@@ -1,0 +1,45 @@
+---
+layout: default
+title: "日本語ドキュメント: 目次"
+categories: [ "jp" ]
+---
+# ここから開始や
+<div class="platforms">
+
+<div class="platforms ios">
+<p class="title">iOS</p>
+<ul>
+<li><a href="/jp/ios/quick-start.html">クイックスタート</a></li>
+<li><a href="/jp/ios/guide.html">リファレンスガイド</a></li>
+<li><a href="/jp/ios/snippets-and-samples.html">サンプルコード集</a></li>
+</ul>
+</div>
+
+<div class="platforms android">
+<p class="title">Android</p>
+<ul>
+<li><a href="/jp/android/quick-start.html">クイックスタート</a></li>
+<li><a href="/jp/android/guide.html">リファレンスガイド</a></li>
+<li><a href="/jp/android/snippets-and-samples.html">サンプルコード集</a></li>
+</ul>
+</div>
+
+<div class="platforms js">
+<p class="title">JavaScript</p>
+<ul>
+<li><a href="/jp/js/quick-start.html">クイックスタート</a></li>
+<li><a href="/jp/js/guide.html">リファレンスガイド</a></li>
+<li><a href="/jp/js/snippets-and-samples.html">サンプルコード集</a></li>
+</ul>
+</div>
+
+<div class="platforms rest">
+<p class="title">REST</p>
+<ul>
+<li><a href="/jp/rest/quick-start.html">クイックスタート</a></li>
+<li><a href="/jp/rest/guide.html">リファレンスガイド</a></li>
+<li><a href="/jp/rest/snippets-and-samples.html">サンプルコード集</a></li>
+</ul>
+</div>
+
+</div>
