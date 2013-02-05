@@ -1,9 +1,8 @@
 ---
 layout: default
 title: "日本語ドキュメント: 目次"
-categories: [ "jp" ]
+permalink: /jp/index.html
 ---
-# ここから開始や
 <div class="platforms">
 
 <div class="platforms ios">

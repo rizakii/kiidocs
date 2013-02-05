@@ -1,0 +1,71 @@
+---
+layout: default
+categories: [ "jp", "ios" ]
+permalink: /jp/ios/guide.html
+---
+# iOS スタートガイド
+
+Kii Platform は、iOS アプリケーション開発を支援するツールとして Kii iOS SDK を提供しています。Kii iOS SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに iOS アプリケーション開発を進めることができます。
+
+本ガイドは Kii iOS SDK の主要な機能をご紹介するものです。Kii iOS SDK が提供する機能の利用方法を、サンプルコード等と共に解説します。Kii iOS SDK が提供する各機能の詳細については[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。
+
+## ガイドを読む上での注意点
+
+### ブロッキングAPI vs. ノンブロッキングAPI
+
+新規ユーザの登録やデータのアップロード等、Kii Client SDK が提供する多くの API は、サーバとの通信が発生する関係で処理完了までに時間を要します。このようなAPI に対して、Kii Cloud SDK はブロッキングAPI とノンブロッキングAPI の双方を提供しています。
+
+本ガイドでは、ブロッキングAPI のみをサンプルコードとして提示しています。一例として、新規ユーザの登録方法を解説する際に提示しているサンプルコードを以下にあげます。
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser userWithUsername:@"my_username" andPassword:@"mypassword"];
+[user performRegistrationSynchronous:&error];
+if(error != nil) {
+  // Performing user registration failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+実際にアプリケーションを開発する際には、アプリケーションが「フリーズ」することを防ぐなどの理由からノンブロッキングAPI を利用することもできます。Kii iOS SDK は、ノンブロックング API として以下の2つの方法を提供しています。
+
+1.  Blocks を使った API
+2.  Callbacks を使った API
+
+### 1. Blocks を使った API
+
+新規ユーザ登録を、Blocks によるノンブロッキング API を用いて実現する例を以下にあげます。Blocks を使うと、メソッド処理はバックグラウンドスレッドを実行され、処理終了後結果がメインスレッドに返却されます。
+
+```objc
+KiiUser *user = [KiiUser userWithUsername:@"myusername" andPassword:@"mypassword"];
+[user performRegistrationWithBlock:^(KiiUser *user, NSError *error) {
+  if(error != nil) { 
+    // Performing user registration failed 
+    // Please check error description/code to see what went wrong... 
+  }
+}];
+```
+
+ノンブロッキングAPI の利用方法の詳細については、[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。また Blocks の仕組み自体の詳細については [iOS Developer Library](http://developer.apple.com/library/ios/#featuredarticles/Short_Practical_Guide_Blocks/_index.html) を参照してください。
+
+### 2. Callbacks を使った API
+
+新規ユーザ登録を、Callbacks によるノンブロッキング API を用いて実現する例を以下にあげます。この場合は、メソッドの処理が完了した際に通知を受けるためのコールバックを定義します。
+
+```objc
+- (void) userRegistered:(KiiUser*)user withError:(NSError*)error {
+    NSLog(@"User registered: %@ withError: %@", user, error);
+
+    if(error != nil) {
+        // Performing user registration failed
+        // Please check error description/code to see what went wrong...
+    }
+}
+
+- (void) test_asynchronous_example {
+    KiiUser *user = [KiiUser userWithUsername:@"my_username" andPassword:@"mypassword"];
+    [user performRegistration:self withCallback:@selector(userRegistered:withError:)];
+}
+```
+
+ノンブロッキングAPI の利用方法の詳細については、[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。
