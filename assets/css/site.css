@@ -1,1 +1,31 @@
-/**/
+/* vim: set ts=8 sts=2 sw=2 tw=0 et: */
+
+/*
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video { background: transparent; border: 0; font-size: 100%; margin: 0; outline: 0; padding: 0; vertical-align: baseline}
+body { line-height: 1}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display: block}
+*/
+
+footer { background: #eff0f0; width: 100%; float: left; color: #abb6ba; padding: 60px 0; }
+footer a { color: #abb6ba; text-decoration: none}
+footer .wrapper { padding: 10px 0; width: 980px; margin: 0 auto; }
+footer .wrapper .logo { width: 59px; height: 38px; }
+footer .wrapper .logo a { display: block; width: 59px; height: 0; padding: 38px 0 0 0; background: url("/assets/preview/sites/site/logo-s.png") no-repeat; overflow: hidden}
+footer .wrapper nav { width: 78%; padding: 20px 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: left; }
+footer .wrapper nav ul { list-style: none}
+footer .wrapper nav > ul > li { width: 25%; float: left; padding: 10px 0; }
+footer .wrapper nav > ul > li > a { font-family: "Open Sans",Helvetica,Arial,sans-serif; text-transform: uppercase; font-size: 14px; font-weight: 700; display: block; padding: 10px 0}
+footer .wrapper nav > ul > li: first-child { width: 20%}
+footer .wrapper nav ul ul { font-size: 12px; }
+footer .wrapper nav ul ul li a { display: block; padding: 5px 0}
+footer .wrapper .connect { width: 19%; float: right; padding: 20px 0; }
+footer .wrapper .connect ul { list-style: none; }
+footer .wrapper .connect ul li { float: left; margin: 0 3px; }
+footer .wrapper .connect ul li a { display: block; float: left; width: 32px; height: 32px; overflow: hidden; text-indent: -200em; background: url("/assets/preview/sites/site/social.png") no-repeat}
+footer .wrapper .connect ul li.fb a { background-position: left top}
+footer .wrapper .connect ul li.t a { background-position: center top}
+footer .wrapper .connect ul li.in a { background-position: right top}
+footer .wrapper .connect .email { background: #e2e5e6; -webkit-border-radius: 30px; border-radius: 30px; width: 100%; float: left; clear: both; margin: 20px 0; height: 30px; }
+footer .wrapper .connect .email input { background: none; border: none; width: 60%; padding: 10px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: left}
+footer .wrapper .connect .email button { background: none; border: none; color: #92a0a6; font-size: 12px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; float: right; line-height: 30px; padding: 0 10px; margin-left: -40px}
+footer .wrapper .copyright { clear: both; width: 100%; float: left; padding: 30px 0; font-size: 11px}
