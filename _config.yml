@@ -1,4 +1,11 @@
-markdown: redcarpet
-permalink: none
+encoding:       utf-8
+markdown:       redcarpet
+permalink:      none
+
+redcarpet:
+  extensions: [ 'autolink', 'hard_wrap', 'tables' ]
+
 #base-url: http://taro-m.github.com/kiidoc-demo/index.html
-base-url: http://localhost:4000/
+#base-url: http://localhost:4000/
+
+# vim:set ts=8 sts=2 sw=2 tw=0 et:
