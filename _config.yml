@@ -1,7 +1,7 @@
 encoding:       utf-8
 markdown:       redcarpet
 exclude:        scripts tmp templates
-permalink:      none
+permalink:      pretty
 
 redcarpet:
   extensions: [ 'autolink', 'hard_wrap', 'tables' ]
