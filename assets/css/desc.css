@@ -1,0 +1,81 @@
+---
+# vim: set ts=8 sts=2 sw=2 tw=0 et:
+---
+body#preview .summary h3,body#preview h3{color:#3696da}
+body#preview .summary section.resource article,body#preview section.resource article{margin:10px 0 40px 0}
+body#preview .summary section.resource header,body#preview section.resource header{padding:0 0 20px 0;}
+body#preview .summary section.resource header h3,body#preview section.resource header h3{font-size:25px}
+body#preview .summary section.resource header p,body#preview section.resource header p{margin:0 0;font-size:13px;line-height:normal}
+body#preview .summary > section > article,body#preview > section > article{border-bottom:1px solid #ddd;}
+body#preview .summary > section > article section header h3,body#preview > section > article section header h3{color:#646e75}
+body#preview .summary > section > article .params,body#preview > section > article .params{margin:10px 0;}
+body#preview .summary > section > article .params h4,body#preview > section > article .params h4{width:100%;padding:5px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-moz-border-radius-topleft:4px;-webkit-border-top-left-radius:4px;-o-border-top-left-radius:4px;-ms-border-top-left-radius:4px;border-top-left-radius:4px;-moz-border-radius-topright:4px;-webkit-border-top-right-radius:4px;-o-border-top-right-radius:4px;-ms-border-top-right-radius:4px;border-top-right-radius:4px;margin-top:10px}
+body#preview .summary > section > article .params .list,body#preview > section > article .params .list{display:table;width:100%;font-size:13px}
+body#preview .summary > section > article .params .param,body#preview > section > article .params .param{display:table-row;}
+body#preview .summary > section > article .params .param > div,body#preview > section > article .params .param > div{display:table-cell;border-top:1px solid #ddd;padding:5px}
+body#preview .summary > section > article .methods,body#preview > section > article .methods{padding-left:100px}
+body#preview .summary > section > article .method,body#preview > section > article .method{padding:10px;}
+body#preview .summary > section > article .method h4,body#preview > section > article .method h4{margin-left:-110px;display:inline-block;background:#000;color:#fff;font-weight:normal;padding:4px 10px;-webkit-border-radius:4px;border-radius:4px;font-size:12px;line-height:normal;width:100px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:right;float:left}
+body#preview .summary > section > article .method.GET h4,body#preview > section > article .method.GET h4{background:#008000}
+body#preview .summary > section > article .method.POST h4,body#preview > section > article .method.POST h4{background:#ffa500}
+body#preview .summary > section > article .method.PUT h4,body#preview > section > article .method.PUT h4{background:#800080}
+body#preview .summary > section > article .method.DELETE h4,body#preview > section > article .method.DELETE h4{background:#a52a2a}
+body#preview .summary > section > article .path,body#preview > section > article .path{background:#d7eaf8;border:1px solid #afd5f0;-webkit-border-radius:4px;border-radius:4px;}
+body#preview .summary > section > article .path span,body#preview > section > article .path span,body#preview .summary > section > article .path strong,body#preview > section > article .path strong{display:inline-block;padding:4px 10px;font-size:14px}
+body#preview .summary > section > article .path strong,body#preview > section > article .path strong{background:#afd5f0;color:#3696da;width:100px;text-align:right;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+body#preview .summary > section > article .uri,body#preview > section > article .uri{font-size:12px;margin:0;color:#d0d4d6;background:#646e75;-webkit-border-radius:4px;border-radius:4px;padding:0 10px}
+body#preview .summary > section > article .docs strong,body#preview > section > article .docs strong,body#preview .summary > section > article .docs p,body#preview > section > article .docs p{display:inline-block;font-size:14px;padding:3px 5px 3px 0}
+body#preview .summary > section > article .docs .security-doc,body#preview > section > article .docs .security-doc{background:#ff8400;padding:1px 5px;color:#fff;-webkit-border-radius:4px;border-radius:4px;line-height:normal}
+body#preview .summary > section > article .docs ,body#preview > section > article .docs {display:none}
+body#preview .summary > section > article .request,body#preview > section > article .request,body#preview .summary > section > article .responses,body#preview > section > article .responses{font-size:15px;}
+body#preview .summary > section > article .request .mediaType,body#preview > section > article .request .mediaType,body#preview .summary > section > article .responses .mediaType,body#preview > section > article .responses .mediaType{background:#fff3e5;border:1px solid #ffe6cc;-webkit-border-radius:4px;border-radius:4px;}
+body#preview .summary > section > article .request .mediaType strong,body#preview > section > article .request .mediaType strong,body#preview .summary > section > article .responses .mediaType strong,body#preview > section > article .responses .mediaType strong,body#preview .summary > section > article .request .mediaType span,body#preview > section > article .request .mediaType span,body#preview .summary > section > article .responses .mediaType span,body#preview > section > article .responses .mediaType span{display:inline-block;padding:5px}
+body#preview .summary > section > article .request .mediaType strong,body#preview > section > article .request .mediaType strong,body#preview .summary > section > article .responses .mediaType strong,body#preview > section > article .responses .mediaType strong{background:#ffe6cc}
+body#preview .summary > section > article .request p.doc,body#preview > section > article .request p.doc,body#preview .summary > section > article .responses p.doc,body#preview > section > article .responses p.doc{font-size:13px}
+body#preview .summary > section > article .methods .params,body#preview > section > article .methods .params,body#preview .summary > section > article .methods .body,body#preview > section > article .methods .body{display:table;width:100%;font-size:13px;border-bottom:1px solid #ededed;}
+body#preview .summary > section > article .methods .params div.th span,body#preview > section > article .methods .params div.th span,body#preview .summary > section > article .methods .body div.th span,body#preview > section > article .methods .body div.th span{background:#646e75;color:#c0c5c9}
+body#preview .summary > section > article .methods .params div:nth-child(even),body#preview > section > article .methods .params div:nth-child(even),body#preview .summary > section > article .methods .body div:nth-child(even),body#preview > section > article .methods .body div:nth-child(even){background:#ededed}
+body#preview .summary > section > article .methods .params div,body#preview > section > article .methods .params div,body#preview .summary > section > article .methods .body div,body#preview > section > article .methods .body div{display:table-row;}
+body#preview .summary > section > article .methods .params div span,body#preview > section > article .methods .params div span,body#preview .summary > section > article .methods .body div span,body#preview > section > article .methods .body div span{display:table-cell;padding:5px}
+body#preview .summary > section > article .methods .body div.th span,body#preview > section > article .methods .body div.th span{background:none}
+body#preview .summary > section > article .methods .body div:nth-child(even),body#preview > section > article .methods .body div:nth-child(even){background:none}
+body#preview .summary > section > article .methods .body div span,body#preview > section > article .methods .body div span{border-bottom:1px solid #ededed;padding:0 10px 0 0;background:none}
+body#preview .summary > section > article .methods table.content-body,body#preview > section > article .methods table.content-body{font-size:13px;width:100%;}
+body#preview .summary > section > article .methods table.content-body th,body#preview > section > article .methods table.content-body th{text-align:left;color:#c0c5c9}
+body#preview .summary > section > article .methods table.content-body tr,body#preview > section > article .methods table.content-body tr{border-bottom:1px solid #ededed;}
+body#preview .summary > section > article .methods table.content-body tr td,body#preview > section > article .methods table.content-body tr td{padding:2px 10px 2px 0}
+body#preview .summary > section > article .methods table.content-body tr td.type.details,body#preview > section > article .methods table.content-body tr td.type.details{background:#ededed}
+body#preview .summary > section > article .methods table.content-body tr.details td,body#preview > section > article .methods table.content-body tr.details td{background:#ededed}
+body#preview .summary > section > article .method-links,body#preview > section > article .method-links{padding:20px 0;}
+body#preview .summary > section > article .method-links ul,body#preview > section > article .method-links ul{list-style:none;padding:0}
+body#preview .summary > section > article .method-links li,body#preview > section > article .method-links li{list-style:none;display:inline-block;margin:0 10px 0 0;}
+body#preview .summary > section > article .method-links li a,body#preview > section > article .method-links li a{display:inline-block;padding:3px 10px;border:1px solid #d0d4d6;-webkit-border-radius:5px;border-radius:5px;text-decoration:none;font-size:13px;line-height:normal;font-weight:bold}
+body#preview .summary > section > article .responses .resp_title,body#preview > section > article .responses .resp_title{background:none;display:block;margin-top:30px;color:#000;padding:2px 0;-webkit-border-radius:4px;border-radius:4px}
+body#preview .summary > section > article .response,body#preview > section > article .response{min-height:50px;}
+body#preview .summary > section > article .response .mediaType,body#preview > section > article .response .mediaType{background:#ebf5fb;border:1px solid #d7eaf8;}
+body#preview .summary > section > article .response .mediaType strong,body#preview > section > article .response .mediaType strong,body#preview .summary > section > article .response .mediaType span,body#preview > section > article .response .mediaType span{padding:1px 5px}
+body#preview .summary > section > article .response .mediaType strong,body#preview > section > article .response .mediaType strong{background:#d7eaf8}
+body#preview .summary > section > article .response .status,body#preview > section > article .response .status{float:left;margin-left:-50px;font-size:16px;padding:3px 0;color:#f00;}
+body#preview .summary > section > article .response .status strong,body#preview > section > article .response .status strong{font-weight:normal}
+body#preview .summary > section > article .response.status-200 .status,body#preview > section > article .response.status-200 .status,body#preview .summary > section > article .response.status-201 .status,body#preview > section > article .response.status-201 .status,body#preview .summary > section > article .response.status-204 .status,body#preview > section > article .response.status-204 .status{color:#008000}
+
+body#preview section.content .summary,body#preview section.content {line-height:150%;font-size:15px;}
+body#preview section.content .summary h2,body#preview section.content h2 {
+  font-size:28px; font-weight:normal;
+  line-height:30px;font-family:Georgia;color:#111
+}
+body#preview section.content .summary .subtitle,body#preview section.content .subtitle{font-size:21px;line-height:25px}
+body#preview section.content .summary .box,body#preview section.content .box{border:1px solid #ddd;padding:5px}
+body#preview section.content .summary .inline,body#preview section.content .inline{display:inline}
+/*body#preview section.content .summary .code,body#preview section.content .code{background:#646e75;padding:15px;color:#fff;-webkit-border-radius:5px;border-radius:5px;font-family:Monaco,"Andale Mono",Courier,Monospace,Helvetica,Arial,sans-serif;line-height:180%;font-size:90%}*/
+body#preview section.content .summary .center,body#preview section.content .center{text-align:center}
+body#preview section.content .summary .justify,body#preview section.content .justify{text-align:justify}
+body#preview section.content .summary .right,body#preview section.content .right{text-align:right}
+/*body#preview section.content .summary .highlight,body#preview section.content .highlight{background:#ffff80;padding:5px;-webkit-border-radius:5px;border-radius:5px;border:1px solid #fff}*/
+body#preview section.content .summary .column,body#preview section.content .column{-webkit-column-count:3;-moz-column-count:3;column-count:3}
+body#preview section.content .summary .shadow,body#preview section.content .shadow{-webkit-box-shadow:1px 1px 10px rgba(0,0,0,0.1);box-shadow:1px 1px 10px rgba(0,0,0,0.1);padding:5px}
+/*body#preview section.content .summary code,body#preview section.content code{background:#ebf5fb;color:#3696da;border:1px solid #9bcaec;-webkit-border-radius:4px;border-radius:4px;display:inline;padding:1px 2px;margin:0 2px;font-size:90%}*/
+
+section.content img {
+  border:solid 1px #000;
+}

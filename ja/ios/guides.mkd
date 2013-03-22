@@ -1,7 +1,5 @@
 ---
-layout: default
-categories: [ "jp", "ios" ]
-permalink: /jp/ios/guide.html
+layout: ja-doc
 ---
 # iOS スタートガイド
 

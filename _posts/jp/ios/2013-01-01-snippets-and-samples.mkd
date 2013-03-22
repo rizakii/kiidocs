@@ -1,8 +1,0 @@
----
-layout: default
-categories: [ "jp", "ios" ]
-permalink: /jp/ios/snippets-and-samples.html
----
-# サンプルコード集
-
-Comming soon
