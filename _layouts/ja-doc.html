@@ -8,12 +8,10 @@ layout: ja
 <div class="wrapper">
 
 <div class="breadcrumbs">
-<a href="/ja">Documentation JP</a>
-<span> &gt; </span>
-<a href="/ja/getting-started/">はじめに</a>
-<span> &gt; </span>
-<span>{{ page.title }}</span>
+{% for p in site.pages reversed %}{% if page.url contains p.url %}{% if p.url != page.url %}{% if p.url != '/' %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
+{% endif %}{% endif %}{% endif %}{% endfor %}<span>{{ page.title }}</span>
 </div>
+
 <h1>{{ page.title }}</h1>
 <div class="summary">{% if page.summary %}<p>{{ page.summary | escape }}</p>{% endif %}</div>
 
