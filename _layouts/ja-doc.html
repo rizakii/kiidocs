@@ -4,6 +4,7 @@ layout: ja
 ---
 <div class="content-container">
 <div class="wrapper">
+
 <section class="content">
 <div class="wrapper">
 
@@ -20,5 +21,12 @@ layout: ja
 
 </div>
 </section>
+
+<aside class="sidebar"><nav><ul>
+{% for p in site.pages reversed %}{% if p.url contains 'ja' %}{% if p.title %}
+<li><a href="{{ p.url }}">{{ p.title }}</a></li>
+{% endif %}{% endif %}{% endfor %}
+</ul></nav></aside>
+
 </div>
 </div>
