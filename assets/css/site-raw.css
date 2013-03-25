@@ -217,7 +217,11 @@ body#preview section.content .summary .column,body#preview section.content .desc
 body#preview section.content .summary .shadow,body#preview section.content .description .shadow{-webkit-box-shadow:1px 1px 10px rgba(0,0,0,0.1);box-shadow:1px 1px 10px rgba(0,0,0,0.1);padding:5px}
 body#preview section.content .summary code,body#preview section.content .description code{background:#ebf5fb;color:#3696da;border:1px solid #9bcaec;-webkit-border-radius:4px;border-radius:4px;display:inline;padding:1px 2px;margin:0 2px;font-size:90%}
 body#preview section.content .summary{padding:30px 0}
-body#preview section.content p{margin:10px 0}
+body#preview section.content p,
+body#preview section.content h2 {
+  margin:10px 0;
+}
+body#preview section.content li > p:first-child { margin:0; }
 body#preview section.content ul,body#preview section.content ol{margin:0 0 0 0;padding:0 0 0 20px}
 .sunlight-container{clear:both !important;position:relative !important;margin:10px 0 !important}
 .sunlight-code-container{clear:both !important;position:relative !important;border:none;border-color:#626262 !important;background-color:#464d52;-webkit-border-radius:5px;border-radius:5px}

@@ -2,11 +2,25 @@
 # vim:set ts=2 sts=2 sw=2 et:
 layout: ja
 ---
-<div class="containt-container">
+<div class="content-container">
 <div class="wrapper">
 <section class="content">
 <div class="wrapper">
+
+<div class="breadcrumbs">
+<a href="/jp">Documentation JP</a>
+<span> &gt; </span>
+<a href="/jp/getting-started/">はじめに</a>
+<span> &gt; </span>
+<span>{{ page.title }}</span>
+</div>
+<h1>{{ page.title }}</h1>
+<div class="summary">{{ page.summary | escape }}</div>
+
+<div class="description">
 {{ content }}</div>
+
+</div>
 </section>
 </div>
 </div>
