@@ -1,6 +1,0 @@
----
-layout: ja-doc
----
-# サンプルコード集
-
-Comming soon
