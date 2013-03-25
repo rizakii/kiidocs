@@ -1,0 +1,153 @@
+---
+layout: ja-doc
+title: Kii Ads SDK の導入手順
+---
+## 開発者ポータルで広告サービスの設定をする
+
+広告メディエーションと Direct Ad の機能を SDK 経由で利用するために、開発者はまず開発者ポータルで広告サービスの設定をする必要があります。もしアプリケーションをまだ作成していなければ、開発者ポータルでまずアプリケーションを作成してください。
+
+### 広告を有効にする
+
+* 開発者ポータル左のナビゲーションから、アプリ名をクリックし、Ads を選びます。
+* "Config" タブをクリックします。
+* トグルスイッチを "On" にして、広告を有効にします。
+
+    ![](http://static.kii.com/devportal/docs/images/app_ads_01.png)
+
+### リージョンの設定
+
+Kii 広告ネットワークでは、アプリ使用者のリージョンに従って広告ネットワークの選択方法を設定できます。例えば、開発者は中国にいるユーザに SmartMAD を使用し、米国にいるユーザに AdMob や Direct Ad（もしくは、これらの組み合わせ）を使用する、といった設定が可能です。
+
+このリージョン設定は次のように行います。
+
+* "ALL" リージョンは最初から設定されています。このリージョンの設定は、アプリ利用者のリージョンが未設定の場合に適用されます。例えば、アプリ利用者が "South Korea" リージョンにおり、開発者ポータル上で "South Korea" リージョンの設定がされていな場合、"ALL" リージョンの設定が適用されます。
+* リージョンを追加したい場合、"+ (plus)" ボタンをクリックし、国を選択したあと、"Create Region" ボタンをクリックします。
+
+    ![](http://static.kii.com/devportal/docs/images/app_ads_02.png)
+
+* 追加されたリージョンは編集/無効にできます。
+
+### ネットワークの設定
+
+各リージョンに対して、開発者は1つもしくはそれ以上の広告ネットワークを選択できます。追加した各ネットワークに対して、開発者はネットワーク固有の設定をしなければなりません。
+
+* ネットワークを追加するには、 "+ (plus)" ボタンをクリックします。
+
+    ![](http://static.kii.com/devportal/docs/images/app_ads_03.png)
+
+
+* クリック後の画面で、サポートされている広告ネットワークを選択します。選択後はネットワーク固有の設定が必要です。例えば AdMob の場合は AdMob で取得したパブリッシャーキーを、Direct ad の場合は adspace ID を設定する必要があります。
+* "Site-&gt;" ボタンを押すと、各広告ネットワークの Web サイトに飛びます。移動先の Web サイトで、適宜追加の設定等を行ってください。
+
+    * Direct selling の場合、ログインが必要な amobee のサイトに移動します。
+
+    ![](http://static.kii.com/devportal/docs/images/app_ads_04.png)
+
+* 広告ネットワークを有効にした後、開発者は各広告ネットワークの重み（広告配信される割合）をスライダーで調整することができます。
+* 広告ネットワークをリージョンに追加した後、開発者は "config" をクリックすることで、設定（重みとネットワーク固有の設定）を変更できます。
+
+    ![](http://static.kii.com/devportal/docs/images/app_ads_05.png)
+
+## プロジェクトの設定
+
+Kii 広告ネットワークの利用に必要なアプリ設定の方法は以下の通りです。
+
+### 共通フレームワークの設定
+
+1. KiiAdFramework.framework をプロジェクトの'Frameworks' グループにドラッグします。
+2. プロジェクトに以下の共通フレームワークを追加します。
+  * SystemConfiguration.framework
+  * Security.framework
+  * CFNetwork.framework
+  * MobileCoreServices.framework
+  * CoreLocation.framework
+3.  SDK を用いて広告を表示する全てのファイルに、以下のヘッダを追加します。
+
+    ```objc
+    #import <KiiAdFramework/KiiAdnet.h>
+    // APP ID / KEY
+    #define APP_ID @"22784edc"
+    #define APP_KEY @"ffacec38cd293669703f3b940ec2770b"
+
+    (void)viewDidLoad {
+      [super viewDidLoad];
+      // Do any additional setup after loading the view, typically from a nib.
+      KiiAdnet* adView = [KiiAdnet requestAdWithDelegate:self
+                                       withApplicationId:APP_ID
+                                          applicationKey:APP_KEY
+                                                 andSite:kiiAdSiteUS];
+
+      // Uncomment the following line if you want to show test ads
+      // [adView setTestMode:TRUE];
+      [self.view addSubview:adView];
+    }
+    ```
+
+### 広告ネットワーク毎の設定
+
+#### Admob
+
+1. Admob コンソールより libGoogleAdMobAds.a ライブラリを取得し、プロジェクトに追加します。
+2. （Kii Ads SDK に含まれている）libAdapterAdmob.a ライブラリをプロジェクトに追加します。
+3. 以下のフレームワークをプロジェクトに追加します。
+  * MessageUI.framework
+  * AdSupport.framework
+  * AudioToolbox.framework
+
+#### InMobi
+
+1. InMobi コンソールより、libInMobiAdNetwork-3.6.0.a と libInMobiCommons-3.6.0.a ライブラリを取得し、プロジェクトに追加します。
+2. （Kii Ads SDK に含まれている）libAdapterInMobi.a ライブラリをプロジェクトに追加します。
+3. 以下のフレームワークをプロジェクトに追加します。
+  * CoreTelephony.framework
+  * PassKit.framework
+  * AVFoundation.framework
+  * MessageUI.framework
+  * AdSupport.framework
+  * MediaPlayer.framework
+
+#### MdotM
+
+1. （Kii Ads SDK に含まれている）llibAdapterMdotM.a ライブラリをプロジェクトに追加します。
+
+#### Leadbolt
+
+1. （Kii Ads SDK に含まれている）libAdapterLeadbolt.a ライブラリをプロジェクトに追加します。
+
+#### AMoAd
+
+1. （Kii Ads SDK に含まれている）libAdapterAMoAd.a ライブラリをプロジェクトに追加します。
+
+#### MillenialMedia
+
+1. MillenialMedia コンソールより libMMSDK_4.6.1.a ライブラリを取得し、プロジェクトに追加します。
+2. （Kii Ads SDK に含まれている）libAdapterMillennial.a ライブラリをプロジェクトに追加します。
+3. 以下のフレームワークをプロジェクトに追加します。
+  * QuartzCore.framework
+  * MediaPlayer.framework
+  * CoreGraphics.framework
+  * CoreLocation.framework
+  * MobileCoreServices.framework
+  * AudioToolbox.framework
+  * AVFoundation.framework
+  * SystemConfiguration.framework
+  * UIKit.framework
+
+#### SmartMad
+
+1. SmartMad コンソールより libSmartMad.a ライブラリを取得し、プロジェクトに追加します。
+2. （Kii Ads SDK に含まれている）libAdapterSmartMAD.a ライブラリをプロジェクトに追加します。
+3. 以下のフレームワークをプロジェクトに追加します。
+  * AudioToolbox.framework
+  * AVFoundation.framework
+  * CoreLocation.framework
+  * CoreMotion.framework
+  * CoreTelephony.framework
+  * QuartzCore.framework
+  * MediaPlayer.framework
+  * SystemConfiguration.framework
+  * libsqlite3.0.dylib
+
+#### Direct Selling
+
+1. （Kii Ads SDK に含まれている）libAdapterDirectSelling.a ライブラリをプロジェクトに追加します。

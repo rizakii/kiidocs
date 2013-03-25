@@ -1,3 +1,6 @@
+---
+# vim: set ts=8 sts=2 sw=2 tw=0 et:
+---
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -11,7 +14,14 @@
 
 
  */
-body#preview .summary h3,body#preview .description h3{color:#3696da}
+body#preview .summary h3,
+body#preview .description h3 {
+  margin: 10px 0;
+  padding: 0;
+  font-size: 21px;
+  line-height: 25px;
+  color: #555;
+}
 body#preview .summary section.resource article,body#preview .description section.resource article{margin:10px 0 40px 0}
 body#preview .summary section.resource header,body#preview .description section.resource header{padding:0 0 20px 0;}
 body#preview .summary section.resource header h3,body#preview .description section.resource header h3{font-size:25px}
@@ -212,10 +222,36 @@ body#preview section.content .summary .code,body#preview section.content .descri
 body#preview section.content .summary .center,body#preview section.content .description .center{text-align:center}
 body#preview section.content .summary .justify,body#preview section.content .description .justify{text-align:justify}
 body#preview section.content .summary .right,body#preview section.content .description .right{text-align:right}
-body#preview section.content .summary .highlight,body#preview section.content .description .highlight{background:#ffff80;padding:5px;-webkit-border-radius:5px;border-radius:5px;border:1px solid #fff}
+
+/*
+body#preview section.content .summary .highlight,
+body#preview section.content .description .highlight {
+  background:#ffff80;
+  padding:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  border:1px solid #fff
+}
+*/
+
 body#preview section.content .summary .column,body#preview section.content .description .column{-webkit-column-count:3;-moz-column-count:3;column-count:3}
 body#preview section.content .summary .shadow,body#preview section.content .description .shadow{-webkit-box-shadow:1px 1px 10px rgba(0,0,0,0.1);box-shadow:1px 1px 10px rgba(0,0,0,0.1);padding:5px}
-body#preview section.content .summary code,body#preview section.content .description code{background:#ebf5fb;color:#3696da;border:1px solid #9bcaec;-webkit-border-radius:4px;border-radius:4px;display:inline;padding:1px 2px;margin:0 2px;font-size:90%}
+
+/*
+body#preview section.content .summary code,
+body#preview section.content .description code{
+  background:#ebf5fb;
+  color:#3696da;
+  border:1px solid #9bcaec;
+  -webkit-border-radius:4px;
+  border-radius:4px;
+  display:inline;
+  padding:1px 2px;
+  margin:0 2px;
+  font-size:90%
+}
+*/
+
 body#preview section.content .summary{padding:30px 0}
 body#preview section.content p,
 body#preview section.content h2 {

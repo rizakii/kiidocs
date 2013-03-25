@@ -21,7 +21,7 @@ title: Kii Cloud SDK の導入手順
     // Application startup
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       // Kii initialization
-      [Kii beginWithID:@"___APPID___" 
+      [Kii beginWithID:@"___APPID___"
                 andKey:@"___APPKEY___"
                andSite:kiiSiteUS];
 
@@ -68,13 +68,15 @@ Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定�
     // Application startup
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       // Kii initialization
-      [Kii beginWithID:@"___APPID___" 
-                andKey:@"___APPKEY___" 
+      [Kii beginWithID:@"___APPID___"
+                andKey:@"___APPKEY___"
                andSite:kiiSiteUS];
 
       // Enable push with DevelopmentMode
-      [Kii enableAPNSWithDevelopmentMode:YES 
-                    andNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+      [Kii enableAPNSWithDevelopmentMode:YES
+                    andNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                          UIRemoteNotificationTypeSound |
+                                          UIRemoteNotificationTypeAlert)];
 
       return TRUE;
     }
