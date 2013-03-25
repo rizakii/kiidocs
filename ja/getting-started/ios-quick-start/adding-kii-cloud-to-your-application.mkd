@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
+sort_priority: 10
 title: Kii Cloud SDK の導入手順
 ---
 ## プロジェクトの設定
