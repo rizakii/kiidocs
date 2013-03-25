@@ -1,0 +1,18 @@
+---
+layout: ja-doc
+title: 詳細ドキュメント
+summary: 各プラットフォーム向け Client SDK や REST API の詳細については、以下のドキュメントを参照してください。
+---
+* **Android 向け詳細ドキュメント（Javadoc）**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/storage/)
+  * [Kii Sync SDK](http://static.kii.com/devportal/docs/sync/)
+  * [Kii Ads SDK](http://static.kii.com/devportal/docs/ads/)
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/analytics/)
+* **iOS 向け詳細ドキュメント（appledoc）**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/ios_cloud/)
+  * [Kii Ads SDK](http://static.kii.com/devportal/docs/ios_ads/)
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/ios_analytics/)
+* **Javascript 向け詳細ドキュメント(JSDoc)**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/js/)
+* **REST API 詳細ドキュメント**
+  * [Kii Platform API Documentation](http://documentation.kii.com/rest/application)

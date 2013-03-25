@@ -1,0 +1,81 @@
+---
+layout: ja-doc
+title: Kii Cloud SDK の導入手順
+---
+## プロジェクトの設定
+
+以下の手順で、Kii Cloud SDK をプロジェクトに追加します。
+
+1. framework をダウンロードし、あなたの Xcode プロジェクトの 'Frameworks' セクションに追加します。
+2. 以下のframework をプロジェクトに追加します。
+  * **MobileCoreServices.framework**
+3.  Kii SDKを使用するすべてのファイルに、下記のヘッダを追加します。
+
+    ```objc
+    #import <KiiSDK/Kii.h>
+    ```
+
+4.  下記のコードを、AppDelegate の application:didFinishLaunchingWithOptions メソッドに追加します。
+
+    ```objc
+    // Application startup
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      // Kii initialization
+      [Kii beginWithID:@"___APPID___" 
+                andKey:@"___APPKEY___"
+               andSite:kiiSiteUS];
+
+      return TRUE;
+    }
+    ```
+
+ここで、`___APPID___` と `___APPKEY___` は開発者ポータルで取得したものを指定します。
+またSite は、開発者ポータルで指定した Country に合わせ kiiSiteJP または kiiSiteUS のいずれかを設定してください。
+
+## Push 通知の設定
+
+Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定を行なってください。
+
+1. **Apple Push Notification Service (APNS) の設定**
+
+    Kii Push 通知は、Apple Push Notification Service (APNS) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは APNS の諸設定（e.g., SSL証明書や秘密鍵の作成）を行う必要があります。
+
+    詳細は Apple による[こちらのドキュメント](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008194-CH1-SW1)を参照してください。
+
+2. **Kii Cloud への証明書および秘密鍵の設定**
+
+    開発者ポータルで以下の操作を行い、証明書と秘密鍵を Kii Cloud に登録してください。
+
+    1. アプリケーションコンソールにて "Edit" ボタンをクリックします。
+
+        ![](http://static.kii.com/devportal/docs/images/ios_quick_kiicloud_01_e.png)
+
+    2. "Setting" をクリックした後、"Push Notifications" を選択します。
+
+        次のような Push 通知設定画面が表示されることを確認してください。
+
+        ![](http://static.kii.com/devportal/docs/images/ios_quick_kiicloud_02_e.png)
+
+    Development (Sandbox) および Production 環境用に、それぞれ証明書と秘密鍵をアップロードしてください。（Development / Production 環境に関する詳細は、Apple によるこちらのドキュメントを参照してください）
+
+    設定が完了したら "Save" ボタンを押下してください。
+
+3. **プロジェクトの設定**
+
+    下記のコードを、application:DidFinishLaunchingWithOptions: メソッドに追加します。この例では、APNS を Development モードで有効にしています。
+
+    ```objc
+    // Application startup
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      // Kii initialization
+      [Kii beginWithID:@"___APPID___" 
+                andKey:@"___APPKEY___" 
+               andSite:kiiSiteUS];
+
+      // Enable push with DevelopmentMode
+      [Kii enableAPNSWithDevelopmentMode:YES 
+                    andNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+
+      return TRUE;
+    }
+    ```

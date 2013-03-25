@@ -1,0 +1,32 @@
+---
+layout: ja-doc
+title: iOS クイックスタート
+---
+## アプリケーションを開発者ポータルに登録する
+
+まず初めに、アプリケーションを開発者ポータルに登録する必要があります。登録が完了すると、Kii Platform はあなたのアプリケーション用に Application ID と Application Key を払い出します。
+
+開発者ポータルへのアプリケーション登録の手順は次の通りです。
+
+1.  開発者ポータル（[http://developer.kii.com](http://developer.kii.com)）にログインする
+
+2.  "Create App" ボタンをクリックし、表示されるメニューにアプリケーション名とアプリケーション開発プラットフォーム等を入力後、"Create" ボタンをクリックする
+
+    ![](//static.kii.com/devportal/docs/images/common_quick_01.png)
+
+3.  作成されたアプリケーションを選択後、"Access Keys" をクリックする
+
+    ![](//static.kii.com/devportal/docs/images/common_quick_02_access_key.png)
+
+以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別する際に利用されます。
+
+<br/>
+
+## iOS Client SDK をダウンロードする
+
+アプリケーション登録完了後、SDK ダウンロード用のウインドウがポップアップします。このウインドウに表示されるリンクをクリックすることで、iOS 用の Client SDK を含む iOS スターターキットをダウンロードできます。（アプリケーションコンソールの上部に表示されている "SDK" をクリックして SDK をダウンロードすることもできます）
+
+ダウンロード完了後、SDK を設定してアプリケーションに導入してください。
+
+*   Kii Cloud SDK の設定方法は、セクション「[Kii Cloud SDK の導入方法](http://document.kii.com/jp/adding-kii-cloud-to-your-application--2)」を参照してください
+*   Kii Ads SDK の設定方法は、セクション「[Kii Ads SDK の導入方法](http://document.kii.com/jp/adding-kii-ads-in-your-application--2)」を参照してください

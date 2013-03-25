@@ -1,0 +1,42 @@
+---
+layout: ja-doc
+title: リファレンスガイド
+---
+本リファレンスガイドは、Kii Client SDK の主要な機能をご紹介するドキュメントです。より詳細なドキュメントは、セクション「[詳細ドキュメント](/ja/references/)」より入手可能です。
+
+現在、Kii Platform は以下のプラットフォーム向け SDK を提供しています。
+
+* Android (Java)
+* iOS (Objective-C)
+* Javascript
+
+さらに、直接 Kii Platform のCloud API を操作する手段として REST API を公開しています。
+
+<br/>
+
+それぞれの Client SDK および REST API により利用可能な Kii Platform の機能を以下にまとめます。
+
+* Android client SDK：
+  * ユーザ管理機能
+  * グループ管理機能
+  * データ管理機能（JSON 型 Object の管理機能と、フォルダ同期を含む File 管理機能）
+  * 広告管理機能
+  * プッシュ通知機能
+  * アナリティクス（収益化支援）機能
+* iOS client SDK：
+  * ユーザ管理機能
+  * グループ管理機能
+  * データ管理機能（JSON 型 Object の管理機能と File 管理機能）
+  * 広告管理機能
+  * プッシュ通知機能
+  * アナリティクス（収益化支援）機能
+* Javascript client SDK：
+  * ユーザ管理機能
+  * グループ管理機能
+  * データ管理機能（JSON 型 Object の管理機能）
+  * アナリティクス（収益化支援）機能
+* REST API
+  * ユーザ管理機能
+  * グループ管理機能
+  * データ管理機能（JSON 型 Object の管理機能と File 管理機能）
+  * アナリティクス（収益化支援）機能

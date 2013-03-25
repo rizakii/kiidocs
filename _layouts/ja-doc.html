@@ -8,14 +8,14 @@ layout: ja
 <div class="wrapper">
 
 <div class="breadcrumbs">
-<a href="/jp">Documentation JP</a>
+<a href="/ja">Documentation JP</a>
 <span> &gt; </span>
-<a href="/jp/getting-started/">はじめに</a>
+<a href="/ja/getting-started/">はじめに</a>
 <span> &gt; </span>
 <span>{{ page.title }}</span>
 </div>
 <h1>{{ page.title }}</h1>
-<div class="summary">{{ page.summary | escape }}</div>
+<div class="summary">{% if page.summary %}<p>{{ page.summary | escape }}</p>{% endif %}</div>
 
 <div class="description">
 {{ content }}</div>

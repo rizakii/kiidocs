@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: サンプルコード集
+---
+* [Kii Balance for Android](http://documentation.kii.com/jp/kii-balance-for-android)
+* （近日中にさらにサンプルアプリが追加される予定です。もしサンプルアプリを投稿したいという方がいらっしゃいましたら support@kii.com までご連絡ください）

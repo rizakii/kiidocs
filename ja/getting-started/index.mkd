@@ -1,0 +1,11 @@
+---
+layout: ja-doc
+title: はじめに
+summary: このドキュメントは、Kii Platform が提供するクライアント SDK を用いてアプリケーション開発を行うために必要な手順を説明します。
+---
+
+Kii Platform は、以下のプラットフォーム向けに Client SDK を提供しています。
+
+* **Android (Java)**: Android 2.2 以降（Folder 同期機能を利用する場合は Android 2.3.3 以降）
+* **iOS (Objective-C)**: iOS 4.3 以降
+* **Javascript**: Mozilla FireFox 14 以降, Google Chrome 20以降、Safari 5以降
