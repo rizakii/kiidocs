@@ -3,17 +3,12 @@
 module HierarchicalSort
 
   class Utils
-    def Utils.keys(url)
-      keys = url.split('/')
+    def Utils.keys(page)
+      keys = page.to_liquid['url'].split('/')
       if keys.length > 0 and keys[0].length == 0
         keys.shift
       end
       return keys
-    end
-
-    def Utils.key(page)
-      url = page.to_liquid['url']
-      return Utils.keys(url).join('/')
     end
 
     def Utils.priority(p)
@@ -22,14 +17,18 @@ module HierarchicalSort
   end
 
   class PriorityTable
-    def initialize()
+    def initialize(pages)
       @table = {}
+      pages.each { |p| add(p) }
+      finish
     end
 
+    private
     def add(page)
-      @table[Utils.key(page)] = Utils.priority(page)
+      @table[Utils.keys(page).join('/')] = Utils.priority(page)
     end
 
+    private
     def finish()
       max = 0
       keys = []
@@ -37,21 +36,24 @@ module HierarchicalSort
       @table.each { |k, v|
         if v < 0
           keys.push(k)
-          s = k.split('/')[-1]
-          priorities[k] = s ? s : ''
+          last = k.split('/')[-1]
+          priorities[k] = last ? last : ''
         elsif v > max
           max = v
         end
       }
-      keys.sort! { |a, b| priorities[a] <=> priorities[b] }
-      keys.each { |k| @table[k] = (max += 1) }
+      keys.sort { |a, b|
+        priorities[a] <=> priorities[b]
+      }.each { |k|
+        @table[k] = (max += 1)
+      }
     end
 
+    public
     def get(page)
-      url = page.to_liquid['url']
       priorities = []
       curr = []
-      Utils.keys(url).each { |k|
+      Utils.keys(page).each { |k|
         key = curr.push(k).join('/')
         priorities.push(@table.has_key?(key) ? @table[key] : 0)
       }
@@ -89,15 +91,13 @@ module HierarchicalSort
     end
 
     def generate(site)
-      priorities = PriorityTable.new()
-      site.pages.each { |p| priorities.add(p) }
-      priorities.finish
-      site.config['hierarchical_pages'] = site.pages.map {
-        |p| PageItem.new(p, priorities)
-      }.sort {
-        |a, b| a <=> b
-      }.map{
-        |i| i.page
+      priorityTable = PriorityTable.new(site.pages)
+      site.config['hierarchical_pages'] = site.pages.map { |p|
+        PageItem.new(p, priorityTable)
+      }.sort { |a, b|
+        a <=> b
+      }.map { |i|
+        i.page
       }
     end
 
