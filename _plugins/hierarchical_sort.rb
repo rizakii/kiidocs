@@ -25,7 +25,8 @@ module HierarchicalSort
 
     private
     def add(page)
-      @table[Utils.keys(page).join('/')] = Utils.priority(page)
+      @table[page.data['hierarchical_sort_keys'].join('/')] =
+        Utils.priority(page)
     end
 
     private
@@ -53,7 +54,7 @@ module HierarchicalSort
     def get(page)
       priorities = []
       curr = []
-      Utils.keys(page).each { |k|
+      page.data['hierarchical_sort_keys'].each { |k|
         key = curr.push(k).join('/')
         priorities.push(@table.has_key?(key) ? @table[key] : 0)
       }
@@ -65,9 +66,10 @@ module HierarchicalSort
 
     attr_accessor :page, :priorities
 
-    def initialize(page, priorityTable)
+    def initialize(page, table)
       @page = page
-      @priorities = priorityTable.get(page)
+      @priorities = table.get(page)
+      page.data['hierarchical_sort_priorities'] = @priorities
     end
 
     def <=>(obj)
@@ -91,9 +93,14 @@ module HierarchicalSort
     end
 
     def generate(site)
-      priorityTable = PriorityTable.new(site.pages)
+      site.pages.each { |p|
+        p.data['hierarchical_sort_keys'] = Utils.keys(p)
+      }
+
+      table = PriorityTable.new(site.pages)
+
       site.config['hierarchical_pages'] = site.pages.map { |p|
-        PageItem.new(p, priorityTable)
+        PageItem.new(p, table)
       }.sort { |a, b|
         a <=> b
       }.map { |i|
