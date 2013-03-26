@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: Kii Sync SDK の導入手順
+sort_priority: 20
+---

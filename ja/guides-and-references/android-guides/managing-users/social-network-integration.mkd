@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: 外部サービス（FaceBook）連携
+sort_priority: 30
+---

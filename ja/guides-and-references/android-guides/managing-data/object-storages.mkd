@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: Object Storage
+sort_priority: 20
+---

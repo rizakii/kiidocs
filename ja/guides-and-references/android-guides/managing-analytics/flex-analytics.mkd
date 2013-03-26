@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: Flex Analytics
+sort_priority: 20
+---
+

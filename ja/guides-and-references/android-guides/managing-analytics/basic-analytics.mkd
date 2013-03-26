@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: Basic Analytics
+sort_priority: 10
+---
+

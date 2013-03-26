@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: JavaScript スタートガイド
+sort_priority: 30
+---

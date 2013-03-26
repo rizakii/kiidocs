@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: サインアップ
+sort_priority: 10
+---
