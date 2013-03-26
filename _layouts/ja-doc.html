@@ -22,15 +22,18 @@ layout: ja
 </div>
 </section>
 
-{% assign curr_rank = 0 %}
-<aside class="sidebar"><nav>{% for p in site.hierarchical_pages %}{% if p.url contains '/ja/' and p.url != '/ja/' and p.hierarchical_parent_url == page.url or page.hierarchical_ancestors_url contains p.url or p.hierarchical_parent_url == page.hierarchical_parent_url or page.hierarchical_ancestors_url contains p.hierarchical_parent_url %}
+{% assign curr_rank = 2 %}
+<aside class="sidebar"><nav>
+<ul>{% for p in site.hierarchical_pages %}{% if p.url contains '/ja/' and p.url != '/ja/' and p.hierarchical_parent_url == page.url or page.hierarchical_ancestors_url contains p.url or p.hierarchical_parent_url == page.hierarchical_parent_url or page.hierarchical_ancestors_url contains p.hierarchical_parent_url %}
 {% if p.hierarchical_rank != curr_rank %}{% if p.hierarchical_rank > curr_rank %}<ul{% if curr_rank != 0 %} class="sub_pages"{% endif %}>
-{% else %}</ul>
-</li>
-{% endif %}{% assign curr_rank = p.hierarchical_rank %}{% else %}</li>
+{% else %}{% for i in (p.hierarchical_rank..curr_rank) %}{% if i != curr_rank %}</li>
+</ul>
+{% endif %}{% endfor %}{% endif %}{% assign curr_rank = p.hierarchical_rank %}{% else %}</li>
 {% endif %}<li{% if page.url == p.url %} class="selected"{% elsif page.hierarchical_ancestors_url contains p.url %} class="selected_parent"{% endif %}><div><a href="{{ p.url }}">{{ p.title }}</a></div>{% endif %}{% endfor %}
-{% if curr_rank != 0 %}</ul>
-{% endif %}</nav></aside>
+{% if curr_rank >= 3 %}{% for i in (curr_rank .. 3) %}</ul>
+</li>
+{% endfor %}{% endif %}</ul>
+</nav></aside>
 
 </div>
 </div>
