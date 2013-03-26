@@ -9,8 +9,8 @@ layout: ja
 <div class="wrapper">
 
 <div class="breadcrumbs">
-{% for p in site.pages reversed %}{% if page.url contains p.url %}{% if p.url != page.url %}{% if p.url != '/' %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
-{% endif %}{% endif %}{% endif %}{% endfor %}<span>{{ page.title }}</span>
+{% for p in site.pages reversed %}{% if page.url contains p.url and p.url != page.url and p.url != '/' %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
+{% endif %}{% endfor %}<span>{{ page.title }}</span>
 </div>
 
 <h1>{{ page.title }}</h1>
@@ -22,11 +22,13 @@ layout: ja
 </div>
 </section>
 
-<aside class="sidebar"><nav><ul>
-{% for p in site.pages reversed %}{% if p.url contains 'ja' %}{% if p.title %}
-<li><a href="{{ p.url }}">{{ p.title }}</a></li>
-{% endif %}{% endif %}{% endfor %}
-</ul></nav></aside>
+{% assign curr_rank = 0 %}
+<aside class="sidebar"><nav>
+{% for p in site.hierarchical_pages %}{% if p.url contains '/ja/' and p.url != '/ja/' and p.hierarchical_parent_url == page.url or page.hierarchical_ancestors_url contains p.url or p.hierarchical_parent_url == page.hierarchical_parent_url or page.hierarchical_ancestors_url contains p.hierarchical_parent_url %}{% if p.hierarchical_rank != curr_rank %}{% if p.hierarchical_rank > curr_rank %}<ul>
+{% else %}</ul>
+{% endif %}{% assign curr_rank = p.hierarchical_rank %}{% endif %}<li{% if page.url == p.url %} class="selected"{% elsif page.hierarchical_ancestors_url contains p.url %} class="selected_parent"{% endif %}><a href="{{ p.url }}">{{ p.title }}</a></li>
+{% endif %}{% endfor %}{% if curr_rank != 0 %}</ul>
+{% endif %}</nav></aside>
 
 </div>
 </div>

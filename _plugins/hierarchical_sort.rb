@@ -3,8 +3,12 @@
 module HierarchicalSort
 
   class Utils
-    def Utils.keys(page)
-      keys = page.to_liquid['url'].split('/')
+    def Utils.url(page)
+      return page.to_liquid['url']
+    end
+
+    def Utils.keys(url)
+      keys = url.split('/')
       if keys.length > 0 and keys[0].length == 0
         keys.shift
       end
@@ -13,6 +17,25 @@ module HierarchicalSort
 
     def Utils.priority(p)
       return p.data.has_key?('sort_priority') ? p.data['sort_priority'] : -1
+    end
+
+    def Utils.parent(url)
+      if !url or url == '/'
+        return nil
+      end
+      parts = Utils.keys(url)
+      return parts.length == 0 ? nil :
+        parts.length == 1 ? '/' :
+        '/' + parts[0...-1].join('/') + '/'
+    end
+
+    def Utils.ancestors(url)
+      list = []
+      while url
+        list.push(url)
+        url = Utils.parent(url)
+      end
+      return list
     end
   end
 
@@ -94,7 +117,13 @@ module HierarchicalSort
 
     def generate(site)
       site.pages.each { |p|
-        p.data['hierarchical_sort_keys'] = Utils.keys(p)
+        url = Utils.url(p)
+        keys = Utils.keys(url)
+        parent = Utils.parent(url)
+        p.data['hierarchical_sort_keys'] = keys
+        p.data['hierarchical_parent_url'] = parent
+        p.data['hierarchical_ancestors_url'] = Utils.ancestors(parent)
+        p.data['hierarchical_rank'] = keys.length
       }
 
       table = PriorityTable.new(site.pages)
