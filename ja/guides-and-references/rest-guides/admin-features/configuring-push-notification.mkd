@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: Push 通知を設定する
+sort_priority: 20
+---
+

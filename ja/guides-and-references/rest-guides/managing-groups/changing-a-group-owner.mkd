@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: グループオーナーの変更
+sort_priority: 25
+---

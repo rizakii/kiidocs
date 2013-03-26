@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: File のスコープと ACL 設定
+sort_priority: 70
+---
+

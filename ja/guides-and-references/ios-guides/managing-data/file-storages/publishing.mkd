@@ -1,0 +1,6 @@
+---
+layout: ja-doc
+title: File の公開
+sort_priority: 60
+---
+

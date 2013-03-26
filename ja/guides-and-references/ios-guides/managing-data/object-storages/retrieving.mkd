@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: Object の取得
+sort_priority: 20
+---

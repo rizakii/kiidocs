@@ -1,0 +1,5 @@
+---
+layout: ja-doc
+title: グループ名の変更
+sort_priority: 20
+---
