@@ -1,16 +1,16 @@
 #
-# page_ref.rb - Tags to refer by ID which assigned to pages.
+# page_ref.rb - Tags to refer the page by ID which be assigned to.
 #
 # USAGE:
 #
-# 1. Add page_id property in YAML Header.
+# 1. Add page_id property to assign ID in YAML Header of target page.
 #
 #     page_id: some-page-id
 #
-# 2. Add below tags in pages or posts, those will be expanded...
+# 2. Add tags in other pages or posts, those will be expanded...
 #
-#     {% page_url some-page-id %}  - to page's URL.
-#     {% page_link some-page-id %} - to page's link and title.
+#     {% page_url some-page-id %}  - to the page's URL.
+#     {% page_link some-page-id %} - to the page's link and title.
 
 # page_ref.rb - ページにIDを割り当てて、そのIDで参照するタグ
 #
