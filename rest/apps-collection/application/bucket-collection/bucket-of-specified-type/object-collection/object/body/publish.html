@@ -1,0 +1,60 @@
+---
+layout: rest-api
+title: 'Publish'
+tags: rest-api
+---
+<div class="summary">
+
+				This resource is accessed to publish the
+				body of the
+				object being accessed
+			
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id=""><div class="path"><strong>Location</strong><span>/apps/{appID}/buckets/{bucketType}:{bucketID}/objects/{objectID}/body/publish</span></div><div class="method-links"><ul><li class="method-link-POST"><a href="#method--POST">POST</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>No</span></span></div></div></div></div><div class="methods"><div class="method POST" id="method--POST"><h4>POST</h4><p class="uri">/apps/{appID}/buckets/{bucketType}:{bucketID}/objects/{objectID}/body/publish</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+					Gets the URL where the body of the object
+					being
+					accessed is published
+				</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.ObjectBodyPublicationRequest+json</span></p></div><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">expiresAt</span><span class="req"></span><span class="type">long</span><span class="doc">
+						The date in Unix epoch when the publication URL
+						should expire
+					</span></div><div><span class="name">expiresIn</span><span class="req"></span><span class="type">int</span><span class="doc">
+						The period in seconds the publication URL has
+						to be
+						available, after that it will expire
+					</span></div></div><div class="example"><strong class="examplestitle">Sample Request</strong><div class="code javascript json">{
+  &quot;expiresAt&quot;: &quot;[long]&quot;,
+  &quot;expiresIn&quot;: &quot;[int]&quot;
+}</div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-200"><div class="status"><strong>200</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectBodyPublicationResponse+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">publicationID</td><td class="type ">string</td><td class="doc">The ID of the publication</td></tr><tr><td class="name">url</td><td class="type ">string</td><td class="doc">The URL to access the published content
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code USER_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">field</td><td class="type ">string</td><td class="doc">
+						The field used to search for the user,
+						can be the
+						userID field or an address field
+					</td></tr><tr><td class="name">value</td><td class="type ">string</td><td class="doc">
+						The value of the field used to look for the user
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the user belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.GroupNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code GROUP_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">groupID</td><td class="type ">string</td><td class="doc">
+						The groupID of the group that was not found
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the group belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that contains the object
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object that was not found
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectBodyNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_BODY_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that contains the object
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object that does not have body
+					</td></tr></table></div><div class="response status-401"><div class="status"><strong>401</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UnauthorizedAccessException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code UNAUTHORIZED</td></tr><tr><td class="name">authenticatedAppID</td><td class="type ">string</td><td class="doc">The authenticated application ID</td></tr><tr><td class="name">authenticatedUserID</td><td class="type ">string</td><td class="doc">The authenticated user ID</td></tr></table></div></div></div></div></article></section>
+</div>
