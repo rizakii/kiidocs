@@ -24,7 +24,7 @@ layout: ja
 
 {% assign curr_rank = 2 %}
 <aside class="sidebar"><nav>
-<ul>{% for p in site.hierarchical_pages %}{% if p.url contains '/ja/' and p.url != '/ja/' and p.hierarchical_parent_url == page.url or page.hierarchical_ancestors_url contains p.url or p.hierarchical_parent_url == page.hierarchical_parent_url or page.hierarchical_ancestors_url contains p.hierarchical_parent_url %}
+<ul>{% for p in page.hierarchical_pages %}{% if p.url contains '/ja/' and p.url != '/ja/' %}
 {% if p.hierarchical_rank != curr_rank %}{% if p.hierarchical_rank > curr_rank %}<ul{% if curr_rank != 0 %} class="sub_pages"{% endif %}>
 {% else %}{% for i in (p.hierarchical_rank..curr_rank) %}{% if i != curr_rank %}</li>
 </ul>

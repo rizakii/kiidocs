@@ -3,10 +3,6 @@
 module HierarchicalSort
 
   class Utils
-    def Utils.url(page)
-      return page.to_liquid['url']
-    end
-
     def Utils.keys(url)
       keys = url.split('/')
       if keys.length > 0 and keys[0].length == 0
@@ -46,13 +42,11 @@ module HierarchicalSort
       finish
     end
 
-    private
     def add(page)
       @table[page.data['hierarchical_sort_keys'].join('/')] =
         Utils.priority(page)
     end
 
-    private
     def finish()
       max = 0
       keys = []
@@ -73,7 +67,6 @@ module HierarchicalSort
       }
     end
 
-    public
     def get(page)
       priorities = []
       curr = []
@@ -115,9 +108,20 @@ module HierarchicalSort
     def initialize(config)
     end
 
+    def cache_page_url(site)
+      site.pages.each { |page|
+        if not page.data.has_key?('cached_url')
+          page.data['cached_url'] = page.to_liquid['url']
+        end
+      }
+    end
+
     def generate(site)
+      t = Time.now
+      cache_page_url(site)
+
       site.pages.each { |p|
-        url = Utils.url(p)
+        url = p.data['cached_url']
         keys = Utils.keys(url)
         parent = Utils.parent(url)
         p.data['hierarchical_sort_keys'] = keys
@@ -128,13 +132,34 @@ module HierarchicalSort
 
       table = PriorityTable.new(site.pages)
 
-      site.config['hierarchical_pages'] = site.pages.map { |p|
+      hierarchical_pages = site.pages.map { |p|
         PageItem.new(p, table)
       }.sort { |a, b|
         a <=> b
       }.map { |i|
         i.page
       }
+      site.config['hierarchical_pages'] = hierarchical_pages;
+
+      site.pages.each { |page|
+        page.data['hierarchical_pages'] =
+          get_hierarchical_pages(hierarchical_pages, page)
+      }
+    end
+
+    def get_hierarchical_pages(pages, target)
+      hierarchical_pages = []
+      target_url = target.data['cached_url']
+      target_parent = target.data['hierarchical_parent_url']
+      target_ancestors = target.data['hierarchical_ancestors_url']
+      pages.each { |page|
+        page_url = page.data['cached_url']
+        page_parent = page.data['hierarchical_parent_url']
+        if page_parent == target_url or page_parent == target_parent or target_ancestors.index(page_url) or target_ancestors.index(page_parent)
+          hierarchical_pages.push(page)
+        end
+      }
+      return hierarchical_pages
     end
 
   end
