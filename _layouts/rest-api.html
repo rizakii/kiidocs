@@ -9,8 +9,8 @@ layout: en-notrans
 <div class="wrapper">
 
 <div class="breadcrumbs">
-{% for p in site.pages reversed %}{% if page.url contains p.url and p.url != page.url and p.url != '/' %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
-{% endif %}{% endfor %}<span>{{ page.title }}</span>
+{% for p in page.parents %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
+{% endfor %}<span>{{ page.title }}</span>
 </div>
 
 <h1>{{ page.title }}</h1>
