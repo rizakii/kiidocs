@@ -113,7 +113,12 @@ body#preview #container #main > header,body#preview #content{width:1010px;margin
 body#preview #container #main > header{padding:25px 0 0 0;height:155px;}
 body#preview #container #main > header .logo{width:255px;height:66px;float:left;}
 body#preview #container #main > header .logo a{display:block;overflow:hidden;height:0;width:255px;padding:66px 0 0 0;background:url("/assets/preview/sites/site/kiicloud-logo.png") no-repeat}
-body#preview #container #main > header nav.main{float:right;width:700px;padding:20px 0;font-family:'Open Sans',Helvetica,Arial,sans-serif;}
+body#preview #container #main > header nav.main{
+  float:right;
+  width:700px;
+  padding: 10px 0 0 0;
+  font-family:'Open Sans',Helvetica,Arial,sans-serif;
+}
 body#preview #container #main > header nav.main ul{float:right;}
 body#preview #container #main > header nav.main ul li{float:left;}
 body#preview #container #main > header nav.main ul li a{display:block;float:left;padding:0 20px 0 50px;font-size:20px;text-decoration:none;font-weight:600;color:#646e75}
