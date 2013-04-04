@@ -2,4 +2,5 @@
 layout: ja-doc
 title: Android スタートガイド
 sort_priority: 10
+page_id: android-guides-ja
 ---

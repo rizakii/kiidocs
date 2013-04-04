@@ -1,6 +1,7 @@
 ---
 layout: ja-doc
 title: リファレンスガイド
+page_id: guides-ja
 ---
 本リファレンスガイドは、Kii Client SDK の主要な機能をご紹介するドキュメントです。より詳細なドキュメントは、セクション「[詳細ドキュメント](/ja/references/)」より入手可能です。
 

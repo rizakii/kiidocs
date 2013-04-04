@@ -2,6 +2,7 @@
 layout: ja-doc
 title: 詳細ドキュメント
 summary: 各プラットフォーム向け Client SDK や REST API の詳細については、以下のドキュメントを参照してください。
+page_id: references-ja
 ---
 * **Android 向け詳細ドキュメント（Javadoc）**
   * [Kii Cloud SDK](http://static.kii.com/devportal/docs/storage/)

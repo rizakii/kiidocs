@@ -2,4 +2,5 @@
 layout: ja-doc
 title: JavaScript クイックスタート
 sort_priority: 30
+page_id: js-quickstart-ja
 ---
