@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /assets/
+# for developing.
+Disallow: /
