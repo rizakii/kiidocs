@@ -16,4 +16,4 @@ page_id: references-ja
 * **Javascript 向け詳細ドキュメント(JSDoc)**
   * [Kii Cloud SDK](http://static.kii.com/devportal/docs/js/)
 * **REST API 詳細ドキュメント**
-  * [Kii Platform API Documentation](http://documentation.kii.com/rest/application)
+  * [Kii Platform API Documentation]({% page_url references-rest-en %}/apps-collection/application/)

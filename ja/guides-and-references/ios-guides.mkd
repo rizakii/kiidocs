@@ -6,7 +6,7 @@ page_id: ios-guides-ja
 ---
 Kii Platform は、iOS アプリケーション開発を支援するツールとして Kii iOS SDK を提供しています。Kii iOS SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに iOS アプリケーション開発を進めることができます。
 
-本ガイドは Kii iOS SDK の主要な機能をご紹介するものです。Kii iOS SDK が提供する機能の利用方法を、サンプルコード等と共に解説します。Kii iOS SDK が提供する各機能の詳細については[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。
+本ガイドは Kii iOS SDK の主要な機能をご紹介するものです。Kii iOS SDK が提供する機能の利用方法を、サンプルコード等と共に解説します。Kii iOS SDK が提供する各機能の詳細については[こちら]({% page_url references-ja %})の appledoc を参照してください。
 
 ## ガイドを読む上での注意点
 
@@ -45,7 +45,7 @@ KiiUser *user = [KiiUser userWithUsername:@"myusername" andPassword:@"mypassword
 }];
 ```
 
-ノンブロッキングAPI の利用方法の詳細については、[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。また Blocks の仕組み自体の詳細については [iOS Developer Library](http://developer.apple.com/library/ios/#featuredarticles/Short_Practical_Guide_Blocks/_index.html) を参照してください。
+ノンブロッキングAPI の利用方法の詳細については、[こちら]({% page_url references-ja %})の appledoc を参照してください。また Blocks の仕組み自体の詳細については [iOS Developer Library](http://developer.apple.com/library/ios/#featuredarticles/Short_Practical_Guide_Blocks/_index.html) を参照してください。
 
 ### 2. Callbacks を使った API
 
@@ -67,4 +67,4 @@ KiiUser *user = [KiiUser userWithUsername:@"myusername" andPassword:@"mypassword
 }
 ```
 
-ノンブロッキングAPI の利用方法の詳細については、[こちら](http://documentation.kii.com/jp/--271)の appledoc を参照してください。
+ノンブロッキングAPI の利用方法の詳細については、[こちら]({% page_url references-ja %})の appledoc を参照してください。
