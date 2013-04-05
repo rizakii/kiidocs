@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
 title: サインアップ
-sort-priority: 10
+page_id: android-sing-up-ja
+sort_priority: 10
 ---

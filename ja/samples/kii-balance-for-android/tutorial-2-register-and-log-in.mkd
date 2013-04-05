@@ -4,3 +4,122 @@ sort_priority: 30
 page_id: tutorial-2-register-and-log-in-ja
 title: 'チュートリアル#2: ユーザ登録とログイン'
 ---
+
+Kii Balance の利用者は、Kii Cloud へのユーザ登録とログインを行います。ここで、ログイン時に毎回ユーザ名とパスワードを入力させるのは手間なので、これらの入力を省略しつつログイン処理を進める方法を見ていきましょう。
+
+## 1. ユーザ登録
+
+次のコードは、ユーザ登録処理行っています（[RegisterDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/RegistrationDialogFragment.java#L115)）
+
+```java
+public void onClick(View v){
+
+   (...snip...)
+
+  // call user registration API
+  RegisterCallback callback = new RegisterCallback(dialog);
+  KiiUser user = KiiUser.createWithUsername(username);
+  user.register(callback, password);
+
+}
+```
+ここでは基本的に２つのことをしています。
+
+1. ユーザ名をパラメータとして `createWithUsername` メソッドをたたき KiiUser インスタンスを作成。
+2. パスワードをパラメータとして `register` メソッドをたたき、ユーザ登録を実施。
+
+register メソッド実行時、パラメータとしてコールバック関数（ref. RegisterCallback.java）を指定することにより非同期 API を利用しています。
+
+ユーザ登録処理が完了すると、Kii Balance はこのユーザのアクセストークンを取得し、これを保存します。後ほどこのユーザがログインを行う際には、このアクセストークンを利用することにより再度ユーザ名とパスワードを入力する手間を省きます。
+
+実際にユーザトークンを取得・保存しているコードを見てみましょう（[TitleFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/TitleFragment.java#L66)）。
+
+```java
+void onRegisterFinished() {
+
+  (...snip...)
+
+  // to next fragment
+  onLoginFinished();
+}
+
+void onLoginFinished() {
+
+  (...snip...)
+
+  // store access token
+  KiiUser user = KiiUser.getCurrentUser();
+  String token = user.getAccessToken();
+  Pref.setStoredAccessToken(activity, token);
+
+}
+```
+
+OnRegisterFinished() の実行後、onLoginFinished() が実行されるのが見て取れます。onLoginFinished() では以下の２つのことをしています。
+
+1. `getCurrentUser` メソッドを実行し、カレントユーザの KiiUser インスタンスを作成。
+2. `getAccessToken` メソッドを実行し、カレントユーザのアクセストークンを取得。
+取得したアクセストークンは SharedPreferences を使って保存しています(ref. Pref.java)。
+
+## 2. ユーザログイン
+Kii Balance では２種類のログインを利用しています。
+
+* ユーザ名とパスワードによるログイン
+* アクセストークンによるログイン
+
+**ユーザ名とパスワードによるログイン:**
+
+ユーザがタイトルページの "Login" ボタンをクリックした際には、こちらのログイン方法を利用します。ユーザが入力したユーザ名とパスワードを用いて、ログイン処理を実行します。
+
+実際のコードを見てみましょう（[LoginDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/LoginDialogFragment.java#L115)）。
+
+```java
+public void onClick(View v) {
+
+   (...snip...)
+
+  // call user registration API
+  LoginCallback callback = new LoginCallback(dialog);
+  KiiUser.logIn(callback, username, password);
+}
+```
+
+ユーザ名とパスワードをパラメータとして `logIn` メソッドを実行しています。実行の際は、コールバック関数（ref. LoginCallback.java）をパラメータとして指定し、非同期 API を利用しています。
+
+ユーザ登録時同様、ログイン処理完了後にユーザのアクセストークンの取得および保存を行っています。
+
+アクセストークンによるログイン:
+
+実際にアクセストークンによるログインを行っているコードを見てみましょう（[MainActivity.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/MainActivity.java#L51)）。
+
+```java
+public void onCreate(Bundle saveInstanceState) {
+
+    (...snip...)
+
+  // check access token
+  String token = Pref.getStoredAccessToken(getApplicationContext());
+  if (token == null || token.length() == 0) {
+    toTitleFragment();
+    return;
+  }
+
+  // login with token
+  AutoLoginCallback callback = new AutoLoginCallback(this);
+  KiiUser.loginWithToken(callback, token);
+}
+```
+
+まず、カレントユーザのアクセストークンを取得します。トークンはSharedPreferences (ref. Pref.java) を使って保存しているので、こちらよりトークンを再取得します。
+
+トークンの再取得が成功したら、次にこのトークンをパラメータとして `loginWithToken` メソッドを実行します。この際、パラメータとしてコールバック関数（ref. AutoLoginCallback.java）を指定し、非同期 API として実行しています。
+
+---
+## 次は...
+実際に収支を取り扱う準備が整いました。 Kii Cloud より保存済のエントリを取得してみましょう。
+[チュートリアル＃３]({% page_url tutorial-3-retrieve-income-expense-entry-ja %}) へ移動。
+
+### より詳しく学びたい方へ
+
+ユーザ登録時に、メールアドレスや電話番号の認証処理を走らせる方法などについては「[サインアップ]({% page_url android-sing-up-ja %})」を参照してください。
+Facebook アカウントによるユーザ登録をする方法については「[外部サービス（Facebook）連携]({% page_url android-social-network-integration-ja %})」を参照してください。

@@ -46,7 +46,8 @@ div.gsc-control-cse {
   padding: 0;
 }
 
-.content p > code {
+.content p > code,
+.content li > code {
   display: inline;
   margin: 0 2px;
   padding: 2px 4px;
