@@ -4,7 +4,7 @@ exclude:        scripts tmp templates README.mkd
 permalink:      pretty
 
 redcarpet:
-  extensions: [ 'autolink', 'hard_wrap', 'tables' ]
+  extensions: [ 'autolink', 'tables' ]
 
 base-url: http://documentation.kii.com/
 
