@@ -2,7 +2,7 @@
 layout: ja-doc
 sort_priority: 20
 title: Kii Ads SDK の導入手順
-page_id: ios-adding_kii_ads_in_your_application-ja
+page_id: ios-adding_kii_ads_to_your_application-ja
 ---
 ## 開発者ポータルで広告サービスの設定をする
 

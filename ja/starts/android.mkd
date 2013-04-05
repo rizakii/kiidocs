@@ -4,3 +4,32 @@ title: Android クイックスタート
 sort_priority: 10
 page_id: android-quickstart-ja
 ---
+## アプリケーションを開発者ポータルに登録する
+
+まず初めに、アプリケーションを開発者ポータルに登録する必要があります。登録が完了すると、Kii Platform はあなたのアプリケーション用に Application ID と Application Key を払い出します。
+
+開発者ポータルへのアプリケーション登録の手順は次の通りです。
+
+1.  開発者ポータル（[http://developer.kii.com](http://developer.kii.com)）にログインする
+
+2.  "Create App" ボタンをクリックし、表示されるメニューにアプリケーション名とアプリケーション開発プラットフォーム等を入力後、"Create" ボタンをクリックする
+
+    ![](/assets/images/commons/starts_01.png)
+
+3.  作成されたアプリケーションを選択後、"Access Keys" をクリックする
+
+    ![](/assets/images/commons/starts_02_access_key.png)
+
+以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別するために利用されます。
+
+<br/>
+
+## Android Client SDK をダウンロードする
+
+アプリケーションの登録が完了すると、SDK ダウンロード用のウインドウがポップアップします。このウインドウに表示されるリンクをクリックすることで、Android 用の Client SDK を含む Android スターターキットをダウンロードできます。（アプリケーションコンソールの上部に表示されている "SDK" をクリックして SDK をダウンロードすることもできます）
+
+ダウンロード完了後、SDK を設定してアプリケーションに導入してください。
+
+*   Kii Cloud SDK の設定方法は、セクション「{% page_link android-adding_kii_cloud_to_your_application-ja %}」を参照してください
+*   Kii Sync SDK の設定方法は、セクション「{% page_link android-adding_kii_sync_to_your_application-ja %}」を参照してください
+*   Kii Ads SDK の設定方法は、セクション「{% page_link android-adding_kii_ads_to_your_application-ja %}」を参照してください

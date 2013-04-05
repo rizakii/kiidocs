@@ -2,4 +2,63 @@
 layout: ja-doc
 title: Kii Cloud SDK の導入手順
 sort_priority: 10
+page_id: android-adding_kii_cloud_to_your_application-ja
 ---
+## プロジェクトの設定
+
+下記の手順に従って、KiiCloudSDK をアプリケーションのプロジェクトに追加してください。
+
+1.  KiiCloudStorageSDK の Java ライブラリ（KiiCloudStorageSDK-xxx.jar）をライブラリパス（{your android application project root}/libs）にコピーします。
+2.  AndroidManifest.xml を更新し、必要なパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ```
+
+    なお、android.permission.WRITE_EXTERNAL_STORAGE は、File Storage (KiiFile 関連）機能を利用するときのみ設定が必要です。
+
+3.  SDK を導入するクラスに com.kii.cloud.storage をインポートし、Kii.initialize() を呼び出します。
+
+    ```java
+    import com.kii.cloud.storage
+
+    public class MyClass {
+        static {
+            // this configure the SDK to use the specified AppID and AppKey.
+            // This must be called prior to any API invocations.
+            // It is ok to call this method multiple times
+            Kii.initialize("___APPID___", "___APPKEY___", Site.JP);
+        }
+    }
+    ```
+
+    "APPID" / "APPKEY" の項目は、開発者ポータルにて取得した "Application ID" / "Application Key" を設定してください。また Site は、開発者ポータルにて指定した Country に対応する値（Site.JP または Site.US のいづれか）を指定してください。
+
+## Push 通知の設定
+
+Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定を行なってください。
+
+1.  **Google Cloud Messaging (GCM) の設定**
+
+    Kii Push 通知は Google Cloud Messaging (GCM) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは GCM の設定（e.g., Google API プロジェクトの作成、GCM サービスの有効化、GCM API key の取得等）を行う必要があります。
+
+    詳細は、Google による tutorial を参照してください。
+
+2.  **GCM API key の設定**
+
+    1\.で取得した GCM API Key を Kii Cloud に設定します。以下の操作を開発者ポータルで行なってください。
+
+    1.  アプリケーションコンソールにて "Edit" ボタンをクリックします。
+
+        ![](01.png)
+
+    2.  "Setting" をクリックした後、"Push Notifications" を選択します。
+
+        次のような Push 通知設定画面が表示されることを確認してください。
+
+        ![](02.png)
+
+    GCM Key をアップロードしてください。
+
+    設定が完了したら "Save" ボタンを押してください。

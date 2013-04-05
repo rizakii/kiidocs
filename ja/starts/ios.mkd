@@ -31,4 +31,4 @@ page_id: ios-quickstart-ja
 ダウンロード完了後、SDK を設定してアプリケーションに導入してください。
 
 *   Kii Cloud SDK の設定方法は、セクション「{% page_link ios-adding_kii_cloud_to_your_application-ja %}」を参照してください
-*   Kii Ads SDK の設定方法は、セクション「{% page_link ios-adding_kii_ads_in_your_application-ja %} 」を参照してください
+*   Kii Ads SDK の設定方法は、セクション「{% page_link ios-adding_kii_ads_to_your_application-ja %} 」を参照してください
