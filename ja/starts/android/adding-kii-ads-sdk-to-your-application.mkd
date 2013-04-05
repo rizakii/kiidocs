@@ -4,3 +4,143 @@ title: Kii Ads SDK の導入手順
 sort_priority: 30
 page_id: android-adding_kii_ads_to_your_application-ja
 ---
+## 開発者ポータルで広告サービスの設定をする
+
+広告メディエーションと Direct Ad の機能を SDK 経由で利用するために、開発者はまず開発者ポータルで広告サービスの設定をする必要があります。もしアプリケーションをまだ作成していなければ、開発者ポータルでまずアプリケーションを作成してください。
+
+### 広告を有効にする
+
+* 開発者ポータル左のナビゲーションから、アプリ名をクリックし、Ads を選びます。
+* "Config" タブをクリックします。
+* トグルスイッチを "On" にして、広告を有効にします。
+
+    ![](01.png)
+
+### リージョンの設定
+
+Kii 広告ネットワークでは、アプリ使用者のリージョンに従って広告ネットワークの選択方法を設定できます。例えば、開発者は中国にいるユーザに SmartMAD を使用し、米国にいるユーザに AdMob や Direct Ad（もしくは、これらの組み合わせ）を使用する、といった設定が可能です。
+
+このリージョン設定は次のように行います。
+
+* "ALL" リージョンは最初から設定されています。このリージョンの設定は、アプリ利用者のリージョンが未設定の場合に適用されます。例えば、アプリ利用者が "South Korea" リージョンにおり、開発者ポータル上で "South Korea" リージョンの設定がされていな場合、"ALL" リージョンの設定が適用されます。
+* リージョンを追加したい場合、"+ (plus)" ボタンをクリックし、国を選択したあと、"Create Region" ボタンをクリックします。
+
+    ![](02.png)
+
+* 追加されたリージョンは編集/無効にできます。
+
+### ネットワークの設定
+
+各リージョンに対して、開発者は1つもしくはそれ以上の広告ネットワークを選択できます。追加した各ネットワークに対して、開発者はネットワーク固有の設定をしなければなりません。
+
+* ネットワークを追加するには、 "+ (plus)" ボタンをクリックします。
+
+    ![](03.png)
+
+* クリック後の画面で、サポートされている広告ネットワークを選択します。選択後はネットワーク固有の設定が必要です。例えば AdMob の場合は AdMob で取得したパブリッシャーキーを、Direct ad の場合は adspace ID を設定する必要があります。
+* "Site-&gt;" ボタンを押すと、各広告ネットワークの Web サイトに飛びます。移動先の Web サイトで、適宜追加の設定等を行ってください。
+
+    * Direct selling の場合、ログインが必要な amobee のサイトに移動します。
+
+    ![](04.png)
+
+* 広告ネットワークを有効にした後、開発者は各広告ネットワークの重み（広告配信される割合）をスライダーで調整することができます。
+* 広告ネットワークをリージョンに追加した後、開発者は "config" をクリックすることで、設定（重みとネットワーク固有の設定）を変更できます。
+
+    ![](05.png)
+
+## プロジェクトの設定
+
+KiiAds をアプリケーションで有効化する手順は下記の通りです。
+
+### プロジェクトに KiiAdsSDK を追加する
+
+1. AndroidManifest.xml に下記のパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    ```
+
+2. KiiAdsSDK（KiiAdNetSDK_Android_x.x.x.jar）をライブラリフォルダ（/libs）に追加します。
+
+3. Proguard を使った難読化を利用したい場合は、下記のコードを "proguard-project.txt" もしくは "proguard.cfg" に追加してください。
+
+    ```
+    -dontwarn com.kii.ad.adapters.* 
+
+    -keep class com.kii.ad.adapters.* {
+        public *;
+    }
+    ```
+
+### アドネットワークのプラグインを追加する
+
+#### AdMob
+
+1. AdMobSDK（GoogleAdMobAdsSdk-x.x.x.jar）をライブラリフォルダ（/libs）に追加します。
+
+2. AndroidManifest.xml に下記のパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    ```
+
+3. プロジェクトの Android ターゲットを 3.2 以上に設定します。
+
+4. AndroidManifest.xml に下記のアクティビティ設定を追加します。
+
+    ```xml
+    <activity android:name="com.google.ads.AdActivity"
+              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
+    ```
+
+#### MdotM
+
+1. MdotMSDK（MdotM-Android-SDK-2.0.6.jar）をライブラリフォルダ（/libs）に追加します。
+
+#### SmartMAD
+
+1. SmartMADSDK（smartmad-sdk-android.jar）をライブラリフォルダ（/libs）に追加します。
+
+2. AndroidManifest.xml に下記のパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    ```
+
+#### Millenial Media
+
+1. MillenialMediaSDK（MMAdView.jar）をライブラリフォルダ（/libs）に追加します。
+
+2. AndroidManifest.xml に下記のパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android:permission.ACCESS_NETWORK_STATE" />
+    ```
+
+3. AndroidManifest.xml に下記のアクティビティを追加します。
+
+    ```xml
+    <activity android:name="com.millennialmedia.android.MMAdViewOverlayActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:configChanges="keyboardHidden|orientation|keyboard" />
+    <activity android:name="com.millennialmedia.android.VideoPlayer" android:configChanges="keyboardHidden|orientation|keyboard" />
+    ```
+
+#### InMobi
+
+1. InMobiSDK（InMobiAndroidSDK.jar）をライブラリフォルダ（/libs）に追加します。
+
+2. AndroidManifest.xml に下記のアクティビティを追加します。
+
+    ```xml
+    <activity android:name="com.inmobi.androidsdk.IMBrowserActivity" android:configChanges="keyboardHidden|orientation|keyboard" />
+    ```
+
+#### Leadbolt
+
+Leadbolt 固有の設定は不要です。アプリケーションが有効化されると、自動的に KiiPlatform による広告配信が開始されます。
+
+#### AMoAd
+
+AMoAd 固有の設定は不要です。アプリケーションが有効化されると、自動的に KiiPlatform による広告配信が開始されます。
