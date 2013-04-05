@@ -63,4 +63,5 @@
 .highlight pre code .p { color: #b1edec; } /* punctuation */
 .highlight pre code .n { color: #ffb566; } /* name */
 
-.highlight pre { background-color: #646e75; }
+/*.highlight pre { background-color: #646e75; }*/
+div.highlight { background-color: #646e75; }

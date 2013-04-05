@@ -3,4 +3,80 @@ layout: ja-doc
 title: Android スタートガイド
 sort_priority: 10
 page_id: android-guides-ja
+summary: Kii Platform は、Android アプリケーション開発を支援するツールとして Kii Android SDK を提供しています。Kii Android SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに Android アプリケーション開発を進めることができます。本ガイドは Kii Android SDK の主要な機能をご紹介します。Kii Android SDK が提供する機能の利用方法を、サンプルコードを交えつつ解説します。Kii Android SDK が提供する各機能の詳細についてはこちらの Javadoc を参照してください。
 ---
+
+
+## ガイドを読む上での注意点
+
+### 例外処理
+
+本ガイドは、SDK の利用方法をサンプルコードと共に解説しています。これらのサンプルコードにおいて、例外のハンドリングは簡略化されています。
+
+ユーザによるサインアップの解説を例に取ると、ここで提示されているサンプルコードは次のように IOException と AppException という抽象度の高い例外のみをハンドルしています。
+
+```java
+try{
+  user.register(password);
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+}
+```
+
+実際には、Kii Android SDK はより詳細な例外を送出し、アプリケーションに対して発生した例外の詳細を通知しています。例えば、上で取り上げたユーザサインアップの場合、Kii Android SDK は BadRequestException や ConflictException などの詳細な例外を送出します。アプリケーション側で発生した例外に応じて細かく対処を行う場合、例えば以下のようにこれらの詳細な例外を一つ一つキャッチして然るべき対応を行うことになります。
+
+```java
+try{
+  user.register(password);
+} catch (BadRequestException e) {
+  // Registration failed because username / password
+  // have invalid format
+} catch (ConflictException e) {
+  // Registration failed because the user already exists
+} catch (AppException e) {
+  // Other exceptions in App layer
+} catch (IOException e) {
+  // Error occurred in Network layer
+}
+```
+
+Kii Client SDK の各API が送出する例外の詳細については、こちらの Javadoc を参照してください。
+
+### ブロッキング API vs. ノンブロッキング API
+
+新規ユーザの登録やデータのアップロード等、Kii Android SDK が提供する多くのメソッドは、サーバとの通信が発生する関係で処理完了までに時間を要します。このようなメソッドに対して、Kii Android SDK はブロッキング API とノンブロッキング API の双方を提供しています。
+
+本ガイドでは、ブロッキング API のみをサンプルコードとして提示しています。一例として、Object データのアップロードを解説する際に提示しているサンプルコードを以下にあげます。
+
+```java
+KiiObject object = Kii.bucket("my_bucket").object();
+object.set("foo", "bar");
+
+// Save an object with a blocking API
+try {
+  object.save();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+実際にアプリケーションを開発する際には、アプリケーションが「フリーズ」することを防ぐなどの理由でノンブロッキング API を利用したほうがよいケースがあります。ノンブロッキング API を利用する場合は、メソッドの処理が完了した際に通知を受けるためのコールバックを定義します。以下に、Object データのアップロードをノンブロッキング API を用いて実現する例をあげます。
+
+```java
+KiiObject object = Kii.bucket("my_bucket").object();
+object.set("foo", "bar");
+
+// Save an object with a non-blocking API
+object.save(new KiiObjectCallBack() {
+  @Override
+  public void onSaveCompleted(int token, KiiObject object, Exception exception) {
+    // Update UI, etc.
+  }
+});
+```
+
+ノンブロッキングAPI の利用方法の詳細については、こちらの Javadoc を参照してください。
