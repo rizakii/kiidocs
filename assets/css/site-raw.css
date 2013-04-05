@@ -259,11 +259,19 @@ body#preview section.content .description code{
 
 body#preview section.content .summary{padding:30px 0}
 body#preview section.content p,
-body#preview section.content h2 {
+body#preview section.content h2,
+body#preview section.content ul,
+body#preview section.content ol {
   margin:10px 0;
 }
-body#preview section.content li > p:first-child { margin:0; }
-body#preview section.content ul,body#preview section.content ol{margin:0 0 0 0;padding:0 0 0 20px}
+body#preview section.content li > *:first-child {
+  margin:0;
+}
+body#preview section.content ul,
+body#preview section.content ol {
+  margin: 10px 0;
+  padding: 0 0 0 20px;
+}
 .sunlight-container{clear:both !important;position:relative !important;margin:10px 0 !important}
 .sunlight-code-container{clear:both !important;position:relative !important;border:none;border-color:#626262 !important;background-color:#464d52;-webkit-border-radius:5px;border-radius:5px}
 .sunlight-highlighted,.sunlight-container,.sunlight-container textarea{font-family:Consolas,Inconsolata,Monaco,"Courier New" !important;font-size:16px !important;line-height:19px !important}

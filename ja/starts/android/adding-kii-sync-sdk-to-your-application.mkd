@@ -4,3 +4,46 @@ title: Kii Sync SDK の導入手順
 sort_priority: 20
 page_id: android-adding_kii_sync_to_your_application-ja
 ---
+
+## プロジェクトの設定
+
+1.  filesync-sdk プロジェクトを Android ライブラリプロジェクトとして参照するよう、あなたのプロジェクトを設定します。
+
+    Eclipseを使っている場合、下記の方法で設定できます：
+    * プロジェクトエクスプローラーからあなたのプロジェクトを選択
+    * 上部のメニューから 「ファイル」→「プロパティ」→「Android」と選択
+    * Library パネルから filesync-sdk プロジェクトを ライブラリとして追加
+
+2.  AndroidManifest.xml を更新し、必要なパーミッションを追加します。
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ```
+
+3.  アプリケーションのプロジェクトルートフォルダに `res/raw/kiifs_config` を作成し、以下を追加します。
+
+    ```
+    site = JP
+    app.id = your-app-id
+    app.key = your-app-key
+    ```
+
+    フォーマットはJava のプロパティファイル形式です。
+
+    `APPID` / `APPKEY` の項目は、クイックスタートで取得した `Application ID` / `Application Key` を設定してください。
+
+    site には JP または US が指定できます。Site は Kii Cloud サーバの物理的なロケーションです。サービスの展開に最適な Site を選択してください。
+
+4.  Proguard を使った難読化を利用したい場合は、下記のコードを `proguard-project.txt` に追加してください。
+
+    ```
+    -keep public interface com.kii.cloud.filesync.jni.JNIReferred {}
+    -keep public class * implements com.kii.cloud.filesync.jni.JNIReferred {
+        public *;
+    }
+    ```
+
+<p class="note">
+注意: KiiSyncSDK はユーザー管理機能を含んでいません。もしアプリケーションでユーザー管理機能を利用したい場合には、セクション「{% page_link android-adding_kii_cloud_to_your_application-ja %}」を参照し KiiCloudSDK をプロジェクトに導入してください。
+</p>

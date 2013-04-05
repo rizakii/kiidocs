@@ -45,3 +45,20 @@ div.gsc-control-cse {
   border: 0;
   padding: 0;
 }
+
+.content p > code {
+  display: inline;
+  margin: 0 2px;
+  padding: 2px 4px;
+  border: 1px solid #9bcaec;
+  border-radius: 4px;
+  background: #ebf5fb;
+  color: #3696da;
+  font-size: 90%;
+}
+
+.content p.note {
+  padding: 5px;
+  background: #ffff80;
+  border-radius: 5px;
+}
