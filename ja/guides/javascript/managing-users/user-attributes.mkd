@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: ユーザ属性
-sort_priority: 50
+sort-priority: 50
 ---

@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: Folder 同期の起動
-sort_priority: 10
+sort-priority: 10
 ---
 

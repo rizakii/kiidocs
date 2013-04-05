@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: 広告管理機能
-sort_priority: 60
+sort-priority: 60
 ---

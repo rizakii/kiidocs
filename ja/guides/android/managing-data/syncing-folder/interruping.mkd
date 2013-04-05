@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: Folder Sync の中断と再開
-sort_priority: 20
+sort-priority: 20
 ---
 

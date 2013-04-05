@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: サインイン
-sort_priority: 20
+sort-priority: 20
 ---

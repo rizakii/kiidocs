@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: Basic Analytics
-sort_priority: 10
+sort-priority: 10
 ---
 

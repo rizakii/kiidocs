@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: メッセージを送信する
-sort_priority: 30
+sort-priority: 30
 ---
 

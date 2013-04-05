@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
-sort_priority: 50
+sort-priority: 50
 title: 'チュートリアル#4： エントリーの作成'
 ---

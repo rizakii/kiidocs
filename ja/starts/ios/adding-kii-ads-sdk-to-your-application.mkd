@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
-sort_priority: 20
+sort-priority: 20
 title: Kii Ads SDK の導入手順
 page_id: ios-adding_kii_ads_to_your_application-ja
 ---

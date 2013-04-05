@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: ユーザを無効化する
-sort_priority: 50
+sort-priority: 50
 ---
 

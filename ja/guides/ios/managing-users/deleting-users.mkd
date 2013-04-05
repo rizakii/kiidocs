@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: ユーザ削除
-sort_priority: 60
+sort-priority: 60
 ---

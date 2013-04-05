@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
-sort_priority: 60
+sort-priority: 60
 title: 'チュートリアル#5: エントリーの更新と削除'
 ---

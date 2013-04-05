@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
 title: Kii Ads SDK の導入手順
-sort_priority: 30
+sort-priority: 30
 page_id: android-adding_kii_ads_to_your_application-ja
 ---
 ## 開発者ポータルで広告サービスの設定をする

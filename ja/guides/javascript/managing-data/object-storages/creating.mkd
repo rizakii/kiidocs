@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: Object の作成
-sort_priority: 10
+sort-priority: 10
 ---

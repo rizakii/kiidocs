@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
-sort_priority: 40
+sort-priority: 40
 title: 'チュートリアル#3: エントリーの取得'
 ---

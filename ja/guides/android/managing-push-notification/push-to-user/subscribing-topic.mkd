@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: トピックを購読する/購読解除する
-sort_priority: 20
+sort-priority: 20
 ---
 

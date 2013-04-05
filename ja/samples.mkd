@@ -2,7 +2,7 @@
 layout: ja-doc
 title: サンプルコード集
 page_id: samples-ja
-sort_priority: 40
+sort-priority: 40
 ---
 * {% page_link android-sample_balance-ja %}
 * （近日中にさらにサンプルアプリが追加される予定です。もしサンプルアプリを投稿したいという方がいらっしゃいましたら support@kii.com までご連絡ください）

@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: Folder 同期
-sort_priority: 40
+sort-priority: 40
 ---

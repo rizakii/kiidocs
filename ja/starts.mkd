@@ -3,7 +3,7 @@ layout: ja-doc
 title: はじめに
 summary: このドキュメントは、Kii Platform が提供するクライアント SDK を用いてアプリケーション開発を行うために必要な手順を説明します。
 page_id: quickstart-ja
-sort_priority: 10
+sort-priority: 10
 ---
 
 Kii Platform は、以下のプラットフォーム向けに Client SDK を提供しています。

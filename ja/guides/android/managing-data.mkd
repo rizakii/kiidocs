@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
 title: データ管理機能
-sort_priority: 30
+sort-priority: 30
 ---

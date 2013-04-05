@@ -1,5 +1,5 @@
 ---
 layout: ja-doc
-sort_priority: 10
+sort-priority: 10
 title: アプリとコードのダウンロード
 ---
