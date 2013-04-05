@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
-sort-priority: 30
+sort_priority: 30
+page_id: tutorial-2-register-and-log-in-ja
 title: 'チュートリアル#2: ユーザ登録とログイン'
 ---

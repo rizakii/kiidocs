@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
-sort-priority: 40
-title: 'チュートリアル#3: エントリーの取得'
+sort_priority: 40
+page_id: tutorial-3-retrieve-income-expense-entry-ja
+>>>>>>> Port kii-balance-for-android.
 ---
