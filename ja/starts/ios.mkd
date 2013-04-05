@@ -2,7 +2,7 @@
 layout: ja-doc
 title: iOS クイックスタート
 sort-priority: 20
-page_id: ios-quickstart-ja
+page-id: ios-quickstart-ja
 ---
 ## アプリケーションを開発者ポータルに登録する
 

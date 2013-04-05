@@ -2,7 +2,7 @@
 layout: ja-doc
 sort-priority: 10
 title: Kii Cloud SDK の導入手順
-page_id: ios-adding_kii_cloud_to_your_application-ja
+page-id: ios-adding_kii_cloud_to_your_application-ja
 ---
 ## プロジェクトの設定
 

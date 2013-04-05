@@ -2,7 +2,7 @@
 layout: ja-doc
 title: Android スタートガイド
 sort-priority: 10
-page_id: android-guides-ja
+page-id: android-guides-ja
 summary: 'Kii Platform は、Android アプリケーション開発を支援するツールとして Kii Android SDK を提供しています。Kii Android SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに Android アプリケーション開発を進めることができます。<br /><br />本ガイドは Kii Android SDK の主要な機能をご紹介します。Kii Android SDK が提供する機能の利用方法を、サンプルコードを交えつつ解説します。Kii Android SDK が提供する各機能の詳細についてはこちらの Javadoc を参照してください。'
 ---
 

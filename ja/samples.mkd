@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
 title: サンプルコード集
-page_id: samples-ja
+page-id: samples-ja
 sort-priority: 40
 ---
 * {% page_link android-sample_balance-ja %}

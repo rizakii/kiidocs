@@ -2,5 +2,5 @@
 layout: ja-doc
 title: JavaScript スタートガイド
 sort-priority: 30
-page_id: js-guides-ja
+page-id: js-guides-ja
 ---

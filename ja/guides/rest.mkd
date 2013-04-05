@@ -2,5 +2,5 @@
 layout: ja-doc
 title: REST スタートガイド
 sort-priority: 40
-page_id: rest-guides-ja
+page-id: rest-guides-ja
 ---
