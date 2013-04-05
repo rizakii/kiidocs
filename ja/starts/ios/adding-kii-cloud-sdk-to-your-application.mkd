@@ -50,13 +50,13 @@ Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定�
 
     1. アプリケーションコンソールにて "Edit" ボタンをクリックします。
 
-        ![](http://static.kii.com/devportal/docs/images/ios_quick_kiicloud_01_e.png)
+        ![](ios_quick_kiicloud_01_e.png)
 
     2. "Setting" をクリックした後、"Push Notifications" を選択します。
 
         次のような Push 通知設定画面が表示されることを確認してください。
 
-        ![](http://static.kii.com/devportal/docs/images/ios_quick_kiicloud_02_e.png)
+        ![](ios_quick_kiicloud_02_e.png)
 
     Development (Sandbox) および Production 環境用に、それぞれ証明書と秘密鍵をアップロードしてください。（Development / Production 環境に関する詳細は、Apple によるこちらのドキュメントを参照してください）
 
