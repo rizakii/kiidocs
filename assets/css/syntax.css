@@ -1,6 +1,6 @@
 /*TODO*/ .highlight pre code .hll { background-color: #ffffcc }
 .highlight pre code .c { color: #909aa0; } /* Comment */
-/*TODO*/ .highlight pre code .err { border: 1px solid #FF0000 } /* Error */
+/*DISABLED .highlight pre code .err { border: 1px solid #FF0000 } Error*/
 .highlight pre code .k { color: #a3ccf7; } /* Keyword */
 .highlight pre code .o { color: #b1edec; } /* Operator */
 .highlight pre code .cm { color: #909aa0; } /* Comment.Multiline */

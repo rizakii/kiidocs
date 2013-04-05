@@ -3,3 +3,33 @@ layout: ja-doc
 title: Kii Analytics SDK の導入手順
 sort_priority: 40
 ---
+## プロジェクトの設定
+
+以下の手順に従って、Kii Analytics SDK をアプリケーションのプロジェクトに追加してください。
+
+1.  フレームワークをダウンロードし、XCode プロジェクトの 'Frameworks' グループにドラッグします。
+2.  以下のフレームワークがプロジェクトに追加されたことを確認します。
+  *   libsqlite3.dylib
+3.  KiiAnalyticsSDK を利用する全てのファイルに、以下のヘッダを追加します。
+
+    ```objc
+    #import <KiiSDK/KiiAnalytics.h>
+    ```
+
+4.  Add the following code in your AppDelegate's application:didFinishLaunchingWithOptions method:
+
+    ```objc
+    // Application startup
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      // Kii initialization
+      [KiiAnalytics beginWithID:@"___APPID___" 
+                         andKey:@"___APPKEY___" 
+                        andSite:kiiAnalyticsSiteUS];
+
+      return YES;
+    }
+    ```
+
+    `__APP_ID__` と `__APP_KEY__` には、それぞれあなたのアプリの Application ID と Application Key を設定してください。
+
+    また、`Site` は `kiiAnalyticsSiteJP` （日本）または `kiiAnalyticsSiteUS` （米国） が選択可能です。`Site` はKii Cloud サーバの物理的なロケーションを指定します。サービスの展開に最適な `Site` を選択してください。
