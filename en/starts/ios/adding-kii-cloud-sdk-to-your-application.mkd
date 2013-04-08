@@ -1,0 +1,87 @@
+---
+layout: en-doc
+title: Adding Kii Cloud to Your Application
+summary: Kii Cloud SDK gives you the ability to manage your application users and data with only a few lines of client code.
+sort-priority: 10
+page-id: ios-adding_kii_cloud_to_your_application-en
+---
+## Configuring Your Project
+
+Follow the steps below to add Kii Cloud SDK to your application:
+
+1. Download the framework and drag in into the 'Frameworks' section in your XCode project.
+2. Ensure the following frameworks exist in your project:
+  * **MobileCoreServices.framework**
+3. Add the following header to all files that will use Kii SDK:
+
+    ```objc
+    #import <KiiSDK/Kii.h>
+    ```
+
+4. Add the following code in your AppDelegate's `application:didFinishLaunchingWithOptions` method:
+
+    ```objc
+    // Application startup
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      // Kii initialization
+      [Kii beginWithID:@"___APPID___" 
+                andKey:@"___APPKEY___" 
+               andSite:kiiSiteUS];
+
+      return TRUE;
+    }
+    ```
+
+    Insert your application's credentials (i.e., `___APPID___` and `___APPKEY___`) in the specified parameters in this method. 
+
+    You may also customize the default site based on your location to optimize performance. The currently supported values are: kiiSiteUS (United States) and kiiSiteJP (Japan).
+
+## Configuring Push Notification
+
+If you want to leverage Kii Cloud push notification features, follow the steps below:
+
+1. **Set up Apple Push Notification Service (APNS).**
+
+    Kii Push notification leverages Apple Push Notification Service (APNS) mechanism.  You therefore need to set up your application (e.g., creating SSL Certificate and Keys) so as to enable APNS.
+
+    Please refer the [documentation](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008194-CH1-SW1) provided by Apple for the details.
+
+2. **Configuring your certificate and key.**
+
+    Register your certificate and key to Kii Cloud by executing the following steps on the dev portal.
+
+    1.  Click "Edit" button at your application console.
+
+        ![](01.png)
+
+    2.  Click "Setting" button and then select "Push Notification".
+
+        This will bring a push notification configuration screen.  
+
+        ![](02.png)
+
+    Upload your certificates and keys for both Development (Sandbox) and Production environments.  (Please refer the [documentation](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ProvisioningDevelopment/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1) provided by Apple for the details.)
+
+    Click "Save" button when done.
+
+3. **Configure your project.**
+
+    Update your app delegate's application:didFinishLaunchingWithOptions method like the following example.  In this example, we are enabling the APNS in Development mode.
+
+```objc
+// Application startup
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  // Kii initialization
+  [Kii beginWithID:@"___APPID___" 
+            andKey:@"___APPKEY___" 
+           andSite:kiiSiteUS];
+
+  // Enable push with DevelopmentMode
+  [Kii enableAPNSWithDevelopmentMode:YES 
+                andNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                      UIRemoteNotificationTypeSound |
+                                      UIRemoteNotificationTypeAlert)];
+
+  return TRUE;
+}
+```

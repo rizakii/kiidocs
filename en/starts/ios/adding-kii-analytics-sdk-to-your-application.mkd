@@ -1,0 +1,37 @@
+---
+layout: en-doc
+title: Adding Kii Analytics SDK to Your Application
+summary: 
+sort-priority: 40
+#page-id: foo-bar-baz
+---
+## Configuring your project
+
+Follow the steps below to enable Kii Ads in your application.
+
+1. Download the framework and drag in into the 'Frameworks' section in your XCode project.
+2. Ensure the following framework exists in your project.
+  * libsqlite3.dylib
+3. Add the following header to all files that will use KiiAnalyticsSDK:
+
+    ```objc
+    #import <KiiSDK/KiiAnalytics.h>
+    ```
+
+4. Add the following code in your AppDelegate's application:didFinishLaunchingWithOptions method:
+
+    ```objc
+    // Application startup
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      // Kii initialization
+      [KiiAnalytics beginWithID:@"___APPID___"
+                         andKey:@"___APPKEY___"
+                        andSite:kiiAnalyticsSiteUS];
+
+      return YES;
+    }
+    ```
+
+Insert your application's credentials (i.e., `___APPID___` and `___APPKEY___`) in the specified parameters in this method.
+
+You may also customize the default site based on your location to optimize performance. The currently supported values are: `kiiAnalyticsSiteUS` (United States) and `kiiAnalyticsSiteJP` (Japan).

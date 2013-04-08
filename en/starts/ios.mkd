@@ -34,5 +34,4 @@ Otherwise, you can always download the SDK by clicking the "SDK" link at the top
 To integrate the SDK with your existing app, check out the following resources:
 
 * For cloud storage: {% page_link ios-adding_kii_cloud_to_your_application-en %}
-* For sync: {% page_link ios-adding_kii_sync_to_your_application-en %}
 * For advertising: {% page_link ios-adding_kii_ads_to_your_application-en %}

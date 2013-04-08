@@ -1,0 +1,150 @@
+---
+layout: en-doc
+title: Adding Kii Ads in Your Application
+summary: Kii Advertising SDK gives you the ability to add multiple advertising networks with only a few lines of client code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
+sort-priority: 20
+page-id: ios-adding_kii_ads_to_your_application-en
+---
+## Configuring Ads Service in Developer Portal
+
+To be able to use advertising mediation and direct ads functionality through our SDKs, you need to first configure the Ad service for your application using the Developer Portal. If you haven't created an application yet, please do so before continuing.
+
+### Enabling Ads
+
+* Click on your application name in the left hand navigation of Developer Portal -- and select Ads.
+* In the resulting interface, select the "Config" tab.
+* Set the toggle switch UI to "On" to enable the ads.
+
+    ![](01.png)
+
+### Configuring Regions
+
+Kii Ad Network offers the ability to configure ad network selection based on the region the app user is from; For instance, an app developer might want to serve ads from SmartMAD (MADHouse) ad network for app users in China -- whereas use Ad Mob or Direct Ads (or a combination of those) for app users in USA. The following steps will walk you thru how to set this up.
+
+* You will notice that by default a region called "default" is already created for you. This Default region's configuration is used if you haven't selected when our Ads system doesn't find any specific regional configuration to apply for a given instance. For example, if the app user is from South Korea -- and there is no "South Korea" region set up -- then the configuration in Default is used.
+* If you would like to create a region (say "China) -- click on "+ (plus)" button, select Country and press "Create Region" button.
+
+    ![](02.png)
+
+* Once you have Regions configured, you can edit/toggle-off them as well.
+
+### Configuring Networks
+
+Within each region, you can select one or more ad networks. For each network you add, you will have to configure additional things -- depending on the network.
+
+* To add a network, click on "+ (plus)" button.
+
+    ![](03.png)
+
+* In the resulting UI, select the ad network (from the list of supported networks and then provide other configurations relevant to the network. For instance, for Admob, you will have to enter your Admob Publisher Key. And for Direct Selling, you need to enter adspace ID.
+* "Site-&gt;" button enables you to go to the ad network's UIs to do additional configuration on the ad network site.
+  * For Direct selling, you are taken to the amobee site which requires login info (as described in the "Enabling Ads" section).
+
+    ![](04.png)
+
+* Once your ad networks are enabled, you can set the weight (percentage of ads delivered thru the network) for each ad network by configuring the slider.
+* Once you add networks to your region, you can change the config (weights and network specific parameters) by clicking on "config".
+
+    ![](05.png)
+
+## Configuring Your Project
+
+Follow the steps below to enable Kii Ads in your application.
+
+### Setting the common frameworks
+
+1. Drag the KiiAdFramework.framework bundle into the 'Frameworks' group in your project.  It's recommended that you choose the option to copy the framework into your project.
+2. Add the following common frameworks to your project:
+  * SystemConfiguration.framework
+  * Security.framework
+  * CFNetwork.framework
+  * MobileCoreServices.framework
+  * CoreLocation.framework
+3. Add the following header to all files that will display ads with the SDK:
+
+    ```objc
+    #define APP_ID @"22784edc"
+    #define APP_KEY @"ffacec38cd293669703f3b940ec2770b"
+
+    (void)viewDidLoad {
+        [super viewDidLoad];
+        // Do any additional setup after loading the view, typically from a nib.
+        KiiAdnet* adView = [KiiAdnet requestAdWithDelegate:self
+                                         withApplicationId:APP_ID
+                                            applicationKey:APP_KEY
+                                                   andSite:kiiAdSiteUS];
+
+        // Uncomment the following line if you want to show test ads
+        // [adView setTestMode:TRUE];
+        [self.view addSubview:adView];
+    }
+    ```
+
+### Plug in individual Ads network(s)
+
+#### Admob
+
+1. Get libGoogleAdMobAds.a library from Admob console and add it to your project.
+2. Add libAdapterAdmob.a library (included in Kii Ad SDK) to your project.
+3. Add the following frameworks to your projects:
+  * MessageUI.framework
+  * AdSupport.framework&nbsp;
+  * AudioToolbox.framework
+
+#### InMobi
+
+1. Get libInMobiAdNetwork-3.6.0.a and libInMobiCommons-3.6.0.a libraries from InMobi console and add them to your project.
+2. Add libAdapterInMobi.a library (included in Kii Ad SDK) to your project.
+3. Add the following frameworks to your projects:
+  * CoreTelephony.framework
+  * PassKit.framework
+  * AVFoundation.framework
+  * MessageUI.framework
+  * AdSupport.framework
+  * MediaPlayer.framework
+
+#### MdotM
+
+1. Add libAdapterMdotM.a library (included in Kii Ad SDK) to your project.
+
+#### Leadbolt
+
+1. Add libAdapterLeadbolt.a library (included in Kii Ad SDK) to your project.
+
+#### AMoAd
+
+1. Add libAdapterAMoAd.a library (included in Kii Ad SDK) to your project.
+
+#### MillenialMedia
+
+1. Get libMMSDK_4.6.1.a from MillenialMedia console and add it to your project.
+2. Add libAdapterMillennial.a library (included in Kii Ad SDK) to your project.
+3. Add the following frameworks to your projects:
+  * QuartzCore.framework
+  * MediaPlayer.framework
+  * CoreGraphics.framework
+  * CoreLocation.framework
+  * MobileCoreServices.framework
+  * AudioToolbox.framework
+  * AVFoundation.framework
+  * SystemConfiguration.framework
+  * UIKit.framework
+
+#### SmartMad
+
+1. Get libSmartMad.a from SmartMad console and add it to your project.
+2. Add libAdapterSmartMAD.a library (included in Kii Ad SDK) to your project.
+3. Add the following frameworks to your projects:
+  * AudioToolbox.framework
+  * AVFoundation.framework
+  * CoreLocation.framework
+  * CoreMotion.framework
+  * CoreTelephony.framework
+  * QuartzCore.framework
+  * MediaPlayer.framework
+  * SystemConfiguration.framework
+  * libsqlite3.0.dylib
+
+#### Direct Selling
+
+1. Add libAdapterDirectSelling.a library (included in Kii Ad SDK) to your project.
