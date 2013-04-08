@@ -2,5 +2,6 @@
 layout: ja-doc
 title: '"Push to App" 通知を受け取る'
 sort-priority: 60
+page-id: android-push-ja
 ---
 

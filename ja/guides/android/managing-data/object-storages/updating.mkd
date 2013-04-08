@@ -2,4 +2,5 @@
 layout: ja-doc
 title: Object の更新
 sort-priority: 30
+page-id: android-updating-ja
 ---
