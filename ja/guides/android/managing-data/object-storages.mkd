@@ -2,4 +2,5 @@
 layout: ja-doc
 title: Object Storage
 sort-priority: 20
+page-id: android-object_storages-ja
 ---
