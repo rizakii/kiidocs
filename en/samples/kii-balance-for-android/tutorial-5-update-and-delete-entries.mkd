@@ -1,0 +1,83 @@
+---
+layout: en-doc
+title: 'Tutorial #5: Update and delete income&#47;expense entries'
+summary: 'Kii Balance allows users to update/delete an entry by long-pressing the entry.  The changes made to the entry should be applied to Kii Cloud.'
+sort-priority: 60
+page-id: tutorial_5_update_and_delete_entries-en
+---
+## Updating an Object
+
+Let us start with updating.  Updating an income/expense entry is implemented as
+the following excerpt from
+[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L216).
+
+```java
+private void updateObject(DialogFragment fragment) {
+
+  (...snip...)
+
+  // Create an Object instance with its id
+  KiiObject object = KiiObject.createByUri(Uri.parse(objectId));
+
+  object.set(Field.NAME, name);
+  object.set(Field.TYPE, type);
+  object.set(Field.AMOUNT, amount * 100 + subAmount);
+
+  (...snip...)
+
+  AddCallback callback = new AddCallback(target, objectId);
+  object.save(callback);
+}
+```
+
+Here are the steps:
+
+1. Create an Object instance by invoking `createByUri` method while specifying the ID of the target Object.
+2. Update key-values pairs in the Object by invoking `set` method.
+3. Invoke `save` method to ask client SDK to reflect the changes to Kii Cloud.
+
+Note that we are using an asynchronous API by specifying a callback function (ref. *AddCallback.java*) as a parameter.
+
+## Deleting an Object
+
+Let us now explore deleting.  Deleting an income/expense entry is implemented
+as the following excerpt from
+[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L252).
+
+```java
+private void deleteObject(DialogFragment fragment) {
+
+  (...snip...)
+
+  // Create an Object instance with its id
+  KiiObject object = KiiObject.createByUri(Uri.parse(objectId));
+
+  (...snip...)
+
+  DeleteCallback callback = new DeleteCallback(target, objectId);
+  object.delete(callback);
+}
+```
+
+Here are the steps:
+
+1. Create an Object instance by invoking `createByUri` method while specifying
+   the ID of the target Object.
+2. Invoke `delete` method to ask client SDK to delete the corresponding Object
+   on Kii Cloud.
+
+Note that we are using an asynchronous API by specifying a callback function
+(ref. *DeleteCallback.java*) as a parameter.
+
+----
+
+### Congratulations!
+
+This is the end of the tutorials!  Hope you get the hang of using the basic Kii Cloud features :-)
+
+#### Want to explore more?
+
+* Want to partially update an Object? 
+  * Check {% page_link android-updaring_objects-en %} section.
+* Want to send a push notification when a Object is update or deleted? 
+  * Check {% page_link android-receiving_push_notification-en %} section.

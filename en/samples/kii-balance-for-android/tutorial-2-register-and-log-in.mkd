@@ -1,0 +1,132 @@
+---
+layout: en-doc
+title: 'Tutorial #2: Register and Log-in'
+summary: '<p>Kii Balance of course has to support user registration and user login. &nbsp;Many users do not like typing their username and password again and again, so allowing them to login without any username and password would be great.</p><p>Let us explore how easy we can realize these with Kii Cloud.</p>'
+sort-priority: 30
+page-id: tutorial_2_register_and_log_in-en
+---
+## User registration
+
+Here is a code snippet that implements the user registration.  The snippet is from [RegisterDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/RegistrationDialogFragment.java#L117).
+
+```java
+public void onClick(View v){
+  (...snip...)
+
+  // call user registration API
+  RegisterCallback callback = new RegisterCallback(dialog);
+  KiiUser user = KiiUser.createWithUsername(username);
+  user.register(callback, password);
+
+}
+```
+
+Basically we are doing only two things here.
+
+1. Create a KiiUser instance by invoking `createWithUsername` method while specifying a username.
+2. Register a user by invoking `register` method with a password.
+
+Note that we are using an asynchronous API when invoking register method.  This is done by specifying a callback function (ref. *RegisterCallback.java*) as a parameter.
+
+When the registration process is finished, Kii Balance saves the access token
+issued for this newly-registered user.  We are saving the access token and
+later use this token to let the user log in next time without typing his/her
+username and password.  Let us see the actual code in
+[TitleFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/TitleFragment.java#L78).
+
+```java
+void onRegisterFinished() {
+
+  (...snip...)
+
+  // to next fragment
+  onLoginFinished();
+}
+
+void onLoginFinished() {
+  
+  (...snip...)
+
+  // store access token
+  KiiUser user = KiiUser.getCurrentUser();
+  String token = user.getAccessToken();
+  Pref.setStoredAccessToken(activity, token);
+}
+```
+
+We see that `onLoginFinished()` is called right after `OnRegisterFinished()` is finished.  In `onLoginFinished()`, two things are done:
+
+1. Invoke invoke `getCurrentUser` method to create an KiiUser instance for the current user.
+2. Invoke `getAccessToken` method to get the user's access token.
+
+The access token is then saved using SharedPreferences (ref. Pref.java). 
+
+## User login
+
+We are using two types of login methods in KiiBalance.
+
+* Login with a username and password
+* Login with an access token
+
+### Login with a username and password:
+
+We use this login method when a user presses "Login" button on the title page.  The user will type in his/her username and password, and we use these info to let the user login.  
+
+Let us see how the flow is implemented in [LoginDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/title/LoginDialogFragment.java#L117).
+
+```java
+public void onClick(View v) {
+
+   (...snip...)
+
+  // call user registration API
+  LoginCallback callback = new LoginCallback(dialog);
+  KiiUser.logIn(callback, username, password);
+}
+```
+
+We are invoking `logIn` method with a user name and password.  Here we are using an asynchronous API by specifying a callback function (ref. *LoginCallback.java*) as a parameter.
+
+Like the registration flow, we store the user's access token right after the login so as to let the user later logs in without typing his/her username and password.
+
+### Login with an access token:
+
+Let us now see how we allow a user to login with his/her access token in 
+[MainActivity.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/MainActivity.java#L57).
+
+```java
+public void onCreate(Bundle saveInstanceState) {
+
+  (...snip...)
+
+  // check access token
+  String token = Pref.getStoredAccessToken(getApplicationContext());
+  if (token == null || token.length() == 0) {
+    toTitleFragment();
+    return;
+  }
+
+  // login with token
+  AutoLoginCallback callback = new AutoLoginCallback(this);
+  KiiUser.loginWithToken(callback, token);
+}
+```
+
+First, we get the access token of the current user.  Since we've saved the access token using SharedPreferences (ref. *Pref.java*), we restore the token from here.
+
+After successfully restoring the access token, we invoke `loginWithToken` method with the access token to log in.  Note that we are using an asynchronous API here by specifying a callback function (ref. *AutoLoginCallback.java*) as a parameter.
+
+----
+
+### Next up...
+
+Users are now ready rock.
+
+Let us now move to {% page_link tutorial_3_retrieve_income_expense_entry-en %}.
+
+#### Or want to explore more?
+
+* Want to let users register with their email address or phone number while verifying them?
+  * Check {% page_link android-sign_up-en %} section.
+* Want to let users log in with their Facebook account?
+  * Check {% page_link android-social_network_integration-en %} section.

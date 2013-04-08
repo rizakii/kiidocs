@@ -1,0 +1,11 @@
+---
+layout: en-doc
+title: Download the application and code
+summary: 
+sort-priority: 10
+page-id: download_the_application_and_code-en
+---
+You can get the application (apk file) and code here:
+
+* Get the app: [KiiBalance-1.0.apk](http://static.kii.com/devportal/docs/samples/KiiBalance-1.0.apk)
+* Get the code: [Github](https://github.com/KiiPlatform/KiiBalance-Android)

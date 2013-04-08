@@ -1,0 +1,44 @@
+---
+layout: en-doc
+title: 'Tutorial #1: Initialize Kii Client SDK'
+summary: 'Before anything else, we need to initialize Kii Client SDK to make it ready to use.  The initialization is super-simple - just one line of code!'
+sort-priority: 20
+page-id: tutorial_1_initialize_kii_client_sdk-en
+---
+In the initialization, we tell the following application-related information to the SDK:
+
+* Application ID
+* Application Key
+* Site location
+
+These information are assigned to your application when we create it on the dev portal.  Please check {% page_link android-quickstart-en %} to learn more.
+
+Now, let us look into the actual code.  Take a look at [MainActivity.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/MainActivity.java#L66).
+
+```java
+public void onCreate(Bundle saveInstanceState) {
+
+  (...snip...)
+
+  // initialize
+  initKiiSDK();
+}
+
+public void initiKiiSDK() {
+  Kii.initialize(
+    Constants.APP_ID,  // Put your App ID
+    Constants.APP_KEY, // Put your App Key
+    Site.US            // Put your site
+    );
+}
+```
+
+Yes, just invoke `initialize` method will do the rest :-)
+
+----
+
+### Next up...
+
+The next step is letting users sign-up and sign-in.
+
+Let us proceed to {% page_link tutorial_2_register_and_log_in-en %}.

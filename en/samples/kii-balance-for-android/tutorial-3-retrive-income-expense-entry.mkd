@@ -1,0 +1,71 @@
+---
+layout: en-doc
+title: 'Tutorial #3: Retrieve income&#47;expense entries'
+summary: 'Right after a user logs in, Kii Balance will show a list of his/her existing income/expense entries.  This is done by retrieving the entries from Kii Cloud.'
+sort-priority: 40
+page-id: tutorial_3_retrieve_income_expense_entry-en
+---
+Kii Cloud stores Objects in a bucket.  Kii Balance stores all income/expense entries in a bucket that belongs to the user (called "user-scope" bucket).  This will restrict the entries to be fetched by other users; all Objects (entries) stored in a user-scope bucket are only accessible by the owner of the bucket by default.
+
+Now, fetching Objects from a bucket is done by one of the following ways:
+
+* Retrieve the Object by specifying its ID, or
+* Retrieve the Object(s) by querying the bucket.
+
+In our case, we use the latter because we do not know the IDs of the Objects at
+the time when we are to list the entries.  We want to list all entries while
+sorting the entries in ascending order based on the entrie's creation dates
+(i.e., the newest entry comes in the bottom of the list).  An Object in Kii
+Cloud has a predefined field named `_created`.  This field stores the creation
+date of the object in UNIX time (msec).  We will use this field for sorting the
+income/expense entries.  That is, we will query for Objects while specifying
+the condition "all in the bucket, sorted in ascending order by `_create`
+field".
+
+Let us explore the actual code in [BalanceListFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/BalanceListFragment.java#L97).
+
+```java
+public void onActivityCreated(Bundle savedInstanceState) {
+
+  (...snip...)
+
+  // get items
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiBucket bucket = user.bucket(Constants.BUCKET_NAME);
+
+  // create query instance. 
+  KiiQuery query = new KiiQuery();
+  // sort KiiObject by _created
+  query.sortByAsc(Field._CREATED);
+
+  (...snip...)
+
+  // call Kii API
+  QueryCallback callback = new QueryCallback(this);
+  bucket.query(callback, query);
+}
+```
+
+Here is a step-by-step explanation of what we are doing in this snippet.
+
+1. Create a target KiiBucket instance by invoking `bucket` method with the bucket name.
+2. Create a query instance with the query condition "all objects, sorted in ascending order by `_create` field.
+  * Create an "all" query instance by invoking `KiiQuery` with no clause.
+  * Set the sorting rule ("sorted in ascending order by `_create` field) by invoking `sortByAsc` method 
+3. Query the bucket by invoking `query` method while specifying the query instance.
+
+When invoking query method, we are using an asynchronous API by specifying a callback function (ref. *QueryCallback.java*) as a parameter.
+
+----
+
+### Next up...
+
+Let our users create a new income/expense entry.  
+Moving to {% page_link tutorial_4_create_new_income_expense_entries-en %}...
+
+#### Or want to explore more?
+
+* Want to change the sorting order?  Want to support pagination?  
+  * Check {% page_link android-object_storages-en %} section.
+* Want to share the entries among multiple users?  Want to learn more about bucket scoping.  
+  * Check {% page_link android-bucket-en %} section.

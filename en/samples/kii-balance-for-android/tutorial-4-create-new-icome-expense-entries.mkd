@@ -1,0 +1,68 @@
+---
+layout: en-doc
+title: 'Tutorial #4: Create new income/expense entries'
+summary: 'Kii Balance allows users to create new income/expense entries by pressing "Add" button.  Those entries are to be uploaded and stored to Kii Cloud.'
+sort-priority: 50
+page-id: tutorial_4_create_new_income_expense_entries-en
+---
+Kii Balance uses an Object with the following fields to save each income/expense entry (ref.Field.java):
+
+* **name**: The name of the income/expense.
+* **type**: The type of the entry (1 for income, 2 for expense).
+* **amount**: The amount of the income/expense (in cents)
+
+Additionally, there are some predefined fields that will be automatically
+attached to the Object.  Please check
+{% page_link tutorial_3_retrieve_income_expense_entry-en %}
+to see how we leverage the predefined field `_created` to sort the list of
+income/expense entries.
+
+Creating a new Object is fairly simple.  We just need to set field values in
+the object and ask the client SDK to save it, as shown in the following code
+snippet from
+[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L173).
+
+```java
+private void createObject(DialogFragment fragment) {
+
+  (...snip...)
+
+  // Create an Object instance
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiBucket bucket = user.bucket(Constants.BUCKET_NAME);
+  KiiObject object = bucket.object();
+
+  object.set(Field.NAME, name);
+  object.set(Field.TYPE, type);
+  object.set(Field.AMOUNT, amount * 100 + subAmount);
+
+  (...snip...)
+
+  AddCallback callback = new AddCallback(target, null);
+  object.save(callback);
+
+}
+```
+
+Let us see the snippet in details.  
+
+1. Create a target bucket instance by invoking `bucket` method with its name.
+2. Invoke `object` method to create an Object instance in the bucket.  At this point, this Object instance has no key-value.
+3. Set key-values pairs in the Object by invoking `set` method.
+4. Invoke `save` method to ask the client sdk to upload the Object to Kii Cloud.
+
+Note that we are using an asynchronous API by specifying a callback function (ref. *AddCallback.java*) as a parameter.
+
+----
+### Next up...
+
+Oops, seems that users mistyped something and want to update or delete the entries.  
+
+Moving to {% page_link tutorial_5_update_and_delete_entries-en %}.
+
+#### Or want to learn more?
+
+* Want to learn more on what you can put in an Object?  
+  * Check {% page_link android-object_storages-en %} section.
+* Want to send a push notification when a new Object is created? 
+  * Check {% page_link andorid-receiving_push_notification-en %} section.
