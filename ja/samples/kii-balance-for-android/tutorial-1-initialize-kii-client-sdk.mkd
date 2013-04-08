@@ -4,3 +4,44 @@ sort-priority: 20
 page-id: tutorial_1_initialize_kii_client_sdk-ja
 title: 'チュートリアル#1: SDK の初期化'
 ---
+<div class="summary">なにはともあれ、まずは Kii Client SDK を初期化する必要があります。SDK の初期化は、基本的にはたったの１行で完了します。</div>
+
+初期化は、アプリに関する以下の情報を SDK に通知することで行います。
+
+* Application ID
+* Application Key
+* Site location
+
+これらの情報は、開発者ポータルでアプリを作成した際に通知されます。<br>
+詳細については[「Android クイックスタート」]({% page_url android-quickstart-ja %})を参照してください。
+
+では、実際のコードを覗いてみましょう（[MainActivity.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/MainActivity.java#L64)）
+
+```java
+public void onCreate(Bundle saveInstanceState) {
+
+  (...snip...)
+
+  // initialize
+  initKiiSDK();
+}
+
+public void initiKiiSDK() {
+  Kii.initialize(
+    Constants.APP_ID,  // Put your App ID
+    Constants.APP_KEY, // Put your App Key
+    Site.US            // Put your site
+    );
+}
+```
+
+`initialize` メソッドをたたくだけで終了です！
+
+---
+<div class="subtitle">次は...</div>
+
+ユーザ登録とログインについて見てみましょう。<br>
+[チュートリアル#2]({% page_url tutorial_2_register_and_log_in-ja %})へ移動
+
+
+
