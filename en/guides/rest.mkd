@@ -1,0 +1,53 @@
+---
+layout: en-doc
+title: REST Guides
+summary: Kii Platform provides developers with a set of tools to support REST application development. &nbsp;Our API gives you the opportunity to develop applications without ever needing your own servers.
+sort-priority: 40
+page-id: rest-guides-en
+---
+This guide will navigate you through the API's basic features.  You can review
+what is possible with the Kii API, and even get a head start with some sample
+code snippets.  After reviewing the guide, you'll be ready to dig into our
+APIs or check the detailed documentation available
+[here]({% page_url references-en %}).
+
+## Reminder on Reading Guides
+
+### Incorporating Application ID and Application Key
+
+Kii Cloud uses two application-specific values: Application ID and Application
+Key in order to identify your application when the REST API is invoked.  You
+must send those values to Kii Cloud with each call to the API.
+
+Application Key and ID must be specified in the following HTTP headers upon
+invoking the API:
+
+* **x-kii-appid**  - Application ID
+* **x-kii-appkey**  - Application Key
+
+The resource URL for each REST API also includes your Application ID.  For
+example, the following will be the resource URL you will access when you want
+to handle user sign-up:
+
+    https://api.kii.com/api/apps/{APP_ID}/users
+
+Here, `{APP_ID}` should be replaced with your Application ID.
+
+Throughout the guide, we will use the server URL `https://api.kii.com/` like
+the above example, assuming that you've selected "US" as Country when you've
+created your app on the developer portal.  If you've selected "Japan" as
+Country instead, please replace the server url with `https://api-jp.kii.com/`
+while reading the rest of the guide.
+
+### Access Token (user token) and "/me" literal
+
+Most of the features provided by Kii Cloud REST API require users to be signed in.  Kii Cloud will determine if the user is signed in by checking the access token.  The access token should be sent in the following HTTP header:
+
+* **Authorization: Bearer** - Access token (user token)
+
+Check out the [Managing Users - Sign In]({% page_url rest-sign_in-en %})
+section to see how you can get the user's access token.
+
+For a REST API that is sent with a user token, you can use "/me" literal in the
+resource URL; "/me" will be replaced with the User ID that correspond to the
+given user token.

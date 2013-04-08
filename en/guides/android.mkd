@@ -1,0 +1,103 @@
+---
+layout: en-doc
+title: Android Guide
+summary: 'Kii Platform provides developers with a set of tools to support Android application development.  Our Android SDK gives you the opportunity to develop applications without ever needing your own servers.'
+sort-priority: 10
+page-id: android-guides-en
+---
+This guide will navigate you through the SDK's basic features. &nbsp;You can
+review what is possible with the Kii SDK, and even get a head start with some
+sample code snippets. &nbsp;After reviewing the guide, you'll be ready to dig
+into our SDK or check the detailed documentation available
+[here]({% page_url references-en %}).
+
+## A reminder when reading the guides...
+
+### Exception Handling
+
+In the guides, we provide sample code snippets in order to illustrate how you
+can leverage our SDKs.  In these code snippets, the exception handling is
+usually simplified.  For example, we only cover abstract exceptions - namely
+IOException and AppException - when we present how to register a user.  Here is
+the example code snippet used in the guide:
+
+```java
+try {
+    user.register(password);
+} catch (IOException e) {
+    // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+    // Please check AppException to see what went wrong...
+}
+```
+
+Kii SDK actually provides more detailed exceptions for better debugging when
+something goes wrong.  Using the above example as a reference, it will throw
+more detailed exceptions like BadRequestException and ConflictException.  If
+you choose, your application may want to catch the specialized exceptions
+individually in order to properly handle the various error cases. Take the
+following as an example:
+
+```java
+try {
+    user.register(password);
+} catch (BadRequestException e) {
+    // Registration failed because username / password
+    // have invalid format
+} catch (ConflictException e) {
+    // Registration failed because the user already exists
+} catch (AppException e) {
+    // Other exceptions in App layer
+} catch (IOException e) {
+    // Error occurred in Network layer
+}
+```
+
+For a detailed description of the exceptions thrown by each API call, please
+refer to the [detailed documentation]({% page_url references-en %}).
+
+### Blocking API vs. Non-Blocking API
+
+Many of our SDK methods, such as registering a new user and uploading data,
+require network communication with Kii Cloud.  For these methods, Kii SDK
+provides both blocking and non-blocking methods.
+
+In the guides, we provide sample code snippets with blocking APIs only.  For
+example, the following code snippet is used in the guide for uploading object
+data:
+
+```java
+KiiObject object = Kii.bucket("my_bucket").object();
+object.set("foo", "bar");
+
+// Save an object with a blocking API
+try {
+    object.save();
+} catch (AppException e) {
+    // handle error
+} catch (IOException e) {
+    // handle error
+}
+```
+
+For actual application development, if you aren't handling threading on your
+own, you may want to use non-blocking APIs instead to keep your main thread
+from freezing the UI.  The following sample code illustrates how to invoke the
+same feature asynchronously, in a non-blocking way:
+
+```java
+KiiObject object = Kii.bucket("my_bucket").object();
+object.set("foo", "bar");
+
+// Save an object with a non-blocking API
+object.save(new KiiObjectCallBack() {
+    @Override
+    public void onSaveCompleted(int token, KiiObject object,
+                Exception exception) {
+        // Update UI, etc.
+    }
+});
+```
+
+For the detailed description on how to use non-blocking APIs, please refer to
+the [detailed documentation]({% page_url references-en %}).
