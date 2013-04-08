@@ -2,4 +2,135 @@
 layout: ja-doc
 title: サインアップ
 sort-priority: 10
+summary: アプリケーションのユーザ管理の第一歩は、ユーザ登録です。
 ---
+<p class="callout">ユーザ名とパスワードによるサインアップの代わりに、Facebook などの外部サービス経由でサインアップを行うことも可能です。詳細は「外部サービス（Facebook）連携」を参照してください。</p>
+
+Kii Platform は、ユーザ名とパスワードによるサインアップ機能を提供しています。さらに、メールアドレスや電話番号をサインアップ時に指定し、これらの情報をユーザに紐付けることができます。
+
+メールアドレスや電話番号を指定した場合、Kii Cloud に指定されたメールアドレスや電話番号の認証処理を行わせることもできます。認証を有効にした場合、メールアドレスや電話番号の認証が完了するまでこれらを用いたサインインは有効になりません。（この認証は、ユーザが他人のメールアドレス/電話番号でサインアップを行ったり、不正なメールアドレス/電話番号でサインアップを行うことを防止するための機能です）。
+
+
+## サインアップ
+
+ユーザ名とパスワードを使ったサインアップの例です。この例では、ユーザ名 "user\_123456"、パスワード "123ABC" で新規ユーザのサインアップを行なっています。（例の中では、さらに "displayName" と "country" も指定しています）
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users" \
+    -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC"}'
+```
+
+サインアップが成功すると、Kii Cloud は次のようなレスポンスでユーザの UserID を返します。
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Location: https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}
+Content-Type: application/vnd.kii.RegistrationResponse+json
+Transfer-Encoding: chunked
+Date: Mon, 23 Apr 2012 00:22:38 GMT
+
+{
+  "userID" : {USER_ID}
+}
+```
+
+次の例では、ユーザ名 "user\_123456"、メールアドレス "`user_123456@example.com`"、パスワード "123ABC" で新規ユーザのサインアップを行なっています。
+
+```
+curl -v -X POST \
+    -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users" \
+    -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC", "emailAddress":"user_123456@example.com"}'
+```
+
+次の例では、ユーザ名 "user\_123456"、電話番号 "+819012345678"、パスワード "123ABC" で新規ユーザのサインアップを行なっています。
+
+```
+curl -v -X POST \
+    -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users" \
+    -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC", "phoneNumber":"+819012345678"}'
+```
+
+電話番号を国内番号形式で指定する場合は、"country" 属性に2文字の国コードを指定してください。
+
+なお、ユーザ名を指定せず、メールアドレスないしは電話番号のみでサインアップを行う場合、メールアドレスや電話番号の認証をオフにしておく必要があります（認証処理の詳細については次のセクションを参照してください）。
+
+### メールアドレス/電話番号の認証を利用する
+
+アプリ設定より、ユーザのメールアドレスや電話番号の認証をオンにできます（デフォルトはオフ）。認証のオン/オフは、開発者ポータル上で設定します。また、アプリ管理者向け REST API 経由での設定も可能です（詳細は[こちら]({% page_url rest-configuring_your_application-ja %})を参照してください）。
+
+以下に開発者ポータルでの設定方法を説明します。
+
+1. アプリケーションコンソール上の "Edit" ボタンをクリックします。
+    ![](01.png)
+1. "Settings" をクリックし、アプリ設定メニューを開きます。
+1. ”Phone Number" と "Email Address" のチェックボックスを使い、電話番号（SMS）認証とメールアドレス認証をオン/オフします。
+    ![](02.png)
+
+認証をオンにすると、以下の手順で認証を行いつつサインアップ処理が実施されます：
+
+### メールアドレス認証:
+メールアドレス認証がオンの状態でメールアドレスを伴うアカウント作成処理が実行されると、Kii Cloud はこのメールアドレス宛に認証リンク付きメールを送信します。指定されたメールアドレスによるサインインは、ユーザがこの認証リンクをクリックするまで有効になりません。
+
+### 電話番号（SMS）認証:
+電話番号（SMS）認証がオンの状態で電話番号を伴うアカウント作成処理が実行されると、Kii Cloud はこの電話番号宛てに認証コードを含む SMS を送信します。認証処理を完了するには、この認証コードをユーザより受け取り、Kii Cloud に送信する必要があります。指定された電話番号によるサインインは、この認証処理が完了するまで有効になりません。
+
+### 注意:
+電話番号は、+と、国コードから始まる国際電話番号を指定してください。これにより Kii Cloud は SMS の宛先を決定することが可能となります。上記以外の形式が指定された場合、本人認証用 SMS が正しく送信できないことがあります。
+
+以下、認証用コードを Kii Cloud に送信する手順をまとめます。
+
+1. ユーザ名とパスワードを使い、ユーザトークンを取得する
+
+    以下の例のように、ユーザ名とパスワードでサインインします。
+
+    ```sh
+    curl -v -X POST \
+        -H "content-type:application/json" \
+        -H "x-kii-appid:{APP_ID}" \
+        -H "x-kii-appkey:{APP_KEY}" \
+        "https://api-jp.kii.com/api/oauth2/token" \
+        -d '{"username":"user_123456", "password":"123ABC"}'
+    ```
+
+    サインインが成功すると、Kii Cloud は次のようなレスポンスを返します。
+
+    ```
+    < HTTP/1.1 200 OK
+    < Server: Apache-Coyote/1.1
+    < Content-Type: application/json
+    < Transfer-Encoding: chunked
+    < Date: Mon, 14 May 2012 22:52:52 GMT
+    <
+    {
+      "id" : {USER_ID},
+      "access_token" : {ACCESS_TOKEN},
+      "expires_in" : 9223372036854775
+    }
+    ```
+
+    このレスポンスにおける {ACCESS\_TOKEN} がユーザトークンです。またレスポンスにもあるように、トークンの有効期限が UNIX時間（ミリ秒）で返されます。
+
+2. 取得したユーザトークンを使い、認証コードを Kii Cloud に送信する
+
+    以下の例のように、認証コードを送信します。この際、HTTPヘッダ "Authorization: Bearer" にユーザトークンを指定します。
+
+    ```sh
+    curl -v -X POST \
+        -H "Authorization: Bearer {ACCESS_TOKEN}" \
+        -H "content-type:application/vnd.kii.AddressVerificationRequest+json" \
+        -H "x-kii-appid:{APP_ID}" \
+        -H "x-kii-appkey:{APP_KEY}" \
+        "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/phone-number/verify" \
+        -d '{"verificationCode":"12345"}'
+    ```

@@ -3,4 +3,37 @@ layout: ja-doc
 title: REST スタートガイド
 sort-priority: 40
 page-id: rest-guides-ja
+summary: Kii Platform は、アプリケーション開発を支援するツールを REST API として公開しています。我々の API を利用することで、サーバ側の設定やコーディングなどを一切気にせずにアプリケーション開発を進めることができます。
 ---
+本ガイドは Kii Platform が提供する REST API の主要な機能をご紹介するものです。REST API が提供する機能の利用方法を、サンプル等と共にご紹介します。REST API が提供する各機能の詳細については[こちら]({% page_url references-ja %})の ドキュメントを参照してください。
+
+## ガイドを読む上での注意点
+
+### Application ID と Application Key
+
+Kii Cloud は、どのアプリケーションが REST API にリクエストを送信したのかを Application ID と Application Key を用いて識別します。このため、すべてのリクエストにおいて、Application ID と Application Key を Kii Cloud に送信する必要があります。
+
+具体的には、以下の HTTP ヘッダに Application Key と Application ID を埋め込んでください。
+
+* **x-kii-appid** ... Application ID
+* **x-kii-appkey** ... Application Key
+
+また、REST API のリソース URL は、Application ID を含んだ形式をとっています。一例として、ユーザのサインアップを処理する際にアクセスするリソース URL は以下のようになっています。
+
+```
+https://api-jp.kii.com/api/apps/{APP_ID}/users
+```
+
+上記リソース URL の {APP_ID} の箇所に、アプリケーションを割り振られた Application ID を指定します。
+
+なお、日本語ガイドにおけるアクセス先サーバは、上記の例のように https\://api-jp.kii.com/ となっています。これは、開発者ポータルにおいてアプリを作成した際、Country として Japan （日本）を選択したことを想定しています。Country として US（米国）を選択した場合は、アクセス先サーバを適宜 https\://api.kii.com/ に読み替えてガイドを読んでください。
+
+### Access Token (user token) と "/me" リテラル
+
+Kii Platform の REST API の多くは、ユーザがサインインしていることを前提としています。Kii Cloud は、クライアントより送信されるアクセストークンを元に、ユーザがサインインしているか否かを判定します。アクセストークンは、以下の HTTP ヘッダに埋め込む形で Kii Cloud に送信します。
+
+* **Authorization: Bearer**  ... Access token (user token)
+
+アクセストークンの取得方法は、{% page_link rest-sign_in-ja %}を参照してください。
+
+アクセストークンと共にリクエストされる REST API においては、Resource URL にて "/me" リテラルが利用できます。この場合、"/me" は送信されたアクセストークンのユーザの User ID とみなされます。
