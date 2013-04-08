@@ -1,0 +1,12 @@
+---
+layout: en-doc
+title: JavaScript Guides
+summary: Kii Platform provides developers with a set of tools to support HTML5 application development. &nbsp;Our Javascript SDK gives you the opportunity to develop applications without ever needing your own server-side backend.
+sort-priority: 30
+page-id: js-guides-en
+---
+This guide will navigate you through the SDK's basic features.  You can review
+what is possible with the Kii SDK, and even get a head start with some sample
+code snippets.  After reviewing the guide, you'll be ready to dig into our SDK
+or check the detailed documentation available
+[here]({% page_url references-en %}).

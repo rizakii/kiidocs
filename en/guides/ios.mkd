@@ -1,0 +1,94 @@
+---
+layout: en-doc
+title: iOS Guide
+summary: Kii Platform provides developers with a set of tools to support iOS application development. &nbsp;Our iOS SDK gives you the opportunity to develop applications without ever needing your own servers.
+sort-priority: 20
+page-id: ios-guides-en
+---
+This guide will navigate you through the SDK's basic features. &nbsp;You can
+review what is possible with the Kii SDK, and even get a head start with some
+sample code snippets. &nbsp;After reviewing the guide, you'll be ready to dig
+into our SDK or check the detailed documentation available
+[here]({% page_url references-en %}).
+
+## Reminder on Reading Guides
+
+### Blocking API vs. Non-Blocking API
+
+Many of our SDK methods, such as registering a new user and uploading data,
+require network communication with Kii Cloud.  For these methods, Kii SDK
+provides both blocking and non-blocking methods.
+
+In the guides, we provide sample code snippets with blocking APIs only.  For
+example, the following code snippet is used in the guide when we explain about
+how you can register a new user.
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser userWithUsername:@"my_username"
+            andPassword:@"mypassword"];
+[user performRegistrationSynchronous:&error];
+if(error != nil) {
+    // Performing user registration failed
+    // Please check error description/code to see what went wrong...
+}
+```
+
+For actual application development, if you aren't handling threading on your
+own, you may want to use non-blocking APIs instead to keep your main thread
+from freezing the UI.  Kii iOS SDK provides the following two ways of executing
+a method asynchronously, in a non-blocking way:
+
+1. Using Blocks
+2. Using a method within the class instance as a callback for an asynchronous
+   function
+
+
+#### Using Blocks
+
+Here is an example of using a Block-based function.  By using a block
+mechanism, the function will be performed on a background thread and the result
+will be returned on the main thread.
+
+```objc
+KiiUser *user = [KiiUser userWithUsername:@"myusername" 
+                              andPassword:@"mypassword"];
+[user performRegistrationWithBlock:^(KiiUser *user, NSError *error) {
+  if(error != nil) { 
+    // Performing user registration failed 
+    // Please check error description/code to see what went wrong... 
+  }
+}];
+```
+
+For the detailed description on how to use non-blocking APIs, please refer to
+our [Appledoc]({% page_url references-en %}).  If you are not
+familiar with Blocks, please also refer
+[iOS Developer Library](http://developer.apple.com/library/ios/#featuredarticles/Short_Practical_Guide_Blocks/index.html)
+for more descriptions.
+
+#### Using Callbacks
+
+The following sample code illustrates how to invoke the same feature
+asynchronously, in a non-blocking way:
+
+```objc
+- (void) userRegistered:(KiiUser*)user withError:(NSError*)error {
+    NSLog(@"User registered: %@ withError: %@", user, error);
+
+    if(error != nil) {
+        // Performing user registration failed
+        // Please check error description/code to see what went wrong...
+    }
+}
+
+- (void) test_asynchronous_example {
+    KiiUser *user = [KiiUser userWithUsername:@"my_username"
+                andPassword:@"mypassword"];
+    [user performRegistration:self
+                withCallback:@selector(userRegistered:withError:)];
+}
+```
+
+For the detailed description on how to use non-blocking APIs, please refer to
+our [Appledoc]({% page_url references-en %}).
