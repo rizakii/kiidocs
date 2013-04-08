@@ -3,9 +3,8 @@ layout: ja-doc
 sort-priority: 20
 page-id: tutorial_1_initialize_kii_client_sdk-ja
 title: 'チュートリアル#1: SDK の初期化'
+summary: なにはともあれ、まずは Kii Client SDK を初期化する必要があります。SDK の初期化は、基本的にはたったの１行で完了します。
 ---
-<div class="summary">なにはともあれ、まずは Kii Client SDK を初期化する必要があります。SDK の初期化は、基本的にはたったの１行で完了します。</div>
-
 初期化は、アプリに関する以下の情報を SDK に通知することで行います。
 
 * Application ID
@@ -38,7 +37,8 @@ public void initiKiiSDK() {
 `initialize` メソッドをたたくだけで終了です！
 
 ---
-<div class="subtitle">次は...</div>
+
+### 次は...
 
 ユーザ登録とログインについて見てみましょう。
 

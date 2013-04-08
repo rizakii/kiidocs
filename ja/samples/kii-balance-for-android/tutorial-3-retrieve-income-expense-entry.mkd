@@ -3,8 +3,9 @@ layout: ja-doc
 sort-priority: 40
 page-id: tutorial_3_retrieve_income_expense_entry-ja
 title: 'チュートリアル#3: エントリーの取得'
+summary: ログインが完了すると、Kii Balance はこのユーザの既存の収支エントリを Kii Cloud より取得して一覧表示します。
 ---
-<div class="summary">ログインが完了すると、Kii Balance はこのユーザの既存の収支エントリを Kii Cloud より取得して一覧表示します。</div>
+
 
 Kii Cloud は、すべての Object を Bucket に保存します。Kii Balance は、収支エントリをユーザに属する Bucket （User-scope Bucket と呼びます）に保存しています。User-scope Bucket 内に保存された Object （エントリ）は、デフォルトこの Bucket を保持するユーザのみがアクセス可能となります。つまり、他人が勝手に収支エントリを覗き見したり改ざんすることを未然に防ぐことができます。
 
@@ -52,13 +53,13 @@ public void onActivityCreated(Bundle savedInstanceState) {
 query メソッド実行時には、パラメータとしてコールバック関数（QueryCallback.java）を指定することで、非同期 API として実行しています。
 
 ---
-<div class="subtitle">次は...</div>
+### 次は...
 
 新しい収支エントリを作成してみましょう。
 
 [チュートリアル＃４]({% page_url tutorial_5_update_and_delete_entries-ja %})へ移動
 
-**より詳しく学びたい方へ**
+#### より詳しく学びたい方へ
 
 * ソート順番を変えたり、ページネイションを利用する方法については[「Object の検索」]({% page_url android-object_storages-ja %})を参照してください。
 * ユーザグループ間でエントリを共有する方法などについては[「Bucket」]({% page_url android-buckets-ja %})を参照してください。
