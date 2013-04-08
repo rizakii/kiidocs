@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Samples and Tutorials
+page-id: samples-en
+sort-priority: 40
+---
+## Sample Apps
+
+* {% page_link android-sample_balance-en %}
+
+## Tutorials
+
+* {% page_link ios-tutorial_login_view_controller-en %}
+  * A [KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS) plugin to give your app a customizable user management UI out-of-the-box.
+* {% page_link ios-tutorial_image_view-en %}
+  * A [KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS) plugin to easily load and display images stored in Kii Cloud asynchronously in a nice UI.
+
+_More content coming soon. To contribute, visit our [GitHub page](https://github.com/KiiPlatform) or contact us at [support@kii.com](mailto:support@kii.com)_

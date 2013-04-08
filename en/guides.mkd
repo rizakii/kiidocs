@@ -1,0 +1,39 @@
+---
+layout: en-doc
+title: Guides
+page-id: guides-en
+sort-priority: 20
+---
+This guide will walk you through some basic features you can leverage with the
+Kii SDK.  Currently, the following platforms are supported:
+
+* Android (Java)
+* iOS (Objective-C)
+* Javascript
+
+Kii also provides a REST API if you would like to access Kii Cloud from another
+platform or language.
+
+<br/>
+
+Each client SDK supports the following features:
+
+* Android SDK
+  * User Management
+  * Group Management
+  * Data Management (JSON object management and file management with folder sync extension)
+  * Ads Management
+  * Push Notification Management
+  * Analytics Management
+* iOS SDK
+  * User Management
+  * Group Management
+  * Data Management (JSON object management and file management)
+  * Ads Management
+  * Push Notification Management
+  * Analytics Management
+* Javascript SDK
+  * User Management
+  * Group Management
+  * Data Management (JSON object management)
+  * Analytics Management

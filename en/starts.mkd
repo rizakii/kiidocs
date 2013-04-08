@@ -1,0 +1,15 @@
+---
+layout: en-doc
+title: Getting Started
+summary: This section will introduce you to integrating your mobile application with the Kii SDK!
+sort-priority: 10
+page-id: quickstart-en
+---
+We provide Kii SDKs for the following platforms:
+
+* **Android (Java)**: Supports Android 2.2 and later (2.3.3 and later for file sync sdk)
+* **iOS (Objective-C)**: Supports iOS 4.3 and later
+* **Javascript**: Supports Mozilla Firefox 14+, Google Chrome 20+ and Safari 5+
+
+Use the navigation on the left to find the appropriate Quick Start for
+integrating with your app. Enjoy!

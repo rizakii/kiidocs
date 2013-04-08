@@ -1,0 +1,20 @@
+---
+layout: en-doc
+title: References
+summary: Ready to learn more? Below you can find links to the detailed documentation (Javadocs, Appledocs, etc). These will help you figure out everything you need to know about the technical implementation of Kii Platform!
+page-id: references-en
+sort-priority: 30
+---
+* **Javadoc for Android SDKs**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/storage/)
+  * [Kii Sync SDK](http://static.kii.com/devportal/docs/sync/)
+  * [Kii Ads SDK](http://static.kii.com/devportal/docs/ads/) 
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/analytics/)
+* **Appledoc for iOS SDKs**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/ios_cloud/)
+  * [Kii Ads SDK](http://static.kii.com/devportal/docs/ios_ads/)
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/ios_analytics/)
+**JSDoc for Javascript SDK**
+  * [Kii Cloud SDK](http://static.kii.com/devportal/docs/js/)
+**REST API**
+  * [Kii Platform API Documentation]({% page_url references-rest-en %}/apps-collection/application/)
