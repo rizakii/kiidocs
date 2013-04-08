@@ -1,6 +1,28 @@
 ---
 layout: ja-doc
 title: Bucket
+summary: Kii Platform におけるデータ管理を理解するためには Bucket という概念を理解する必要があります。Cloud 上に浮かんでいる仮想的なバケツを想像してください。Cloud 上にデータを保存するためには、このデータの「入れ物」が必要です。Bucket は、いわばこのデータのための「入れ物」に相当します。
 sort-priority: 10
 page-id: android-buckets-ja
 ---
+### Bucket のスコープ
+
+Bucket にはスコープが定義されます。スコープは、この Bucket が誰に属するものであるかを示します。一例として、ある Bucket が特定のグループに属する場合、この Bucket は Group Scope を有しており、対象はこのグループということになります。この場合、Bucket 内の全データは、このグループが存在する限り Kii Cloud に存在し続けます。
+
+また、Bucket のスコープは、この Bucket にデフォルトで適用されるアクセス制御を決定します。以下に、Kii Platform がサポートするスコープの定義と、このスコープを持つ Bucket にデフォルトで適用されるアクセス制御をまとめます。（アクセス制御の詳細についてはセクション「[Bucket の ACL 設定]({% page_url android-buckets-setting-acl-ja %})」を参照してください）
+
+ * **Application Scope** : Bucket があなたのアプリケーションに属していることを意味します。
+  * Authenticated users （サインインが完了した全てのユーザ）に対して、この Bucket に対するフルアクセスを許可します。
+  * Anonymous users （サインインが完了していないユーザ）に対して、この Bucket に対する「検索」および「読み取り」アクセスのみ許可します。
+
+ * **Group Scope** : Bucket があるグループに属していることを意味します。
+  * このグループのオーナーに対して、この Bucket に対するフルアクセスを許可します。
+  * このグループの全メンバーに対して、この Bucket に対する Bucket 削除以外の全アクセスを許可します。
+  * このグループのメンバー以外に対して、この Bucket に対する全アクセスを拒否します。
+
+ * **User Scope** : Bucket があるユーザに属していることを意味します。
+  * このユーザに対して、この Bucket に対するフルアクセスを許可します。
+  * このユーザ以外に対して、この Bucket に対する全アクセスを拒否します。
+
+
+
