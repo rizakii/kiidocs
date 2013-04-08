@@ -2,4 +2,98 @@
 layout: ja-doc
 title: 外部サービス（Facebook）連携
 sort-priority: 30
+summary: 外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
 ---
+現時点において、Kii Platform は Facebook との連携をサポートしています。また、以下の2つの外部サービスの連携も近日中にサポート予定です。
+
+* Twitter：http://www.twitter.com/
+* RenRen（人人）：http://www.renren.com/
+
+## 外部サービスとKii Platformの連携
+
+最初のステップとして、外部サービスと Kii Platform の連携を設定する必要があります。これは以下の手順にしたがって開発者ポータル上で行います。
+
+1. アプリケーションコンソール上で "Edit" ボタンをクリックします。
+    ![](00.png)
+2. "Setting" をクリックしアプリ設定画面を開きます。
+3. Facebook App ID を設定します。
+    ![](01.png)
+
+## 外部サービスアカウントによるサインアップ/サインイン
+
+Facebookアカウント経由でサインアップを行う例を以下にあげます。
+例における {ACCESS\_TOKEN\_PROVIDED\_BY\_FACEBOOK} の箇所には、Facebook より提供されたアクセストークンを入れてください。
+
+```sh
+curl -v -X POST \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "content-type:application/vnd.kii.AuthTokenFacebookRequest+json" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/integration/facebook" \
+  -d '{"accessToken":{ACCESS_TOKEN_PROVIDED_BY_FACEBOOK}}'
+```
+
+Kii Cloud は指定された {ACCESS\_TOKEN\_PROVIDED\_BY\_FACEBOOK} を用いてユーザの Facebook ID を取得し、この ID が既に Kii Cloud に登録済かを確認します。もし登録済であればサインイン処理を行い、未登録であればサインアップ処理を行います。
+
+いずれのケースにおいても、Kii Cloud は以下のようなレスポンスを返します。
+
+```sh
+< 200
+< Content-Type: application/json
+<
+{
+  "id" : {USER_ID},
+  "access_token" : {ACCESS_TOKEN},
+  "expires_in" : 9223372036854775,
+  "new_user_created": true
+}
+```
+
+レスポンス中の "access\_token" がユーザトークンとなります。また "expires\_in" は、ユーザトークンの有効期限（UNIX時間・ミリ秒）となります。Kii Cloud がサインアップ処理を行った場合は "new\_user\_created" の値が true になります。
+
+## 既存アカウントと外部サービスアカウントを連携する
+
+既存のアカウントを外部サービスアカウントとリンクすると、この外部サービスアカウント経由でサインインができるようになります。
+
+以下に Facebook アカウントをリンクする例をあげます。
+例における {ACCESS\_TOKEN\_PROVIDED\_BY\_FACEBOOK} の箇所には、Facebook より提供されたアクセストークンを入れてください。
+
+```sh
+curl -v -X POST \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "content-type:application/vnd.kii.LinkFacebookRequest+json" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/facebook/link" \
+    -d '{"accessToken":{ACCESS_TOKEN_PROVIDED_BY_FACEBOOK}}'
+```
+
+Kii Cloud は以下のようなレスポンスを返します。
+
+```sh
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Date: Mon, 14 May 2012 22:55:41 GMT
+<
+```
+
+## 既存アカウントと外部サービスアカウントの連携を解除する
+
+既存のアカウントと外部サービスアカウントのリンクを解除する例を以下に上げます。
+
+```sh
+curl -v -X POST \
+    -H "x-kii-appid:japp" \
+    -H "x-kii-appkey:dummy" \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/facebook/unlink"
+```
+
+Kii Cloud は以下のようなレスポンスを返します。
+
+```sh
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Date: Mon, 14 May 2012 22:55:41 GMT
+<
+```
