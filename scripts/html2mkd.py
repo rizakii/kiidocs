@@ -5,8 +5,29 @@ import urllib2
 from BeautifulSoup import BeautifulSoup, Tag, NavigableString
 from urlparse import urlparse
 import re
+import htmlentitydefs
 
 date1 = re.compile('(\d\d\d\d)/(\d\d)/(\d\d)')
+
+deref1 = re.compile('&([^;]*);')
+
+def deref_text(text):
+    result = ''
+    i = 0
+    while True:
+        match = deref1.search(text, i)
+        if match is None:
+            result += text[i:]
+            break
+        result += text[i:match.start()]
+        i = match.end()
+        name = match.group(1)
+        if name in htmlentitydefs.name2codepoint.keys():
+            result += unichr(htmlentitydefs.name2codepoint[name]).encode('utf-8')
+        else:
+            result += match.group(0)
+    return result
+
 
 def tag2text(out, tag):
     if isinstance(tag, Tag):
@@ -16,6 +37,8 @@ def tag2text(out, tag):
             out.append('\n\n')
         if (tag.name == 'img'):
             out.append('![]()')
+        if (tag.name == 'br'):
+            out.append('\n')
         if (tag.name in ('ol', 'ul')):
             out.append('\n')
     elif isinstance(tag, NavigableString):
@@ -42,7 +65,8 @@ def tag2text(out, tag):
                     and p['class'] == 'callout':
                 out.append('> %s' % text)
             else:
-                out.append(text)
+                deref = deref_text(text)
+                out.append(deref)
 
 
 def body2text(contents):
