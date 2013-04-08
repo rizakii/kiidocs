@@ -3,4 +3,74 @@ layout: ja-doc
 sort-priority: 60
 page-id: tutorial_5_update_and_delete_entries-ja
 title: 'チュートリアル#5: エントリーの更新と削除'
+summary: Kii Balance では、表示中の収支エントリを長押しすることで、エントリの更新や削除ができます。これらの変更は Kii Cloud に適宜通知されます。
 ---
+#### Object の更新
+
+Object の更新を行っているコードを見てみましょう（[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L216)）。
+
+```java
+private void updateObject(DialogFragment fragment) {
+
+  (...snip...)
+
+  // Create an Object instance with its id
+  KiiObject object = KiiObject.createByUri(Uri.parse(objectId));
+
+  object.set(Field.NAME, name);
+  object.set(Field.TYPE, type);
+  object.set(Field.AMOUNT, amount * 100 + subAmount);
+
+  (...snip...)
+
+  AddCallback callback = new AddCallback(target, objectId);
+  object.save(callback);
+
+}
+```
+
+ここでは以下のことを行っています。
+
+1. 更新対象 Object のID をパラメータとして指定の上`createByUri`メソッドを実行し、Object インスタンスを作成。
+1. `set`メソッドを実行し、key-value ペアを更新。
+1. `save`メソッドを実行し、更新を Kii Cloud に反映。
+
+saveメソッド実行時には、コールバック関数（ref. AddCallback.java）をパラメータとして指定することで、非同期 API として実行しています。
+
+#### Object の削除
+
+次に、Object の削除を行っているコードを見てみましょう（[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L252)）。
+
+```java
+private void deleteObject(DialogFragment fragment) {
+
+ (...snip...)
+
+  // Create an Object instance with its id
+  KiiObject object = KiiObject.createByUri(Uri.parse(objectId));
+
+ (...snip...)
+
+  DeleteCallback callback = new DeleteCallback(target, objectId);
+  object.delete(callback);
+
+}
+```
+
+ここでは以下のことを行っています。
+
+1. 更新対象 Object のID をパラメータとして指定の上`createByUri`メソッドを実行し、Object インスタンスを作成。
+1. `delete`メソッドを実行し、削除を Kii Cloud に反映。
+
+save メソッド実行時には、コールバック関数（ref. DeleteCallback.java）をパラメータとして指定することで、非同期 API として実行しています。
+
+---
+
+### おめでとうございます！
+
+チュートリアルは以上です。Kii Cloud の基本的な機能の使い方はご理解いただけましたでしょうか？
+
+#### より詳しく学びたい方へ
+
+* Object の部分アップデートを行う方法などについては「{% page_link android-object_storages_updating-ja %}」をご参照ください。
+* Object が更新や削除されるたびに Push 通知をする方法を知りたい方は「{% page_link android-object_storages_push-ja %}」を参照してください。

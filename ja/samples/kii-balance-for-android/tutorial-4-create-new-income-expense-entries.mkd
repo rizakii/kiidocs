@@ -3,4 +3,57 @@ layout: ja-doc
 sort-priority: 50
 page-id: tutorial_4_create_new_income_expense_entries-ja
 title: 'チュートリアル#4： エントリーの作成'
+summary: ユーザは "Add" ボタンを押して新しい収支エントリを作成します。Kii Balance は、作成されたエントリを Kii Cloud にアップロードして保存します。
 ---
+Kii Balance は、以下のフィールドを持つ Object に収支エントリを保存します（ref. Field.java）。
+
+* **name**: 支出の名目。
+* **type**: エントリのタイプ（収入であれば1、支出であれば2）
+* **amount**: 収支の額（セント単位）
+
+さらに、Kii Cloud はいくつかの規定フィールドを Object に追加します。Kii Balance では、{% page_link tutorial_3_retrieve_income_expense_entry-ja %}で解説したように、規定フィールドの一つである "_created" を収支一覧表示の際のソートに利用しています。
+
+Object の作成は非常にシンプルです。必要な key-value をセットし、SDK に保存を要求するだけです。実際にコードを見てみましょう（[ItemEditDialogFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/ItemEditDialogFragment.java#L173)）。
+
+```java
+private void createObject(DialogFragment fragment) {
+
+ (...snip...)
+
+  // Create an Object instance
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiBucket bucket = user.bucket(Constants.BUCKET_NAME);
+  KiiObject object = bucket.object();
+
+  object.set(Field.NAME, name);
+  object.set(Field.TYPE, type);
+  object.set(Field.AMOUNT, amount * 100 + subAmount);
+
+ (...snip...)
+
+  AddCallback callback = new AddCallback(target, null);
+  object.save(callback);
+
+}
+```
+
+ここでは以下のことをしています。
+
+1. `bucket`メソッドを実行し、対象 Bucket のインスタンスを作成。
+1. `object`メソッドを実行し、Bucket 内に Object インスタンスを作成。この時点では、この Object は空の状態です。
+1. `set`メソッドを使い、Object に key-value ペアをセット。
+1. `save` メソッドを実行し、Object の追加を Kii Cloud に反映。
+
+save メソッド実行時には、パラメータとしてコールバック関数（AddCallback.java）を指定することで、非同期 API として実行しています。
+
+---
+### 次は...
+
+ユーザが収支エントリを書き間違えたようです。エントリの更新・削除に対応しましょう。
+
+{% page_link tutorial_5_update_and_delete_entries-ja %}へ移動。
+
+#### より詳しく学びたい方へ
+
+* Object に保存可能な内容について詳細を知りたい方は「{% page_link android-object_storages-ja %}」を参照してください。 
+* 新しい Object が作成されるたびに Push 通知をする方法を知りたい方は「{% page_link android-object_storages_push-ja %}」を参照してください。
