@@ -2,4 +2,5 @@
 layout: ja-doc
 title: サインイン
 sort-priority: 20
+page-id: rest-sign_in-ja
 ---
