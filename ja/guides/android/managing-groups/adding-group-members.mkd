@@ -3,3 +3,30 @@ layout: ja-doc
 title: グループメンバーの追加と削除
 sort-priority: 50
 ---
+###グループメンバーの追加
+
+グループオーナーは `addUser` メソッドを使用してグループのメンバーを追加することができます。
+
+```java
+Uri userUri = Uri.parse("some existing user uri on cloud");
+KiiUser user2 = KiiUser.createByUri(userUri);
+group.addUser(user2);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```
+
+###グループメンバーの削除
+
+グループオーナーは `removeUser` メソッドを使用してグループのメンバーを削除することができます。
+
+```java
+group.removeUser(user2);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```

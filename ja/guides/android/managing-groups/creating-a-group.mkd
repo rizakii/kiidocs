@@ -3,3 +3,20 @@ layout: ja-doc
 title: グループの作成
 sort-priority: 10
 ---
+サインイン済のユーザはグループを作成することができます。グループを作成したユーザが、このグループのオーナーとなります。
+
+基本手順は以下のようになります。
+
+1. `group` メソッドを使用して KiiGroup インスタンスを生成します。
+2. `save` メソッドをコールして KiiGroup の作成リクエストを送信します。
+
+```java
+String groupName = "myGroup";
+KiiGroup group = Kii.group(groupName, null);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Group creation failed for some reasons
+  // Please check GroupOperationException to see what went wrong...
+}
+```
