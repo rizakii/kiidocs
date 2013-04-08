@@ -3,3 +3,84 @@ layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
 ---
+Kii Cloud SDK は、所定の属性の参照・設定をするためのメソッドを提供します。
+
+ * `getUsername`
+ * `getEmail`
+ * `getPhone`
+ * `isPhoneVerified`
+ * `isEmailVerified`
+ * `getDisplayname`/ `setDisplayname`
+ * `getCountry`/ `setCountry`
+
+またデベロッパーは任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
+
+
+###所定の属性の設定
+
+ * ディスプレイネームと、国属性については setter メソッドを使用して変更します。
+ * ユーザ名は変更できません。
+ * メールアドレスと電話番号は変更用の API をコールして変更します。
+
+以下に、メールアドレス、電話番号、国属性を変更するサンプルコードをあげます。
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+
+// Change "email" and "phone" fields
+try{
+  KiiUser.logIn(username, password);
+  KiiUser.changeEmail("user_123456@example.com");
+  KiiUser.changePhone("+919012345678");
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+}
+
+// Change "country" field
+try{
+  KiiUser user = KiiUser.logIn(username, password);
+  user.setCountry("JP");
+  user.update();
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+}
+```
+
+###任意の属性の設定
+
+任意の属性を設定するサンプルコードです。<br />
+`set`メソッドを使用して Key-Value ペアを指定します。<br />
+幾つかの Key は SDK により予約されており、使用することができません。予約されている Key の詳細については[こちら]({% page_url references-ja %})の Javadoc を参照してください。
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+try{
+  KiiUser user = KiiUser.logIn(username, password);
+  user.set("score", 500);
+  user.set("gender", "male");
+  user.update();
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+} 
+```
+
+設定した任意の属性は、次の例のように `keySet` メソッドを使って確認することができます。
+
+```java
+ // Login and refresh KiiUser instance
+String username = "user_123456";
+String password = "123ABC";
+KiiUser user = KiiUser.logIn(username, password);
+user.refresh();
+
+// Get a set of arbitrary keys
+HashSet <String> keyset = user.keySet();
+```

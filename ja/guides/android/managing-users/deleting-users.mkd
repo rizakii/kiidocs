@@ -1,5 +1,21 @@
 ---
 layout: ja-doc
 title: ユーザ削除
+summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Cloud SDK はユーザ削除機能を提供しています。
 sort-priority: 60
 ---
+
+以下のサンプルに示すように、`delete` メソッドを呼ぶことでユーザを削除できます。
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+try{
+  KiiUser user = KiiUser.logIn(username, password);
+  user.delete();
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+}
+```
