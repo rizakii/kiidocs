@@ -10,7 +10,7 @@ page-id: js-quickstart-ja
 
 開発者ポータルへのアプリケーション登録の手順は次の通りです。
 
-1. 開発者ポータル（[http://developer.kii.com](http://developer.kii.com/)）にログインする
+1. 開発者ポータル（http://developer.kii.com/）にログインする
 2. "Create App" ボタンをクリックし、アプリケーション名とアプリケーション開発プラットフォームを入力後、"Create" ボタンをクリックする
 
     ![](01.png)

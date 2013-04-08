@@ -1,6 +1,13 @@
 ---
 # vim: set ts=8 sts=2 sw=2 tw=0 et:
 ---
+body section.content h2 {
+  margin:1.5em 0 10px 0;
+}
+body section.content h2:first-child {
+  margin:10px 0;
+}
+
 body#preview section.content .description h4 {
   margin: 10px 0;
   font-style: italic;
