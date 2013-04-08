@@ -1,0 +1,38 @@
+---
+layout: en-doc
+title: iOS Quick Start
+sort-priority: 20
+page-id: ios-quickstart-en
+---
+## Registering your application on the Kii Developer Portal
+
+In order to utilize the Kii SDKs, you must first register your application in the developer portal. Once registered, your application will have an associated App Key and App ID to be used with the SDKs.
+
+### Register an application
+
+1. Log in on to the developer portal: http://developer.kii.com
+2. Press the "Create App" button.
+
+    This will bring up "Create An App" screen.
+
+    ![](01.png)
+
+3. Enter the name of your app, select the mobile platforms you'd like to utilize and click "Create" button
+
+4. Select the newly created app and then click "Access Keys"
+
+    ![](02.png)
+
+    These are your application's credentials.  These values will be used by Kii to distinguish your app from other apps.
+
+## Downloading iOS Client SDK
+
+Once your application is registered, you will be prompted to download the iOS Starter Kit. This includes the client SDK as well as a sample application to get you started.
+
+Otherwise, you can always download the SDK by clicking the "SDK" link at the top of your application console.
+
+To integrate the SDK with your existing app, check out the following resources:
+
+* For cloud storage: {% page_link ios-adding_kii_cloud_to_your_application-en %}
+* For sync: {% page_link ios-adding_kii_sync_to_your_application-en %}
+* For advertising: {% page_link ios-adding_kii_ads_to_your_application-en %}
