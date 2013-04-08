@@ -1,0 +1,40 @@
+---
+layout: en-doc
+title: Getting Started
+summary: In this tutorial, we'll show how you can add this module to your application and customize it to make it your own. In order to follow along, we recommend a few small preparations below.
+sort-priority: 10
+page-id: ios-tutorial_image_view_getting_started-en
+---
+## Register For Kii Cloud
+
+If you aren't already, you'll need to become a registered Kii Cloud developer
+with the **Kii SDK** and **KiiToolkit** included in your application. Don't
+worry, it's **completely free** to get started - all you need is an email to
+sign up.
+
+To register for Kii and/or get the required libraries, follow the instructions
+[found here](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/Getting-Started)
+
+
+## Project Setup
+
+We'll be walking through this tutorial based on the sample project
+[found here](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Stubbed.zip).
+The sample comes complete with SDKs and resources included, but has the code
+stubbed out for you to work along with the tutorial.
+
+If you'd like to skip ahead to a completed version, you can download that at
+the end of the tutorial. 
+
+<p class="note">
+<strong>Note:</strong> With both samples, you'll need to plug in your own
+<strong>App ID</strong> and <strong>App Key</strong> (retrievable from your app
+within the developer portal at
+<a href="http://developer.kii.com">http://developer.kii.com</a>)
+</p>
+
+Once you've downloaded the sample app, open it up in XCode and continue on...
+
+----
+
+Next {% page_link ios-tutorial_image_view_project_setup-en %} &gt;&gt;

@@ -20,7 +20,6 @@ advantage of a pre-built UI and logic for user authentication, user
 registration and 'forgot password' functionality out-of-the-box. As with all
 features within KiiToolkit, the view controller(s) are fully customizable to
 match the look and feel of your application.
-<br />
 
 ----
 

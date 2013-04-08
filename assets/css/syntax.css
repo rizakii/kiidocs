@@ -23,7 +23,7 @@
 .highlight pre code .kp { color: #a3ccf7 } /* Keyword.Pseudo */
 .highlight pre code .kr { color: #a3ccf7; font-weight: bold } /* Keyword.Reserved */
 .highlight pre code .kt { color: #a3ccf7; } /* Keyword.Type */
-/*TODO*/ .highlight pre code .m { color: #666666 } /* Literal.Number */
+/*TODO*/ .highlight pre code .m { color: #cccccc } /* Literal.Number */
 .highlight pre code .s { color: #55eb54; } /* Literal.String */
 .highlight pre code .na { color: #e0e0e0 } /* Name.Attribute */
 .highlight pre code .nb { color: #e0e0e0; } /* Name.Builtin */
@@ -39,10 +39,10 @@
 .highlight pre code .nv { color: #ffb566; } /* Name.Variable */
 /*TODO*/ .highlight pre code .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
 /*TODO*/ .highlight pre code .w { color: #bbbbbb } /* Text.Whitespace */
-/*TODO*/ .highlight pre code .mf { color: #666666 } /* Literal.Number.Float */
-/*TODO*/ .highlight pre code .mh { color: #666666 } /* Literal.Number.Hex */
-/*TODO*/ .highlight pre code .mi { color: #666666 } /* Literal.Number.Integer */
-/*TODO*/ .highlight pre code .mo { color: #666666 } /* Literal.Number.Oct */
+/*TODO*/ .highlight pre code .mf { color: #cccccc } /* Literal.Number.Float */
+/*TODO*/ .highlight pre code .mh { color: #cccccc } /* Literal.Number.Hex */
+/*TODO*/ .highlight pre code .mi { color: #cccccc } /* Literal.Number.Integer */
+/*TODO*/ .highlight pre code .mo { color: #cccccc } /* Literal.Number.Oct */
 /*TODO*/ .highlight pre code .sb { color: #55eb54 } /* Literal.String.Backtick */
 /*TODO*/ .highlight pre code .sc { color: #55eb54 } /* Literal.String.Char */
 /*TODO*/ .highlight pre code .sd { color: #55eb54; font-style: italic } /* Literal.String.Doc */
@@ -58,7 +58,7 @@
 /*TODO*/ .highlight pre code .vc { color: #19177C } /* Name.Variable.Class */
 /*TODO*/ .highlight pre code .vg { color: #19177C } /* Name.Variable.Global */
 /*TODO*/ .highlight pre code .vi { color: #19177C } /* Name.Variable.Instance */
-/*TODO*/ .highlight pre code .il { color: #666666 } /* Literal.Number.Integer.Long */
+/*TODO*/ .highlight pre code .il { color: #cccccc } /* Literal.Number.Integer.Long */
 
 .highlight pre code .p { color: #b1edec; } /* punctuation */
 .highlight pre code .n { color: #ffb566; } /* name */
