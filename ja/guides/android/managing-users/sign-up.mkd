@@ -1,6 +1,96 @@
 ---
 layout: ja-doc
 title: サインアップ
-page-id: android-sing_up-ja
 sort-priority: 10
+page-id: android-sing_up-ja
 ---
+アプリケーションのユーザ管理の第一歩は、ユーザ登録です。
+
+<p class="callout">ユーザ名とパスワードによるサインアップの代わりに、Facebook などの外部サービス経由でサインアップを行うことも可能です。詳細は「外部サービス（Facebook）連携」を参照してください。</p>
+
+Kii Platform は、ユーザ名とパスワードによるサインアップ機能を提供しています。さらに、メールアドレスや電話番号をサインアップ時に指定し、これらの情報をユーザに紐付けることができます。
+
+メールアドレスや電話番号を指定した場合、Kii Cloud SDK に指定されたメールアドレスや電話番号の認証処理を行わせることもできます。認証を有効にした場合、メールアドレスや電話番号の認証が完了するまでこれらを用いたサインインは有効になりません。（この認証は、ユーザが他人のメールアドレス/電話番号でサインアップを行ったり、不正なメールアドレス/電話番号でサインアップを行うことを防止するための機能です）。
+
+
+###サインアップ
+
+サインアップの例を以下に上げます。この例では、新しいユーザのアカウントを、ユーザ名 "user\_123456"、メールアドレス "`user_123456@example.com`"、電話番号 "+819012345678" 、パスワード "123ABC" を指定して作成しています。
+
+```java
+builder = KiiUser.builderWithName("user_123456");
+builder.withEmail("user_123456@example.com");
+builder.withPhone("+819012345678");
+KiiUser user = builder.build();
+
+try {
+  user.register("123ABC");
+} catch (AppException e) {
+  // Sign-up failed for some reasons
+  // Please check AppException to see what went wrong...
+} catch (IOException e) {?
+  // Sign-up failed for some reasons
+  // Please check IOExecption to see what went wrong...
+}
+```
+
+基本手順は以下の通りです。
+
+1. `builderWithName` メソッドを使い KiiUser インスタンスを生成します。
+2. メールアドレスと電話番号を（必要に応じて）インスタンスにセットします。
+3. `register` メソッドでパスワードを指定し、ユーザを登録します。この時点で、指定したユーザ名とパスワードにより新たなアカウントが作成され、これらによるサインイン処理が行われます。
+
+ユーザ名を省略して新たなアカウントを作成することもできます。メールアドレスや電話番号でアカウント作成を行う場合は、それぞれ `builderWithEmail` メソッドと `builderWithPhone` メソッドを利用してください。この際、メールアドレスや電話番号の認証をオフにしておく必要があります（認証処理の詳細については次のセクションを参照してください）。
+
+さらに、ショートカットとして `createWithEmail` メソッドと `createWithPhone` メソッドが用意されています。｛ユーザ名、メールアドレス、パスワード｝の組や｛ユーザ名、電話番号、パスワード｝の組で新規ユーザ作成を行う場合は、これらのメソッドを利用することもできます。
+
+国際電話番号形式ではなく国内電話番号形式を利用する場合は、以下の例のように2文字の国コードを指定の上 `setCountry` メソッドを利用してください。
+
+```java
+String phoneNumber = "09051903944";
+String country = "JP";
+String password = "123456";
+KiiUser user = KiiUser.builderWithPhone(phoneNumber).build();
+user.setCountry(country); // 2-letter country code
+user.register(password);
+```
+
+###メールアドレス/電話番号の認証を利用する
+
+アプリ設定より、ユーザのメールアドレスや電話番号の認証をオンにできます（デフォルトはオフ）。認証のオン/オフは、以下のように開発者ポータルで設定します。
+
+1. アプリケーションコンソール上の "Edit" ボタンをクリックします。
+
+![](00.png)
+
+2. "Settings" をクリックし、アプリ設定メニューを開きます。
+
+3. ”Phone Number" と "Email Address" のチェックボックスを使い、電話番号（SMS）認証とメールアドレス認証をオン/オフします。
+
+![](01.png)
+
+認証をオンにすると、以下の手順で認証を行いつつサインアップ処理が実施されます：
+
+**メールアドレス認証:**
+
+メールアドレス認証がオンの状態でメールアドレスを伴うアカウント作成処理が実行されると、Kii Cloud はこのメールアドレス宛に認証リンク付きメールを送信します。指定されたメールアドレスによるサインインは、ユーザがこの認証リンクをクリックするまで有効になりません。
+
+**電話番号（SMS）認証:**
+
+電話番号（SMS）認証がオンの状態で電話番号を伴うアカウント作成処理が実行されると、Kii Cloud はこの電話番号宛てに認証コードを含む SMS を送信します。認証処理を完了するには、この認証コードをユーザより受け取り、Kii Cloud に送信する必要があります。指定された電話番号によるサインインは、この認証処理が完了するまで有効になりません。
+
+SMS での認証用コードを受信後、以下のように `verifyPhone` メソッドをコールして Kii Cloud に送信することで認証プロセスは完了します。
+
+```java
+String code = "XYZXYZXYZ"; // Verification code
+
+try{
+  user.verifyPhone(code);
+} catch (IOException e) {
+  // Sign-up failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-up failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```

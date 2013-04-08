@@ -3,3 +3,73 @@ layout: ja-doc
 title: サインイン
 sort-priority: 20
 ---
+サインアップ処理完了後（メールアドレスや電話番号を指定した場合は、これらの認証が完了後）、登録したユーザ名やメールアドレス、電話番号とパスワードによるサインインが有効になります。
+
+また、サインインに成功後、Kii Cloud SDK よりアクセストークンを取得することができます。次回サインイン時には、このアクセストークンを利用することもできます。この場合、取得したアクセストークンをアプリケーション側で安全に保存・管理してください。
+
+
+
+###パスワードによるサインイン
+
+以下にユーザ名とパスワードによるサインインの例を示します。メールアドレスや電話番号でサインインする場合も、ユーザ名の代わりにこれらの値を指定して `logIn` メソッドをコールしてください。
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+try {
+  KiiUser user = KiiUser.logIn(username, password);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
+国内電話番号でサインインする場合は、次の例のように `logInWithLocalPhone` メソッドを利用してください。
+
+```java
+String phoneNumber = "09051903944";
+String country = "JP";
+String password = "123456";
+try{
+  KiiUser user = KiiUser.logInWithLocalPhone(phoneNumber, password, country);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
+
+###アクセストークンによるサインイン
+
+一度サインインしたユーザに対して、Kii Cloud はアクセストークンを発行します。アクセストークンは期限が切れるまで有効です。アクセストークンを使用することで、二回目以降はユーザ名やパスワードの入力を省略して Kii Cloud にアクセスすることが可能になります。
+
+アクセストークンによるサインインの例です。アクセストークンを取得するには、`getAccessToken` メソッドをユーザがサインインしている状態でコールしてください。このトークンを `loginWithAccessToken` メソッドをコール時に使用することで、アクセストークンによるサインインが完了します。
+
+```java
+ // Get an access token
+KiiUser user = KiiUser.login("username", "password");
+String accessToken = user.getAccessToken();
+
+// Securely store the access token in persistent storage
+// (assuming that your application implements this function)
+storeToken(accessToken);
+
+// Get the access token from persistent storage
+// (assuming that your application implements this function)
+String accessToken = getStoredToken();
+
+// Use the access token to sign-in again
+try {
+  KiiUser.loginWithAccessToken(accessToken);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
