@@ -3,3 +3,12 @@ layout: ja-doc
 title: グループ名の変更
 sort-priority: 20
 ---
+グループのオーナーはKii Cloud上のグループの名前を `changeName` メソッドを使用して変更することができます。
+
+```java
+try {
+  group.changeName("myGroup2");
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```
