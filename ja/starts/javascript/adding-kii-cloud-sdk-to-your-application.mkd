@@ -1,5 +1,51 @@
 ---
 layout: ja-doc
 title: Kii Cloud SDK の導入手順
+summary: 
 sort-priority: 10
+page-id: js-adding_kii_cloud_to_your_application-ja
 ---
+## プロジェクトの設定
+
+以下の手順で、Kii Cloud SDK をあなたのプロジェクトに追加します。
+
+### jQuery のダウンロード
+
+Kii Client SDK は jQuery を使用します。下記のリンクからダウンロードしてください。
+
+http://code.jquery.com/jquery-1.8.2.min.js
+
+### プロジェクトの設定
+
+1. HEAD タグ内で Kii Cloud SDK を読み込みます。スクリプトへのパスが正しいことを確認してください。
+
+    ```html
+    <head>
+      <script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+      <script type="text/javascript" src="../js/KiiSDK.js"></script>
+      ...
+    </head>
+    ```
+
+2. onLoad ハンドラ内で初期化メソッドを `AppID` と `AppKey` を指定して呼びます。例では jQuery's ready() メソッドを使用しています。
+
+    ```html
+    <head>
+      ...
+      <script type="text/javascript">
+
+        $(document).ready(function() {
+          // must be initialized with your application id and key
+          // before any other Kii SDK calls are made
+          Kii.initialize("<AppID>", "<AppKey>", KiiSite.JP);
+
+          // the rest of your javascript initialization
+          . . .
+        });
+      </script>
+    </head>
+    ```
+
+    `<AppID>`, `<AppKey>` は開発者ポータルでアプリケーション作成時に発行される Application ID と Application Key を指定してください。
+
+    Site は KiiSite.US または KiiSite.JP を選択可能です。Site は Kii Cloud サーバの物理的なロケーションを示しています。サービスを展開する上で最適な Site を選択してください。

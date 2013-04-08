@@ -4,3 +4,26 @@ title: JavaScript クイックスタート
 sort-priority: 30
 page-id: js-quickstart-ja
 ---
+## アプリケーションを開発者ポータルに登録する
+
+まず初めに、アプリケーションを開発者ポータルに登録する必要があります。登録が完了すると、Kii Platform はあなたのアプリケーション用に Application ID と Application Key を払い出します。
+
+開発者ポータルへのアプリケーション登録の手順は次の通りです。
+
+1. 開発者ポータル（[http://developer.kii.com](http://developer.kii.com/)）にログインする
+2. "Create App" ボタンをクリックし、アプリケーション名とアプリケーション開発プラットフォームを入力後、"Create" ボタンをクリックする
+
+    ![](01.png)
+
+3. 作成されたアプリケーションを選択後、"Access Keys" をクリックする
+
+    ![](02.png)
+
+以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別する際に利用されます。
+
+
+## Javascript Client SDK をダウンロードする
+
+アプリケーション登録完了後、SDK ダウンロード用のウインドウがポップアップします。このウインドウに表示されるリンクをクリックすることで、Javacript 用の Client SDK を含む Javascript スターターキットをダウンロードできます。（アプリケーションコンソールの上部に表示されている "SDK" をクリックして SDK をダウンロードすることもできます）
+
+ダウンロード完了後、SDK を設定してアプリケーションに導入してください。設定方法は、セクション「{% page_link js-adding_kii_cloud_to_your_application-ja %}」を参照してください。
