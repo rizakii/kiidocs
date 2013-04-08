@@ -61,7 +61,7 @@ KiiAds をアプリケーションで有効化する手順は下記の通りで�
     <uses-permission android:name="android.permission.INTERNET" />
     ```
 
-2. KiiAdsSDK（KiiAdNetSDK_Android_x.x.x.jar）をライブラリフォルダ（/libs）に追加します。
+2. KiiAdsSDK（KiiAdNetSDK\_Android\_x.x.x.jar）をライブラリフォルダ（/libs）に追加します。
 
 3. Proguard を使った難読化を利用したい場合は、下記のコードを "proguard-project.txt" もしくは "proguard.cfg" に追加してください。
 

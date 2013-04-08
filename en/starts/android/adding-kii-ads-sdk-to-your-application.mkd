@@ -1,0 +1,149 @@
+---
+layout: en-doc
+title: Adding Kii Ads SDK to Your Application
+summary: Kii Advertising SDK gives you the ability to add multiple advertising networks with only a few lines of client code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
+sort-priority: 30
+page-id: android-adding_kii_ads_to_your_application-en
+---
+## Configuring Ads Service in Developer Portal
+
+To be able to use advertising mediation and direct ads functionality thru our SDKs, you need to first configure the Ad service for your application thru the Developer Portal. If you haven't created an application yet, please create an application in developer portal.
+
+### Enabling Ads
+
+* Click on your application name in the left hand navigation of Developer Portal -- and select Ads.
+* In the resulting interface, select the "Config" tab.
+* Set the toggle switch UI to "On" to enable the ads.
+
+    ![](01.png)
+
+### Configuring Regions
+
+Kii Ad Network offers the ability to configure ad network selection based on the region the app user is from; For instance, an app developer might want to serve ads from SmartMAD ad network for app users in China -- whereas use AdMob or Direct Ads (or a combination of those) for app users in USA. The following steps will walk you thru how to set this up.
+
+* You will notice that by default a region called "default" is already created for you. This Default region's configuration is used if you haven't selected when our Ads system doesn't find any specific regional configuration to apply for a given instance. For example, if the app user is from South Korea -- and there is no "South Korea" region set up -- then the configuration in Default is used.
+* If you would like to create a region (say "China) -- click on "+ (plus)" button, select Country and press "Create Region" button.
+
+    ![](02.png)
+
+* Once you have Regions configured, you can edit/toggle-off them as well.
+
+### Configuring Networks
+
+Within each region, you can select one or more ad networks. For each network you add, you will have to configure additional things -- depending on the network.
+
+* To add a network, click on "+ (plus)" button.
+
+    ![](03.png)
+
+* In the resulting UI, select the ad network (from the list of supported networks and then provide other configurations relevant to the network. For instance, for AdMob, you will have to enter your AdMob Publisher Key.
+* "Site-&gt;" button enables you to go to the ad network's website to register and do additional configuration on the ad network site.
+* For Direct selling, you are taken to the amobee site which requires login info (as described in the "Enabling Ads" section).
+
+    ![](04.png)
+
+* Once your ad networks are enabled, you can set the weight (percentage of ads delivered thru the network) for each ad network by configuring the slider.
+
+    ![](05.png)
+
+
+## Configuring Your Project
+
+Follow the steps below to enable Kii Ads in your application.
+
+### Add to Your Project
+
+1. Add the following permission to AndroidManifest.xml:
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    ```
+
+2. Add KiiAdNetSDK\_Android\_1.0.0.jar to "libs" folder.
+
+3. If you want to use KiiAdNetSDK with proguard, please add the following settings to your proguard-project.txt or proguard.cfg.
+
+    ```
+    -dontwarn com.kii.ad.adapters.* 
+
+    -keep class com.kii.ad.adapters.* {
+        public *;
+    }
+    ```
+
+### Plug in Ads Network
+
+#### AdMob
+
+1. Add GoogleAdMobAdsSdk-4.3.1.jar to "libs" folder.
+
+2. Add the following permission to AndroidManifest.xml.
+
+    ```xml
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    ```
+
+3. Change target version to Android 3.2 or above.
+
+4. Add the following activity info to AndroidManifest.xml.
+
+    ```xml
+    <activity android:name="com.google.ads.AdActivity"
+              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
+    ```
+
+#### MdotM
+
+1. Add MdotM-Android-SDK-2.0.6.jar to "libs" folder.
+
+#### SmartMAD
+
+1. Add smartmad-sdk-android.jar to "libs" folder.
+
+2. Add the following permission to AndroidManifest.xml
+
+    ```xml
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    ```
+
+#### Millenial Media
+
+1. Add MMAdView.jar to "libs" folder.
+
+2. Add the following permissions to AndroidManifest.xml
+
+    ```xml
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android:permission.ACCESS_NETWORK_STATE" />
+    ```
+
+3. Add the following activity info to AndroidManifest.xml
+
+    ```xml
+    <activity android:name="com.millennialmedia.android.MMAdViewOverlayActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|keyboard"/>
+
+    <activity android:name="com.millennialmedia.android.VideoPlayer"
+           android:configChanges="keyboardHidden|orientation|keyboard"/>
+    ```
+
+#### InMobi
+
+1. Add InMobiAndroidSDK.jar to "libs" folder.
+
+2. Add the following activity info to AndroidManifest.xml
+
+    ```xml
+    <activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"/>
+    ```
+
+#### Leadbolt
+
+* No specific configuration needed. &nbsp;Kii Platform wil start distributing ads as soon as your application is validated.
+
+#### AMoAd
+
+* No specific configuration needed. &nbsp;Kii Platform wil start distributing ads as soon as your application is validated.

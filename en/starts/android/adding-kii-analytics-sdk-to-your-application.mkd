@@ -1,0 +1,50 @@
+---
+layout: en-doc
+title: Adding Kii Analytics SDK to Your Application
+summary: Kii Analytics SDK lets you upload events to be analyzed as a part of Flex Analysis.  It also let you get the analytics results.
+sort-priority: 40
+#page-id: foo-bar-baz
+---
+## Configuring your project
+
+Follow the steps below to enable Kii Ads in your application.
+
+1. Add the following permission on AndroidManifest.xml:
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ```
+
+2. Put the latest Kii Analytics SDK jar (KiiAnalyticsSDK-{version name}.jar) in "libs" folder.
+
+3. Add the following service on AndroidManifest.xml:
+
+    ```xml
+    <application>
+      <service android:name="com.kii.colud.analytics.EventUploadService" />
+    </application>
+    ```
+
+4. Add the following code to initialize the SDK.
+
+    ```java
+    public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      // Initialize Kii client SDK
+      KiiAnalytics.initialize(this, "{APP_ID}", "{APP_KEY}", Site.US);
+      ....
+    }
+    ```
+
+Insert your application's `{APP_ID}` and `{APP_KEY}` accordingly.
+
+You may also customize the default site based on your location to optimize performance. The currently supported values are: `Site.US` (United States) and `Site.JP` (Japan).
+
+## Proguard Setting
+
+If you are using Proguard, please add the following line in your proguard-project.txt
+
+```
+-keep class com.kii.cloud.analytics.EventUploadService
+```

@@ -1,0 +1,51 @@
+---
+layout: en-doc
+title: Adding Kii Sync SDK to Your Application
+summary: 'Kii Sync SDK provides you a super-simple method for syncing a folder. By leveraging our sync SDK, you will be able to sync a folder among multiple devices, making all files and subfolders accessible from all devices even if they are offline.'
+sort-priority: 20
+page-id: android-adding_kii_sync_to_your_application-en
+---
+## Configuring Your Project
+
+1.  Configure your project so as to refer the filesync-sdk project as Android Library Project
+
+    For example, if you are using Eclipse:
+    * Choose your project on the project explorer
+    * Select File -> Properties -> Android
+    * Add filesync-sdk project as Library from 'Library' panel
+
+2.  Update `AndroidManifest.xml` as follows to add the necessary permissions:
+
+    ```xml
+    <!-- permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ```
+
+3.  Create `res/raw/kiifs_config` and edit the following lines:
+
+    ```
+    site = US
+    app.id = your-app-id
+    app.key = your-app-key
+    ```
+
+    The format is same as java property file.
+
+    Here, put the App ID and App Key assigned to your application.
+    site can be US or JP.
+    This represent where the Kii Cloud physical server located. 
+    You can choose Site suitable for your service.
+
+4.  If you want to use Proguard on your application, add the following on your progurad-project.txt
+
+    ```
+    -keep public interface com.kii.cloud.filesync.jni.JNIReferred {}
+    -keep public class * implements com.kii.cloud.filesync.jni.JNIReferred {
+        public *;
+    }
+    ```
+
+<p class="note">
+NOTE: Kii Sync SDK does not include user management features.  If you need to leverage these features from your application, please also add Kii Cloud SDK to your project by following the steps described in "{% page_link android-adding_kii_cloud_to_your_application-en %}" section.
+</p>
