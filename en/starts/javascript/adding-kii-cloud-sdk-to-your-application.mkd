@@ -1,0 +1,50 @@
+---
+layout: en-doc
+title: Adding Kii Cloud SDK to Your Application
+summary: Kii Cloud SDK gives you the ability to manage your application users and data with only a few lines of client code.
+sort-priority: 10
+page-id: js-adding_kii_cloud_to_your_application-en
+---
+## Configuring Your Project
+
+Follow the steps below to add Kii Cloud SDK to your application project.
+
+### Download jQuery Javascript Library
+
+Kii Client SDK utilizes the jQuery Javascript Library.  You can find the most recent supported version here:
+
+http://code.jquery.com/jquery-1.8.2.min.js
+
+### Configure Your Project
+
+1. Include the frameworks in your HTML page HEAD tag.  Ensure that the paths to the frameworks are correct
+
+    ```html
+    <head>
+      <script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+      <script type="text/javascript" src="../js/KiiSDK.js"></script>
+      ...
+    </head>
+    ```
+
+2. Add the following code where the page's onLoad handler is called. A common example would be in jQuery's `$(document).ready()`
+
+    ```html
+    <head>
+      <script type="text/javascript">
+
+        $(document).ready(function() {
+          // Must be initialized with your AppID and AppKey
+          // before any other Kii SDK callsa re made
+          Kii.initialize("{AppID}", "<AppKey>", KiiSite.US);
+
+          // The rest of your Javascript initialization
+          ...
+        });
+      </script>
+    </head>
+    ```
+
+    Insert your application's credentials in the specified parameters in this method.
+
+    You may also customize the default site based on your location to optimize performance. The currently supported values are: `KiiSite.US` (United States) and `KiiSite.JP` (Japan).

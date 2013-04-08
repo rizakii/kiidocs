@@ -27,7 +27,7 @@ http://code.jquery.com/jquery-1.8.2.min.js
     </head>
     ```
 
-2. onLoad ハンドラ内で初期化メソッドを `AppID` と `AppKey` を指定して呼びます。例では jQuery's ready() メソッドを使用しています。
+2. onLoad ハンドラ内で初期化メソッドを `AppID` と `AppKey` を指定して呼びます。例では jQuery の `$(document).ready()` メソッドを使用しています。
 
     ```html
     <head>
@@ -40,7 +40,7 @@ http://code.jquery.com/jquery-1.8.2.min.js
           Kii.initialize("<AppID>", "<AppKey>", KiiSite.JP);
 
           // the rest of your javascript initialization
-          . . .
+          ...
         });
       </script>
     </head>
