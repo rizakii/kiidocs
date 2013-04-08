@@ -2,5 +2,6 @@
 layout: ja-doc
 title: アプリを設定する
 sort-priority: 10
+page-id: rest-configuring_your_application-ja
 ---
 
