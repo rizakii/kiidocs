@@ -26,7 +26,7 @@ def deref_text(text):
             result += unichr(htmlentitydefs.name2codepoint[name]).encode('utf-8')
         else:
             result += match.group(0)
-    return result
+    return result.replace('\xc2\xa0', ' ')
 
 
 def tag2text(out, tag):
@@ -42,7 +42,7 @@ def tag2text(out, tag):
         if (tag.name in ('ol', 'ul')):
             out.append('\n')
     elif isinstance(tag, NavigableString):
-        text = str(tag).strip()
+        text = deref_text(str(tag).strip())
         if len(text):
             p = tag.parent
             if p.name == 'a':
@@ -65,8 +65,7 @@ def tag2text(out, tag):
                     and p['class'] == 'callout':
                 out.append('> %s' % text)
             else:
-                deref = deref_text(text)
-                out.append(deref)
+                out.append(text)
 
 
 def body2text(contents):
