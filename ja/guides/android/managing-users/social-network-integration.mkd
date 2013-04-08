@@ -4,3 +4,83 @@ title: 外部サービス（Facebook）連携
 page-id: android-social_network_integration-ja
 sort-priority: 30
 ---
+外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
+
+現時点において、Kii Platform は Facebook との連携をサポートしています。また、以下の2つの外部サービスの連携も近日中にサポートを予定しています。
+
+ * Twitter： [http://www.twitter.com/](http://www.twitter.com/)
+ * RenRen（人人）： [http://www.renren.com/](http://www.renren.com/)
+
+
+###外部サービスと Kii Platform の連携
+
+最初のステップとして、外部サービスと Kii Platform の連携を設定する必要があります。これは以下の手順にしたがって開発者ポータル上で行います。
+
+1. アプリケーションコンソール上で "Edit" ボタンをクリックします。
+    ![](00.png)
+2. "Setting" をクリックしアプリ設定画面を開きます。
+3. Facebook App ID を設定します。
+    ![](01.png)
+
+###外部アカウントを利用したサインイン
+
+Facebook アカウントを利用してサインインする場合のサンプルコードです。
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.logIn(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onLoginCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```
+
+基本手順は以下の通りです。
+
+1. 外部ソーシャル・ネットワークを利用したサインインを制御する Activity を作成します。
+2. ソーシャル・ネットワークコネクターのインスタンスを socialConnect メソッドで生成します。この際、ターゲットとなるソーシャル・ネットワークを引数で指定します（今回の例では Facebook を指定）
+3. `logIn` メソッドをコールしてサインインを開始します。このメソッドは非同期で実行され、コールバックで結果が通知されます。
+
+###既存ユーザを外部アカウントとリンク
+
+すでに存在する Kii Cloud のユーザと外部アカウントをリンクさせることもできます。リンクさせることにより、ユーザは外部アカウントの認証を行うことによって Kii Cloud にサインインできるようになります。
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.link(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```
+
+###リンクを解除する。
+
+Kii Cloud のユーザと外部アカウントのリンクを解除します。
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.unlink(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onUnLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```
