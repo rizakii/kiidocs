@@ -4,3 +4,61 @@ sort-priority: 40
 page-id: tutorial_3_retrieve_income_expense_entry-ja
 title: 'チュートリアル#3: エントリーの取得'
 ---
+<div class="summary">ログインが完了すると、Kii Balance はこのユーザの既存の収支エントリを Kii Cloud より取得して一覧表示します。</div>
+
+Kii Cloud は、すべての Object を Bucket に保存します。Kii Balance は、収支エントリをユーザに属する Bucket （User-scope Bucket と呼びます）に保存しています。User-scope Bucket 内に保存された Object （エントリ）は、デフォルトこの Bucket を保持するユーザのみがアクセス可能となります。つまり、他人が勝手に収支エントリを覗き見したり改ざんすることを未然に防ぐことができます。
+
+Bucket より Object を取得する方法には、以下の２通りが存在します。
+
+* Object の ID を指定して取得する方法。
+* Bucket を検索して条件にマッチする Object を取得する方法。
+
+エントリ一覧表示の時点において Object の ID が分からないため、Kii Balance は後者の方法を利用します。
+
+Kii Cloud で取り扱う Object には "\_created" という規定のフィールドが設定されており、この中には Object が作成された時間が UNIX 時間（ミリ秒）で自動的に保存されます。そこで、Kii Balance は、Bucket より Object を取得する際、このフィールド値をもとに昇順にソートを行っています。言い換えると、Bucket に対して「Bucket 内のすべての Object を、"\_created" フィールドのもとに昇順にソートして取得」という検索を行っています。
+
+では、実際に収支エントリを取得しているコードを見てみましょう（[BalanceListFragment.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/BalanceListFragment.java#L82)）。
+
+```java
+public void onActivityCreated(Bundle savedInstanceState) {
+
+  (...snip...)
+
+  // get items
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiBucket bucket = user.bucket(Constants.BUCKET_NAME);
+
+  // create query instance.
+  KiiQuery query = new KiiQuery();
+  // sort KiiObject by _created
+  query.sortByAsc(Field._CREATED);
+
+  (...snip...)
+
+  // call Kii API
+  QueryCallback callback = new QueryCallback(this);
+  bucket.query(callback, query);
+
+}
+```
+このコードにおいて行ってない内容を順に見ていきましょう。
+
+1. Bucket 名を指定の上`bucket`メソッドを実行し、検索対象 Bucket のインスタンスを作成。
+2. 「すべての Object を、"\_created" フィールドをもとに昇順にソート」というクエリインスタンスを次のように生成。
+  * パラメータなしで`KiiQuery`を実行し、"all" クエリインスタンスを生成。
+  * sortByAsc メソッドを実行し、ソート規則（"\_created" フィールドをもとに昇順）をセット。
+3. 作成したクエリインスタンスをパラメータとして `query` メソッドを実行し、Bucket を検索。
+
+query メソッド実行時には、パラメータとしてコールバック関数（QueryCallback.java）を指定することで、非同期 API として実行しています。
+
+---
+<div class="subtitle">次は...</div>
+
+新しい収支エントリを作成してみましょう。
+
+[チュートリアル＃４]({% page_url tutorial_5_update_and_delete_entries-ja %})へ移動
+
+**より詳しく学びたい方へ**
+
+* ソート順番を変えたり、ページネイションを利用する方法については[「Object の検索」]({% page_url android-object_storages-ja %})を参照してください。
+* ユーザグループ間でエントリを共有する方法などについては[「Bucket」]({% page_url android-buckets-ja %})を参照してください。

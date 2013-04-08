@@ -40,8 +40,6 @@ public void initiKiiSDK() {
 ---
 <div class="subtitle">次は...</div>
 
-ユーザ登録とログインについて見てみましょう。<br>
+ユーザ登録とログインについて見てみましょう。
+
 [チュートリアル#2]({% page_url tutorial_2_register_and_log_in-ja %})へ移動
-
-
-
