@@ -72,5 +72,5 @@ save メソッド実行時には、コールバック関数（ref. DeleteCallbac
 
 #### より詳しく学びたい方へ
 
-* Object の部分アップデートを行う方法などについては「{% page_link android-updating-ja %}」をご参照ください。
-* Object が更新や削除されるたびに Push 通知をする方法を知りたい方は「{% page_link android-push-ja %}」を参照してください。
+* Object の部分アップデートを行う方法などについては「{% page_link android-object_storages_updating-ja %}」をご参照ください。
+* Object が更新や削除されるたびに Push 通知をする方法を知りたい方は「{% page_link android-object_storages_push-ja %}」を参照してください。
