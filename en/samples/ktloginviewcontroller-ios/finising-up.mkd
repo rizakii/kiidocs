@@ -1,0 +1,26 @@
+---
+layout: en-doc
+title: Finishing Up
+sort-priority: 40
+page-id: ios-tutorial_login_view_controller_finshing_up
+---
+## Resources
+
+To download the completed sample project, click [here](http://blog.kii.com/downloads/KTLoginViewExample-Complete.zip).
+
+## Having Issues?
+
+Read through the console output or ensure you have entered your app's
+credentials in the AppDelegate.m file as shown:
+
+```objc
+[Kii beginWithID:@"<INSERT YOUR APP ID HERE>" 
+          andKey:@"<INSERT YOUR APP KEY HERE>"];
+```
+
+## Wrapping Up
+
+Hopefully that's enough to get you started with KTLoginViewController. You can
+get a lot more information on our
+[GitHub project page](https://github.com/KiiPlatform/KiiToolkit-iOS)
+including more detailed examples and full documentation.
