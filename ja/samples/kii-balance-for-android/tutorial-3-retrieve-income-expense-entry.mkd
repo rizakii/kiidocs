@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
 sort-priority: 40
+page-id: tutorial_3_retrieve_income_expense_entry-ja
 title: 'チュートリアル#3: エントリーの取得'
 ---

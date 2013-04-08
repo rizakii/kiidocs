@@ -19,8 +19,8 @@ page-id: js-quickstart-ja
 
     ![](02.png)
 
-以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別する際に利用されます。
 
+以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別する際に利用されます。
 
 ## Javascript Client SDK をダウンロードする
 

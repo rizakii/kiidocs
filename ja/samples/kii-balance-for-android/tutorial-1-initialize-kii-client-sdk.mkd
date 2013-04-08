@@ -1,5 +1,6 @@
 ---
 layout: ja-doc
 sort-priority: 20
+page-id: tutorial_1_initialize_kii_client_sdk-ja
 title: 'チュートリアル#1: SDK の初期化'
 ---

@@ -4,3 +4,38 @@ title: Kii Balance for Android
 page-id: android-sample_balance-ja
 summary: Kii Balance はシンプルなおこづかい帳アプリです。簡単な操作で日々の収支を記録し、Kii Cloud に保存することができます。保存された情報は、複数端末間でシェアされます。例えば Android 携帯で記録した情報を、後ほど Android タブレットで確認することができます。
 ---
+   
+![](01.png) ![](02.png)
+
+* 新規ユーザを登録するには "Register" ボタンをクリックしてください。
+* 既存ユーザとしてログインするには "Login" ボタンをクリックしてください。
+* 新たに収支エントリを登録するには "Add" ボタンをクリックしてください。
+* 既存収支エントリを変更・削除するには、エントリを長押ししてください。
+
+このアプリは、Kii Cloud の基本的な機能の使い方を学ぶよいサンプルです。本アプリは、以下にあげた Kii Cloud のユーザ管理機能とデータ管理機能を利用して実装されています。
+
+* ユーザ管理機能
+ * ユーザ名とパスワードによるユーザ登録
+ * ユーザ名とパスワードによるユーザログイン
+ * アクセストークンを用いたユーザログイン
+* データ管理機能
+ * User-scope の Object 作成
+ * Object の検索
+ * Object の更新
+  * Object の削除
+
+ぜひダウンロードしてアプリを試すとともに、コードを覗いてみてください :-)
+<br/>
+
+## アプリとコードをダウンロードする
+アプリ本体： [KiiBalance-1.0.apk](http://static.kii.com/devportal/docs/samples/KiiBalance-1.0.apk)
+ソースコード：[Github](https://github.com/KiiPlatform/KiiBalance-Android)
+
+## チュートリアル
+ソースコードを読みほどく参考資料として、以下のチュートリアルも合わせてご確認ください。
+
+* チュートリアル#1: [SDKを初期化する]({% page_url tutorial_1_initialize_kii_client_sdk-ja %})
+* チュートリアル#2: [ユーザ登録とログイン]({% page_url tutorial_2_register_and_log_in-ja %})
+* チュートリアル#3: [エントリーの取得]({% page_url tutorial_3_retrieve_income_expense_entry-ja %})
+* チュートリアル#4: [エントリーの作成]({% page_url tutorial_4_create_new_income_expense_entries-ja %})
+* チュートリアル#5: [エントリーの更新と削除]({% page_url tutorial_5_update_and_delete_entries-ja %})
