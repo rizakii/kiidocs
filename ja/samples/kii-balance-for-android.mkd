@@ -34,8 +34,8 @@ summary: Kii Balance はシンプルなおこづかい帳アプリです。簡�
 ## チュートリアル
 ソースコードを読みほどく参考資料として、以下のチュートリアルも合わせてご確認ください。
 
-* チュートリアル#1: [SDKを初期化する]({% page_url tutorial-1-initialize-kii-client-sdk-ja %})
-* チュートリアル#2: [ユーザ登録とログイン]({% page_url tutorial-2-register-and-log-in-ja %})
-* チュートリアル#3: [エントリーの取得]({% page_url tutorial-3-retrieve-income-expense-entry-ja %})
-* チュートリアル#4: [エントリーの作成]({% page_url tutorial-4-create-new-income-expense-entries-ja %})
-* チュートリアル#5: [エントリーの更新と削除]({% page_url tutorial-5-update-and-delete-entries-ja %})
+* チュートリアル#1: [SDKを初期化する]({% page_url tutorial_1_initialize_kii_client_sdk-ja %})
+* チュートリアル#2: [ユーザ登録とログイン]({% page_url tutorial_2_register_and_log_in-ja %})
+* チュートリアル#3: [エントリーの取得]({% page_url tutorial_3_retrieve_income_expense_entry-ja %})
+* チュートリアル#4: [エントリーの作成]({% page_url tutorial_4_create_new_income_expense_entries-ja %})
+* チュートリアル#5: [エントリーの更新と削除]({% page_url tutorial_5_update_and_delete_entries-ja %})

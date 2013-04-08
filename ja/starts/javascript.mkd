@@ -25,5 +25,5 @@ page-id: js-quickstart-ja
 ## Javascript Client SDK をダウンロードする
 アプリケーション登録完了後、SDK ダウンロード用のウインドウがポップアップします。このウインドウに表示されるリンクをクリックすることで、Javacript 用の Client SDK を含む Javascript スターターキットをダウンロードできます。（アプリケーションコンソールの上部に表示されている "SDK" をクリックして SDK をダウンロードすることもできます）
 
-ダウンロード完了後、SDK を設定してアプリケーションに導入してください。設定方法は、セクション「{% page_link adding-kii-cloud-sdk-to-your-application-ja %}」を参照してください。
+ダウンロード完了後、SDK を設定してアプリケーションに導入してください。設定方法は、セクション「{% page_link js-adding_kii_cloud_to_your_application-ja %}」を参照してください。
 

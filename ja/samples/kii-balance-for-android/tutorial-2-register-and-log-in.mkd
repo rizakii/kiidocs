@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
-sort_priority: 30
-page_id: tutorial-2-register-and-log-in-ja
+sort-priority: 30
+page-id: tutorial_2_register_and_log_in-ja
 title: 'チュートリアル#2: ユーザ登録とログイン'
 ---
 
@@ -117,9 +117,9 @@ public void onCreate(Bundle saveInstanceState) {
 ---
 ## 次は...
 実際に収支を取り扱う準備が整いました。 Kii Cloud より保存済のエントリを取得してみましょう。
-[チュートリアル＃３]({% page_url tutorial-3-retrieve-income-expense-entry-ja %}) へ移動。
+[チュートリアル＃３]({% page_url tutorial_3_retrieve_income_expense_entry-ja %}) へ移動。
 
 ### より詳しく学びたい方へ
 
-ユーザ登録時に、メールアドレスや電話番号の認証処理を走らせる方法などについては「[サインアップ]({% page_url android-sing-up-ja %})」を参照してください。
-Facebook アカウントによるユーザ登録をする方法については「[外部サービス（Facebook）連携]({% page_url android-social-network-integration-ja %})」を参照してください。
+ユーザ登録時に、メールアドレスや電話番号の認証処理を走らせる方法などについては「[サインアップ]({% page_url android-sing_up-ja %})」を参照してください。
+Facebook アカウントによるユーザ登録をする方法については「[外部サービス（Facebook）連携]({% page_url android-social_network_integration-ja %})」を参照してください。

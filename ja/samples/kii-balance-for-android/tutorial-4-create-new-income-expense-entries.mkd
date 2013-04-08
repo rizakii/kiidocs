@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
-sort_priority: 50
-page_id: tutorial-4-create-new-income-expense-entries-ja
+sort-priority: 50
+page-id: tutorial_4_create_new_income_expense_entries-ja
 title: 'チュートリアル#4： エントリーの作成'
 ---

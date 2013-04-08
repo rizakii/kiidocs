@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
-sort_priority: 10
-page_id: download-the-application-and-code-ja
+sort-priority: 10
+page-id: download_the_application_and_code-ja
 title: アプリとコードのダウンロード
 ---
