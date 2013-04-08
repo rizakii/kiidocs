@@ -57,9 +57,9 @@ query メソッド実行時には、パラメータとしてコールバック�
 
 新しい収支エントリを作成してみましょう。
 
-[チュートリアル＃４]({% page_url tutorial_5_update_and_delete_entries-ja %})へ移動
+{% page_link tutorial_5_update_and_delete_entries-ja %}へ移動
 
 #### より詳しく学びたい方へ
 
-* ソート順番を変えたり、ページネイションを利用する方法については[「Object の検索」]({% page_url android-object_storages-ja %})を参照してください。
-* ユーザグループ間でエントリを共有する方法などについては[「Bucket」]({% page_url android-buckets-ja %})を参照してください。
+* ソート順番を変えたり、ページネイションを利用する方法については「{% page_link android-object_storages-ja %}」を参照してください。
+* ユーザグループ間でエントリを共有する方法などについては「{% page_link android-buckets-ja %}」を参照してください。

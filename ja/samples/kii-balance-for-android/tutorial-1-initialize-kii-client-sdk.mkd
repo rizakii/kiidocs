@@ -12,7 +12,7 @@ summary: なにはともあれ、まずは Kii Client SDK を初期化する必�
 * Site location
 
 これらの情報は、開発者ポータルでアプリを作成した際に通知されます。<br>
-詳細については[「Android クイックスタート」]({% page_url android-quickstart-ja %})を参照してください。
+詳細については{% page_link android-quickstart-ja %}を参照してください。
 
 では、実際のコードを覗いてみましょう（[MainActivity.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/MainActivity.java#L64)）
 
@@ -42,4 +42,4 @@ public void initiKiiSDK() {
 
 ユーザ登録とログインについて見てみましょう。
 
-[チュートリアル#2]({% page_url tutorial_2_register_and_log_in-ja %})へ移動
+{% page_link tutorial_2_register_and_log_in-ja %}へ移動
