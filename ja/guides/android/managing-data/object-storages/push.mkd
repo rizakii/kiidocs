@@ -42,7 +42,7 @@ bucket.object().save();
 user.pushSubscription().subscribeBucket(bucket);
 ```
 
-### Bucket 購読の確認 （coming soon）
+### Bucket 購読の確認
 
 Bucket 購読の有無を確認する例を以下にあげます。
 
@@ -82,22 +82,24 @@ protected void onMessage(Context context, Intent intent) {
   // Determine the push notification type and start parsing.
   MessageType type = message.pushMessageType();
   switch (type) {
-  case PUSH_TO_USER:
-    PushToAppMessage pum = (PushToAppMessage) message;
+  case PUSH_TO_APP:
+    PushToAppMessage pam = (PushToAppMessage) message;
 
-    // Extract the target topic.
-    if (pum.containsKiITopic()) {
-      KiiTopic topic = pum.getKiiTopic();
+    // Extract the target bucket and object.
+    if (pam.containsKiIBucket()) {
+      KiiBucket bucket = pam.getKiiBucket();
+      if (pam.containsKiiObject()) {
+        KiiObject obj = pam.getKiiObject();
+      }
 
       // Extract more field values.
       long when = extras.getLong("when");
-      String app_specific_string = extras.getString("app_specific_key1");
-      long app_specific_long = extras.getLong("app_specific_key2");
+      String event_type = extras.getString("type");
       // ... and get more field values as needed.
     }
     break;
 
-  // cases for PUSH_TO_APP and DIRECT_PUSH will follow  
+  // cases for PUSH_TO_USER and DIRECT_PUSH will follow  
 
 }
 ```
@@ -108,6 +110,6 @@ protected void onMessage(Context context, Intent intent) {
 2. Bundle を引数に `parse` メソッドを実行して、ReceiveMessage インスタンスを作成。
 3. `getSender` メソッドを実行して、プッシュメッセージの送信者を取得。
 4. `pushMessageType` メソッドを実行して、プッシュメッセージの種別を判別。<BR />
-（"Push to User" の場合、種別は "PUSH\_TO\_USER"）
-5. `getKiiTopic` メソッドを実行し、対象トピック取得。
+（"Push to App" の場合、種別は "PUSH\_TO\_APP"）
+5. `getKiiBucket` メソッドと `getKiiObject` メソッドを実行し、対象 Bucket と Object をそれぞれ取得。
 6. 直接 bundle をパースし、その他の既定フィールドやアプリ定義フィールドの値を取得。<BR />プッシュ通知メッセージの内容の詳細は [Javadoc] (http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) を参照してください。
