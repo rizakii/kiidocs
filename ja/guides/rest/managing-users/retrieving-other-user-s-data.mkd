@@ -2,4 +2,87 @@
 layout: ja-doc
 title: 他ユーザの情報を取得
 sort-priority: 70
+summary: ユーザのユーザ名、メールアドレス、もしくは電話番号を指定することで、該当ユーザの情報にアクセスすることができます。
 ---
+
+Kii Cloud が返すユーザ情報の量は、アプリケーションの設定により決定されます。アプリケーション設定の*"Expose Full User Data to Others"*オプションがオンの場合、ユーザの全情報が返されます。オプションがオフの場合、以下の情報のみが返されます。
+
+* UserID
+* LoginName
+* DisplayName
+
+このアプリケーション設定は、開発者ポータル上の操作か、アプリ開発者向け REST API （詳細は[こちら]({% page_url rest-configuring_your_application-ja %})を参照）により設定可能です。
+
+開発者ポータル上で設定を行う方法を以下に示します。
+
+1. "Edit" ボタンをクリックし、アプリケーションコンソールを開きます。
+    ![](01.png)
+1. "Setting" をクリックしアプリ設定画面を開きます。
+1. "Expose Full User Data To Others" オプションをオン/オフします。
+    ![](02.png)
+
+## ユーザ情報を取得する
+
+### ユーザ名を指定してユーザ情報を取得:
+
+ユーザ名指定によるユーザ情報取得の例を以下にあげます。
+
+```sh
+curl -v -X GET \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/LOGIN_NAME:{USERNAME}"
+```
+
+### メールアドレスを指定してユーザ情報を取得:
+
+メールアドレス指定によるユーザ情報取得の例を以下にあげます。指定するメールアドレスは認証済である必要があります。
+
+```sh
+curl -v -X GET \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/EMAIL:{EMAIL_ADDRESS}"
+```
+
+### 電話番号を指定してユーザ情報を取得:
+
+電話番号指定によるユーザ情報取得の例を以下にあげます。指定する電話番号は認証済である必要があります。また電話番号は、+と国コードから始まる国際電話番号を指定してください。
+
+```sh
+curl -v -X GET \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/PHONE:{PHONE_NUMBER}"
+```
+
+### ユーザ ID を指定してユーザ情報を取得:
+
+ユーザ ID 指定によるユーザ情報取得の例を以下にあげます。
+
+```sh
+curl -v -X GET \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}"
+```
+
+### Kii Cloud からの応答:
+
+いずれのケースにおいても、Kii Cloud は次のようにユーザ情報を返します。
+
+```
+< Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
+<
+{
+  "userID" : "a7784f94-3134-4a78-82af-75df87f23873",
+  "loginName" : "Test003",
+  "displayName" : "Person Test003"
+}
+```
+
+アプリケーション設定パラメータ exposeFullUserDataToOthers が true に設定されている場合、全てのユーザ情報が返されます。
