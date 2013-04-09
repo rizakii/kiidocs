@@ -2,5 +2,80 @@
 layout: ja-doc
 title: File のスコープと ACL の設定
 sort-priority: 70
+summary: File は常に User Scope を持つため、User Scope に即したアクセス制御の既定値が適用されます。
 ---
+## 既定のアクセス制御
 
+ファイルに適用される既定のアクセス制御は以下の通りです。
+
+* ファイルを作成したユーザに対して、この File に対する読み取りと書き込みを許可します。
+* このユーザ以外に対して、この File に対する全アクセスを拒否します。
+
+## File に新たな ACL を設定する
+
+ファイルに新たな ACL を設定すると、他のユーザに対してファイルへのアクセス権限を与えることができます。付与可能なアクセス権限は、以下の２つです。
+
+* **READ\_EXISTING\_OBJECT** : ファイルの読み込みを許可する
+* **WRITE\_EXISTING\_OBJECT** : ファイルの更新や削除を許可する
+
+以下、あるファイルに対する READ\_EXISTING\_OBJECT 権限を付与する例をいくつかあげます。
+
+* **Anonymous User に READ\_EXISTING\_OBJECT 権限を付与する例：**
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization:bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
+    ```
+
+* **Authenticated User に READ\_EXISTING\_OBJECT 権限を付与する例：**
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization:bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANY_AUTHENTICATED_USER"
+    ```
+
+* **あるグループに READ\_EXISTING\_OBJECT を付与する例：**
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization:bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/GroupID:{GROUP_ID}"
+    ```
+
+* **あるユーザに READ\_EXISTING\_OBJECT 権限を付与する例：**
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization:bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/
+    sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/
+    UserID:{USER_ID}"
+    ```
+
+## 権限の剥奪
+
+一旦付与した権利を剥奪するには、対応する ACL に対して DELETE リクエストを送信します。
+
+一例として、一旦 Anonymous User に付与した権限を剥奪するケースを以下にあげます。
+
+* **Anonymous User に付与した WRITE\_EXISTING\_OBJECT 権限を剥奪する例：**
+
+    ```sh
+    curl -v -X DELETE \
+      -H "Authorization:bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/WRITE_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
+    ```
+
+Authenticated Usersやグループ、ユーザより権限を剥奪する場合も同様に DELETE リクエストを送信します。この場合は、対象をそれぞれ "UserID:ANY\_AUTHENTICATED\_USER"、 "GroupID:{GROUD\_ID}"、"UserID:{USER\_ID}" に変更してください。
