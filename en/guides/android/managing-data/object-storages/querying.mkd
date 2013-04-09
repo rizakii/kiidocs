@@ -1,0 +1,117 @@
+---
+layout: en-doc
+title: Querying for Objects
+summary:
+sort-priority: 40
+---
+Kii SDK makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The SDK allows you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...
+
+
+### Defining query conditions with KiiClause
+
+You can define a query condition using the following comparison operators:
+
+ * **equals**
+ * **notEquals**
+ * **greaterThan**
+ * **greaterThanOrEqual**
+ * **lessThan**
+ * **lessThanOrEqual**
+ * **inWithIntValue**, **inWithLongValue**, **inWithDoubleValue**, **inWithStringValue**
+ * **startsWith**
+
+You can also concatenate multiple query conditions using AND/OR logical operators:
+
+ * **and**
+ * **or**
+
+### Constructing KiiQuery
+
+KiiQuery() creates an actual query based on a KiiClause object passed as a parameter.  If no KiiClause object is passed, the query generated will match with all Objects in the bucket (equivalent to "all" query).
+
+Optionally, you can use the following methods to fine-tune the query results:
+
+ * **sortByAsc**
+ * **sortByDesc**
+ * **setLimit**
+
+If neither sortByAsc nor sorByDesc is specified, the query results will be in arbitrary order.  If setLimit is not specified, the maximum number of the query results may be up to 200.
+
+### Parsing KiiQueryResult
+
+The result of the query will be returned as KiiQueryResult instance, whose result can be retrieved by invoking the `getResult` method.  This will give you a list of KiiObjects that match with the query condition(s).
+
+If the result has multiple pages (e.g., you've specified setLimit to 10, and the actual query result has 30 matching objects), a KiiObject list returned by getResult will only contain the first page.  To get the next result page, invoke the `getNextQueryResult` method to fetch the next page and then invoke the `getResult` method to get the actual list of KiiObjects contained within the second page.
+
+
+### Query Examples
+
+Let us start with a simplest example; querying all objects in a bucket.  。
+
+To get all objects in a bucket, you first create an "all" query using `KiiQuery` method without any KiiClause object as a parameter, then invoke the `query` method of the target bucket with the "all" query.  Alternatively, you can just invoke the `query` method without any parameter.
+
+
+```java
+KiiQuery all_query = new KiiQuery();
+
+try {
+  KiiQueryResult<KiiObject> result = Kii.bucket("myBucket").query(all_query);
+  // Alternatively, you can also do:
+  // KiiQueryResult<KiiObject> result = Kii.bucket("myBuckets").query();
+
+  List<KiiObject> objLists = result.getResult();
+  for (KiiObject obj : objLists) {
+    // Do something with objects in the bucket
+  }
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error
+}
+```
+
+In the next example, we will be querying objects with the following conditions:
+
+ * The key "gender" has the value "Female".
+ * The key "age" is greater than 18.
+ * Sort the results in ascending order by the key "age"
+ * Limit the result to 10 objects per query.  Use pagination for getting the next 10 objects.
+
+The following code illustrates how you can execute such a query:
+
+
+```java
+// Prepare the target bucket to be queried
+KiiBucket bucket = Kii.bucket("myBucket");
+
+// Define query conditions 
+KiiQuery query = new KiiQuery(KiiClause.and(
+    KiiClause.equals("gender", "Female"),
+    KiiClause.greaterThan("age", 18)));
+
+// Fine-tune your query results
+query.sortByAsc("age");
+query.setLimit(10);
+
+// Query the bucket
+try {
+  KiiQueryResult<KiiObject> result = bucket.query(query);
+  List<KiiObject> objLists = result.getResult();
+  for (KiiObject obj : objLists) {
+    // Do something with the first 10 objects
+  }
+
+  // Fetching the next 10 objects (pagination handling)
+  if (result.hasNext()) {
+    result = result.getNextQueryResult();
+  }
+  objLists = result.getResult();
+  for (KiiObject obj : objLists) {
+    // Do something with the next 10 objects
+  }
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error
+}
+```

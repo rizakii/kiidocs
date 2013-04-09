@@ -1,0 +1,45 @@
+---
+layout: en-doc
+title: Scoping Objects
+summary: 'All objects have a "scope".  This scope determines the default access control applied to the object upon its creation. For example, an object created in an "Application Scope" bucket will have "Application Scope".'
+sort-priority: 70
+---
+### Object Scopes and Default Access Control
+
+For each scope, the following default access control is applied to objects:
+
+ * **Application Scope**
+  * Authenticated users (i.e., all users who have been signed-in) can read and write the object by default.
+  * Anonymous users (i.e., users who have not yet signed-in) can only read the object by default.
+ * **Group Scope**
+  * All group members can read and write the object by default.
+  * All non-group members cannot read and write the object by default.
+ * **User Scope**
+  * The user can read and write the object by default.
+  * Other user cannot read and write the object by default.
+
+
+### Set a new ACL on an Object
+
+New access permission can be applied to an object by adding a new ACL.  The possible access controls that can be granted on an object are:
+
+ * **READ\_EXISTING\_OBJECT** : Allow the subject to read the object.
+ * **WRITE\_EXISTING\_OBJECT** : Allow the subject to modify and delete the object.
+
+Here is an example for granting READ_EXISTING_OBJECT permission to anonymous users:
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+
+// Setting a new ACL on the Object
+KiiACL acl = object.acl();
+acl.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+    ObjectAction.READ_EXISTING_OBJECT, true));
+
+try {
+  acl.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```

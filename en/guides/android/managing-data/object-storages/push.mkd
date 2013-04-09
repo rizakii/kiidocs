@@ -1,0 +1,113 @@
+---
+layout: en-doc
+title: 'Receiving "Push to App" Notifications'
+sort-priority: 60
+page-id: android-object_storages_push-en
+---
+A "Push to App" notification mechanism will let your application know that there were some changes on object(s) in a bucket.  By leveraging this notification feature, your application can quickly fetch the changes that occur on the server-side.
+
+The changes that can be notified by this push notification include:
+
+ * A new Object is created in the bucket.
+ * An existing Object in the bucket is updated.
+ * An existing Object in the bucket is deleted.
+ * An ACL of an existing Object in the bucket is modified.
+
+Here are the basic steps to utilize Kii Cloud "Push to App" notification.
+
+1. Install a device to make it ready to receive a push notification from Kii Cloud.
+2. Subscribe a bucket so as to start monitoring the bucket for changes.
+3. Receive a push notification when something occurs inside the bucket.
+
+You will also need to configure your application on the developer portal.  Please refer [here]({% page_url android-adding_kii_cloud_to_your_application-en %}) to check how you can configure your application.
+
+### Install a Device to Kii Cloud
+
+Here is a sample snippet for installing a device to Kii Cloud.  You need to specify the regId that you've received from GCM server.  (Please check the [tutorial by Google](http://developer.android.com/google/gcm/gs.html) to learn more).
+
+```java
+// regId is received from GCM server. 
+KiiUser.pushInstallation().install(regId);
+```
+
+### Subscribe a Kii Bucket
+
+Here is a sample snippet for subscribing a bucket.  Once subscribed, your device will be ready to receive push notifications whenever something occurs inside the bucket.
+
+```java
+KiiBucket bucket = user.bucket("_target_bucket_"); 
+bucket.object().save(); 
+user.pushSubscription().subscribeBucket(bucket);
+```
+
+### Check if Subscribed to a Kii Bucket
+
+Here is a sample snippet for checking the subscription.
+
+```java
+try{
+// Instantiate the bucket in question.
+  KiiBucket bucket = user.bucket("_target_bucket_");
+
+  // Check the subscription.
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription ps = user.pushSubscription();
+  ps.isSubscribed(bucket);
+} catch (IOException ioe) {
+  // Something went wrong...
+} catch (AppException e) {
+  // Something went wrong...
+}
+```
+
+### Receive a Push Notificaiton
+
+To receive push notifications, you need to implement onMessage() of GCMIntentService.  Kii Cloud SDK provides a helper API to support your application to parse push messages.
+
+Please check the following snippet.
+
+```java
+@Override
+protected void onMessage(Context context, Intent intent) {
+  Bundle extras = intent.getExtras();
+
+  // Get ReceiveMessage instance by passing the bundle received from GCM.
+  ReceivedMessage message = PushMessageBundleHelper.parse(extras);
+
+  // Get the sender of the push message.
+  KiiUser sender = message.getSender();
+
+  // Determine the push notification type and start parsing.
+  MessageType type = message.pushMessageType();
+  switch (type) {
+  case PUSH_TO_APP:
+    PushToAppMessage pam = (PushToAppMessage) message;
+
+    // Extract the target bucket and object.
+    if (pam.containsKiIBucket()) {
+      KiiBucket bucket = pam.getKiiBucket();
+      if (pam.containsKiiObject()) {
+        KiiObject obj = pam.getKiiObject();
+      }
+
+      // Extract more field values.
+      long when = extras.getLong("when");
+      String event_type = extras.getString("type");
+      // ... and get more field values as needed.
+    }
+    break;
+
+  // cases for PUSH_TO_USER and DIRECT_PUSH will follow  
+
+}
+```
+
+Here is what is happening in this snippet:
+
+1. Get a push message as a bundle.
+2. Create a ReceiveMessage instance by invoking `parse` method while passing the bundle.
+3. Get the sender of the push message by invoking `getSender` method.
+4. Determine the type of the push message by invoking `pushMessageType` method.<BR />
+If the message is "Push to App", the type will be "PUSH\_TO\_APP".
+5. Extract the target Bucket and Object by invoking `getKiiBucket` and `getKiiObject` methods, respectively.
+6. Extract more values, like the timestamp and event type, by directly parsing the bundle. <BR />Please refer [Javadoc] (http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) for more information on what you can extract.

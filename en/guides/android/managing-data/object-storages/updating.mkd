@@ -1,0 +1,52 @@
+---
+layout: en-doc
+title: Updating Objects
+sort-priority: 30
+page-id: android-object_storages_updating-en
+---
+Kii SDK supports the following two object update methods:
+
+ * **Full update**: Completely overwrite an object. *All previous key-values stored in the object will be discarded.* The local key-value pairs will be saved to the object.
+ * **Partial update**： This will update only key/value pairs that have been changed locally, preserving existing key/value pairs.
+
+Note: If you wish to remove key-value pairs, please use full update; partial update does not support key-value pair removal.
+
+### Full Update
+
+The below is an example of how you can fully update an object.  Note that this update process uses the `saveAllFields` method:
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+object.set("myid", 1);
+object.set("name", "John Doe Jr");
+object.set("email", "john_jr@example.com");
+
+try {
+  object.saveAllFields(true);
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+### Partial Update
+
+The below is an example of how you can partially update an object.  Note that this update process uses the `save` method:
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+object.set("myid", 1);
+object.set("name", "John Doe Jr");
+object.set("email", "john_jr@example.com");
+
+try {
+  object.save();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```

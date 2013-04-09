@@ -1,0 +1,30 @@
+---
+layout: en-doc
+title: Retrieving Objects
+summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
+sort-priority: 20
+---
+The following sample code illustrates how to retrieve an object with its URI:
+
+```java
+ // Retrieve an object with URI
+Uri uri = object.toUri();
+KiiObject object2 = KiiObject.createByUri(uri);
+
+// Retrieve the object
+try {
+  object2.refresh();
+} catch (IOException e) {
+  // Handle error
+} catch (AppException e) {
+  // Handle error
+}
+```
+
+The basic steps are as follows:
+
+1. Instantiate an object with the `createByUri` method while specifying the object's URI.
+2. Refresh the object with the `refresh` method
+
+*Please Note*: Do not forget to invoke the refresh method after instantiating the object, or your local object will not be updated to the latest key-values.
+

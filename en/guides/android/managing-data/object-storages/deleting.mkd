@@ -1,0 +1,22 @@
+---
+layout: en-doc
+title: Deleting Objects
+sort-priority: 50
+---
+You can delete an object by invoking the `delete` method.
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+
+try {
+  object.delete();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+*Please Note*: The object will be deleted from the server upon calling the `delete` method; you do not need to invoke the `save` method
+

@@ -1,0 +1,48 @@
+---
+layout: en-doc
+title: Creating Buckets
+sort-priority: 10
+---
+## Creating Object Buckets
+
+Here are examples showing how you can create Object buckets:
+
+```java
+ // Create Application Scope Bucket
+KiiBucket appBucket = Kii.bucket("my_user");
+
+// Create Group Scope Bucket. (Login required)
+KiiBucket groupBucket = Kii.group("Friends").bucket("my_group");
+
+// Create User Scope Bucket. (Login required)
+KiiBucket userBucket = Kii.user().bucket("my_private");
+```
+
+ * Invoke the `bucket` method on Kii instance to create an Application Scope bucket.
+ * Invoke the `bucket` method on KiiGroup instance to create a Group Scope bucket.
+ * Invoke the `bucket` method on KiiUser instance to create a User Scope bucket
+
+*Please Note*: a bucket can not be explicitly saved, it will only be created when an object is saved to it.  For example, userBucket in the above example will be created when an object is created and saved to the bucket as follows:
+
+```java
+KiiObject object = userBucket.object();
+object.save();
+```
+
+## Creating File Buckets
+
+File buckets are the same concept as object buckets, with the exception that a file bucket can only have User Scope, meaning that the bucket will be fully accessible only to the user. Here is an example for creating a file bucket:。
+
+```java
+ // Create User Scope Bucket. (Login required)
+KiiFileBucket fileBucket = Kii.user().fileBucket("my_backup");
+```
+
+ * Invoke the `fileBucket` method on KiiUser instance to create a User Scope file bucket
+
+*Please Note*: a file bucket will not be explicitly saved, it will only be created when a file is saved to it.  For example, fileBucket in the above example will be created when a file is created and saved to the bucket as shown:
+
+```java
+KiiFile file = fileBucket.file();
+file.save();
+```

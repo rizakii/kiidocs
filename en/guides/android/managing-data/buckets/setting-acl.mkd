@@ -1,0 +1,60 @@
+---
+layout: en-doc
+title: Setting a new ACL to a Bucket
+sort-priority: 20
+page-id: android-buckets_setting_acl-en
+---
+
+For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
+
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections.</p>
+
+The possible access controls that can be applied to a bucket are:
+
+ * **QUERY\_OBJECTS\_IN_BUCKET**: Allowing data queries in the bucket.
+ * **CREATE\_OBJECTS\_IN_BUCKET**: Allowing data creation in the bucket.
+ * **DROP\_BUCKET\_WITH\_ALL\_CONTENT**: Allowing bucket deletion with all contents.
+
+Here is an example for adding two new ACLs on a User Scope bucket.  In this example, both QUERY\_OBJECTS\_IN\_BUCKET and CREATE\_OBJECTS\_IN\_BUCKET permissions are granted to authenticated users.
+
+```java
+KiiBucket userBucket = Kii.user().bucket("my_private");
+KiiACL ubACL = userBucket.acl();
+ubACL.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            BucketAction.QUERY_OBJECTS_IN_BUCKET, true));
+ubACL.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            BucketAction.CREATE_OBJECTS_IN_BUCKET, true));
+
+try {
+  ubACL.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```
+
+1. Create a KiiACL instance on the bucket by invoking the `acl` method.
+2. Define an ACL entry by invoking the `putACLEntry` method on the KiiACL instance.  Here, `KiiAnyAuthenticatedUser` instance is specified as an ACL's subject so as to grant the permission to all Authenticated Users.
+3. Invoke the `save` method on the KiiACL instance to reflect the permissions.
+
+In the next example, both QUERY\_OBJECTS\_IN\_BUCKET and CREATE\_OBJECTS\_IN\_BUCKET permissions are granted to anonymous users to create and access a file in a user's scope.
+
+```java
+KiiFileBucket fileBucket = Kii.user().fileBucket("my_backup");
+KiiACL fbACL = fileBucket.acl();
+fbACL.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            BucketAction.QUERY_OBJECTS_IN_BUCKET, true));
+fbACL.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            BucketAction.CREATE_OBJECTS_IN_BUCKET, true));
+
+try {
+  fbACL.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```
+
+1. Create a KiiACL instance on the bucket by invoking the `acl` method.
+2. Define an ACL entry by invoking the `putACLEntry` method on the KiiACL instance.  This time, a `KiiAnonymousUser` instance is specified as an ACL's subject so as to grant the permission to all Anonymous users.
+3. Invoke the `save` method on the KiiACL instance to reflect the permissions.
+
+

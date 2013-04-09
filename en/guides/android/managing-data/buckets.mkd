@@ -1,0 +1,27 @@
+---
+layout: en-doc
+title: Bucket
+summary: In order to fully leverage the power of Kii Platform, it is important to understand the concept of "buckets". The best way to understand a bucket in this sense is to imagine a virtual bucket floating in Kii Cloud. There can be any number of buckets belonging to the application, a user or a group. They are defined by the developer, and hold all data objects and files. A great way to understand is to try it yourself! So read on for some examples...
+sort-priority: 10
+page-id: android-buckets-en
+---
+###Bucket Scopes
+
+Each bucket has a "scope", which determines to whom the bucket belongs.  For example, if a bucket belongs to a specific group, this bucket has "Group Scope" and all the data in this bucket will be kept as long as the group exists in Kii Cloud.  The scope also affects the default access control applied to the data that is created within this bucket. (Please check "[Setting a new ACL to a Bucket]({% page_url android-buckets_setting_acl-en %})" for more information on how you can tweak the access control).
+
+These are the three bucket scopes currently supported by Kii Platform:
+
+ * **Application Scope** : The bucket belongs to your application.
+  * Authenticated users (i.e., all users who have been signed-in) will have full access to the bucket by default.
+  * Anonymous users (i.e., users who have not yet signed-in) can only query and read data in the bucket by default.
+
+ * **Group Scope** : The bucket belongs to a user group.
+  * The group members will have full access to the bucket except "dropping bucket" by default.
+  * All non-group members will have no access to the bucket by default.
+
+ * **User Scope** : The bucket belongs to a user.
+  * The user will have full access to the bucket by default.
+  * Other user will have no access to the bucket by default.
+
+
+

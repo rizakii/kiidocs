@@ -1,0 +1,40 @@
+---
+layout: en-doc
+title: Creating Objects
+summary: Your application can create an object by invoking the corresponding method of the KiiBucket class instance. Once an object is created, you can set various key/value pairs within the object. When you are finished with setting the key-value pairs, invoke the save method to store it on Kii Cloud.
+sort-priority: 10
+---
+In the following example, an object is created in the "mydata" bucket, which has Application Scope.
+
+```java
+ // Create an object
+KiiObject object = Kii.bucket("mydata").object();
+
+// Set key-value pairs
+object.set("myid", 1);
+object.set("name", "John Doe");
+object.set("email", "john@example.com");
+
+// Save the object
+try {
+  object.save();
+} catch (IOException e) {
+  // Handle error
+} catch (AppException e) {
+  // Handle error
+}
+```
+
+Do not forget to invoke the save method, or your objects will not be saved in Kii Cloud
+
+You can later check your arbitrary keys using keySet method like the following example:
+
+```java
+ // Retrieve an object and refresh the instance
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+object.refresh();
+
+// Get a set of arbitrary keys
+HashSet<String> keyset = object.keySet();.
+```
