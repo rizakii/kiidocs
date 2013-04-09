@@ -2,4 +2,132 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
+summary: Kii Platform&nbsp;は、以下の所定の Key-Value を用いてユーザ属性を管理します。
 ---
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+さらに、上記の所定 Key にぶつからない名前であれば、任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
+
+## サインアップ時にユーザ属性を登録する
+
+サインアップ時に、所定の Key-Value に加えて任意の Key-Value を追加することができます。
+次の例では、"followers", "friends", "status" という Key-Value をサインアップ時に指定しています。
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+     "https://api-jp.kii.com/api/apps/{APP_ID}/users" \
+    -d '{ \
+        "loginName":"test004",\
+        "displayName":"person test004",\
+        "country":"JP", \
+        "password":"hogehoge", \
+        "emailAddress":"test004@testkii.com", \
+        "phoneNumber":"+819098439216", \
+        "followers":5, \
+        "friends":400, \
+        "status":"available" \
+    }'
+```
+
+ サインアップが成功すると、Kii Cloud は次のようなレスポンスでユーザの UserID を返します。
+
+```sh
+< HTTP/1.1 201 Created
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Location: https://api-jp.kii.com/api/apps/{API_ID}/users/{USER_ID}
+< Content-Type: application/vnd.kii.RegistrationResponse+json
+< Content-Length: 55
+< Date: Tue, 26 Jun 2012 14:47:02 GMT
+<
+{
+  "userID" : {USER_ID}
+}
+```
+
+## ユーザ属性を確認する
+
+ユーザ属性を確認するには、次のように GET リクエストを送信します。
+
+```sh
+curl -v -X GET \
+  -H "Authorization:Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me"
+```
+
+Kii Cloud は次のようにユーザ属性のリストをレスポンスとして返します。
+
+```sh
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
+< Content-Length: 386
+< Date: Tue, 26 Jun 2012 14:52:42 GMT
+<
+{
+  "userID" : {USER_ID},
+  "internalUserID" : 102906630093406208,
+  "loginName" : "test004",
+  "displayName" : "person test004",
+  "country" : "JP",
+  "emailAddress" : "test004@testkii.com",
+  "emailAddressVerified" : true,
+  "phoneNumber" : "+819098439216",
+  "phoneNumberVerified" : false,
+  "followers" : 5,
+  "friends" : 400,
+  "status" : "available"
+}
+```
+
+## ユーザ属性を更新する
+
+POSTリクエストを送信することで、ユーザ属性はいつでも変更することができます。
+
+```sh
+curl -v -X POST \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "content-type:application/vnd.kii.UserUpdateRequest+json" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/me" \
+    -d '{"friends":401, "age":28}'
+```
+
+ユーザ属性の更新に於いて、任意フィールドの更新は「全体的」に行われることに注意してください。
+
+* POSTリクエストにて新規 Key-Value を指定した場合、この Key-Value が追加される
+* POSTリクエストにて既存のフィールドの Key-Value を指定した場合、この Key-Value が上書きされる
+* POSTリクエストにて既存のフィールドを指定しなかった場合は、この Key-Value が削除される
+
+上のPOSTリクエストを例に取ると、リスエストで指定されていなかった "followers" と "status" は削除され、指定されていた既存フィールドの "friends" は新しい値に更新されます。また新たに指定された "age" フィールドがユーザ属性として追加されます。
+
+ユーザ属性の更新が成功すると、Kii Cloud は次のようなレスポンスで更新時間（UNIX 時間・ミリ秒）を返します。
+
+```sh
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
+< Content-Length: 34
+< Date: Tue, 26 Jun 2012 15:43:05 GMT
+<
+{
+  "modifiedAt" : 1340725385432
+}
+```
