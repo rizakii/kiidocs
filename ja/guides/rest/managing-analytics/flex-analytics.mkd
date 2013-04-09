@@ -35,5 +35,3 @@ summary: Flex Analytics 機能を使うと、カスタムな指標でアプリ�
 * 集めたイベントデータを元に、以下のメトリクスを用いて解析を行いたい。
     * **メトリクス#1：** **"age"**の平均値を、**"city", "location", "gender"**および**"children"**毎に評価
     * **メトリクス#2：** イベントデータ総数を、**"gender", "city", "location", "children"**および**"age"**毎に評価
-
-
