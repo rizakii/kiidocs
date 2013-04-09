@@ -1,6 +1,55 @@
 ---
 layout: ja-doc
 title: メッセージを受信する
+page-id: android-receiving_push_to_user_message-ja
 sort-priority: 40
 ---
 
+プッシュ通知を受け取るには、GCMIntentService の onMessage() を実装します。この際、ヘルパー API を利用することができます。
+
+プッシュメッセージを受け取り、内容を解釈する例を以下にあげます。
+
+```java
+// GCMIntentService.java
+@Override
+protected void onMessage(Context context, Intent intent) {
+  Bundle extras = intent.getExtras();
+
+  // Get ReceiveMessage instance by passing the bundle received from GCM.
+  ReceivedMessage message = PushMessageBundleHelper.parse(extras);
+
+  // Get the sender of the push message.
+  KiiUser sender = message.getSender();
+
+  // Determine the push notification type and start parsing.
+  MessageType type = message.pushMessageType();
+  switch (type) {
+  case PUSH_TO_USER:
+    PushToAppMessage pum = (PushToAppMessage) message;
+
+    // Extract the target topic.
+    if (pum.containsKiITopic()) {
+      KiiTopic topic = pum.getKiiTopic();
+
+      // Extract more field values.
+      long when = extras.getLong("when");
+      String app_specific_string = extras.getString("app_specific_key1");
+      long app_specific_long = extras.getLong("app_specific_key2");
+      // ... and get more field values as needed.
+    }
+    break;
+
+  // cases for PUSH_TO_APP and DIRECT_PUSH will follow  
+
+}
+```
+
+ここでは以下の処理を行なっています。
+
+1. プッシュメッセージを bundle として受け取り。
+2. Bundle を引数に `parse` メソッドを実行して、ReceiveMessage インスタンスを作成。
+3. `getSender` メソッドを実行して、プッシュメッセージの送信者を取得。
+4. pushMessageType メソッドを実行して、プッシュメッセージの種別を判別。<BR />
+（"Push to User" の場合、種別は "PUSH_TO_USER"）
+5. `getKiiTopic` メソッドを実行し、対象トピック取得。
+6. 直接 bundle をパースし、その他の既定フィールドやアプリ定義フィールドの値を取得。取得可能な既定フィールドの内容については [Javadoc](http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) を参照。
