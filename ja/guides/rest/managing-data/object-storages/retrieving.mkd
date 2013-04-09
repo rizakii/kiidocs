@@ -3,3 +3,26 @@ layout: ja-doc
 title: Object の取得
 sort-priority: 20
 ---
+以下に、Object ID を元に Kii Cloud から Object を取得する方法を示します。
+
+```sh
+curl -v -X GET \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:sandbox" \
+  -H "x-kii-appkey:dummy" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Kii Cloud は、以下のように作成時間と更新時間（共に UNIX 時間・ミリ秒）と共に Object を返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Last-Modified: Tue, 15 May 2012 00:03:03 GMT
+< ETag: "3"
+< Content-Type: application/vnd.{APP_ID}.mydata+json
+< Transfer-Encoding: chunked
+< Date: Tue, 15 May 2012 00:07:03 GMT
+<
+{"score":5000,"name":"game1","_created":1337039114613,"_id":"d8dc9f29-0fb9-48be-a80c-ec60fddedb54","_modified":1337040183711,"_owner":"ff43674e-b62c-4933-86cc-fd47bb89b398","_dataType":"mydata","_version":"3"}
+```

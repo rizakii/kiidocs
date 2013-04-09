@@ -3,3 +3,35 @@ layout: ja-doc
 title: Object の作成
 sort-priority: 10
 ---
+Application Scope を持つ "mydata" Bucket 内に Object を作成する例を以下に示します。
+
+```sh
+curl -v -X POST \
+    -H "Authorization: Bearer 3f28aeff-e34b-4c2a-aaad-3cc2c6f6621c" \
+    -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects" \
+    -d '{"score":"1800", "name":"game1"}'
+```
+
+Object のメディアタイプには "application/json" か "applicatoin/vnd.{APP\_ID}.{DATA\_TYPE}" が指定できます。後者の場合、{DATA\_TYPE} には任意の値が利用可能です。
+
+Object の作成が成功すると、Kii Cloud は以下のように Object ID と作成時間（UNIX 時間・ミリ秒）をレスポンスとして返します。
+
+```
+< HTTP/1.1 201 Created
+< Server: Apache-Coyote/1.1
+< Location: https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/
+objects/{OBJECT_ID}
+< ETag: "1"
+< Content-Type: application/vnd.kii.ObjectCreationResponse+json
+< Transfer-Encoding: chunked
+< Date: Mon, 14 May 2012 23:45:14 GMT
+<
+{
+    "objectID" : {OBJECT_ID},
+    "createdAt" : 1337039114613,
+    "dataType" : "application/vnd.{APP_ID}.mydata+json"
+}
+```

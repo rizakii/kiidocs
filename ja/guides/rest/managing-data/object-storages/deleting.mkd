@@ -3,4 +3,15 @@ layout: ja-doc
 title: Object の削除
 sort-priority: 50
 ---
+以下に、Object の削除を行う例をあげます。
 
+```sh
+curl -v -X DELETE \
+  -H "Authorization: {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "If-Match:1" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Object の削除が成功すると、Kii Cloud は 204 応答を返します。

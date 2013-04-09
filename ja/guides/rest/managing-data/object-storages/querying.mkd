@@ -2,5 +2,190 @@
 layout: ja-doc
 title: Object の検索
 sort-priority: 40
+summary: Kii Cloud 上の Object のうち、ある条件を満たすものを取得する方法として、Kii Cloud SDK は検索機能を提供しています。この機能を用いると、例えば「Bucket より "count" フィールドの値が10より大きい Object を、フィールド値降順で最大で10個取得」などといった条件が指定可能です。
 ---
 
+Object を検索するには、次の例のように QueryRequst オブジェクトを作成し、これを Kii Cloud に送信します。
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.QueryRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"eq", "field":"name", \
+  "value":"John Doe"}, "orderBy":"name", "descending":false}, \
+  "paginationKey":"asd12ijdfasdfjadfjgk", "bestEffortLimit":10}'
+```
+
+## QueryRequset オブジェクト
+
+QueryRequest オブジェクトの一例を以下に示します。
+
+```javascript
+{
+  "bucketQuery":{
+    "clause":{"type":"eq", "field":"name", "value":"John Doe" },
+    "orderBy":"name",
+    "descending": false
+  },
+  "paginationKey":"asd12ijdfasdfjadfjgk",
+  "bestEffortLimit":10
+}
+```
+
+* "**bucketQuery**" に検索クエリを指定します。検索クエリは、以下の３つの情報にり構成されます。
+  * "**clause**" には検索条件を指定します。指定方法は本ページの「検索条件」の節を参照してください。
+  * "**orderBy**" と "**descending*** " には検索結果のソート方法を指定します。検索結果は、"orderBy" に指定したフィールドの値を元にソートされます。この際、"descending" が true の場合は降順に、"false" の場合は昇順にソートされます。（"descending" が指定されていない場合はデフォルトで降順にソートされます。また "orderBy" が指定されていない場合、ソート順は不定となります）
+* "**paginationKey**" は、前回のクエリ結果が検索条件を満たす全ての Object を返せなかった際に、次の結果を取得する場合に指定します。詳細は本ページの「パジネーション」の節を参照してください。
+* "**bestEffortLimit**" は、検索結果として最大何件の Object を受け取るかを指定します。詳細は本ページの「パジネーション」を参照してください。指定がない場合はデフォルトで 200 が適用されます。
+
+## 検索条件
+
+検索条件は、以下にあげる条件を１つまたは複数利用して定義します。
+
+* **EqualClause**: フィールド値が、指定の値と等しいか確認。
+
+    ```javascript
+    { "type":"eq",  "field":"name",  "value":"John Doe" }
+    ```
+
+* **PrefixClause**: フィールド値が、指定の文字列により始まっているか確認。String 型のデータに対してのみ有効。
+
+    ```javascript
+    { "type":"prefix",  "field":"name",  "prefix":"John" }
+    ```
+
+* **RangeCluase**: フィールド値が、指定の範囲内に収まっているかを確認。
+
+    ```javascript
+    {
+      "type": "range",
+      "field" : "age",
+      "upperLimit":10,
+      "upperIncluded":true,
+      "lowerLimit":3,
+      "lowerIncluded":false
+    }
+    ```
+
+    範囲の指定方法は、以下の例を参考にしてください。
+    * age が 20 以上 :  { "type":"range", "field":"age", "lowerLimit": 20 }
+    * age が 20 より大きい: { "type":"range", "field":"age", "lowerLimit": 20, "lowerIncluded": false }
+    * age が 20 以上、30未満 : { "type":"range", "field":"age", "lowerLimit": 20, "upperLimit":30, "upperIncluded":false }
+
+* **AllClause**: Bucket 内の全ての Object にマッチ。
+
+    ```javascript
+    { "type":"all" }
+    ```
+
+* **InClause**: フィールド値が、指定の値のいずれかを持っているかを確認。
+
+    ```javascript
+    {
+      "type" : "in",
+      "field" : "lastName",
+      "values" : [ "García", "Smith", "Lopez", "Simpson" ]
+    }
+    ```
+
+* **HasFieldClause**: Object が指定のフィールドを持っているかを確認。フィールドのデータ型（"STRING", "INTEGER", "DECIMAL", "BOOLEAN"）の指定が必要。
+
+    ```javascript
+    {
+      "type" : "hasField",
+      "field" : "name",
+      "fieldType" : "STRING"
+    }
+    ```
+
+* **AndCluase**: 複数の条件を AND 論理演算子で結合。
+
+    ```javascript
+    {
+      "type":"and",
+      "clauses":[
+        { "type":"prefix", "field":"name", "prefix":"John" },
+        { "type":"eq","field":"age", "value":30 }
+      ]
+    }
+    ```
+
+* **OrClause**: 複数の条件を OR 論理演算子で結合。
+
+    ```javascript
+    {
+      "type":"or",
+      "clauses":[
+        { "type":"eq", "field":"name", "value":"John" },
+        { "type":"eq","field":"age", "value":30 }
+      ]
+    }
+    ```
+
+* **NotClause**:  条件を NOT 論理演算子で否定。
+
+    ```javascript
+    {
+      "type" : "not",
+      "clause" : { "type":"eq", "field":"name", "value":"John" }
+    }
+    ```
+
+## パジネーション
+
+QueryRequest オブジェクトの "bestEffortLimit" は、Kii Cloud は検索結果として返す Object の最大件数を決定します。検索結果を満たす Object がこの指定値以上存在した場合、すべての検索結果を一度に取得することができません。このような場合、Kii Cloud は検索結果と共に、以下の例のように "nextPaginationKey" という値を返します。
+
+```javascript
+{
+  "queryDescription": "WHERE ( 1=1 )",
+  "results": [....],
+  "nextPaginationKey": "200/200"
+}
+```
+
+この"nextPaginationKey" の値を次回検索時に指定すると、未習得の検索結果を受け取ることができます。以下、"nextPaginationKey" を指定して未取得分の検索結果を要求する例をあげます。
+
+```sh
+curl -v -X POST \
+  -H"Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.QueryRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"all"}}, "paginationKey":"200/200"}'
+```
+
+Kii Cloud は検索結果のスナップショットを保持していない点に注意してください。前回検索時より時間が経過した後に未取得分の要求を行った場合、検索結果がズレる可能性があります。
+
+## QueryRequest の例
+
+以下に、複数の検索条件を用いた QueryRequset の例をあげます。この例では、以下の検索条件が定義されています。
+
+* { "age" が 18以下、または 65 より大きい} かつ { "gender" が "Female" }
+* 検索結果を "age" を使って降順にソート
+* 検索結果に含まれる Object の最大値は 100
+
+```javascript
+{
+ "bucketQuery" : {
+  "clause" : {
+   "type" : "and",
+   "clauses" : [
+    { "type":"or",
+     "clause" : [
+       { "type":"range", "field":"age", "lowerIncluded":false, "upperLimit":18, "upperIncluded":true },
+       { "type":"range", "field":"age", "lowerIncluded":false, "lowerLimit":65, "upperIncluded":true }
+     ]
+    },
+    { "type":"eq", "field":"gender", "value":"Female" }
+   ]
+  },
+  "orderBy" : "age",
+  "descending" : true
+ },
+ "bestEffortLimit" : 100
+}
+```
