@@ -2,4 +2,60 @@
 layout: ja-doc
 title: Bucket の ACL 設定
 sort-priority: 20
+page-id: android-buckets_setting_acl-ja
 ---
+### Bucket に新たな ACL を設定する
+
+Group Scope と User Scope の Bucket については ACL を設定して新たなパーミッションを追加することができます（例: Anonymous User に Bucket 内へのデータ作成を許可する)
+
+<p class="callout">データ単位で付与可能なアクセス権限としてREAD_EXISTING_OBJECT と WRITE_EXISTING_OBJECT が存在します。詳細はセクション「Object のスコープと ACL 設定」と「File のスコープと ACL 設定」を参照してください。</p>
+
+Bucket に付与可能なアクセス制御は以下の３つです。
+
+ * **QUERY_OBJECTS_IN_BUCKET**: Bucket 内のデータを検索するための権限
+ * **CREATE_OBJECTS_IN_BUCKET**: Bucket 内に新しいデータを作成するための権限
+ * **DROP_BUCKET_WITH_ALL_CONTENT**: Bucket を、その中のデータと共にドロップするための権限
+
+一例として、User Scope のBucket に２つの新しい ACL を追加する例をあげます。この例ではQUERY_OBJECTS_IN_BUCKET と CREATE_OBJECTS_IN_BUCKET のアクセス権限を Authenticated User （サインイン済のユーザ全員）に対して付与しています。
+
+```java
+KiiBucket userBucket = Kii.user().bucket("my_private");
+KiiACL ubACL = userBucket.acl();
+ubACL.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            BucketAction.QUERY_OBJECTS_IN_BUCKET, true));
+ubACL.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            BucketAction.CREATE_OBJECTS_IN_BUCKET, true));
+
+try {
+  ubACL.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```
+
+1. `acl` メソッドをコールして KiiACL のインスタンスを生成します。
+2. `KiiACLEntry` を生成して、 `putACLEntry` メソッドの引数として渡します。この例では `KiiAnyAuthenticatedUser` インスタンスをアクセス権限付与対象として設定しています。
+3. `save` メソッドをコールして パーミッションの変更要求を Kii Cloud に送信します。
+
+次の例は、QUERY_OBJECTS_IN_BUCKET と CREATE_OBJECTS_IN_BUCKET 権限を Anonymous User に対して付与しています。
+
+```java
+KiiFileBucket fileBucket = Kii.user().fileBucket("my_backup");
+KiiACL fbACL = fileBucket.acl();
+fbACL.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            BucketAction.QUERY_OBJECTS_IN_BUCKET, true));
+fbACL.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            BucketAction.CREATE_OBJECTS_IN_BUCKET, true));
+
+try {
+  fbACL.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```
+
+1. `acl` メソッドをコールして KiiACL のインスタンスを生成します。
+2. `KiiACLEntry` を生成して、 `putACLEntry` メソッドの引数として渡します。この例では `KiiAnonymousUser` インスタンスをアクセス権限付与対象として設定しています。
+3. `save` メソッドをコールして パーミッションの変更要求を Kii Cloud に送信します。
+
+
