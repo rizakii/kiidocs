@@ -80,3 +80,22 @@ div.gsc-control-cse {
   padding: 20px;
   color: #b8d8ef;
 }
+
+.content table {
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid #666;
+  border-left: 1px solid #666;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.content table tr > th {
+  background: #dddddd;
+}
+
+.content table tr > * {
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #666;
+  padding: 0.2em 0.9em;
+}

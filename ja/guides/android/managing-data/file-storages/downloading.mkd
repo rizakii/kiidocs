@@ -3,4 +3,31 @@ layout: ja-doc
 title: File のダウンロード
 sort-priority: 20
 ---
+File にアサインされた URI を元に、File を Kii Cloud より取得することができます。以下に File のダウンロードを実施している例をあげます。
+
+```java
+ // Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+String destFilePath = "destination file path";
+
+// Refresh the instance to get the metadata
+try {
+  // Retrieve metadata
+  kFile.refresh();
+  // Download File body
+  kFile.downloadFileBody(destFilePath);
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error.
+}
+```
+
+基本的な手順は下記の通りです：
+
+1. `createByUri` メソッドでファイルのURIを指定し、KiiFile のインスタンスを作成します。
+2. `refresh` メソッドを呼び出し、ファイルのメタデータを取得します。
+3. `downloadFileBody` メソッドを呼び出し、ファイルのBody（実際にはファイルの中身）をダウンロードします。この際、ダウンロードしたファイルの保存先ファイルパスを指定します。
+
 
