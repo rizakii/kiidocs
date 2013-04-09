@@ -1,6 +1,39 @@
 ---
 layout: ja-doc
 title: Folder Sync の中断と再開
+summary: 処理中のフォルダ同期を中断する
 sort-priority: 20
 ---
+処理中のフォルダ同期を停止するには、動作中のスレッドを中断してください。
+
+```java
+import com.kii.cloud.filesync.KiiFS;
+
+Context context; // android.content.Context
+Thread syncThread = new Thread() {
+    @public void run() {
+        try {
+            KiiFS.sync(
+                    context,
+                    new File("/mnt/sdcard/SyncBox"),
+                    "___username___",
+                    "___password___",
+                    null);
+        } catch (InterruptedException e) {
+            // TODO: show "interrupted message" to user.
+        } catch (Exception e) {
+            // TODO: show error message to user.
+        }
+    }
+}
+
+// Start sync with a thread.
+syncThread.run();
+
+// Interrupt the sync!
+syncThread.interrupt();
+```
+
+スレッドの中断が呼び出された場合、SDKは処理中のフォルダ同期を停止します。次にフォルダ同期が実行されると、前回中断された箇所から同期を再開します。
+
 
