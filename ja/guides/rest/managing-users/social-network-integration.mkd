@@ -37,7 +37,7 @@ Kii Cloud は指定された {ACCESS\_TOKEN\_PROVIDED\_BY\_FACEBOOK} を用い�
 
 いずれのケースにおいても、Kii Cloud は以下のようなレスポンスを返します。
 
-```sh
+```
 < 200
 < Content-Type: application/json
 <
@@ -70,7 +70,7 @@ curl -v -X POST \
 
 Kii Cloud は以下のようなレスポンスを返します。
 
-```sh
+```
 < HTTP/1.1 200 OK
 < Server: Apache-Coyote/1.1
 < Date: Mon, 14 May 2012 22:55:41 GMT
@@ -91,7 +91,7 @@ curl -v -X POST \
 
 Kii Cloud は以下のようなレスポンスを返します。
 
-```sh
+```
 < HTTP/1.1 200 OK
 < Server: Apache-Coyote/1.1
 < Date: Mon, 14 May 2012 22:55:41 GMT

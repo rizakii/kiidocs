@@ -43,7 +43,7 @@ curl -v -X POST \
 
  サインアップが成功すると、Kii Cloud は次のようなレスポンスでユーザの UserID を返します。
 
-```sh
+```
 < HTTP/1.1 201 Created
 < Server: Apache-Coyote/1.1
 < Access-Control-Allow-Origin: *
@@ -71,7 +71,7 @@ curl -v -X GET \
 
 Kii Cloud は次のようにユーザ属性のリストをレスポンスとして返します。
 
-```sh
+```
 < HTTP/1.1 200 OK
 < Server: Apache-Coyote/1.1
 < Access-Control-Allow-Origin: *
@@ -119,7 +119,7 @@ curl -v -X POST \
 
 ユーザ属性の更新が成功すると、Kii Cloud は次のようなレスポンスで更新時間（UNIX 時間・ミリ秒）を返します。
 
-```sh
+```
 < HTTP/1.1 200 OK
 < Server: Apache-Coyote/1.1
 < Access-Control-Allow-Origin: *
