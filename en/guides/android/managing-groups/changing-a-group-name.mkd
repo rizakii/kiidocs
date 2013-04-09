@@ -1,0 +1,14 @@
+---
+layout: en-doc
+title: Changing a Group Name
+sort-priority: 20
+---
+A group owner can change a name of the existing group with `changeName` method:
+
+```java
+try {
+  group.changeName("myGroup2");
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```

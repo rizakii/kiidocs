@@ -1,0 +1,20 @@
+---
+layout: en-doc
+title: Listing Group Members
+sort-priority: 40
+---
+A group owner can get a list of members who are in the group with `listMembers` method.  This method will return a list of KiiUser instances representing group members. 
+
+Here's an example:。
+
+```java
+try {
+  List<KiiUser> members = group.listMembers();
+  for (KiiUser groupMember : members) {
+    // do something with each KiiUser within the group
+  }
+} catch (GroupOperationException e) {
+  // Getting a group member list failed for some reasons
+  // Please check GroupOperationException to see what went wrong...
+}
+```

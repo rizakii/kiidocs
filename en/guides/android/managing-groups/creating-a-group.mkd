@@ -1,0 +1,22 @@
+---
+layout: en-doc
+title: Creating a Group
+sort-priority: 10
+---
+Any authenticated user has the ability to create a new group.  This user becomes, by default, the group's owner.
+
+The basic steps for group creation are as follows:
+
+1. Create a `KiiGroup` instance with the group method.
+2. Register this KiiGroup instance with `save` method.
+
+```java
+String groupName = "myGroup";
+KiiGroup group = Kii.group(groupName, null);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Group creation failed for some reasons
+  // Please check GroupOperationException to see what went wrong...
+}
+```

@@ -1,0 +1,32 @@
+---
+layout: en-doc
+title: Adding/Removing Group Members
+sort-priority: 50
+---
+###Adding Group Members
+
+A group owner can add additional members to the group with `addUser` method:
+
+```java
+Uri userUri = Uri.parse("some existing user uri on cloud");
+KiiUser user2 = KiiUser.createByUri(userUri);
+group.addUser(user2);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```
+
+###Removing Group Members
+
+A group owner can remove existing members from the group with `removeUser` method.
+
+```java
+group.removeUser(user2);
+try {
+  group.save();
+} catch (GroupOperationException e) {
+  // Please check GroupOperationException to see what went wrong...
+}
+```

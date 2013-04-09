@@ -1,0 +1,26 @@
+---
+layout: en-doc
+title: Listing Groups
+sort-priority: 30
+---
+A user can get a list of groups in which he/she belongs by invoking `memberOfGroups` method.
+
+
+```java
+ // Get the current login user
+KiiUser user = KiiUser.getCurrentUser();
+
+// Get a list of groups in which the current user is a member
+try{
+  List mygroups = user.memberOfGroups();
+  for (KiiGroup group : mygroups) {
+    // do something with each group
+  }  
+} catch (IOException e) {
+  // Getting a list failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Getting a list failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
