@@ -2,5 +2,31 @@
 layout: ja-doc
 title: アプリ上で広告を表示する
 sort-priority: 10
+page-id: android-ads_displaying_ads_in_your_application-jp
 ---
+アプリ上で広告を表示するにはcom.kii.ad.KiiAdNetLayout を生成します。
+このコードは必ずメインスレッドで呼んでください。
 
+広告を表示するサンプルコードを以下に示します。KiiAdNetLayout 生成の際には、アプリケーションに割り振られた Application ID と Application Key を指定してください。
+
+```java
+// get scaledDensity 
+Display display = getWindowManager().getDefaultDisplay(); 
+DisplayMetrics metrics = new DisplayMetrics(); 
+display.getMetrics(metrics);
+float scaledDensity = metrics.scaledDensity;
+
+// set targeting parameter
+KiiAdNetTargeting.setGender(KiiAdNetTargeting.Gender.FEMALE);
+KiiAdNetTargeting.setKeywords("Application");
+KiiAdNetTargeting.setAge(35);
+KiiAdNetTargeting.setPostalCode("30900");
+
+// create an KiiAdnetLayout
+KiiAdNetLayout adLayout = new KiiAdNetLayout(this, APP_ID, APP_KEY, KiiAdNetLayout.SiteID.US);
+layout.addView(adLayout);
+adLayout.setMaxWidth((int)(scaledDensity * 320));
+adLayout.setMaxHeight((int)(scaledDensity * 52));
+```
+
+レイアウトには任意のサイズを指定可能ですが、広告の最大ユニットサイズである 320 (dip) x 52 (dip) を指定することを推奨します。これより小さなサイズを指定した場合、広告自体は表示されるもののピクセル落ちが発生したり小さなスクロールバーが表示されることがあります。
