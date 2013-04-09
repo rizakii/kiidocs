@@ -93,7 +93,7 @@ def write_blog(data):
         msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
     out = sys.stdout
     out.write('''---
-layout: ja-doc
+layout: en-doc
 title: %(title)s
 summary: %(summary)s
 #sort-priority: 0
