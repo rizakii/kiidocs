@@ -4,3 +4,7 @@ sort-priority: 10
 page-id: download_the_application_and_code-ja
 title: アプリとコードのダウンロード
 ---
+アプリ（apk ファイル）とソースコードはこちらです。
+
+* アプリ本体：[KiiBalance-1.0.apk](http://static.kii.com/devportal/docs/samples/KiiBalance-1.0.apk)
+* ソースコード：[Github](https://github.com/KiiPlatform/KiiBalance-Android)
