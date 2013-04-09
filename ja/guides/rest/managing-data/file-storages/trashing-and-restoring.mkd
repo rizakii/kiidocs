@@ -2,5 +2,85 @@
 layout: ja-doc
 title: File の Trashcan への移動と復元
 sort-priority: 40
+summary: Kii Cloud は、Kii Cloud Trashcan という機能を提供しています。これは、クライアントで削除された File を一時的に保存しておくゴミ箱に相当します。
 ---
+Kii Cloud Trashcan は、Microsoft Windows や MacOS のゴミ箱と同様の働きをします。ファイルがゴミ箱に移動すると、このファイルは一旦隠されます。例えばユーザがファイルの検索を行った場合、ゴミ箱内のファイルは検索の対象とはなりません。また、このファイルがゴミ箱より復元されると再度検索の対象となります。
 
+## Trashcan にファイルやフォルダを移動
+
+File や Folder を Trashcan に移動するには、Files/Folders を ObjectID で指定の上DELETE リクエストを送信します。
+
+```sh
+curl -v -X DELETE
+  -H "Authorization: Bearer {ACCESS_TOKEN}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Trashcan への移動が成功すると、Kii Cloud は以下のレスポンスを返します。
+
+```
+< HTTP/1.1 204 No Content
+< Server: Apache-Coyote/1.1
+< Date: Tue, 24 Apr 2012 08:28:11 GMT
+<
+```
+
+## Trashcan に移動したファイルやフォルダの一覧を確認する
+
+Trashcan に移動した File や Folder は、特定の Bucket 内に格納されます。この Trashcan 用の Bucket は、元々の Bucket 名に**"sync.trash:"**という prefix をつけた名前を持ちます。
+
+例えば、元々の Bucket が "sync:mydata" という名前だった場合、Trashcan に移動した File や Folder は "sync.trash:mydata" という名前の Bucket に格納されます。
+
+つまり、以下の例にあるように、この Trashcan 用の Bucket の内容をリストアップすることで Trashcan に移動した File や Folder の一覧を確認することができます。
+
+```sh
+curl -v -X POST \
+  -H 'Authorization: Bearer {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}'
+  -H 'X-Kii-AppKey: {APP_KEY}'
+  -H 'Content-Type: application/vnd.kii.QueryRequest+json' \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"all"}}}'
+```
+
+Kii Cloud は、次のように Trashcan の中身を返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: nginx/1.0.15
+< Date: Fri, 12 Oct 2012 03:13:37 GMT
+< Content-Type: application/vnd.kii.QueryResponse+json
+< Connection: keep-alive< Access-Control-Allow-Origin: *
+< Content-Length: 221
+<
+{
+ "queryDescription": "WHERE ( 1=1 )",
+ "results":
+[{"title":"test","mimetype":"text\/plain","modified":1350011599546,"trashed":true,
+"type":"File","size":4,"created":1350011598431,"_id":"141869934425669632-204499"}]
+```
+
+## Trashcan より ファイルやフォルダを復元
+
+Trashcan に移動したファイルやフォルダは、メタデータの "trashed" フィールドが "true" になります。次の例のように、このフィールド値を "false" に更新することで、Trashcan よりファイルやフォルダを復元することができます。
+
+```sh
+curl -v -X PUT \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "Authorization: Bearer {ACCESS_TOKEN}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/{OBJECT_ID}" \
+  -d "{"trashed":false}"
+```
+
+Kii Cloud は、次のような応答を返します。
+
+```
+< HTTP/1.1 204 No Content
+< Server: Apache-Coyote/1.1
+< Date: Tue, 24 Apr 2012 10:43:40 GMT
+<
+```

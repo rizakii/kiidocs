@@ -2,5 +2,105 @@
 layout: ja-doc
 title: File と Folder のアップロード
 sort-priority: 10
+summary: ファイルのアップロードは、以下の2つのステップにより行われます。
 ---
+1. ファイルのメタデータをアップロード
+1. ファイル本体をアップロード
 
+ステップ1の結果、Kii Cloud は Object ID を払い出します。ステップ2では、この Object ID と共にファイル本体をアップロードします。結果、Kii Cloud 上でメタデータとファイル本体がセットで保存されます。
+
+多くの場合、フォルダを個別でアップロードする必要はありません。Kii Cloud は、ファイルのアップロードと共に、必要なフォルダを Kii Cloud 上で作成します。例えば "my/folder/README.txt" というファイルパスを持つファイルをアップロードすると、Kii Cloud は自動的に "my/" と "my/folder/" というフォルダを作成します。ただし、空のフォルダ（フォルダ内にファイルが存在しないフォルダ）をアップロードしたい場合は、これを明示的にアップロードする必要があります。
+
+## File のアップロード
+
+### File のメタデータをアップロード
+
+File のメタデータのアップロードは次のように行います。
+
+```sh
+ curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects" \
+  -d '{"path":"my/folder/README.txt","title":"my_readme"}'
+```
+
+* HTTPヘッダの "content-type" に "application/vnd.kii.KiiFile+json" を指定
+* Bucket ID が "sync:" の prefix を持つことを確認
+
+この例では、"my/folder/README.txt" というファイルパスを持つ File のメタデータをアップロードしているため、もし Kii Cloud 上に "my/" と "my/folder/" というパスのフォルダが存在しない場合は、これらが自動的に作成されます。
+
+File のメタデータのアップロードに成功すると、Kii Cloud は次のように objectID と作成時間（UNIX 時間・ミリ秒）を返します。
+
+```javascript
+{
+  "createdAt" : 1335469002121,
+  "objectID" : "79497721924288512-601",
+  "dataType" : "application/vnd.kii.KiiFile+json"
+}
+```
+
+### File 本体のアップロード
+
+File 本体のアップロードは次のように行います。
+
+* HTTPヘッダの "content-type" に "application/vnd.kii.folder" 以外の任意の値を指定
+* {OBJECT\_ID} に、File のメタデータをアップロードした際に取得した Object ID を指定
+* Bucket ID が "sync:" の prefix を持つことを確認
+
+* **例**：テキストファイルを、コンテント直接指定でアップロード
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization: Bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      -H "content-type:text/plain" \
+      "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/body" \
+      -d '___RAW_TEXT_COMES_HERE___'
+    ```
+
+* **例**：バイナリファイル（画像）を、ファイル名指定でアップロード
+
+```sh
+curl -v -X PUT \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "content-type:text/plain" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/body" \
+  --data-binary '@sample.jpg'
+```
+
+File 本体のアップロードに成功すると、Kii Cloud は次のように最終更新時間（UNIX 時間・ミリ秒）をレスポンスとして返します。
+
+```javascript
+{ "modifiedAt" : 1335469019510 }
+```
+
+## Folder のアップロード
+
+空のフォルダをアップロードする例を以下にあげます。
+
+```sh
+curl -v -X PUT \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "If-None-Match:*" \
+  -H "x-kii-appid:｛APP_ID}" \
+  -H "x-kii-appkey:｛APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-" -d '{}'
+```
+
+* HTTPヘッダの "content-type" に "application/vnd.kii.KiiFile+json" を指定
+* Bucket ID が "sync:" の prefix を持つことを確認
+* Resource URL にエンコードされたファイルパスが "-" （/ のエンコード結果）で終了していること
+* メタデータ部分（HTTPのボディ）には空の JSON を指定
+
+フォルダの作成が完了すると、Kii Cloud は次のように最終更新時間（UNIX 時間・ミリ秒）をレスポンスを返します。
+
+```javascript
+{ "modifiedAt" : 1345115675909 }
+```

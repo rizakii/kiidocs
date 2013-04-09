@@ -2,5 +2,110 @@
 layout: ja-doc
 title: File と Folder のダウンロード
 sort-priority: 20
+summary: ファイルのダウンロードは、以下の2つのステップにより行われます。
 ---
 
+1. ファイルのメタデータをダウンロード
+1. ファイル本体をダウンロード
+1. ステップ1のメタデータをダウンロードする手段として、Kii Platform は Object ID を指定する方法とファイルパスを指定する方法の2つを提供しています。ステップ2のファイル本体のダウンロードは、Object ID 指定のみサポートしています。
+
+    フォルダのダウンロードは、ファイルのメタデータのダウンロードとほぼ同様の手順で行います。ただしフォルダの場合、Kii Cloud はこのフォルダのメタデータだけではなく、フォルダ内のファイルとサブフォルダのメタデータもレスポンスとして返します。
+
+## ファイル/フォルダのメタデータをダウンロード
+
+### ObjectID 指定
+
+ObjectID 指定で File のメタデータをダウンロードする例を以下にあげます。
+
+```sh
+curl -v -X GET \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+### ファイルパス指定
+
+ファイルパス指定で File のメタデータをダウンロードする例を以下にあげます。
+
+```sh
+curl -v -X GET \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.my-folder-README..txt"
+```
+
+いずれのケースにおいても、取得対象がファイルの場合 Kii Cloud はファイルのメタデータを以下のように返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: application/vnd.kii.KiiFile+json
+< Transfer-Encoding: chunked
+< Date: Tue, 24 Apr 2012 08:20:09 GMT
+
+< * Connection #0 to host api-jp.kii.com left intact
+* Closing connection #0
+{
+  "_id":"79497721924288512-601",
+  "size":0,
+  "path":"my\/folder\/README.txt",
+  "title":"my_readme",
+  "mimetype":"application\/octet-stream",
+  "trashed":false
+}
+```
+
+取得対象がフォルダの場合、Kii Cloud は次の例のようにフォルダのメタデータだけではなく、このフォルダ内のファイルとサブフォルダのメタデータ一覧を返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: application/vnd.kii.KiiFile+json
+< BodyType: application/vnd.kii.folder
+< Transfer-Encoding: chunked
+< Date: Tue, 24 Apr 2012 08:20:09 GMT
+<
+* Connection #0 to host api-jp.kii.com left intact
+* Closing connection #0
+{
+  "size":0,
+  "path":"my\/folder\/",
+  "mimetype":"application\/vnd.kii.folder",
+  "created":1345115675909,
+  "children":[
+    {"size":0,"path":"my\/folder\/foo\/","mimetype":"application\/vnd.kii.folder",
+    "created":1345115675909,"trashed":false,"_id":"121334893182451712-104"}
+    ],
+  "trashed":false,
+  "_id":"121334893182451712-104"
+}
+```
+
+この例では、"children" フィールドに、"my/folder/foo/" というサブフォルダのメタデータが入った状態で応答が返されています。
+
+## File 本体をダウンロードする
+
+File 本体のダウンロードは以下のように行います。
+
+```sh
+curl -v -X GET \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/body"
+```
+
+Kii Cloud は以下のようにレスポンスを返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain
+< Content-Length: 5
+< Date: Thu, 26 Apr 2012 13:23:51 GMT
+<
+abcde
+```
