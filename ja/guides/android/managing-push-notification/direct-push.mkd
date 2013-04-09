@@ -1,6 +1,106 @@
 ---
 layout: ja-doc
 title: '"Direct Push" 通知'
+summary: '"Direct Push" 通知は、特定のユーザに直接メッセージを送る仕組みを提供します。この機能は、アプリ開発者のみが利用可能です。メッセージ送信は、開発者ポータルにおいて対象ユーザを選択し、送信内容を入力して行います。'
+page-id: android-direct_push-ja
 sort-priority: 20
 ---
 
+## ユーザにメッセージを送信する
+
+ユーザへのメッセージ送信は、開発者ポータル上で以下の手順を実施して行います。
+
+1. 開発者ポータルにログイン。
+
+2. 対象アプリケーションを選択後、"Notification" アイコンをクリックし、さらに "New Messages" ボタンをクリック。
+これにより、プッシュメッセージ送信 UI が表示されます。
+
+ ![](01.png)
+
+3. 以下の情報を入力し、送信するプッシュメッセージを指定します。
+
+**メッセージ送信先に関する情報**
+
+まずは、プッシュメッセージ通知先を指定します。
+
+ ![](02.png)
+
+* "Send To:" セクションにて "User" を選択。
+* 送信先ユーザを、以下のいずれかの ID で指定。
+ * ユーザID
+ * ユーザ名
+ * メールアドレス
+ * 電話番号
+ * 適当な環境（Developer, Production, Both）を選択。
+
+**メッセージの内容に関する情報**
+
+次に、メッセージの内容を指定します。
+
+ ![](03.png)
+
+* "Include" セクションにて、メッセージに含める既定フィールドを指定します。
+それぞれの規定フィールドを有効にした場合にメッセージに追加される値は以下の通りです。
+ * App ID: アプリケーションの AppID
+ * Sender: Client ID
+ * When: プッシュメッセージ送信時のタイムスタンプ
+ * Origin: "Direct Push" メッセージであることを示す "EXPLICIT" という値
+ * Object Scope: N/A （"Direct Push" メッセージ利用時には無効）
+ * Topic ID: N/A （"Direct Push" メッセージ利用時には無効）
+* メッセージに含める任意フィールド（key-value ペア）を指定します。
+* "+" ボタンを押すと、さらにフィールドを追加できます。
+* "Droid" と "Apple" アイコンを押すと、それぞれのフィールドの送信先が制御できます（Android 端末のみに送信、iOS 端末のみに送信等）。
+
+**APNS/GCM の詳細設定**
+
+最後に、必要に応じて APNS/GCM の詳細設定を行います。
+
+ ![](04.png)
+
+* GCM/APNS の詳細設定を行う場合は、トグルボタンを有効にします。
+ * GCM 詳細設定の各項目については、[Google による解説](http://developer.android.com/google/gcm/gcm.html#server) を参照してください。
+ * APNS 詳細設定の各項目については、[Apple による解説](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html) を参照してください。<BR />なお、バックグラウンドで起動されているアプリにプッシュメッセージを送信するためには、こちらの Alert 関連情報を設定する必要があります。
+
+## プッシュ通知の受信
+
+プッシュ通知を受け取るには、GCMIntentService の onMessage() を実装します。この際、ヘルパー API を利用することができます。
+
+プッシュメッセージを受け取り、内容を解釈する例を以下にあげます。
+
+```java
+// GCMIntentService.java
+@Override
+protected void onMessage(Context context, Intent intent) {
+  Bundle extras = intent.getExtras();
+
+  // Get ReceiveMessage instance by passing the bundle received from GCM.
+  ReceivedMessage message = PushMessageBundleHelper.parse(extras);
+
+  // Get the sender of the push message.
+  KiiUser sender = message.getSender();
+
+  // Determine the push notification type and start parsing.
+  MessageType type = message.pushMessageType();
+  switch (type) {
+  case DIRECT＿PUSH:
+
+    // Extract field values.
+    long when = extras.getLong("when");
+    String app_specific_string = extras.getString("app_specific_key1");
+    long app_specific_long = extras.getLong("app_specific_key2");
+    // ... and get more field values as needed.
+
+    break;
+
+  // cases for PUSH_TO_APP and PUSH_TO_USER will follow  
+
+}
+```
+
+ここでは以下の処理を行なっています。
+
+1. プッシュメッセージを bundle として受け取り。
+2. Bundle を引数に `parse` メソッドを実行して、ReceiveMessage インスタンスを作成。
+3. `getSender` メソッドを実行して、プッシュメッセージの送信者を取得。
+4. `pushMessageType` メソッドを実行して、プッシュメッセージの種別を判別。<BR />（"Direct Push" の場合、種別は "DIRECT_PUSH"）
+5. 直接 bundle をパースし、その他の既定フィールドやアプリ定義フィールドの値を取得。取得可能な既定フィールドの内容については [Javadoc](http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) を参照。
