@@ -3,4 +3,22 @@ layout: ja-doc
 title: File の完全削除
 sort-priority: 50
 ---
+ファイルを完全に削除するには `delete` メソッドを呼びます。ファイルは完全に削除され、復元することができなくなります。
+
+```java
+ // Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Parmanently delete the file
+try {
+  kFile.delete();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+`delete` メソッドが呼び出されるとファイルは即時削除されます。別途 `save` メソッドを呼ぶ必要はありません。
 

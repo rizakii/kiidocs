@@ -3,4 +3,25 @@ layout: ja-doc
 title: File のアップロード
 sort-priority: 10
 ---
+ファイルをアップロードするには、まず対応する KiiFile のインスタンスを作成します。
+このインスタンスは、KiiFileBucket クラスのインスタンスメソッドを呼び出すことで作成可能です。この際に KiiFile へ自動的にメタデータのセットが行われますが、必要に応じて一部メタデータの更新をすることでもできます。  
+最後に KiiFile インスタンスの save メソッドを呼び出し、ファイル本体とメタデータを KiiCloud へアップロドします。
 
+ファイルのアップロードを行うサンプルを以下に示します。
+
+```java
+ // Create a reference to the existing local file
+File localFile = new File(Environment.getExternalStorageDirectory(), "test.txt");
+
+// Create a KiiFile instance and save it
+try {
+  KiiFile kiiFile = Kii.user().fileBucket("my_private").file(localFile);
+  kiiFile.save();
+} catch (IOException e) {
+  // File Uploading failed for some reasons
+  // Please check IOException to see what went wrong...
+} catch (AppException e) {
+  // File Uploading failed for some reasons
+  // Please check CloudExecutionException to see what went wrong...
+}
+```

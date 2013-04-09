@@ -3,3 +3,23 @@ layout: ja-doc
 title: File Storage
 sort-priority: 30
 ---
+File Storage は、任意のファイル（File）をメタデータとともに管理する機能を提供します。ファイルのアップロードやダウンロード、ゴミ箱への移動と復元、さらには URL による公開など、多くの機能を容易に利用することができます。
+
+File のインスタンスを生成すると、Kii Cloud SDK は自動的に以下の共有メタデータを生成・保存します。これらメタデータの値は、Kii Cloud SDK が提供する getter メソッドを用いて容易に参照することができます。
+
+ * **Title**: ファイルのタイトル（既定値はファイル名）
+ * **CreatedTime**: Kii Cloud 上におけるファイルの作成時間（UNIX時間・ミリ秒）
+ * **ModifiedTime**: Kii Cloud 上におけるファイルの最終更新時間（UNIX時間・ミリ秒）
+ * **Local path**: クライアントデバイス上におけるファイルパス
+ * **File size**: ファイルのサイズ（バイト）
+ * **MimeType**: ファイルの拡張子より判定したmimetype（SDK が mimetype を特定出来なかった場合は application/octet-stream）
+ * **Thumbnail**: ファイルのサムネイル。ファイルが画像や動画の場合、SDKが自動的にサムネイルを作成・格納。後ほど setter メソッドを用いて別のサムネイルと差し替えることも可能
+ * **Trashed flag**: ファイルが Kii Cloud 上のゴミ箱に入っているかを示すフラグ。ファイル作成時は false
+
+また、以下のメタデータフィールドは、対応する setter メソッドにより値を変更することができます。
+
+ * Title
+ * MimeType
+ * Thumbnail
+ * Custom Field ... アプリケーションが任意の値を追加可能な拡張フィールド。UTF-8 エンコードされた 512バイトまでの値が格納可能
+
