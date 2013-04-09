@@ -2,4 +2,26 @@
 layout: ja-doc
 title: Object Storage
 sort-priority: 20
+summary: Object Storage は、サーバ側のカスタマイズを行うことなく、任意のJSONオブジェクト（Object）を管理する機能を提供します。
 ---
+## 所定 Key
+
+以下のkeyは、Object が Kii Cloud に保存されたタイミングで自動的に生成されます。
+
+* **_id** … Kii Cloud によって割り振られた Object の識別子
+* **\_created** … Object の作成時間 （UNIX時間・ミリ秒）
+* **\_modified** … Object の最後更新時間（UNIX時間・ミリ秒）
+
+これらの値は基本的には内部的に利用されます。
+
+## 任意 Key
+
+上記の所定 Key と被らない名前であれば、任意の Key が利用可能です。また、Value の型としては以下のいずれかが利用可能です。
+
+* String
+* Boolean
+* Int
+* Long
+* Double
+* JSON
+* JSON Array

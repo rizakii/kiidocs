@@ -3,4 +3,21 @@ layout: ja-doc
 title: Object の削除
 sort-priority: 50
 ---
+Object を削除するには、次の例のように `delete` メソッドをコールします。
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+
+try {
+  object.delete();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+`delete` メソッドにより Object の削除要求が Kii Cloud に送信されます。別途 `save` メソッドをコールする必要はありません。
+
 

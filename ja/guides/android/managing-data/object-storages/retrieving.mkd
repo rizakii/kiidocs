@@ -1,5 +1,31 @@
 ---
 layout: ja-doc
 title: Object の取得
+summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 sort-priority: 20
 ---
+以下、Object を URI から取得するサンプルコードです。
+
+```java
+ // Retrieve an object with URI
+Uri uri = object.toUri();
+KiiObject object2 = KiiObject.createByUri(uri);
+
+// Retrieve the object
+try {
+  object2.refresh();
+} catch (IOException e) {
+  // Handle error
+} catch (AppException e) {
+  // Handle error
+}
+```
+
+基本手順は以下の通りです。
+
+1. `createByUri` メソッドで Object の URI を指定して、Object のインスタンスを生成します。
+2. `refresh` メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
+
+`refresh` メソッドをコールするのを忘れないでください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。
+
+
