@@ -3,4 +3,53 @@ layout: ja-doc
 title: File のアップデート
 sort-priority: 30
 ---
+Kii Cloud SDK は、2種類の File 更新手段を提供しています。
 
+ * **メタデータのみ更新**:  
+File のメタデータのみアップデートします。実ファイルは更新されないため、短い時間で更新が完了します。
+ * **ファイル全体を更新**:  
+File のメタデータと実ファイルの双方をアップデートします。
+
+### メタデータのみ更新する場合
+
+下記はファイルのメタデータのみ更新する例です。メタデータの編集後に、パラメータ指定なしで `save` メソッドを呼ぶことで、更新したメタデータの内容が KiiCloud に反映されます。
+
+```java
+ // Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Edit the metadata
+kFile.setCustomeField("My note");
+
+// Update metadata only
+try {
+  kFile.save();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+### ファイル全体を更新する場合
+
+下記はファイル全体（ファイルのBody＋メタデータ）を更新する例です。必要に応じてメタデータを編集した後に、ファイルのパスをパラメータとして指定の上 `save` メソッドを呼ぶことで、ファイル全体の更新内容が KiiCloud に反映されます。
+
+```java
+ // Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Edit the metadata
+kFile.setCustomeField("My note2");
+
+// Update metadata and body
+try {
+  kFile.save(new File(Environment.getExternalStorageDirectory(), "updateFile.txt"));
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```

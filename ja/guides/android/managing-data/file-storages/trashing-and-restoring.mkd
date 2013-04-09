@@ -1,6 +1,48 @@
 ---
 layout: ja-doc
 title: File の Trashcan への移動と復元
+summary: Kii Cloud は、Kii Cloud Trashcan という機能を提供しています。これは、クライアントで削除された File を一時的に保存しておく「ゴミ箱」に相当します。
 sort-priority: 40
 ---
+Kii Cloud Trashcan は、Microsoft Windows や MacOS のゴミ箱と同様の働きをします。ファイルがゴミ箱に移動すると、このファイルは一旦隠されます。
+例えばユーザがファイルの検索を行った場合、ゴミ箱内のファイルは検索の対象から外れます。（ファイルがゴミ箱より復元されると再度検索の対象になります）
 
+### Trashcan へファイルを移動
+
+Trashcanへファイルを移動するには、 `moveToTrash` メソッドを呼び出します。
+
+```java
+ // Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Move to Trashcan
+try {
+  // Move to Trashcan
+  kFile.moveToTrash();
+} catch (AppException e) {
+  // handle error.
+} catch (IOException e) {
+  // handle error
+}
+```
+
+### Trashcan よりファイルを復元
+
+Trashcanからファイルを復元するには、 `restoreFromTrash` メソッドを呼び出します。
+
+```java
+ // Create a KiiFile instance (the file is in Trashcan)
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Restore from Trashcan
+try {
+  // Restore from Trashcan
+  kFile.restoreFromTrash();
+} catch (AppException e) {
+  // handle error.
+} catch (IOException e) {
+  // handle error
+}
+```
