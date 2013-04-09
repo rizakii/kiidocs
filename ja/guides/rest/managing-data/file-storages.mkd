@@ -27,9 +27,9 @@ File Storage の REST API 利用の際には、ファイルパスを URL エン�
 
 以下、ファイルパスのエンコードの例をいくつかあげます。
 
-**Original** |**Encoded**
--------------|-----------
+Original               |Encoded
+-----------------------|-----------------------
 /var/log/kii/error.log |-var-log-kii-error..log
-/var/-log-/--.jpg |-var-.-log.--.-.-..jpg
-///---.jpg |---.-.-.-..jpg
-.././../...jpg | ....-..-....-......jpg
+/var/-log-/--.jpg      |-var-.-log.--.-.-..jpg
+///---.jpg             |---.-.-.-..jpg
+.././../...jpg         |....-..-....-......jpg
