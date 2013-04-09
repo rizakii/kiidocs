@@ -2,5 +2,27 @@
 layout: ja-doc
 title: File や Folder の完全削除
 sort-priority: 50
+summary: ファイルやフォルダは、以下のいずれかの方法により完全削除することができます
 ---
+* Trashcan に移動済のファイルやフォルダに対して DELETE リクエストを送信する (i.e., メタデータの "trashed" フィールドが true のファイルやフォルダに対して DELETE リクエストを送信する)
+* ファイルやフォルダに対して、ファイルパス指定で DELETE リクエストを送信する
 
+## Trashcan に移動済のファイルやフォルダを削除
+
+Microsoft Windows や MacOS のゴミ箱同様、Trashcan に移動済のファイルやフォルダを再度削除することにより、これらのファイル・フォルダを完全削除できます。この際、Bucket 名の prefix が "sync:trash:" になることに注意してください。
+
+フォルダを完全削除した場合、このフォルダ配下のファイルやサブフォルダも合わせて完全削除されます。
+
+## Trashcan をバイパスする
+
+ファイルパス指定でファイルやフォルダに対して DELETE リクエストを送信すると、これらのファイル・フォルダは Trashcan に移動せずに完全削除されます。
+
+以下に、Trashcan を経由せずにフォルダ（tmp/data/）を削除する例をあげます。
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization: Bearer {ACCESS_TOKE}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-"
+```
