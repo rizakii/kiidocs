@@ -2,4 +2,14 @@
 layout: ja-doc
 title: ユーザ削除
 sort-priority: 60
+summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Platform はユーザ削除機能を提供しています。
 ---
+以下に、ユーザ削除の例をあげます。
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization:Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me"
+```
