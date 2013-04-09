@@ -2,4 +2,140 @@
 layout: ja-doc
 title: Bucket
 sort-priority: 10
+summary: Kii Platform におけるデータ管理を理解するためには、Bucket という概念を理解する必要があります。Cloud 上に浮かんでいる仮想的なバケツを想像してみてください。Cloud 上にデータを保存するためには、このデータの「入れ物」が必要です。Bucket は、いわばこのデータのための「入れ物」に相当します。
 ---
+## Bucket のスコープ
+
+Bucket にはスコープが定義されます。スコープは、この Bucket が誰に属するものであるかを示します。一例として、ある Bucket が特定のグループに属する場合、この Bucket は Group Scope を有しており、対象はこのグループということになります。この場合、Bucket 内の全データは、このグループが存在する限り Kii Cloud に存在し続けます。
+
+また、Bucket のスコープは、この Bucket にデフォルトで適用されるアクセス制御を決定します。以下に、Kii Platform がサポートするスコープの定義と、このスコープを持つ Bucket にデフォルトで適用されるアクセス制御をまとめます。
+
+* **Application Scope**: Bucket があなたのアプリケーションに属していることを意味します。
+  * Authenticated users （サインインが完了した全てのユーザ）に対して、この Bucket に対するフルアクセスを許可します。
+  * Anonymous users （サインインが完了していないユーザ）に対して、この Bucket に対する「検索」および「読み取り」アクセスのみ許可します。
+* **Group Scope**: Bucket があるグループに属していることを意味します。
+  * このグループのオーナーに対して、この Bucket に対するフルアクセスを許可します。
+  * このグループの全メンバーに対して、この Bucket に対する Bucket 削除以外の全アクセスを許可します。
+  * このグループのメンバー以外に対して、この Bucket に対する全アクセスを拒否します。
+* **User Scope**: Bucket があるユーザに属していることを意味します。
+  * このユーザに対して、この Bucket に対するフルアクセスを許可します。
+  * このユーザ以外に対して、この Bucket に対する全アクセスを拒否します。
+
+## Object Bucket
+
+Bucket のスコープに応じて、REST のリソースが次のように決定します。
+
+* **Application Scope Bucket**: https\://api.kii.com/api/apps/\<APP\_ID\>/buckets/\<BUCKET\_NAME\>
+* **Group Scope Bucket**: https\://api.kii.com/api/apps/\<APP\_ID\>/groups/<GROUP\_ID>/buckets/\<BUCKET\_NAME\>
+* **User Scope Bucket**: https\://api.kii.com/api/apps/\<APP\_ID\>/users/<selector>/buckets/\<BUCKET\_NAME\>
+
+実際に Object Bucket にアクセスし、Bucket 内に Object を作成する例を以下にあげます。
+
+### App Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+### Group Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+
+### User Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+## File Bucket
+
+File Storage は**User Scope**のみサポートします。つまり、File Bucketはデフォルトにおいてユーザに限定されたものとなります。
+
+File Bucket の Bucket ID には**"sync:"**というprefixを必ずつけてください。Kii Cloud は、このprefixの有無を元に、BucketがObject用なのかFile用なのかを判定します。
+
+実際にFile Bucketにアクセスし、Bucket内にFileのメタデータを作成する例を以下にあげます。
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects" \
+  -d '{"path":"/mnt/esb/README.txt","title":"title-1334915984"}'
+```
+
+## Bucket に新たな ACL を設定する
+
+Group Scope と User Scope を持つ Bucket には、新たな ACL を設定することができます。例えば、ある Bucket に対して Anonymous User がデータを作成できるようにするなどの制御が行えます。
+
+<p class="callout">データ単位に付与可能なアクセス制御に READ\_EXISTING\_OBJECT と WRITE\_EXISTING OBJECT が存在します。これらの詳細についてはセクション「Objct Storage - Object のスコープとACL設定」と「File Storage - File のスコープとACL設定」を参照してください。</p>
+
+Bucket に対して付与可能なアクセス制御には、以下の2種類があります。
+
+* **QUERY\_OBJECTS\_IN\_BUCKET** : Bucket 内のデータを検索するための権限
+* **CREATE\_OBJECTS\_IN\_BUCKET** : Bucket 内に新たなデータを作成するための権限
+* **DROP\_BUCKET\_WITH\_ALL\_CONTENT** : Bucket を、その中のデータと共にドロップするための権限
+
+Bucket に ACL を設定する例として、User Scope を持つ Bucket に新たな ACL を設定する例を以下に示します。この例では、{USER\_ID\_2} をユーザ ID として持つユーザに対して CREATE\_OBJECTS\_IN\_BUCKET 権限を与えています。QUERY\_OBJECTS\_IN\_BUCKET 権限を与える場合は、下記の例における CREATE\_OBJECTS\_IN\_BUCKET を QUERY\_OBJECTS\_IN\_BUCKET に書き換えてください。
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:{USER_ID_2}"
+```
+
+さらには、Anonymous User （サインインしていないユーザ） や Authenticated User （サインインを行ったすべてのユーザ） 、さらにはグループに対して権限を与えることもできます。以下の例を確認してください。
+
+### Anonymous User に対して CREATE\_OBJECTS\_IN\_BUCKET 権限を与える例:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:ANONYMOUS_USER"
+```
+
+### Authenticated User に対して CREATE\_OBJECTS\_IN\_BUCKET 権限を与える例:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:ANY_AUTHENTICATED_USER"
+```
+
+### グループに対して CREATE\_OBJECTS\_IN\_BUCKET 権限を与える例:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/GroupID:{GROUP_ID}"
+```
