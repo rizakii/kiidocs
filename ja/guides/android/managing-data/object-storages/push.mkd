@@ -4,4 +4,76 @@ title: '"Push to App" 通知を受け取る'
 sort-priority: 60
 page-id: android-object_storages_push-ja
 ---
+"Push to App" 通知を使うと、ある Bucket 内の Object に変更があった際に、この事実をアプリが通知として受け取る事ができます。この機能を使うと、サーバ上で発生した変更を、即座にアプリ側に反映させることができます。
+
+”Push to App" 通知が Push 可能なイベントには以下のものがあります。
+
+ * Bucket 内に新たな Object が作成された。
+ * Bucket 内の既存の Object が更新された。
+ * Bucket 内の既存の Object が削除された。
+ * Bucket 内の既存の Object の ACL が更新された。
+
+Kii Cloud の プッシュ通知を利用する基本手順は次のとおりです。
+
+1. ユーザ端末を Kii Cloud にインストールして、プッシュ通知を受け取れる状態にする
+2. 対象 Bucket を購読 (subscribe) して、Bucket の監視を開始する
+3. 対象 Bucket 内で Object の変更が発生する度に、プッシュ通知を受け取る
+
+なお、プッシュ通知の利用には、開発者ポータルにてアプリ設計を行う必要があります。アプリ設定方法の詳細については、[こちら]({% page_url android-adding_kii_cloud_to_your_application-ja %}) を参照してください。
+
+### ユーザ端末のインストール
+
+Kii Cloud は Google Cloud Message (GCM) を利用してプッシュ通知を実装しています。このため、ユーザ端末にプッシュ通知を送る準備として、GCM サーバよりユーザ端末に割り当てられた登録ID（RegId）を Kii Cloud に送信するインストール処理を行う必要があります。（GCM サーバより登録IDを取得する方法については、[Google による tutorial](http://developer.android.com/google/gcm/gs.html)を参照してください）。
+
+GCM サーバより受け取った RegId は、次のように KIi Cloud に送信します。
+
+```java
+ // regId is received from GCM server. 
+KiiUser.pushInstallation().install(regId);
+```
+
+### Bucket の購読 （coming soon）
+
+Bucket を購読して監視を開始する例を以下にあげます。監視を開始すると、以後この Bucket 内の Object に変更が発生する度に、プッシュ通知がアプリに送信されます。
+
+```java
+KiiBucket bucket = user.bucket("_target_bucket_"); 
+bucket.object().save(); 
+user.pushSubscription().subscribeBucket(bucket);
+```
+
+### Bucket 購読の確認
+
+Bucket 購読の有無を確認する例を以下にあげます。
+
+```java
+try{
+// Instantiate the bucket in question.
+  KiiBucket bucket = user.bucket("_target_bucket_");
+
+  // Check the subscription.
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription ps = user.pushSubscription();
+  ps.isSubscribed(bucket);
+} catch (IOException ioe) {
+  // Something went wrong...
+} catch (AppException e) {
+  // Something went wrong...
+}
+```
+
+### "Push to App" 通知の受け取り
+
+プッシュ通知を受け取るには、GCMIntentService の onMessage() を実装します。
+
+```java
+@Override 
+protected void onMessage(Context context, Intent intent) { 
+    Bundle extras = intent.getExtras(); 
+    // parse the extras to get the message contents. 
+}
+```
+
+プッシュ通知メッセージの内容の詳細は[Javadoc]({% page_url references-ja %})を参照してください。
+
 

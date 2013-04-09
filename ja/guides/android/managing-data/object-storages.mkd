@@ -1,6 +1,29 @@
 ---
 layout: ja-doc
 title: Object Storage
+summary: Object Storage は、任意 Key-Value ペアにより構成されるJSON型オブジェクト（Object）を、サーバ側のカスタマイズを行うことなく管理する仕組みを提供します。
 sort-priority: 20
 page-id: android-object_storages-ja
 ---
+### 所定の Key-Value ペア
+
+以下の Key-Value ペアは、Object の所定値として Kii Cloud により自動的に生成されます。
+
+ * \_id … Kii Cloud によって割り振られたObjectの識別子
+ * \_created … Kii Cloud 上における、Object の作成時間 （UNIX時間・ミリ秒）
+ * \_modified … Kii Cloud 上における、Object の最後更新時間（Unix時間・ミリ秒）
+
+これらの値は基本的には内部的に利用されます。作成時間と最終更新時間は、それぞれ `getCreatedTime` メソッドと `getModifiedTime` メソッドを用いて取得可能です。また、 `toURI` メソッドを使うとObject の URL が取得できます。（"_id" の値自体は内部用識別子であるため、これを直接取得する必要はありません）
+
+### 任意の Key-Value ペア
+
+上記の所定 Key-Value ペアと被らない名前であれば、任意の Key-Value ペアを Object に追加することができます。Value のデータ型としては以下が利用可能です。
+
+ * String
+ * Boolean
+ * Int
+ * Long
+ * Double
+ * Byte Array
+ * JSON
+ * JSON Array

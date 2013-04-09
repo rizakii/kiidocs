@@ -1,5 +1,40 @@
 ---
 layout: ja-doc
 title: Object の作成
+summary: ある Bucket インスタンスの <code class="proper-code">object</code> メソッドを実行することで、この Bucket 内に Object のインスタンスが生成されます。生成された Object の <code class="proper-code">`set</code> メソッドを用いて、任意の Key-Value ペアを Object 内にセットできます。セットした Key-Value ペアは、<code class="proper-code">save</code> メソッドを実行することで Kii Cloud に反映されます。
 sort-priority: 10
 ---
+Object 作成方法の例として、"mydata"と名付けられたApplication scope の Bucket 内に Object を生成するサンプルコードを以下に示します。
+
+```java
+ // Create an object
+KiiObject object = Kii.bucket("mydata").object();
+
+// Set key-value pairs
+object.set("myid", 1);
+object.set("name", "John Doe");
+object.set("email", "john@example.com");
+
+// Save the object
+try {
+  object.save();
+} catch (IOException e) {
+  // Handle error
+} catch (AppException e) {
+  // Handle error
+}
+```
+
+`save` メソッドをコールするのを忘れないでください。save オブジェクトをコールすることで、Kii Cloud に Object の保存要求が送信されます。
+
+設定した任意の属性は、次の例のように `keySet` メソッドを使って確認することができます。
+
+```java
+ // Retrieve an object and refresh the instance
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+object.refresh();
+
+// Get a set of arbitrary keys
+HashSet<String> keyset = object.keySet();.
+```

@@ -1,6 +1,45 @@
 ---
 layout: ja-doc
 title: Object のスコープと ACL 設定
+summary: Object は、その Object が作成された Bucket のスコープを引き継ぎます。例えば Application Scope を持つ Bucket の中に Object を作成した場合、この Object は Application Scope を引き継ぎます。
 sort-priority: 70
 ---
+### Object のスコープと規定のアクセス制御
 
+Bucket 同様、Object にデフォルトで割り振られるアクセス制御はそのスコープによって決定されます。以下に、各スコープと規定のアクセス制御をまとめます。
+
+ * **Application Scope**
+  * Authenticated users（サインインが完了した全てのユーザ）に対して、この Object に対する読み取りと書き込みを許可します。
+  * Anonymous users （サインインが完了していないユーザ）に対して、この Object に対する読み取りのみを許可します。
+ * **Group Scope**
+  * このグループの全メンバーに対して、この Object に対する読み取りと書き込みを許可します。
+  * このグループのメンバー以外に対して、この Object に対する全アクセスを拒否します。
+ * **User Scope**
+  * このユーザに対して、この Object に対する読み取りと書き込みを許可します。
+  * このユーザ以外に対して、この Object に対する全アクセスを拒否します。
+
+
+### Object に新たな ACL を設定する
+
+新たな ACL を Object に追加することで、新たなアクセス制御を設定することができます。Object に設定可能なアクセス権限は以下の２つです。
+
+ * **READ\_EXISTING\_OBJECT** : Object の読み取りを許可する。
+ * **WRITE\_EXISTING\_OBJECT** : Object の変更と削除を許可する。
+
+新たな ACL を Object に設定する例として、Object に対する READ\_EXISTING\_OBJECT 権限を Anonymous User に付与するサンプルコードを示します。
+
+```java
+Uri objUri = Uri.parse("some existing object uri");
+KiiObject object = KiiObject.createByUri(objUri);
+
+// Setting a new ACL on the Object
+KiiACL acl = object.acl();
+acl.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+    ObjectAction.READ_EXISTING_OBJECT, true));
+
+try {
+  acl.save();
+} catch (ACLOperationException e) {
+  // handle error
+}
+```
