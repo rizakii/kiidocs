@@ -3,3 +3,16 @@ layout: ja-doc
 title: グループ名の変更
 sort-priority: 20
 ---
+グループオーナーは、グループ名を次のように変更することができます。
+
+```sh
+curl -v -X PUT \
+    -H "content-type: text/plain" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}"
+    -H "x-kii-appid:｛APP_ID} \
+    -H "x-kii-appkey:{APP_KEY} \
+    -d "New name" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/name"
+```
+
+グループ名の変更が成功すると、Kii Cloud は 200 応答を返します。

@@ -3,3 +3,32 @@ layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
 ---
+グループオーナーは、次のようにグループのメンバー一覧を取得できます。
+
+```sh
+curl -v -X GET \
+    -H "accept: application/vnd.kii.MembersRetrievalResponse+json" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/members"
+```
+
+Kii Cloud は、グループメンバーの一覧を次のように返します。
+
+```
+< 200
+< Content-Type: application/vnd.kii.MembersRetrievalResponse+json
+<
+{  
+    "members" : [ {
+        "userID" : {USER_ID_OF_MEMBER_1} 
+    }, {
+        "userID" : {USER_ID_OF_MEMBER_2}   
+    }, {
+        "userID" : {USER_ID_OF_MEMBER_3} 
+    }, {
+        "userID" : {USER_ID_OF_MEMBER_4} 
+    } ]
+}
+```

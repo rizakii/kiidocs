@@ -3,3 +3,50 @@ layout: ja-doc
 title: グループの作成
 sort-priority: 10
 ---
+サインインしたユーザであれば、誰でもグループを作成できます。グループを作成したユーザは、このユーザのオーナーになります。
+
+以下に、グループ作成の例をあげます。この例では "test group" という名前のグループを作成し、{USER\_ID\_OF\_MEMBER\_1} と {USER\_ID\_OF\_MEMBER\_2} という2名のユーザをメンバーとして追加しています。
+
+```sh
+curl -v -X POST \
+    -H "accept: application/vnd.kii.GroupCreationResponse+json" \
+    -H "content-type: application/vnd.kii.GroupCreationRequest+json" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/groups" \
+    -d '{ \
+        "name" : "testing group", \
+        "owner" : {USER_ID}, \
+        "members" : [ \
+            {USER_ID_OF_MEMBER_1}, \
+            {USER_ID_OF_MEMBER_2} \
+        ] \
+    }'
+```
+
+グループの作成に成功すると、Kii Cloud は Group ID を以下のようなレスポンスで返します。
+
+```
+< 201
+< Location: https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID} 
+< Content-Type: application/vnd.kii.GroupCreationResponse+json
+<{
+  "groupID" : {GROUP_ID}
+}
+```
+
+グループ作成処理時に Kii Cloud 上にオーナーが存在しない場合、レスポンスとして USER\_NOT\_FOUND の 404 が返ります。
+
+グループメンバーとして指定したユーザの一部（または全員）が Kii Cloud 上に存在しなかった場合、グループ作成自体は成功します。この場合、レスポンスにおいて存在しなかったユーザのリストが次のように返されます。
+
+```
+< 201
+< Location: https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}
+< Content-Type: application/vnd.kii.GroupCreationResponse+json
+<
+{
+  "groupID" : {GROUP_ID},
+  "notFoundUsers" : [ {NON_EXISTING_USER_ID_1}, ... ] 
+}
+```

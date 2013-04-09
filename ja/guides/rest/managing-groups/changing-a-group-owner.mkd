@@ -3,3 +3,16 @@ layout: ja-doc
 title: グループオーナーの変更
 sort-priority: 25
 ---
+グループオーナーは、他のユーザを新たなグループオーナーにすることができます。
+
+```sh
+curl -v -X PUT \
+  -H "content-type: application/vnd.kii.GroupOwnerChangeRequest+json" \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/owner" \
+  -d '{"owner" : {USER_ID}}'
+```
+
+グループオーナー変更後、元のグループオーナーはグループメンバーになります。

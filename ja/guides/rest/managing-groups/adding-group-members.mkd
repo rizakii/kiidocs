@@ -3,3 +3,30 @@ layout: ja-doc
 title: グループメンバーの追加と削除
 sort-priority: 50
 ---
+## グループメンバーの追加
+
+グループオーナーは、次のようにグループメンバーを追加できます。
+
+```sh
+curl -v -X PUT \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:s{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/members/{USER_ID}"
+```
+
+グループメンバーの追加に成功した場合、Kii Cloud は 201 応答を返します。指定したメンバーが既にグループメンバーだった場合は 200 応答を返します。
+
+## グループメンバーの削除
+
+グループオーナーは、次のようにグループメンバーを削除できます。
+
+```sh
+curl -v -X DELETE \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:s{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/members/{USER_ID}"
+```
+
+グループメンバーの削除に成功すると、Kii Cloud は 204 応答を返します。
