@@ -30,7 +30,7 @@ curl -v -X POST \
 サインインが成功すると、Kii Cloud は次のようなレスポンスを返します。
 このレスポンスにおける "access\_token" の値がユーザトークンです。また "expired\_in" は、ユーザトークンの有効期限（UNIX 時間・ミリ秒）となります。
 
-```sh
+```
 < HTTP/1.1 200 OK
 < Server: Apache-Coyote/1.1
 < Content-Type: application/json
