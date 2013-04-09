@@ -1,0 +1,96 @@
+---
+layout: en-doc
+title: Sign up
+sort-priority: 10
+page-id: android-sing_up-en
+---
+Getting users registered with your application is the first step for user management.
+
+<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check "Social Network Integration" section for more details</p>
+
+Kii Platform allows users to register with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses.
+
+When setting an email address or phone number to a user, you may let Kii Cloud takes the steps to verify their credentials -- either through a verification email or an SMS. Users won't be able to authenticate with that credential until they've been validated. This way, you can prevent fake identities -- all built into Kii Platform!
+
+
+###User Sign-up
+
+The following snippet shows how to sign up a user with a username "user_123456", an email address "`user_123456@example.com`", a phone number "+819012345678" and a password "123ABC".
+
+```java
+builder = KiiUser.builderWithName("user_123456");
+builder.withEmail("user_123456@example.com");
+builder.withPhone("+819012345678");
+KiiUser user = builder.build();
+
+try {
+  user.register("123ABC");
+} catch (AppException e) {
+  // Sign-up failed for some reasons
+  // Please check AppException to see what went wrong...
+} catch (IOException e) {
+  // Sign-up failed for some reasons
+  // Please check IOExecption to see what went wrong...
+}
+```
+
+The basic steps are as follows:
+
+1. Create a KiiUser instance with `builderWithName` method.
+2. Set the email address and phone number in the instance as needed.
+3. Register this KiiUser instance with register `method` while specifying the password.  At this point, a new account will be created, and the user will be signed-in.
+
+You can also create a new account without username.  To create an account with an email address or a phone number, use `builderWithEmail` and `builderWithPhone` methods, respectively.  Note that in this case, the email and phone number (SMS) verification must be disabled (please check the next section for more details on the verification mechanism).
+
+There are two shortcut methods, namely `createWithEmail` and `createWithPhone`;  you can use these methods if you want to create a new account with a set of {username, email address, password} or {username, phone number, password}.
+
+
+When you want to specify a local phone number, please also set a valid 2-letter country code using `setCountry` method like the following example:
+
+```java
+String phoneNumber = "09051903944";
+String country = "JP";
+String password = "123456";
+KiiUser user = KiiUser.builderWithPhone(phoneNumber).build();
+user.setCountry(country); // 2-letter country code
+user.register(password);
+```
+
+###Enabling email and/or phone verification
+
+You can configure your application to verify the user's email address and/or phone number.   You can toggle the verification on and off on the dev portal as follows:
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](00.png)
+
+2. Click "Settings" to bring your application configuration menu.
+3. Toggle SMS/Phone verification.
+
+    ![](01.png)
+
+When enabled, the email address and/or phone number will be verified as follows:
+
+####Email verification:
+
+When the email verification is enabled and an account is registered with an email address, Kii Cloud will send an email to that user with a verification link.  Signing in with the specified email address will be allowed only when the user verifies themselves by clicking this link.
+
+####Phone verification:
+
+When the email verification is enabled and an account is registered with an email address, Kii Cloud will send an email to that user with a verification link.  Signing in with the specified email address will be allowed only when the user verifies themselves by clicking this link.
+
+After receiving the SMS verification code from the user, your application should invoke `verifyPhone` method to complete the verification process.
+
+```java
+String code = "XYZXYZXYZ"; // Verification code
+
+try{
+  user.verifyPhone(code);
+} catch (IOException e) {
+  // Sign-up failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-up failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```

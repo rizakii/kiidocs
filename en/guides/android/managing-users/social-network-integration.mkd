@@ -1,0 +1,90 @@
+---
+layout: en-doc
+title: Social Network Integration
+page-id: android-social_network_integration-en
+sort-priority: 30
+---
+By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
+
+Currently, Kii Platform supports the following social networks:
+
+ * Facebook: [http://www.facebook.com] (http://www.facebook.com)
+ * Twitter (coming soon)： [http://www.twitter.com/](http://www.twitter.com/)
+ * RenRen (coming soon)： [http://www.renren.com/](http://www.renren.com/)
+
+
+###Integrate Facebook with Kii Platform
+
+To get started, you must set up your app's Facebook ID.  Please execute the following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](00.png)
+
+2. Click "Settings" to bring your application configuration menu.
+3. Put your Facebook App ID.
+
+    ![](01.png)
+
+###Sign up via Facebook Account
+
+Here is a sample code snippet for letting a new application user register via their Facebook account:
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.logIn(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onLoginCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```
+
+The basic steps are:
+
+1. Create an activity for handling sign-up with Facebook.
+2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is FACEBOOK).
+3. Start the sign-up process with `logIn` method.  This method is non-blocking, so use a callback to get the results.
+
+###Linking existing users with Facebook
+
+By linking existing applications with their social accounts, they will have an alternative to authentication - in addition to their existing passwords.
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.link(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```
+
+###Unlink the existing users with their external accounts
+
+You can unlink the existing users with their external accounts in the following manner:
+
+```java
+Activity activity = this.getActivity();
+KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.unlink(activity, null, new KiiSocialCallBack(){
+  @Override
+  public void onUnLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
+    if (exception == null) {
+      // Success.
+    } else {
+      // Failure. handle error.
+    }
+  }
+});
+```

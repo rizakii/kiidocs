@@ -1,0 +1,21 @@
+---
+layout: en-doc
+title: Deleting Users
+summary: Sometimes when a user wishes to remove themselves from your application, you will want to permanently delete his/her user account.
+sort-priority: 60
+---
+
+The following sample shows how you can delete a user:
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+try{
+  KiiUser user = KiiUser.logIn(username, password);
+  user.delete();
+} catch (IOException e) {
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Please check AppException to see what went wrong...
+}
+```

@@ -1,0 +1,78 @@
+---
+layout: en-doc
+title: Retrieving other user's data
+sort-priority: 70
+---
+You can access other user's data by specifying his/her username, email address or phone number.
+
+The amount of information returned by Kii Cloud depends on the application setting; if the application option *"Expose Full User Data To Others"* is enabled, the response will be a full user data.  Otherwise, the response will only contain only the following field values:
+
+ * UserID
+ * LoginName
+ * DisplayName
+
+###How to toggle the option "Expose Full User Data to Others"
+
+Please execute the following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](00.png)
+
+2. Click "Settings" and select "User Management".
+3. Toggle "Expose Full User Data To Others" option.
+
+    ![](01.png)
+
+
+###How to Access Other user's Data
+
+####Accessing user data with username:
+
+The following sample shows how you can retrieve a user data by his/her username.
+
+```java
+String username = "user_123456";
+
+try{
+  KiiUser found = KiiUser.findUserByUsername(username);
+} catch (IOException e){
+  // Please check IOException to see what went wrong...
+} catch (AppException e){
+  // Please check AppException to see what went wrong...
+}
+```
+
+####Accessing user data with email address:
+
+The following sample shows how you can retrieve a user data by his/her email address.  You must specify the verified email address.
+
+```java
+String email_address = "user_123456@example.com";
+
+try{
+  KiiUser found = KiiUser.findUserByEmail(email_address);
+} catch (IOException e){
+  // Please check IOException to see what went wrong...
+} catch (AppException e){
+  // Please check AppException to see what went wrong...
+}
+```
+
+####Accessing user data with phone number:
+
+The following sample shows how you can retrieve a user data by his/her phone number.  You must specify the verified phone number.
+
+Note that you must specify the phone number in an international phone number format (starting with + and your country code).
+
+```java
+String phone_number = "+819012345678";
+
+try{
+  KiiUser found = KiiUser.findUserByPhone(phone_number);
+} catch (IOException e){
+  // Please check IOException to see what went wrong...
+} catch (AppException e){
+  // Please check AppException to see what went wrong...
+}
+```

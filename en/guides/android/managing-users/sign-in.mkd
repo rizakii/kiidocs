@@ -1,0 +1,72 @@
+---
+layout: en-doc
+title: Sign In
+sort-priority: 20
+---
+Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
+
+
+###Sign-in with a password
+
+Here is a sample code snippet for authenticating a user.  Simply invoke the `logIn` method with a username (or an international phone number or an email address) and a password combination.
+
+```java
+String username = "user_123456";
+String password = "123ABC";
+try {
+  KiiUser user = KiiUser.logIn(username, password);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
+When you want to authenticate a user with a local phone number, please invoke `logInWithLocalPhone` method instead:
+
+```java
+String phoneNumber = "09051903944";
+String country = "JP";
+String password = "123456";
+try{
+  KiiUser user = KiiUser.logInWithLocalPhone(phoneNumber, password, country);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
+
+###Sign-in with an access token
+
+For maintaining a user session when returning to the app, the Kii SDK allows developers to authenticate using a Kii-provided access token. This keeps your user from having to type in credentials each time -- or from needing to store them on the device. By keeping this token in persistent storage, you allow the user to authenticate seamlessly between sessions.
+
+Here is a sample code snippet for authenticating a user with an access token.  To retrieve the access token for a user, call `getAccessToken` method while the user is signed-in. By invoking `loginWithAccessToken` method with this access token, your user will be authenticated once again.
+
+```java
+ // Get an access token
+KiiUser user = KiiUser.login("username", "password");
+String accessToken = user.getAccessToken();
+
+// Securely store the access token in persistent storage
+// (assuming that your application implements this function)
+storeToken(accessToken);
+
+// Get the access token from persistent storage
+// (assuming that your application implements this function)
+String accessToken = getStoredToken();
+
+// Use the access token to sign-in again
+try {
+  KiiUser.loginWithAccessToken(accessToken);
+} catch (IOException e) {
+  // Sign-in failed for some reasons
+  // Please check IOExecption to see what went wrong...
+} catch (AppException e) {
+  // Sign-in failed for some reasons
+  // Please check AppException to see what went wrong...
+}
+```
