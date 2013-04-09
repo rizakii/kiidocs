@@ -1,13 +1,13 @@
 ---
 layout: en-doc
 title: iOS Guide
-summary: Kii Platform provides developers with a set of tools to support iOS application development. &nbsp;Our iOS SDK gives you the opportunity to develop applications without ever needing your own servers.
+summary: Kii Platform provides developers with a set of tools to support iOS application development. Our iOS SDK gives you the opportunity to develop applications without ever needing your own servers.
 sort-priority: 20
 page-id: ios-guides-en
 ---
-This guide will navigate you through the SDK's basic features. &nbsp;You can
+This guide will navigate you through the SDK's basic features. You can
 review what is possible with the Kii SDK, and even get a head start with some
-sample code snippets. &nbsp;After reviewing the guide, you'll be ready to dig
+sample code snippets. After reviewing the guide, you'll be ready to dig
 into our SDK or check the detailed documentation available
 [here]({% page_url references-en %}).
 
@@ -26,7 +26,7 @@ how you can register a new user.
 ```objc
 NSError *error;
 KiiUser *user = [KiiUser userWithUsername:@"my_username"
-            andPassword:@"mypassword"];
+                              andPassword:@"mypassword"];
 [user performRegistrationSynchronous:&error];
 if(error != nil) {
     // Performing user registration failed
@@ -84,9 +84,9 @@ asynchronously, in a non-blocking way:
 
 - (void) test_asynchronous_example {
     KiiUser *user = [KiiUser userWithUsername:@"my_username"
-                andPassword:@"mypassword"];
+                                  andPassword:@"mypassword"];
     [user performRegistration:self
-                withCallback:@selector(userRegistered:withError:)];
+                 withCallback:@selector(userRegistered:withError:)];
 }
 ```
 
