@@ -2,5 +2,26 @@
 layout: ja-doc
 title: ユーザを無効化する
 sort-priority: 50
+summary: アプリ管理トークンを使うとユーザの無効化ができます。無効化されたユーザはサインインできなくなり、このユーザに対して払いだされていた全てのユーザトークンが無効化されます。また、無効化されたユーザはパスワードのリセットができなくなります。
 ---
+ユーザの無効化/有効化は "disabled" 属性で制御します。属性値を "true" にするとこのユーザは無効化され、"false" にすると再び有効化されます。
 
+以下に、ユーザを無効化する例をあげます。例にもあるように、ここではアプリ管理者トークンを指定する必要があります。アプリ管理者トークン取得方法は「{% page_link rest-admin_features-ja%}」を参照してください。
+
+```sh
+curl -v -X PUT \
+    -H "Authorization: Bearer {ADMIN_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "content-type: application/vnd.kii.UserStatusUpdateRequest+json" \
+    "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/status" \
+    -d '{"disabled": true}'
+```
+
+ユーザの無効化に成功すると、Kii Cloud は次のように応答します。
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Date: Mon, 14 May 2012 18:41:45 GMT
+```
