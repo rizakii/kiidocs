@@ -2,4 +2,21 @@
 layout: ja-doc
 title: Object の取得
 sort-priority: 20
+summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 ---
+以下、Object を URI を指定して取得するサンプルコードです。`objectWithURI`メソッドを使い KiiObject のインスタンスを作成後、`refresh`メソッドによりObjectの中身を取得しています。
+
+```javascript
+var object2 = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+object2.refresh({
+  success: function(theObject) {
+    console.log("Object refreshed!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error refreshing object: " + errorString);
+  }
+});
+```
+
+インスタンス作成後、`refresh`メソッドを呼ぶのを忘れないようにしてください。Objectのインスタンスを生成しただけでは、Objectの中身は最新のものになりません。

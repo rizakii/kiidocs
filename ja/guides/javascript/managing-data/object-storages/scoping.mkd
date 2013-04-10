@@ -1,6 +1,49 @@
 ---
 layout: ja-doc
 title: Object のスコープと ACL 設定
-sort-priority: 70
+sort-priority: 60
+summary: Object は、その Object が作成された Bucket のスコープを引き継ぎます。例えば Application Scope を持つ Bucket の中に Object を作成した場合、この Object は Application Scope を引き継ぎます。
 ---
+## Object のスコープと規定のアクセス制御
 
+Bucket 同様、Object にデフォルトで割り振られるアクセス制御はそのスコープによって決定されます。以下に、各スコープと規定のアクセス制御をまとめます。
+
+* **Application Scope**
+    * Authenticated users（サインインが完了した全てのユーザ）に対して、この Object に対する読み取りと書き込みを許可します。
+    * Anonymous users （サインインが完了していないユーザ）に対して、この Object に対する読み取りのみを許可します。
+* **Group Scope**
+    * このグループの全メンバーに対して、この Object に対する読み取りと書き込みを許可します。
+    * このグループのメンバー以外に対して、この Object に対する全アクセスを拒否します。
+* **User Scope**
+    * このユーザに対して、この Object に対する読み取りと書き込みを許可します。
+    * このユーザ以外に対して、この Object に対する全アクセスを拒否します。
+
+## Object に新たな ACL を設定する
+
+新たな ACL を Object に追加することで、新しいアクセス制限を設定することができます。Object に 設定可能なアクセス権限は以下の２つです。
+
+* **KiiACLObjectActionRead** : Objectの読み取りを許可する。
+* **KiiACLObjectActionWrite** : Objectの更新や削除を許可する。
+
+新たな ACL を Object に設定する例として、Anonymous User に対して Object への KiiACLObjectActionRead 権限を付与するサンプルコードを以下に示します。
+
+```javascript
+var object = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+
+// create the ACL rule
+var entry = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLObjectActionRead);
+
+// Get the ACL handle and put the rule in the handle
+var acl = object.objectACL();
+acl.putACLEntry(entry);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theObject) {
+    console.log("Object ACL updated!");
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error updating object ACL: " + errorString);
+  }
+});
+```
