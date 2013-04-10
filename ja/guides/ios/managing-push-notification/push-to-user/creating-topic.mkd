@@ -1,6 +1,95 @@
 ---
 layout: ja-doc
 title: トピックを作成する
+summary: ここでは、サンプルシナリオのそれぞれを例に取り、トピックの作成方法を説明してきます。
 sort-priority: 10
+page-id: ios-creating_topic-ja
 ---
+## シナリオ#1: 全アプリユーザへの一斉通知
+
+このシナリオでは application scope トピックを作成します。Application scope ト
+ピックは、アプリ開発者のみ作成可能です。全てのアプリユーザが購読可能ですが、こ
+のトピックにメッセージを送信できるのはトピック作成者（つまりアプリ開発者）のみ
+となります。
+
+Application scope トピック作成は 次のように REST API を用いて行います。
+
+
+1. [「RESTスタートガイド - アプリ管理者向け機能」]({% page_url rest-admin_features-ja %})
+   の内容に従い、アプリ管理者トークンを取得します。
+1. 次の例のようにして application scope トピックを作成します（この例では
+   "SendingAlert" という名前のトピックを作成しています）。
+
+```
+ curl -v -X PUT \
+  -H "X-Kii-AppID:{APP_ID}" \
+  -H "X-Kii-AppKey:{APP_KEY}" \
+  -H "Authorization:Bearer {APP_ADMIN_TOKEN}" \
+  "http://api-jp.kii.com/api/apps/{APP_ID}/topics/SendingAlert"
+```
+
+{APP\_ID} と {APP\_KEY} の箇所には実際の AppID と AppKey の値を入れます。また、取得したアプリ管理者トークンを {APP\_ADMIN\_TOKEN} の箇所に入れてください。
+
+<p class="note">近日中に、開発者ポータル上でアプリスコープのトピックが作成ができるようになる予定です。</p>
+
+
+## シナリオ#2: グループメッセージング
+
+このシナリオでは group scope トピックを作成します。Group scope トピックは、グ
+ループメンバーであれば誰でも作成可能です。また、グループメンバーであれば誰でも
+購読可能であり、全てのグループメンバーがトピックに対してメッセージを送信するこ
+とができます。
+
+Application scope トピックと異なり、group scope トピックは通常アプリケーション
+によって動的に作成されます。以下に、group scope トピックを作成する例をあげま
+す。
+
+```objc
+ // Create a group
+KiiGroup *group = [KiiGroup groupWithName:groupname];
+
+// Create instance of group scope topic.
+// (assume that the current suser is a member of the group)
+NSString *topicname = @"GroupTopic";
+KiiTopic *topic = [group topicWithName:topicname];
+
+// Save the topic to Kii Cloud.
+[topic saveSynchronous:&error;];
+if (error != nil) {
+  // Topic creation failed.
+}
+```
+
+ここでは、以下の処理を実行しています。
+
+* `topicWithName` メソッドを実行し、group-scope の topic を作成。
+* `save` メソッドを実行し、topic を Kii Cloud に保存。
+
+
+## シナリオ#3: TODO リストを全てのデバイスにプッシュ
+
+このシナリオでは user scope トピックを作成します。Group scope トピック同様、
+user scope トピックは通常アプリケーションによって動的に作成されます。
+
+以下に、user scope トピックを作成する例をあげます。
+
+```objc
+NSError *error;
+
+// Create a user-scope group
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Save the topic to Kii Cloud
+[topic saveSynchronous:&error;];
+if (error != nil) {
+  // Topic creation failed.
+}
+```
+
+ここでは以下の処理を実行しています。
+
+* `topicWithName` メソッドを実行し、user scope トピックを作成。
+* `save` メソッドを実行し、トピックを Kii Cloud に保存。
 

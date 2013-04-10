@@ -2,5 +2,6 @@
 layout: ja-doc
 title: '"Direct Push" 通知'
 sort-priority: 20
+page-id: ios-direct_push-ja
 ---
 

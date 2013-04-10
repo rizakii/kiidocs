@@ -2,5 +2,6 @@
 layout: ja-doc
 title: メッセージを送信する
 sort-priority: 30
+page-id: ios-sending_push_to_user_messages-ja
 ---
 

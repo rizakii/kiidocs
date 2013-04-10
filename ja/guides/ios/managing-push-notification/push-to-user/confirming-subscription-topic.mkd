@@ -1,0 +1,37 @@
+---
+layout: ja-doc
+title: トピック購読の有無を確認する
+summary: アプリにおいて、ユーザがあるトピックを未購読の場合は「購読する」ボタンを、既に購読済の場合は「購読を解除する」ボタンを表示するケースを考えます。この場合、ユーザがあるトピックを購読済なのか未購読なのかを判定する必要があります。
+sort-priority: 25
+page-id: ios-confirming_subscription_topic-ja
+---
+以下に、トピック購読の有無を確認する例をあげます。ここではサンプルシナリオ#1を
+例にとります。（他のシナリオについても、基本的な操作は同様です）
+
+```objc
+NSError *error = nil;
+
+// Instantiate the topic in question.
+KiiTopic *topic = [Kii topicWithName:@"SendingAlert"];
+
+// Check if the current user is already subscribing to the topic.
+BOOL subscribed = [KiiPushSubscription checkSubscriptionSynchronous:topic
+                                                          withError:&error];
+
+if (error != nil){
+  // Something went wrong...
+}
+
+if (subscribed){
+  NSLog(@"Subscribed!");
+} else {
+  NSLog(@"Not subscribed!");
+}
+```
+
+ここでは次の処理を行なっています：
+
+ * 購読の有無を確認したいトピックのインスタンスを作成。
+ * `checkSubscription` メソッドを実行し、トピック購読の有無を確認。
+
+
