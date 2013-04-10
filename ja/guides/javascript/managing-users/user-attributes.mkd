@@ -2,4 +2,88 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
+summary: Kii Cloud SDK は、以下の所定の Key-Value を用いてユーザ属性を管理します。
 ---
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+さらに、上記の所定 Key にぶつからない名前であれば、任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
+
+## 所定の属性の設定
+
+多くの所定 Key が SDK の内部で使用されています。これらの値はSDKによって自動的にセットされ、開発者は基本的に気にする必要はありません。
+
+以下の所定 Key-Value は、setter メソッドにより値を変更可能です。
+
+* displayName
+* country
+
+以下の所定 Key-Value は更新用の API をコールして値の変更を行います。
+
+* email
+* phoneNumber
+* country
+
+以下に、"email"、"phoneNumber"、"coutry" の値を変更するサンプルコードをあげます。
+
+```javascript
+var user = KiiUser.getCurrentUser();
+
+// Change email
+user.changeEmail("mynewemail@example.com", {
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+
+// Change phone number
+user.changePhone("+14085550000", {
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+
+// Change country
+user.set("country", "US");
+user.save({
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+```
+
+## 任意の属性の設定
+
+任意の Key-Value ペアをセットするサンプルを以下に示します。例にあるように`set`メソッドを使用して Key-Value を設定していきます。
+
+```javascript
+var user = KiiUser.getCurrentUser();
+user.set("gender", "male");
+user.set("score", 500);
+user.save({
+  // Called on successful information change
+  success: function(theUser) {
+    console.log("User's information changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's information: " + errorString);
+  }
+});
+```
