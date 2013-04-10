@@ -18,5 +18,5 @@ try {
 }
 ```
 
-*Please Note*: The object will be deleted from the server upon calling the `delete` method; you do not need to invoke the `save` method
+**Please Note**: The object will be deleted from the server upon calling the `delete` method; you do not need to invoke the `save` method
 

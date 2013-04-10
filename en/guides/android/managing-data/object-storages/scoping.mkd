@@ -26,7 +26,7 @@ New access permission can be applied to an object by adding a new ACL.  The poss
  * **READ\_EXISTING\_OBJECT** : Allow the subject to read the object.
  * **WRITE\_EXISTING\_OBJECT** : Allow the subject to modify and delete the object.
 
-Here is an example for granting READ_EXISTING_OBJECT permission to anonymous users:
+Here is an example for granting READ\_EXISTING\_OBJECT permission to anonymous users:
 
 ```java
 Uri objUri = Uri.parse("some existing object uri");

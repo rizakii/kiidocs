@@ -8,7 +8,7 @@ sort-priority: 10
 Here are examples showing how you can create Object buckets:
 
 ```java
- // Create Application Scope Bucket
+// Create Application Scope Bucket
 KiiBucket appBucket = Kii.bucket("my_user");
 
 // Create Group Scope Bucket. (Login required)
@@ -34,7 +34,7 @@ object.save();
 File buckets are the same concept as object buckets, with the exception that a file bucket can only have User Scope, meaning that the bucket will be fully accessible only to the user. Here is an example for creating a file bucket:。
 
 ```java
- // Create User Scope Bucket. (Login required)
+// Create User Scope Bucket. (Login required)
 KiiFileBucket fileBucket = Kii.user().fileBucket("my_backup");
 ```
 

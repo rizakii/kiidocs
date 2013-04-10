@@ -7,7 +7,7 @@ sort-priority: 10
 In the following example, an object is created in the "mydata" bucket, which has Application Scope.
 
 ```java
- // Create an object
+// Create an object
 KiiObject object = Kii.bucket("mydata").object();
 
 // Set key-value pairs
@@ -30,7 +30,7 @@ Do not forget to invoke the save method, or your objects will not be saved in Ki
 You can later check your arbitrary keys using keySet method like the following example:
 
 ```java
- // Retrieve an object and refresh the instance
+// Retrieve an object and refresh the instance
 Uri objUri = Uri.parse("some existing object uri");
 KiiObject object = KiiObject.createByUri(objUri);
 object.refresh();

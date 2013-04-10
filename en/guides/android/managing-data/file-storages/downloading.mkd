@@ -1,0 +1,33 @@
+---
+layout: en-doc
+title: Downloading Files
+sort-priority: 20
+---
+If you know the URI of the file you wish to download, you can directly retrieve the file from Kii Cloud.
+
+The following sample code illustrates how to retrieve an object via its URI:
+
+```java
+// Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+String destFilePath = "destination file path";
+
+// Refresh the instance to get the metadata
+try {
+  // Retrieve metadata
+  kFile.refresh();
+  // Download File body
+  kFile.downloadFileBody(destFilePath);
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error.
+}
+```
+
+The basic steps are as follows:
+
+1. Create a `KiiFile` instance with the `createByUri` method, specifying the file's URI.
+2. Invoke the `refresh` method to retrieve the file's metadata.
+3. Invoke the `downloadFileBody` method to download the file body (actual file content) while specifying the destination file path.

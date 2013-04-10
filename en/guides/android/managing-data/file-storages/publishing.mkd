@@ -1,0 +1,36 @@
+---
+layout: en-doc
+title: Publishing Files
+summary: 'Kii Platform has the ability to publish your file to an accessible URL, which can be utilized by your application in order to share content outside of the application.'
+sort-priority: 60
+---
+When publishing a file, you can optionally specify the expiration time in UNIX time (msec) when the URL will expire and the content will no longer be available. If you do not specify the expiration time, the URL will be valid forever.
+
+Here is an example of publishing a file with the expiration time of 24 hours:
+
+```java
+// Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Publish the file
+try {
+  // Set the expiration time (24 hours from now)
+  long expiration = System.currentTimeMillis() + 24 * 60 * 60 * 1000;
+
+  // Publish the file
+  String publishedUri = kFile.publish(expiration);
+  // The file is now accessible with publishedUri.
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+The basic steps are as follows:
+
+1. Create a KiiFile instance.
+2. Invoke `publish` method while specifying the expiration time (if required)
+
+**Please Note**: Your user must have READ permission on the file in order to publish it.

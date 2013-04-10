@@ -46,7 +46,7 @@ Here is a sample snippet for checking the subscription.
 
 ```java
 try{
-// Instantiate the bucket in question.
+  // Instantiate the bucket in question.
   KiiBucket bucket = user.bucket("_target_bucket_");
 
   // Check the subscription.

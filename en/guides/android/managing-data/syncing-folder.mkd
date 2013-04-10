@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Syncing Folder
+summary: 'Kii Sync SDK provides a super-simple method for syncing a folder. By leveraging our sync SDK, you will be able to sync a folder among multiple devices, making all files and subfolders accessible from all devices - even if they are offline.'
+sort-priority: 40
+---
+### Sample scenario
+
+Here are a few example scenarios of what you can achieve with the Kii Sync SDK:
+
+#### Multi-device sync
+
+In this scenario, your user wants to sync a folder among your multiple devices (e.g., Android phone, tablet, or even your Windows/MacOS PC).  All files in the folder will be synced up to Kii Cloud, and then will sync down to other devices.  The multi-device sync will allow you to access your files from any of your devices.
+
+#### Backup
+
+In this scenario, your user wants to back up a folder (e.g., your DCIM folder).  Everything inside the folder will be backed up to Kii Cloud.  If the user ever gets a new phone or something happens to their device, their content is still safe and they can restore all backed-up files onto their new device.
+

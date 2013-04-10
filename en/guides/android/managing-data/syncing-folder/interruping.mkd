@@ -1,0 +1,38 @@
+---
+layout: en-doc
+title: Interrupting Folder Sync
+sort-priority: 20
+---
+In order to interrupt an ongoing sync session, simply interrupt the thread running the session as follows:
+
+```java
+import com.kii.cloud.filesync.KiiFS;
+
+Context context; // android.content.Context
+Thread syncThread = new Thread() {
+    @public void run() {
+        try {
+            KiiFS.sync(
+                    context,
+                    new File("/mnt/sdcard/SyncBox"),
+                    "___username___",
+                    "___password___",
+                    null);
+        } catch (InterruptedException e) {
+            // TODO: show "interrupted message" to user.
+        } catch (Exception e) {
+            // TODO: show error message to user.
+        }
+    }
+}
+
+// Start sync with a thread.
+syncThread.run();
+
+// Interrupt the sync!
+syncThread.interrupt();
+```
+
+When interrupted, the SDK will stop the ongoing sync session.  The next time you launch a new sync session, the SDK will resume the session from the point where the previous session was interrupted.
+
+

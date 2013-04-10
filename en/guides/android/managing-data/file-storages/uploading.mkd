@@ -1,0 +1,25 @@
+---
+layout: en-doc
+title: Uploading Files
+sort-priority: 10
+---
+To upload a file, create a `KiiFile` instance by invoking the `file` method of your user's `KiiFileBucket` instance. This will automatically create the corresponding metadata within `KiiFile`. Before uploading, you can optionally update some of the metadata -- but must invoke the `save` method to upload the file to the cloud. 
+
+Here is an example:
+
+```java
+// Create a reference to the existing local file
+File localFile = new File(Environment.getExternalStorageDirectory(), "test.txt");
+
+// Create a KiiFile instance and save it
+try {
+  KiiFile kiiFile = Kii.user().fileBucket("my_private").file(localFile);
+  kiiFile.save();
+} catch (IOException e) {
+  // File Uploading failed for some reasons
+  // Please check IOException to see what went wrong...
+} catch (AppException e) {
+  // File Uploading failed for some reasons
+  // Please check CloudExecutionException to see what went wrong...
+}
+```

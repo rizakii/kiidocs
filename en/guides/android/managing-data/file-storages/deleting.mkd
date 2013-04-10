@@ -1,0 +1,23 @@
+---
+layout: en-doc
+title: Deleting Files
+sort-priority: 50
+---
+You can permanently delete a file by invoking `delete` method.  The file will be permanently deleted; you cannot restore the file.
+
+```java
+// Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Parmanently delete the file
+try {
+  kFile.delete();
+} catch (AppException e) {
+  // handle error
+} catch (IOException e) {
+  // handle error
+}
+```
+
+**Please Note**: The file will be deleted from the server immediately when invoking the delete method - you do not need to invoke the 'save' method.

@@ -1,0 +1,60 @@
+---
+layout: en-doc
+title: Scoping Files
+sort-priority: 70
+---
+### Default Access Control
+
+For all files, the following default access control will be applied:
+
+ * **User Scope**
+  * The user can read and write the object by default.
+  * Other users cannot read and write the object by default.
+
+### Set a new ACL on a File
+
+New access permission can be applied onto a file by adding a new ACL.  The possible access controls that can be granted on an object are as follows:
+
+ * **READ\_EXISTING\_OBJECT**: Allow the subject to read the object.
+ * **WRITE\_EXISTING\_OBJECT**: Allow the subject to modify and delete the object.
+
+Here is a sample snippet for granting READ\_EXISTING\_OBJECT and WRITE\_EXISTING\_OBJECT permissions:
+
+```java
+Uri frUri = Uri.parse("some existing user uri on cloud");
+KiiUser friend1 = KiiUser.createByUri(frUri);
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+KiiACL acl = kFile.acl();
+// Set a new ACL (granting READ_EXISTING_OBJECT and WRITE_
+// EXISTING_OBJECT permission to user Y) on a file owned by User X.
+acl.putACLEntry(new KiiACLEntry(friend1,
+            FileAction.WRITE_EXISTING_OBJECT, true));
+acl.putACLEntry(new KiiACLEntry(friend1,
+            FileAction.READ_EXISTING_OBJECT, true));
+
+// Set a new ACL (granting READ_EXISTING_OBJECT and WRITE_
+// EXISTING_OBJECT permission to all authenticated users) on a file
+// owned by User X.
+acl.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            FileAction.WRITE_EXISTING_OBJECT, true));
+acl.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+            FileAction.READ_EXISTING_OBJECT, true));
+
+// Set a new ACL (granting READ_EXISTING_OBJECT and WRITE_
+// EXISTING_OBJECT permission to anonymous users) on a file
+// owned by User X.
+acl.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            FileAction.WRITE_EXISTING_OBJECT, true));
+acl.putACLEntry(new KiiACLEntry(KiiAnonymousUser.create(),
+            FileAction.READ_EXISTING_OBJECT, true));
+
+try {
+  acl.save();
+} catch (ACLOperationException e) {
+  // handle error.
+}
+```
+
+

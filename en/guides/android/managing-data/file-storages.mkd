@@ -1,0 +1,25 @@
+---
+layout: en-doc
+title: File Storage
+sort-priority: 30
+---
+File storage allows your application to manage virtually any file and its associated metadata. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code.
+
+When a file instance is created, the SDK automatically stores the following common metadata:
+
+ * **Title**: The default value will be the file name.
+ * **CreatedTime**: The date the file was created on Kii Cloud in UNIX time (msec).
+ * **ModifiedTime**: The date the file was last updated on Kii Cloud in UNIX time (msec).
+ * **Local path**: The file path on the client device.
+ * **File size**: Size of the file (in bytes).
+ * **MimeType**: The content-type of the file determined by the file extension (application/octet-stream will be assigned if the SDK cannot determine the mimetype).
+ * **Thumbnail**: If a file is an image or movie, the SDK will create a thumbnail by default and store it as metadata. You can override the custom thumbnail or retrieve it at any time.
+ * **Trashed flag**: A flag indicating if the file is in Kii Cloud Trashcan or not; the default value is false.
+
+You can manually set values for the following attributes by invoking the corresponding setter methods:
+
+ * Title
+ * MimeType
+ * Thumbnail
+ * Custom Field ...  a free field in which you can put any string up to 512 bytes (UTF-8 encoded)
+
