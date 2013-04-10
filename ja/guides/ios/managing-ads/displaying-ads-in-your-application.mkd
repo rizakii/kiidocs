@@ -3,4 +3,23 @@ layout: ja-doc
 title: アプリ上で広告を表示する
 sort-priority: 10
 ---
+アプリに広告を表示させる例です。
+
+1. プロジェクト内のview controllerで広告を表示させたいものを開きます。
+
+    例: MyViewController.m
+
+1. `viewDidLoad` メソッドに以下のコードを追加します。
+
+
+```objc
+KiiAdnet *adView = [KiiAdnet requestAdWithDelegate:self
+                                 withApplicationId:@"<AppID>"
+                                 andApplicationKey:@"<AppKey>"];
+[self.view addSubview:adView];
+```
+
+ここで、アプリケーションに割り振られた Application ID と Application Key を指定
+してください。
+
 
