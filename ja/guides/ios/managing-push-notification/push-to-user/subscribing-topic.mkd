@@ -2,5 +2,6 @@
 layout: ja-doc
 title: トピックを購読する/購読解除する
 sort-priority: 20
+page-id: ios-subscribing_topic-ja
 ---
 

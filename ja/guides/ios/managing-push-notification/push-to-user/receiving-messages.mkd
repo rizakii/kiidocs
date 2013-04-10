@@ -2,5 +2,6 @@
 layout: ja-doc
 title: メッセージを受信する
 sort-priority: 40
+page-id: ios-push_to_user_receiving_messages-ja
 ---
 

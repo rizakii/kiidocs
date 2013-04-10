@@ -2,5 +2,6 @@
 layout: ja-doc
 title: トピックの ACL を変更する
 sort-priority: 50
+page-id: ios-settings_topic_acl-ja
 ---
 

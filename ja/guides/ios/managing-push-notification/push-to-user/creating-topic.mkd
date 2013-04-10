@@ -2,5 +2,6 @@
 layout: ja-doc
 title: トピックを作成する
 sort-priority: 10
+page-id: ios-creating_topic-ja
 ---
 

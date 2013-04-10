@@ -2,4 +2,5 @@
 layout: ja-doc
 title: グループ管理機能
 sort-priority: 20
+page-id: ios-managing_groups-ja
 ---
