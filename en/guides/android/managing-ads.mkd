@@ -1,0 +1,6 @@
+---
+layout: en-doc
+title: Managing Ads
+sort-priority: 60
+---
+Kii Advertising SDK gives you the ability to add multiple advertising networks with only a few lines of client code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.

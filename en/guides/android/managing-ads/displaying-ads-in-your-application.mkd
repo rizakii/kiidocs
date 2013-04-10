@@ -1,0 +1,31 @@
+---
+layout: en-doc
+title: Displaying Ads in Your Application
+sort-priority: 10
+page-id: android-ads_displaying_ads_in_your_application-en
+---
+In order to display ads in your application, create a com.kii.ad.KiiAdNetLayout. You must ensure that this code is called in the main thread
+
+The following is an example for displaying ads in your application.  Use the App ID and App Key assigned to your application when creating KiiAdnetLayout.
+
+```java
+// get scaledDensity 
+Display display = getWindowManager().getDefaultDisplay(); 
+DisplayMetrics metrics = new DisplayMetrics(); 
+display.getMetrics(metrics);
+float scaledDensity = metrics.scaledDensity;
+
+// set targeting parameter
+KiiAdNetTargeting.setGender(KiiAdNetTargeting.Gender.FEMALE);
+KiiAdNetTargeting.setKeywords("Application");
+KiiAdNetTargeting.setAge(35);
+KiiAdNetTargeting.setPostalCode("30900");
+
+// create an KiiAdnetLayout
+KiiAdNetLayout adLayout = new KiiAdNetLayout(this, APP_ID, APP_KEY, KiiAdNetLayout.SiteID.US);
+layout.addView(adLayout);
+adLayout.setMaxWidth((int)(scaledDensity * 320));
+adLayout.setMaxHeight((int)(scaledDensity * 52));
+```
+
+You can choose whatever size that suits your application for the layout. We suggest 320 (dip) x 52 (dip), as this is the largest ad unit size. If you choose to make the view smaller, the ads will still display - but may cut off a few pixels and display a small scroll bar.
