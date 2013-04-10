@@ -2,5 +2,6 @@
 layout: ja-doc
 title: '"Push to User" 通知'
 sort-priority: 10
+page-id: ios-push_to_user-ja
 ---
 
