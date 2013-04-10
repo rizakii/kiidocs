@@ -1,6 +1,23 @@
 ---
 layout: ja-doc
 title: Object の削除
-sort-priority: 50
+sort-priority: 40
 ---
+`delete`メソッドで指定したObjectを削除することができます。
 
+`delete`メソッドを呼ぶとすぐに削除され、`save`メソッドを呼ぶ必要はありません。
+
+```javascript
+var object = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+
+// Delete the Object
+object.delete({
+  success: function(theDeletedObject) {
+    console.log("Object deleted!");
+    console.log(theDeletedObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error deleting object: " + errorString);
+  }
+});
+```

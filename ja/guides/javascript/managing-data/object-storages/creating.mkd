@@ -2,4 +2,30 @@
 layout: ja-doc
 title: Object の作成
 sort-priority: 10
+summary: ある Bucket インスタンスの createObject メソッドを実行すると、この Bucket 内に Object が生成されます。生成された Object の setObject メソッドを用いて、任意の Key-Value を Object 内にセットできます。セットした Key-Value は、save メソッドを実行することで Kii Cloud に反映されます。
 ---
+Object 作成のサンプルコードを以下にあげます。以下の例では、Application Scope を持つ「app_bucket」という名の Bucket の下に Object を作成しています。
+
+```javascript
+// Create an application scope bucket named "app_bucket"
+var appBucket = Kii.bucketWithName("app_bucket");
+
+// Create the object with key/value pairs
+var obj = appBucket.createObject();
+obj.set("myid", 1);
+obj.set("name", "John Doe");
+obj.set("email", "john@example.com");
+
+// Save the object
+obj.save({
+  success: function(theObject) {
+    console.log("Object saved!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object: " + errorString);
+  }
+});
+```
+
+`save`メソッドを呼ぶのを忘れないようにしてください。このメソッドを呼ぶまで、Object の内容は Kii Cloud に反映されません。
