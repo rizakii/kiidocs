@@ -1,6 +1,99 @@
 ---
 layout: ja-doc
 title: トピックを購読する/購読解除する
+summary: あるトピックに興味のあるユーザは、このトピックを購読することでトピックに送信されたプッシュメッセージを受け取ることができるようになります。また、トピックの購読を止めることで、プッシュメッセージの受信を止めることができます。
 sort-priority: 20
+page-id: android-subscribing_topic-ja
 ---
+## トピックを購読する
+
+以下に、サンプルシナリオ#1 向けの例（application scope トピックを購読する例）をあげます。
+
+```java
+try{
+  // Instantiate the already-existing app-scope topic
+  String topicName = "SendingAlert";
+  KiiTopic topic = Kii.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscription(topic);
+} catch (IOException ioe){
+  // Subscription failed.
+} catch (AppException e){
+  // Subscription failed.
+}
+```
+
+同様に、サンプルシナリオ#2 向けの例（group scope トピックを購読する例）をあげます。
+
+```java
+try {
+  // Instantiate the already-existing group and its group-scope topic.
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  // (The current user must be a group member)
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscribe(topic);
+} catch (IOException ioe) {
+  // Subscription failed.
+} catch (AppException e) {
+  // Subscription failed.
+}
+```
+
+最後に、サンプルシナリオ#3 向けの例（user scope トピックを購読する例）をあげます。
+
+```java
+try{
+  // Instantiate the already-existing user-scope topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscribe(topic);
+} catch (IOException ioe ) {
+  // failed.
+} catch (AppExceptioin e) {
+  // failed.
+}
+```
+
+いずれの例においても、以下の処理が行なわれています。
+
+ * `pushSubscription` メソッドを実行し、KiiPushSubscription インスタンスを作成。
+ * 対象 topic を指定の上 `subscribe` メソッドを実行。
+
+
+## トピックの購読を止める
+
+トピックの購読を止めるには、次の例のようにします。  
+（基本的な手順はいずれのトピックスコープについても同様です）
+
+```java
+ // Assume that the current user is subscribing to the topic.
+ // (and the target topic is already instantiated)
+
+try {
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.unsubscribe(topic);
+} catch (IOException ioe) {
+  // Unsubscription failed.
+} catch (AppException e) {
+  // Unsubscription failed.
+}
+```
+
+ * `pushSubscription` メソッドを実行し、KiiPushSubscription インスタンスを作成。
+ * 対象 topic を指定の上 `unsubscribe` メソッドを実行。
+
 
