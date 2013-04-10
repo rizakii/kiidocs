@@ -1,6 +1,196 @@
 ---
 layout: ja-doc
 title: イベントデータの解析
+summary: イベントデータ（Event Data）の解析を行う基本的なステップは以下の通りです。
 sort-priority: 20
 ---
+1. メトリクスを定義する。
+1. アプリよりイベントデータを送信する。
+1. 開発者ポータルで解析結果を確認する。
+1. Android SDK で解析結果詳細を取得する。
+
+以後、以下のサンプルシナリオを例に取り、実際に Event Data の解析を行う手順を解
+説していきます。
+
+* アプリのインストール時に、以下のイベントデータを送信している（このイベント
+  データには "MyUser" という名前をつける者とする）
+    * **"gender"** ... ユーザ性別を示す文字列 (M or F)
+    * **"city"** ... ユーザが居住する都市を示す文字列 (San Francisco, Dallas,
+      New York, ...)
+    * **"location"** ... ユーザが居住する国を示す文字列 (UK, EU, JP, ...)
+    * **"children"** ... ユーザの子供の数を示す整数値 (0, 1,2,3, ...)
+    * **"age"** ... ユーザの年齢 (18, 20, 42, 44, ...)
+* 集めたイベントデータを元に、以下のメトリクスを用いて解析を行いたい。
+    * **メトリクス#1：** **"age"**の平均値を、**"city", "location", "gender"**
+      および**"children"**毎に評価
+    * **メトリクス#2：** イベントデータ総数を、**"gender", "city", "location",
+      "children"**および**"age"**毎に評価
+
+## 1. メトリクスを定義する
+
+以下の手順でメトリクスを定義します。
+
+1. 開発者ポータルにて、"Metrics" アイコンをクリック後、"Config" を選択します。
+1. "Add" ボタンを押下します。
+    ![](01.png)
+
+    以下のように Aggregation Rules 定義画面が表示されます。
+
+    ![](02.png)
+1. "Name" セクションに Aggregation Rule の名前を入力します。
+1. "Data" セクションの "Event Data" を選択します。
+1. "Aggregated using" セクションに以下の情報を入力し、ファクトの集計方法を定義
+   します。
+    * **Aggregation function** : ファクトの集計方法。指定可能な集計関数は
+      **Count**, **Avg** (平均), **Sum**, **Min**, **Max**のいずれかです。
+    * **Field name** : ファクトとして集計するイベントデータのフィールド名。集計
+      関数として Count を指定した場合、field name として"*" を指定することがで
+      きます。
+    * **Data type** : フィールド値のタイプ。指定可能なタイプは int, float,
+      boolean, stringのいずれかです。
+
+    <p class="note">現バージョンにおいては、マルチバイト文字はサポートされません。マルチバイト文字を含むフィールド名やマルチバイト値を持つフィールドを指定した場合、期待通りの結果が表示されないことがあります。</p>
+
+1. "Filter by Type" セクションに、解析対象とするイベントデータのタイプを指定し
+   ます。指定を省略した場合は、すべてのイベントデータが集計対象となります。
+1. "Dimensions" セクションに以下の情報を入力し、集計に利用するディメンションを
+   定義します。
+    * **Label** : ディメンションの解析結果上におけるラベル。指定を省略した場合
+      は、イベントデータのフィールド名がラベルとして適用されます。
+    * **Name** : ディメンションとして利用するイベントデータのフィールド名。
+    * **Type** : フィールドデータのタイプ。指定可能なタイプはint, float,
+      boolean, stringのいずれかです。
+
+    一例として、我々のサンプルシナリオにおけるメトリクス＃１は次のように定義し
+    ます。
+
+    ![](03.png)
+
+    同様に我々のサンプルシナリオにおけるメトリクス＃２の指定方法を以下にあげま
+    す。この例では、集計関数として Count を指定しているため、集計対象フィールド
+    名として "*" を指定しています。
+
+    ![](04.png)
+
+1. 設定が完了したら "Save" ボタンをクリックします。
+
+    設定した Aggregation Rule が一覧に表示されますが、まだこの段階では有効に
+    なっていません。
+
+    "Config" アイコンをクリックします。
+
+    ![](05.png)
+
+1. Aggregation Rules 設定画面が表示されます。ここで "Activate" ボタンをクリック
+   します。
+1. Aggregation Rule が有効になり、インジケーターが緑色に変わります。
+    ![](06.png)
+
+    Aggregation Rule ID が表示されることを確認してください。後ほど解析結果の詳
+    細を Android Analytics SDK 経由で取得する際にこの ID を利用します。
+
+## 2. アプリよりイベントデータを送信する
+
+イベントデータの送信方法は次の通りです。
+
+1. `event` メソッドを用いて KiiEvent インスタンスを生成します。この際、必要に応じてイベントタイプを指定します。イベントタイプには "installed" や "level up" など任意の文字列を利用できます。我々のサンプルシナリオでは"MyUser" を使います。
+1. `set` メソッドを用いて任意の key-value ペアをセットします。我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
+1. `push` メソッドでイベントデータをキャッシュします。Kii Analytics SDK は、キャッシュされたイベントデータを適切なタイミングで Kii Cloud にアップロードします。
+
+イベントデータを送信するサンプルコードを以下にあげます。
+
+```java
+ // Create a KiiEvent instance
+KiiEvent event = KiiAnalytics.event("MyUser");
+
+// Set key-value pairs
+event.set("gender", "M");
+event.set("city", "San Francisco");
+event.set("location", "US");
+event.set("children", 2);
+event.set("age", 35);
+
+// Upload Event RawData to Kii Cloud
+try{
+    event.push();
+} catch (IOException e) {
+    // Please check IOException to see what went wrong
+}
+```
+
+## 3. 開発者ポータルで解析結果を確認する
+
+開発者ポータルにて、次の操作を行います。
+
+1. "Metrics" アイコンをクリック後、"Metrics" を選択肢ます。
+1. 対象メトリクスを選択肢ます。
+
+    以下のデフォルトビューが表示されます。
+
+    ![](07.png)
+
+    メトリクス名一覧のすぐ下に、ディメンションが表示されています。これらのうち１つをクリックすると、このディメンションにより分割されたビューが表示されます。
+
+    一例として、ディメンション "Location" を選択した際のビューを以下にあげます。
+
+    ![](08.png)
+
+    解析結果をさらに絞り込む方法を次に示します。
+
+    1. 左下に表示されているテーブルの行をクリックすることで、対象データのオン/オフができます。次の例では、トップ３アイテム（"UK", "IN", and "US"） を無効化しています。
+        ![](09.png)
+
+    1. さらに別ディメンションを用いたフィルタをかけることもできます。"Filters" の下の "None" というボタンを押下し、表示されるプルダウンメニューより新たなフィルタを定義します。
+
+        次の例では、"age" の値が 22 であるデータに解析結果を絞り込んでいます。
+
+        ![](10.png)
+
+## 4. Android SDK で解析結果詳細を取得する
+
+Android SDK は、解析結果詳細を取得するための API を提供しています。
+
+解析結果取得の際には、以下の情報を指定します。
+
+* ディメンション（グルーピングキー）：どのディメンションで分割した結果を取得す
+  るか？指定を省略した場合は、デフォルトビュー（分割なし）の結果を取得します。
+* フィルター： 適用するフィルターを指定します。複数のフィルターが指定可能です。
+  複数指定した場合は、指定内容を AND 結合したフィルタが適用されます。
+* 取得対象データのレンジ。
+
+さらに、開発者ポータルに表示されている Aggregation Rule ID を指定します。
+
+以下に、Android Analytics SDK 経由で解析結果を取得するサンプル snippet をあげま
+す。
+
+```java
+ // Define filters
+Filter filter = new Filter();
+filter.addFilter("location", "UK");
+
+// Define data range
+SimpleDate start = new SimpleDate(2012, 10, 01);
+SimpleDate end = new SimpleDate(2012, 10, 10);
+DateRange dateRange = new DateRange(start, end);
+
+// Build a query (while setting a dimension as "gender")
+ResultQuery query = ResultQuery.builderWithGroupingKey("gender")
+                               .withFilter(filter)
+                               .withDateRange(dateRange)
+                               .build();
+
+try {
+  // Get the snapshots
+  GroupedResult result = KiiAnalytics.getResult("_Aggregation_Rule_ID_", query);
+  // Check the snapshots
+  List snapshots = result.getSnapShots();
+} catch (KiiAnalyticsException) {
+  //  Please check KiiAnalyticsException to see what went wrong
+}
+```
+
+解析結果は GroupedSnapShot として返されます。各 GroupedSnapShot は、以下のプロ
+パティにより構成されています。GroupSnapShot の解釈方法については
+[Javadoc]({% page_url references-ja %}) を参照してください。
+
 
