@@ -3,4 +3,37 @@ layout: ja-doc
 title: アプリの現在設定を確認する
 sort-priority: 30
 ---
+アプリの現在設定を確認するには、以下のようにリクエストを投げます。例にもあるように、ここではアプリ管理者トークンを指定する必要があります。アプリ管理者トークン取得方法は「{% page_link rest-admin_features-ja %}」を参照してください。
 
+```sh
+curl -v -X GET \
+    -H "content-type:application/json" \ 
+    -H 'authorization:Bearer {ADMIN_TOKEN}' \
+    -H 'x-kii-appid:{APP_ID}' \
+    -H 'x-kii-appkey:{APP_KEY}' \
+    https://api-jp.kii.com/api/apps/{APP_ID}
+```
+
+Kii Cloud は次のように現在設定を返します。
+
+```
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Content-Length: 501
+Content-Type: application/vnd.kii.AppRetrievalResponse+json
+Date: Thu, 25 Oct 2012 06:02:31 GMT
+Server: nginx/1.0.15
+{
+    "appID": {APP_ID},
+    "clientID": {CLIENT_ID},
+    "clientSecret": {CLIENT_SECRET},
+    "description": "app_description",
+    "emailAddress": "you@example.com",
+    "emailAddressVerificationRequired": false,
+    "facebookAppID": {FACEBOOK_APP_ID},
+    "phoneNumberVerificationRequired": false,
+    "smsFrom": "AppSmsSender",
+    "verificationSmsTemplate": "Your validation code is ${code}, valid for ${valid} hours."
+}
+```
