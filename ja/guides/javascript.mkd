@@ -3,4 +3,6 @@ layout: ja-doc
 title: JavaScript スタートガイド
 sort-priority: 30
 page-id: js-guides-ja
+summary: Kii Platform は、Javascript アプリケーション開発を支援するツールとして Kii Javascript SDK を提供しています。Kii Javascript SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに Javascript アプリケーション開発を進めることができます。
 ---
+本ガイドは Kii Javascript SDK の主要な機能をご紹介するものです。Kii Javascript SDK が提供する機能の利用方法を、サンプルコード等と共にご紹介します。Kii Javascript SDK が提供する各機能の詳細については[こちら]({% page_url references-ja%})の ドキュメントを参照してください。

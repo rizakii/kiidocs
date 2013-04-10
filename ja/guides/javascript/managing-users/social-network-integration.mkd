@@ -2,4 +2,117 @@
 layout: ja-doc
 title: 外部サービス（Facebook）連携
 sort-priority: 30
+summary: 外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
 ---
+現時点において、Kii Platform は Facebook との連携をサポートしています。また、以下の2つの外部サービスの連携も近日中にサポートを予定しています。
+
+* Twitter：http://www.twitter.com/
+* RenRen（人人）：http://www.renren.com/
+
+## 外部サービスと Kii Platform の連携
+
+最初のステップとして、外部サービスと Kii Platform の連携を設定する必要があります。これは以下の手順にしたがって開発者ポータル上で行います。
+
+1. アプリケーションコンソール上で "Edit" ボタンをクリックします。
+    ![](01.png)
+1. "Setting" をクリックしアプリ設定画面を開きます。
+1. Facebook App ID を設定します。
+    ![](02.png)
+
+## 外部アカウントによるサインイン
+
+以下、Facebookアカウントでのサインインを行う例をあげます。
+
+まず、以下のJavaScriptコードをあなたのページの\<head\>タグに挿入してください。
+
+```html
+<script>
+  ...
+  window.fbAsyncInit = function() {
+    // initialize the Kii SDK
+    Kii.initialize(MY_KII_APP_ID, MY_KII_APP_KEY);
+
+    // set options required by Facebook's API
+    var options = {
+      channelUrl : null,
+      status : true,
+      cookie : true,
+      xfbml : true
+    };
+
+    // Initialize the SNS for later use
+    KiiSocialConnect.setupNetwork(
+      KiiSocialNetworkName.FACEBOOK,
+      MY_FACEBOOK_API_KEY, null, options);
+
+    ... // other code here
+  };
+
+  // required to load the Facebook API connections
+  (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script');
+    js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document));
+  ...
+</script>
+```
+
+実際のサインイン処理は次のように行います。
+
+```javascript
+ // SNS Registration
+var loginCallbacks = {
+  // successfully connected to facebook
+  success : function(user, network) {
+    console.log("Connected user " + user + " to network: " + network);
+  },
+  // unable to connect
+  failure : function(user, network, error) {
+    console.log("Unable to connect to " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.logIn(KiiSocialNetworkName.FACEBOOK, null, loginCallbacks);
+```
+
+## 外部アカウントと既存ユーザーとのリンク
+
+すでに存在する Kii Cloud のユーザと外部アカウントをリンクさせる例を以下に示します。リンクさせることにより、ユーザは外部アカウントの認証を行うことによって Kii Cloud にサインインできるようになります。
+
+```javascript
+var linkCallbacks = {
+  // successfully connected to facebook
+  success : function(user, network) {
+    console.log("Linked user " + user + " to network: " + network);
+  },
+  // unable to connect
+  failure : function(user, network, error) {
+    console.log("Unable to link to " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.linkCurrentUserWithNetwork(
+    KiiSocialNetworkName.FACEBOOK, null, linkCallbacks);
+```
+
+## 外部アカウントとのリンクの解除
+
+Kii Cloud のユーザと外部アカウントのリンクを解除する例を以下に示します。
+
+```javascript
+var unlinkCallbacks = {
+  success: function(user, network) {
+    console.log("Unlinked user " + user + " from network: " + network);
+  },
+  failure: function(user, network, error) {
+    console.log("Unable to unlink from " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.unLinkCurrentUserFromNetwork(
+  KiiSocialNetworkName.FACEBOOK, unlinkCallbacks);
+```
