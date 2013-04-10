@@ -2,5 +2,123 @@
 layout: ja-doc
 title: Object の検索
 sort-priority: 50
+summary: Kii Cloud 上の Object のうち、ある条件を満たすものを取得する方法として、Kii Cloud SDK は検索機能を提供しています。この機能を用いると、例えば「Bucket より "count" フィールドの値が10より大きい Object を、フィールド値降順で最大で10個取得」などといった条件が指定可能です。
 ---
+検索条件には JSON オブジェクトのtop-level keyを使うことができます。KiiQuery クラスを使って検索クエリを構築し、検索したい bucket の`query`メソッドを呼びます。実際のクエリ条件を定義するには KiiClause クラスを使用します。KiiQueryResult インスタンスが検索結果として返されます。また、KiiQueryResult はpagination 機能を提供します。
 
+## KiiClauseによる検索条件の定義
+
+検索条件の定義には次の比較演算子が使用できます。
+
+* **equals**
+* **notEquals**
+* **greaterThan**
+* **greaterThanOrEqual**
+* **lessThan**
+* **lessThanOrEqual**
+* **inWIthIntValue, inWithLongValue, inWithDoubleValue, inWithStringValue**
+* **startsWith**
+
+また、複数の検索条件を組み合わせる論理演算子としてAND/ORが使用できます。
+
+* **and**
+* **or**
+
+## KiiQueryの構築
+
+KiiQuery インスタンスは `queryWithClause` メソッドに KiiClause インスタンスを渡すことで生成できます。KiiClause インスタンスを渡さずに KiiQuery インスタンスを生成した場合は、対象 Bucket 内の全ての Object が検索結果としてマッチします（i.e., **all**検索に相当）。
+
+さらにオプションとして、以下のメソッドにより検索結果のソート（昇順、降順）および絞り込みを行うことができます。
+
+* **sortByAsc**
+* **sortByDesc**
+* **setLimit**
+
+sortByAsc も sortByDesc も指定されない場合は、検索結果は任意の並びになります。setLimit が指定されない場合は、最大200件を返します。
+
+## KiiQueryResult による検索結果のパース（ページネイション）
+
+検索結果は`getResult`メソッドを呼ぶことで KiiQueryResult として返されます。KiiQueryResult から検索条件に一致するオブジェクトのリストを取得することができます。
+
+検索結果が複数のページに渡っている場合（たとえば、`setLimit`で10を指定し、30件のオブジェクトが一致した場合）、`getResult`が返すリストは最初のページに含まれるオブジェクトを返します。次のページのオブジェクトを取得するには`getNextQueryResult`メソッドを呼び、改めて`getResult`メソッドを呼びます。
+
+## Query の例
+
+まずは、一番単純な例として、Bucket 内の全てのオブジェクトを取得する検索を考えます。
+
+全オブジェクト取得のためには、"all" 検索に相当する KiiQuery インスタンスを作成します。これは `KiiQuery.queryWithClause()` を何の KiiClause オブジェクトも渡さずに実行することにより実現できます。検索対象 Bucket の `executeQuery` メソッドを、作成した "all" クエリを渡して実行すると、Bucket 内の全てのオブジェクトが返されます。（別の方法として、クエリとして null を指定の上 `executeQuery` メソッドを実行しても同じ結果となります）
+
+```javascript
+// Prepare the target bucket to be queried
+var bucket = Kii.bucketWithName("my_bucket");
+
+// Build "all" query
+var all_query = KiiQuery.queryWithClause();
+
+// Define the callbacks
+var queryCallbacks = {
+  success: function(queryPerformed, resultSet, nextQuery) {
+    // do something with the results
+    for(var i=0; i<resultSet.length; i++) {
+      // do something with the object
+      // resultSet[i]; // could be KiiObject, KiiGroup, KiiUser, etc
+    }
+    if(nextQuery != null) {
+      bucket.executeQuery(nextQuery, queryCallbacks);
+    }
+  },
+  failure: function(queryPerformed, anErrorString) {
+    // do something with the error response
+  }
+}
+
+// Execute the query
+bucket.executeQuery(all_query, queryCallbacks);
+// alternatively, you can also do:
+// bucket.executeQuery(null, queryCallbacks);
+```
+
+次に、以下の条件でオブジェクトを検索するケースを考えます。
+
+* "gender" プロパティが "Female"、かつ "age" が 18 より大きい
+* 検索結果の並びは、"age" プロパティの値で昇順にソートされている
+* 10件ごと取得する
+
+次のコードは上記条件のクエリを構築します。
+
+```javascript
+// Prepare the target bucket to be queried
+var bucket = Kii.bucketWithName("my_bucket");
+
+// Create the conditions for the query
+var clause1 = KiiClause.equals("gender", "Female");
+var clause2 = KiiClause.greaterThan("age", 18);
+
+// Merge the conditions together with an AND
+var totalClause = KiiClause.and(clause1, clause2);
+
+// Build the query with the clauses and some other parameters
+var query = KiiQuery.queryWithClause(totalClause);
+query.setLimit(10);
+query.sortByAsc("age");
+
+// Define the callbacks
+var queryCallbacks = {
+  success: function(queryPerformed, resultSet, nextQuery) {
+    // do something with the results
+    for(var i=0; i<resultSet.length; i++) {
+      // do something with the object
+      // resultSet[i]; // could be KiiObject, KiiGroup, KiiUser, etc
+    }
+    if(nextQuery != null) {
+      bucket.executeQuery(nextQuery, queryCallbacks);
+    }
+  },
+  failure: function(queryPerformed, anErrorString) {
+    // do something with the error response
+  }
+}
+
+// Execute the query
+bucket.executeQuery(query, queryCallbacks);
+```
