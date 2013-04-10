@@ -9,8 +9,8 @@ layout: en-notrans
 <div class="wrapper">
 
 <div class="breadcrumbs">
-{% for p in page.parents %}<a href="{{ p.url }}">{{ p.title }}</a><span> &gt; </span>
-{% endfor %}<span>{{ page.title }}</span>
+{% kiidoc_parents %}
+<span>{{ page.title }}</span>
 </div>
 
 <h1>{{ page.title }}</h1>
@@ -23,17 +23,8 @@ layout: en-notrans
 
 </section>
 
-{% assign curr_rank = 2 %}
 <aside class="sidebar"><nav>
-<ul>{% for p in page.hierarchical_pages %}{% if p.url contains '/rest/' and p.url != '/rest/' %}
-{% if p.hierarchical_rank != curr_rank %}{% if p.hierarchical_rank > curr_rank %}<ul{% if curr_rank != 0 %} class="sub_pages"{% endif %}>
-{% else %}{% for i in (p.hierarchical_rank..curr_rank) %}{% if i != curr_rank %}</li>
-</ul>
-{% endif %}{% endfor %}{% endif %}{% assign curr_rank = p.hierarchical_rank %}{% else %}</li>
-{% endif %}<li{% if page.url == p.url %} class="selected"{% elsif page.hierarchical_ancestors_url contains p.url %} class="selected_parent"{% endif %}><div><a href="{{ p.url }}">{{ p.title }}</a></div>{% endif %}{% endfor %}
-{% if curr_rank >= 3 %}{% for i in (curr_rank .. 3) %}</ul>
-</li>
-{% endfor %}{% endif %}</ul>
+{% kiidoc_treenav rest %}
 </nav></aside>
 
 </div>
