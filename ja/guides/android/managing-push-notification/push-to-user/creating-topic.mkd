@@ -1,6 +1,92 @@
 ---
 layout: ja-doc
 title: トピックを作成する
+summary: ここでは、サンプルシナリオのそれぞれを例に取り、トピックの作成方法を説明していきます。
 sort-priority: 10
+page-id: android-creating_topic-ja
 ---
+### シナリオ#1: 全アプリユーザへの一斉通知
+
+このシナリオでは application scope トピックを作成します。Application scope トピックは、アプリ開発者のみ作成可能です。全てのアプリユーザが購読可能ですが、このトピックにメッセージを送信できるのはトピック作成者（つまりアプリ開発者）のみとなります。
+
+Application scope トピック作成は 次のように REST API を用いて行います。
+
+1.[「RESTスタートガイド - アプリ管理者向け機能」]({% page_url rest-admin_features-ja %})の内容に従い、アプリ管理者トークンを取得します。
+2. 次の例のようにして application scope トピックを作成します（この例では "SendingAlert" という名前のトピックを作成しています）。
+
+```
+ curl -v -X PUT \
+  -H "X-Kii-AppID:{APP_ID}" \
+  -H "X-Kii-AppKey:{APP_KEY}" \
+  -H "Authorization:Bearer {APP_ADMIN_TOKEN}" \
+  "http://api-jp.kii.com/api/apps/{APP_ID}/topics/SendingAlert"
+```
+
+{APP\_ID} と {APP\_KEY} の箇所には実際の AppID と AppKey の値を入れます。また、取得したアプリ管理者トークンを {APP\_ADMIN\_TOKEN} の箇所に入れてください。
+
+<p class="note">近日中に、開発者ポータル上で application scope トピックが作成ができるようになる予定です。</p>
+
+
+### シナリオ#2: グループメッセージング
+
+このシナリオでは group scope トピックを作成します。Group scope トピックは、グループメンバーであれば誰でも作成可能です。また、グループメンバーであれば誰でも購読可能であり、全てのグループメンバーがトピックに対してメッセージを送信することができます。
+
+Application scope トピックと異なり、group scope トピックは通常アプリケーションによって動的に作成されます。以下に、group scope トピックを作成する例をあげます。
+
+```java
+try {
+  // Create a group
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  group.save();
+
+  // Create an instance of group-scope topic.
+  // (assume that the current user is a member of the group)
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Save the topic to Kii Cloud
+  topic.save();
+} catch (IOException ioe) {
+  // failed.
+} catch (GroupOperationException goe) {
+  // failed
+} catch (AppException e) {
+  // failed
+}
+```
+
+ここでは、以下の処理を実行しています。
+
+ * `topic` メソッドを実行し、group-scope の topic を作成します。
+ * `save` メソッドを実行し、topic を Kii Cloud に保存します。
+
+
+### シナリオ#3: TODO リストを全てのデバイスにプッシュ
+
+このシナリオでは user scope トピックを作成します。Group scope トピック同様、user scope トピックは通常アプリケーションによって動的に作成されます。
+
+以下に、user scope トピックを作成する例をあげます。
+
+```java
+try{
+   // Create a user-scope group
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Save the topic to Kii Cloud
+  topic.save();
+} catch (IOException ioe ) {
+  // failed.
+} catch (AppExceptioin e) {
+  // failed.
+}
+```
+
+ここでは以下の処理を実行しています。
+
+ * `topic` メソッドを実行し、user scope トピックを作成。
+ * `save` メソッドを実行し、トピックを Kii Cloud に保存。
+
 
