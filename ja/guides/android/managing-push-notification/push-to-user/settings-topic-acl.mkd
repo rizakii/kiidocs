@@ -4,4 +4,148 @@ title: トピックの ACL を変更する
 sort-priority: 50
 page-id: android-settings_topic_acl-ja
 ---
+アプリケーションの用途によっては、トピックのスコープ毎に定まる規定のルールを変
+更したい時があります。例えば、以下の様なシナリオが考えられます。
+
+*  **シナリオ#2a:**（シナリオ#2 の拡張シナリオ）全アプリユーザに購読許可を出し
+   たい。  
+    トピック作成者として、現在利用中の「グループ間メッセージング」機能を全アプ
+    リユーザ（認証済ユーザ）に開放したい。
+    具体的には、グループメンバー以外のユーザがROM （Read-only メンバー）として
+    参加可能となるよう、トピックに対する購読のみを許可したい。
+ 
+*  **シナリオ#2b:**（シナリオ#2 の拡張シナリオ）ある特定のユーザに購読・メッ
+   セージ送信を許可したい。
+    トピック作成者として、現在利用中の「グループ間メッセージング」機能をある特定
+    のユーザに開放したい。具体的には、このユーザを管理者として招待したいため、ト
+    ピックに対する購読とメッセージ送信の双方を許可したい。
+ 
+*  **シナリオ#3a:**（シナリオ#3 の拡張シナリオ）TODO リストをグループメンバー全
+   員と共有したい。
+    TODO アプリユーザとして、己の TODO リストを家族メンバーと共有したい。既に家
+    族メンバーが参加しているユーザグループは存在するため、このグループに属するメ
+    ンバー全員に対して、トピックに対する購読を許可したい。
+
+これらのルール変更は、対象トピックに対して ACL エントリ（ホワイトリストエント
+リ）を追加することで実現可能です。
+
+## トピックに ACL エントリを設定する
+
+ACL エントリは、以下の３つの情報により構成されます。
+
+* **Subject**: この ACL エントリは、誰（サブジェクト）に対してアクションを許
+    可するものか？
+
+    指定可能な subject は以下の通りです：
+    * 特定のユーザ
+    * 特定のユーザグループ
+    * 認証済ユーザ（i.e., 全アプリユーザ）
+
+* **Action**: この ACL エントリは、どのアクションを許可するものか？
+
+    指定可能な action は以下の通りです：
+    * トピックの購読 (SUBSCRIBE\_TO\_TOPIC)
+    * トピックへのプッシュメッセージ送信 (SEND\_MESSAGE\_TO\_TOPIC)
+
+* **Grant or revoke**: この ACL エントリで相手に対して、指定のアクションを実
+    際に許可するか？なお、ACL エントリはホワイトリストとしてのみ利用可能なた
+    め、revoke は既に登録済の ACL エントリに対してのみ実施可能です。（i.e., ブ
+    ラックリスト ACL エントリを新規で登録することはできません）
+
+実際の例を見てみましょう。以下のサンプルコードは、シナリオ#2a および #2b を実現
+するための ACL エントリを設定するためのものです。
+
+```java
+try{
+  // Instantiate the already-existing group-scope topic.
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  group.save();
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Get an ACL handler
+  KiiACL acl = topic.acl();
+
+  // Scenario #2a:
+  // Allow all application users (authenticated users) to subscribe
+  KiiACLEntry entry = new KiiACLEntry(KiiAnyAuthenticatedUser.create(), 
+      TopicAction.SUBSCRIBE_TO_TOPIC, true);
+  acl.putACLEntry(entry);
+
+  // Scenario #2b:
+  // Allow a user to subscribe and send push messages.
+  KiiUser user = KiiUser.findUserByUsername("_I_am_a_supervisor_");
+  KiiACLEntry entry = new KiiACLEntry(user, 
+      TopicAction.SUBSCRIBE_TO_TOPIC, true);
+  acl.putACLEntry(entry);
+
+  KiiACLEntry entry = new KiiACLEntry(user, 
+      TopicAction.SEND_MESSAGE_TO_TOPIC, true);
+  acl.putACLEntry(entry);
+
+  // Reflect all ACL entries
+  acl.save();
+
+} catch (IOException e){
+  // hoge
+} catch (AppException e){
+  // hoge
+} 
+```
+
+ここでは以下の処理が行われています。
+
+1.  `acl` メソッドを実行して ACL ハンドラを作成。
+2.  `KiiACLEntry` メソッドを実行して ACL エントリを作成。
+    * シナリオ#2a 向けに、サブジェクトとして `kiiAnyAuthenticatedUser.create()`
+      を、アクションとして `TopicAction.SUBSCRIBE_TO_TOPIC` を指定しています。
+      これによって、全ての認証済ユーザに対してトピックの購読を許可する ACL エン
+      トリが作成されます。
+    * シナリオ#2b 向けに、サブジェクトとして特定ユーザを、アクションとして
+      `TopicAction.SUBSCRIBE_TO_TOPIC` と `TopicAction.SEND_MESSAGE_TO_TOPIC`
+      を指定しています。これによって、このユーザに対してトピックの購読とトピッ
+      クへのメッセージ送信を許可する ACL エントリが作成されます。
+
+3.  `putACLEntry` メソッドを実行し、各 ACL エントリをローカル保存します。
+4.  `save` メソッドを実行し、ACL エントリを Kii Cloud に保存します。
+
+次のサンプルコードでは、シナリオ#3a を実現するための ACL エントリを設定しています。
+
+```java
+try{
+  // Instantiate the already-existing user-scope topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Get an ACL handler
+  KiiACL acl = topic.acl();
+
+  // Scenario #3a:
+  // Allow group members to subscribe.
+  String groupName = "MyFamily";
+  KiiGroup group = Kii.group(groupName);
+  group.save();
+  
+  KiiACLEntry entry = new KiiACLEntry(group, 
+      TopicAction.SUBSCRIBE_TO_TOPIC, true);
+  acl.putACLEntry(entry);
+
+  // Reflect all ACL entries
+  acl.save();
+
+} catch (IOException ioe) {
+  // Changing topic ACL failed.
+} catch (GroupOperationException ge) {
+  // Chaging topic ACL (group operation) failed.
+} catch (AppException e) {
+  // Changing topic ACL failed.
+} 
+```
+
+基本的な処理は、先ほどのサンプルコードを同様です。こちらの例では、ACL エントリ
+のサブジェクトとしてユーザグループを指定しています。これにより、指定したアク
+ション（トピックの購読）が、このユーザグループのメンバー全員に許可されます。
+
 
