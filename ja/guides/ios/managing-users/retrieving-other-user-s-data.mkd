@@ -2,4 +2,67 @@
 layout: ja-doc
 title: 他ユーザの情報を取得
 sort-priority: 70
+summary: ユーザのユーザ名、メールアドレス、もしくは電話番号を指定することで、該当ユーザの情報にアクセスすることができます。
 ---
+Kii Cloud が返すユーザ情報の量は、アプリケーションの設定により決定されます。アプリケーション設定の-"Expose Full User Data to Others"-オプションがオンの場合、ユーザの全情報が返されます。オプションがオフの場合、以下の情報のみが返されます。
+
+* UserID
+* LoginName
+* DisplayName
+
+## 設定オプション "Expose Full User Data to Others" のオン/オフ方法
+
+開発者ポータル上で、以下の操作を行なってください。
+
+1. "Edit" ボタンをクリックし、アプリケーションコンソールを開きます。
+
+    ![](01.png)
+1. "Setting" をクリックしアプリ設定画面を開きます。
+1. "Expose Full User Data To Others" オプションをオン/オフします。
+
+    ![](02.png)
+
+## 他ユーザの情報取得方法
+
+### ユーザ名を指定してユーザ情報を取得
+
+ユーザ名指定によるユーザ情報取得の例を以下にあげます。
+
+```objc
+NSString *username = @"user_123456";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByUsernameSynchronous:username withError:&error];
+if (error != nil) {
+    // Please check error to see what went wrong...
+}
+```
+
+### メールアドレスを指定してユーザ情報を取得
+
+メールアドレス指定によるユーザ情報取得の例を以下にあげます。指定するメールアドレスは認証済である必要があります。
+
+```objc
+NSString *email = @"user_123456@example.com";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByEmailSynchronous:email
+                                           withError:&error];
+if (error != nil) {
+    // Please check error to see what went wrong...
+}
+```
+
+### 電話番号を指定してユーザ情報を取得
+
+電話番号指定によるユーザ情報取得の例を以下にあげます。指定する電話番号は認証済である必要があります。
+
+なお、電話番号は、+と国コードから始まる国際電話番号で指定してください。
+
+```objc
+NSString *phone = @"+819012345678";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByPhoneSynchronous:phone
+                                           withError:&error];
+if (error != nil) {
+    // Please check error to see what went wrong...
+}
+```
