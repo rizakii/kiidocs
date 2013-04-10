@@ -2,4 +2,78 @@
 layout: ja-doc
 title: 外部サービス（Facebook）連携
 sort-priority: 30
+summary: 外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
 ---
+現時点において、Kii Platform は Facebook との連携をサポートしています。また、以下の2つの外部サービスの連携も近日中にサポートを予定しています。
+
+* Twitter：http://www.twitter.com/
+* RenRen（人人）：http://www.renren.com/
+
+## 外部サービスとKii Platformの連携
+
+最初のステップとして、外部サービスと Kii Platform の連携を設定する必要があります。これは以下の手順にしたがって開発者ポータル上で行います。
+
+1. アプリケーションコンソール上で "Edit" ボタンをクリックします。
+
+    ![](01.png)
+1. "Setting" をクリックしアプリ設定画面を開きます。
+1. Facebook App ID を設定します。
+
+    ![](02.png)
+
+## Info.plistの編集
+
+info.plistに以下の記述を追加してください。この際、Facebook より提供された Facebook App Key の前に "fb" というプリフィックスを指定してください。
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb{FACEBOOK_APP_KEY}</string>
+        </array>
+    </dict>
+</array>
+```
+
+## AppDelegate.mの編集
+
+外部サービス連携のために、以下のコードをAppDelegate.mに追加してください。
+
+```objc
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+
+     return [KiiSocialConnect handleOpenURL:url];
+}
+```
+
+## 外部サービスによるサインイン
+
+Facebook アカウントでサインインする例です。
+
+```objc
+- (void) myRegistrationFinished:(KiiUser*)user
+                   usingNetwork:(KiiSocialNetworkName)network
+                      withError:(NSError*)error {
+
+      // the user has logged in successfully
+      if(error == nil) {
+          // do something with the user
+      }
+}
+
+- (void) myRegistrationMethod {
+        [KiiSocialConnect setupNetwork:kiiSCNFacebook
+                         　　　  withKey:FACEBOOK_APP_KEY
+                　　　         andSecret:nil
+                  　　　      andOptions:nil];
+        [KiiSocialConnect logIn:kiiSCNFacebook
+             　　　  usingOptions:nil
+             　　　  withDelegate:self
+               　　　 andCallback:@selector(myRegistrationFinished:usingNetwork:withError:)];
+    }
+```
