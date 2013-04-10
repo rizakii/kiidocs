@@ -1,5 +1,0 @@
----
-layout: ja-doc
-title: Bucket の作成
-sort-priority: 10
----

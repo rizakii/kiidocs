@@ -2,5 +2,74 @@
 layout: ja-doc
 title: Push 通知を設定する
 sort-priority: 20
+summary: KIi Cloud の Push 通知を利用するには、正しくアプリ設定を行う必要があります。例えば Android で Push 通知を利用する場合、正しい GCM Key を予めセットしておく必要があります。
 ---
+## アプリに GCM Key を設定する
 
+以下に、アプリに GCM Key を設定する例をあげます。この操作にはアプリ管理者トークンが必要です。
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H "content-type:application/vnd.kii.GCMKeyRegistrationRequest+json" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/configuration/gcm" \
+  -d '{"gcmKey":"{GCM_KEY}"}'
+```
+
+既に GCM Key が設定済のアプリに対して上記のリクエストを送信した場合は、GCM Key の交換が行われます。この場合、新たに設定した GCM Key が古い GCM Key と置き換わります。
+
+## アプリの GCM Key を確認する
+
+### アプリに GCM Key が設定済か確認
+
+アプリに GCM Key が設定済か確認する例を以下にあげます。
+
+```sh
+curl -v -X HEAD \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```
+
+### アプリに設定されている GCM Key を取得
+
+アプリの GCM Key を取得する例を以下にあげます。
+
+```sh
+curl -v -X GET \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```
+
+Kii Cloud は次のように応答を返します。
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.GCMKeyRetrievalResponse+json
+< Content-Length: 58
+< Date: Fri, 16 Nov 2012 17:11:53 GMT
+<
+{
+  "gcmKey" : "AIzaSyCxZLKEhrRMUtTpw9kRdPoWb71A9LZZyDY"
+* Connection #0 to host api-jp.kii.com left intact
+* Closing connection #0
+```
+
+## アプリより GCM Key を破棄する
+
+アプリの GCM Key を破棄する例を以下にあげます。
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api-jp.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```

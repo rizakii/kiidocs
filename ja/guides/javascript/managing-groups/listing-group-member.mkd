@@ -3,3 +3,17 @@ layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
 ---
+グループオーナーは、グループメンバーの一覧を次の例のように取得することができます。
+
+```javascript
+group.getMemberList({
+  success: function(theGroup, theMembers) {
+    console.log("Group retrieved!");
+    console.log(theGroup);
+    console.log(theMembers);
+  },
+  failure: function(theGroup, errorString) {
+    console.log("Error retrieving group members: " + errorString);
+  }
+});
+```

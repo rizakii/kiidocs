@@ -2,4 +2,58 @@
 layout: ja-doc
 title: サインイン
 sort-priority: 20
+summary: サインアップ処理完了後（メールアドレスや電話番号を指定した場合は、これらの認証が完了後）、登録したユーザ名やメールアドレス、電話番号とパスワードによるサインインが有効になります。
 ---
+また、サインインに成功後、Kii Cloud SDK よりアクセストークンを取得することができます。次回サインイン時には、このアクセストークンを利用することもできます。この場合、取得したアクセストークンをアプリケーション側で安全に保存・管理してください。
+
+## パスワードによるサインイン
+
+以下の例はパスワードを使ったサインインです。ユーザ名とパスワードを指定して`authenticate`メソッドを呼びます。認証済メールアドレスや電話番号でサインインを行う場合は、ユーザ名の代わりにこれらの値を指定してください。
+
+```javascript
+var username = "user123456789";
+var password = "123ABC";
+
+// Authenticate the user
+KiiUser.authenticate(username, password, {
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User authenticated!");
+    console.log(theUser);
+  },
+  // Called on a failed authentication
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error authenticating: " + errorString);
+  }
+})
+```
+
+## アクセストークンを用いたサインイン
+
+一度サインインしたユーザに対して、Kii Cloud はアクセストークンを発行します。二回目以降はこのアクセストークンを用いて`authenticateWithToken`メソッドを呼ぶことで、ユーザーをサインインさせることができます。アクセストークンは期限切れ/失効しない限り使用することが可能で、ユーザーに何度もパスワードを入力させる必要がなくなります。
+
+以下にアクセストークンを用いたサインインの例をあげます。`getAccessToken`による取得したアクセストークンを、後ほど`authenticateWithToken`メソッドにて利用しサインインを行なっています。
+
+```javascript
+ // Get an access token
+var access_token = KiiUser.getAccessToken();
+
+...
+
+// Authenticate the user with the access token
+KiiUser.authenticateWithToken(access_token, {
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User authenticated!");
+    console.log(theUser);
+  },
+  // Called on a failed authentication
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error authenticating: " + errorString);
+  }
+})
+```
