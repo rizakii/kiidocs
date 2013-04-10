@@ -13,7 +13,9 @@ summary: アプリデータ（App Data）の解析を行う基本的なステッ
 
 * ゲームアプリにおいて、ユーザのハイスコア保存用に次のような Object を利用している。
 
-    `{ "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }`
+    ```javascript
+    { "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }
+    ```
 
     * キー "**Score**" は、ユーザのスコアを整数値として保存
     * キー "**Level**" は、ユーザのレベル（"Easy", "Normal", "Hard"）を文字列として保存
