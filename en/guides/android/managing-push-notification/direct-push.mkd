@@ -80,7 +80,7 @@ protected void onMessage(Context context, Intent intent) {
   // Determine the push notification type and start parsing.
   MessageType type = message.pushMessageType();
   switch (type) {
-  case DIRECT＿PUSH:
+  case DIRECT_PUSH:
 
     // Extract field values.
     long when = extras.getLong("when");
