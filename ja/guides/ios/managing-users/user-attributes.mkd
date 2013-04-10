@@ -2,4 +2,78 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
+summary: Kii Cloud SDK は、以下の所定の Key-Value を用いてユーザ属性を管理します。
 ---
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+さらに、上記の所定 Key にぶつからない名前であれば、任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
+
+## 所定の属性の設定
+
+多くの所定のKeyはSDKの内部で使用されています。これらの値はSDKによって自動的にセットされ、開発者は基本的に気にする必要はありません。
+
+以下の所定 Key-Value は、setter メソッドにより値を変更可能です。
+
+* displayName
+* country
+
+以下の所定 Key-Value は更新用の API をコールして値の変更を行います。
+
+* email
+* phoneNumber
+* country
+
+以下に、"email"、"phoneNumber"、"coutry" の値を変更するサンプルコードをあげます。
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser currentUser];
+
+// User - Setting predefined attributes (profile - email)
+[user changeEmailSynchronous:@"myNewEmail@example.com" withError:&error];
+if(error != nil) {
+    // Email change failed
+    // Please check error description/code to see what went wrong...
+}
+
+// User - Setting predefined attributes (profile - phone number)
+[user changePhoneSynchronous:@"+15555555555" withError:&error];
+if(error != nil) {
+    // Email change failed
+    // Please check error description/code to see what went wrong...
+}
+
+// User - Setting predefined attributes (profile - country)
+[user setCountry:@"JP"];
+[user saveSynchronous:&error];
+if(error != nil) {
+    // Country change failed
+    // Please check error description/code to see what went wrong...
+}
+```
+
+## 任意の属性の設定
+
+任意の Key-Value ペアをセットするサンプルです。以下の例のように`setObject`メソッドを使用して Key-Value を設定していきます。
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser currentUser];
+[user setObject:@"male" forKey:@"gender"];
+[user setObject:[NSNumber numberWithInt:500] forKey:@"score"];
+[user saveSynchronous:&error];
+
+if(error != nil) {
+    // User object save failed
+    // Please check error description/code to see what went wrong...
+}
+```
