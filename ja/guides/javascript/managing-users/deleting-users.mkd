@@ -2,4 +2,19 @@
 layout: ja-doc
 title: ユーザ削除
 sort-priority: 60
+summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Cloud SDK はユーザ削除機能を提供しています。
 ---
+次の例は、ユーザーを削除する例です。
+
+```javascript
+var user = KiiUser.getCurrentUser();
+user.delete({
+  // Called on successful deletion
+  success: function(theUser) {
+    console.log("User deleted!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error deleting user: " + errorString);
+  }
+});
+```
