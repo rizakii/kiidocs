@@ -2,5 +2,214 @@
 layout: ja-doc
 title: アプリデータの解析
 sort-priority: 10
+summary: アプリデータ（App Data）の解析を行う基本的なステップは以下の通りです。
 ---
 
+1. メトリクスを定義する
+1. 開発者ポータルで解析結果を確認する
+1. （必要に応じて）REST API を用いて解析結果詳細を取得する
+
+以後、以下のサンプルシナリオを例に取り、実際に App Data の解析を行う手順を解説していきます。
+
+* ゲームアプリにおいて、ユーザのハイスコア保存用に次のような Object を利用している。
+
+    `{ "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }`
+
+    * キー "**Score**" は、ユーザのスコアを整数値として保存
+    * キー "**Level**" は、ユーザのレベル（"Easy", "Normal", "Hard"）を文字列として保存
+    * キー "**AppVersion**" は、アプリのバージョン（1, 2, 3, ...）を整数値として保存
+* ユーザのゲームプレイ状況把握のために、このハイスコアデータを以下のメトリクスを用いて解析を行いたい。
+    * **メトリクス#1** **"Score"**の平均値を、**"Level"**と**"AppVersion"**毎に評価
+    * **メトリクス#2** データ総数 (i.e., アップロードされたハイスコアデータの総数）を、**"Score"**,**"Level"** および **"AppVersion"** 毎に評価
+
+## 1. メトリクスを定義する
+
+開発者ポータルで以下の手順を実施します。
+
+1. 開発者ポータルより、対象アプリを選択します。
+1. "Metrics" アイコンをクリックします。
+1. "Config" を選択し、"Add" ボタンを押下します。
+    ![](01.png)
+
+    以上の手順により、Aggregation Rules 定義画面が表示されます。
+
+    ![](02.png)
+
+1. "App Data" を選択
+1. "Select a conversion rule" を押下
+
+    ![](03.png)
+1. "+" ボタンをクリックし、Conversion Rules 定義画面を開きます。
+1. アプリデータの解釈方法（Conversion Rule）を定義します。以下の情報を入力してください。
+    * **NAME** : Conversion Rule の名前
+    * **BUCKET NAME、SCOPE**: 解析対象データが保存されている Bucket の名前とスコープ
+    * **COLUMNS** : 解析対象となるデータフィールド。各コラムは、以下の３つの項目により定義されます。
+        * **Name** : フィールドにつける名前
+        * **Source** : アプリデータにおけるフィールド名
+        * **Type** : フィールド値のタイプ (int, string, float, boolean).
+
+            <p class="note">現バージョンにおいては、マルチバイト文字はサポートされません。マルチバイト文字を含むフィールド名やマルチバイト値を持つフィールドを指定した場合、期待通りの結果が表示されないことがあります。</p>
+
+            一例として、我々のサンプルシナリオの場合は次のように conversion rule を定義します。
+            ![](04.png)
+    * Conversion rule の名前は "High Score Tracking"
+    * App scope の "score" という Bucket を解析対象 Bucket として指定
+    * 以下のカラムを定義：
+        * int 型の値を保持するデータフィールド "Score" に対して、"UserScope" という名前をセット
+        * string 型の値を保持するデータフィールド "Level" に対して、"UserLvel" という名前をセット
+        * int 型の値を保持するデータフィールド "AppVersion" に対して、"AppVersion" という名前をセット
+
+    設定が完了したら "Save" を押下してください。
+
+1. 今定義した conversion rule が、Conversion Rule 一覧に新たに表示されていることを確認します。
+    ![](05.png)
+
+    この conversion rule をクリックします。
+1. Aggregation Rules 定義画面に戻ります。先ほどクリックした conversion rule が反映されていることを確認してください
+
+    Aggregation rule の残りの部分を設定します。
+    * **"Aggregate using"**  セクションに、以下の情報を記入します。
+        * **Aggregation function:** ファクトをどう集計するか。選択可能な関数は**Count**, **Avg** (Average), **Sum**, **Min**, **Max** のいずれかです。
+        * **Column:**  どのカラムをファクトとして集計するか。
+    * **"Dimensions"**  セクションに表示されているボタンより、ディメンションとして使用するものをクリックして有効にします。
+
+    一例として、我々のサンプルシナリオにおけるメトリクス＃１は次のように設定します。
+
+    ![](06.png)
+
+    同様にメトリクス＃２は次のように定義します。
+
+    ![](07.png)
+
+    設定が完了したら "Save" ボタンを押下します。
+1. 今設定した Aggregation Rule が表示されることを確認します。ただし、この段階ではルールはまだ有効になっていません。
+    ![](08.png)
+
+    "Config" ボタンを押下します。
+1. Aggregation Rule 設定画面が表示されます。
+    ![](09.png)
+
+    "Activate" をクリックし、インジケーターが緑色に変わるのを確認します。
+
+    ![](10.png)
+
+これで設定した Aggregation Rule が有効になりました。Aggregation Rule ID が表示されていることを確認してください。この ID は、後ほど Android SDK 経由で解析結果の詳細を取得する際に利用します。
+
+## 2. 開発者ポータルで解析結果を確認する
+
+開発者ポータルにて、次の操作を行います。
+
+1. "Metrics" アイコンをクリック後、"Metrics" を選択。
+1. 対象メトリクスを選択。（ここではメトリクス＃２ "Counting # of scores" を選択したものとして話を進めます）
+
+    以下のデフォルトビューが表示されます。
+
+    ![](11.png)
+
+    メトリクス名一覧のすぐ下に、ディメンションが表示されています。これらのうち１つをクリックすると、このディメンションにより分割されたビューが表示されます。
+
+    一例として、ディメンション "UserScore" を選択した際のビューを以下にあげます。
+
+    ![](12.png)
+
+    解析結果をさらに絞り込む方法を次に示します。
+
+    1. 左下に表示されているテーブルの行をクリックすることで、対象データのオン/オフができます。次の例では、"UserScore" の値が 80, 90, または 100 データのみを残し、これ以外のデータをすべて無効化しています。
+        ![](13.png)
+    1. さらに別ディメンションを用いたフィルタをかけることもできます。"Filters" の下の "None" というボタンを押下し、表示されるプルダウンメニューより新たなフィルタを定義します。例えば、この手順で "AppVersion" の値が 5 であるデータに解析結果を絞り込む、などといったことが可能です。
+
+        なお、開発者ポータルは、絞り込み結果を表示する際に解析のしやすいグラフを表示します。
+
+        一例として、我々のサンプルシナリオにおけるメトリクス＃２（"Tracking Average scores"）を表示した場合におけるグラフ表示の例を以下にあげます。この場合は、円グラフではなく棒グラフが表示されています。
+
+        ![](14.png)
+
+## 3. REST API を用いて解析結果詳細を取得する
+
+REST API を使うと、以下の２つのフォーマットで解析結果詳細を取得できます。
+
+* Tabular Result: ファクトが、各ディメンションの組み合わせ毎に集計された形で返されます。
+* Grouped Result: ファクトが、指定したディメンションで分割された形で返されます。
+
+### Tabular Result
+
+以下に、Tabular Result を取得する例をあげます。ここでは、2012-12-01 から 2013-01-31 までの集計結果を取得しています。
+
+```sh
+curl -v -X GET
+  -H 'Authorization: {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}' \
+  -H 'X-Kii-AppKey: {APP_KEY}' \
+  -H 'Accept: application/vnd.kii.TabularAnalyticResult+json' \
+  "https://qa21.internal.kii.com/api/apps/{APP_ID}/analytics/
+  {AGGREGATION_RULE_ID}/data?startDate=2012-12-1&endDate=2013-1-31"
+```
+
+Kii Cloud は次のように集計結果を返します。
+
+```javascript
+{
+  "labels" : [ {
+    "label" : "UserScore",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "UserLevel",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "AppVersion",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "Count",
+    "type" : "FACT"
+  } ],
+  "snapshots" : [ {
+    "createdAt" : 1357862400000,
+    "data" : [ [ 90, "Hard", 5, 1 ], [ 0, "Easy", 1, 8 ],   (...snip...)   , [ 90, "Hard", 4, 1 ] ]
+  }, {
+    "createdAt" : 1357948800000,
+    "data" : [ [ 0, "Easy", 1, 8 ], [ 90, "Hard", 6, 1 ],   (...snip...)   , [ 90, "Hard", 5, 1 ] ]
+
+  (... snip ...)
+
+  } ]
+}
+```
+
+リクエスト時に、フィルタ（e.g,. "UserLevel" が "Easy" であるデータのみを対象とした集計を実施）を指定して取得解析結果の絞り込みを行うこともできます。指定方法などの詳細については、[REST API 詳細ドキュメント]({% page_url references-ja %})を参照してください。
+
+### Grouped Result
+
+以下に、Grouped Result を取得する例をあげます。ここでは、ディメンションとして "UserScore" を指定の上、 2012-12-01 から 2013-01-31 までの集計結果を取得しています。
+
+```sh
+curl -v -X GET
+  -H 'Authorization: {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}' \
+  -H 'X-Kii-AppKey: {APP_KEY}' \
+  -H 'Accept: application/vnd.kii.GroupedAnalyticResult+json' \
+  "https://qa21.internal.kii.com/api/apps/{APP_ID}/analytics/{AGGREGATION_RULE_ID}/data?startDate=2012-12-1&endDate=2013-1-31&Group=UserScore"
+```
+
+Kii Cloud は次のように集計結果を返します。
+
+```javascript
+{
+  "snapshots" : [ {
+    "name" : 0,
+    "data" : [ 236, 236, 236,  (...snip...)   , 236 ],
+    "pointStart" : 1357862400000,
+    "pointInterval" : 86400000
+  }, {
+    "name" : 50
+    "data" : [ 330, 330, 354,  (...snip...)   , 354],
+    "pointStart" : 1357862400000,
+    "pointInterval" : 86400000
+ }, {
+
+  (... snip ...)
+
+  } ]
+}
+```
+
+リクエスト時に、フィルタ（e.g,. "UserLevel" が "Easy" であるデータのみを対象とした集計を実施）を指定して取得解析結果の絞り込みを行うこともできます。指定方法などの詳細については、[REST API 詳細ドキュメント]({% page_url references-ja %})を参照してください。
