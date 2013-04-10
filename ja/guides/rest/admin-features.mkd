@@ -2,6 +2,7 @@
 layout: ja-doc
 title: アプリ管理者向け機能
 sort-priority: 50
+page-id: rest-admin_features-ja
 summary: REST API は、アプリの挙動設定などを行うアプリ管理者向け機能を提供しています。
 ---
 ## アプリ管理者トークンの取得
