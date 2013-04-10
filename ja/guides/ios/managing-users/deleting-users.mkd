@@ -2,4 +2,18 @@
 layout: ja-doc
 title: ユーザ削除
 sort-priority: 60
+summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Cloud SDK はユーザ削除機能を提供しています。
 ---
+以下のサンプルのように、`deleteSynchronous`メソッドを呼ぶことでユーザを削除できます。
+
+```objc
+NSError *error;
+
+KiiUser *user = [KiiUser currentUser];
+[user deleteSynchronous:&error];
+
+if(error != nil) {
+    // User deletion failed
+    // Please check error description/code to see what went wrong...
+}
+```
