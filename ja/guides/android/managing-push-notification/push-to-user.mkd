@@ -85,6 +85,6 @@ page-id: android-push_to_user-ja
  * [トピックを作成する]({% page_url android-creating_topic-ja %})
  * [Topic を購読する/購読を解除する]({% page_url android-subscribing_topic-ja %})
  * [メッセージを送信する]({% page_url android-sending_push_to_user_messages-ja %})
- * [メッセージを受信する]({% page_url android-receiving_push_to_user_message-ja %})
+ * [メッセージを受信する]({% page_url android-push_to_user_receiving_messages-ja %})
  * [トピックの ACL を変更する]({% page_url android-settings_topic_acl-ja %})
 
