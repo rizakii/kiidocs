@@ -3,3 +3,31 @@ layout: ja-doc
 title: プッシュ通知機能
 sort-priority: 50
 ---
+Kii Cloud では、以下の３つの プッシュ通知機能を利用できます。
+
+ * **"Push to App"** : Cloud で新たなイベントが発生したことを通知する仕組みです。この仕組みを使うと、例えばある Bucket 内に新たな Object が作成された際に、これをアプリケーションに通知することができます。詳細については [「Object storage - "Push to App" 通知を受け取る」]({% page_url android-object_storages_push-ja %})を参照してください。  
+
+ * **"Push to User"** : アプリユーザやアプリ開発者が、他のアプリユーザにメッセージをプッシュ送信する仕組みです。この仕組を使うと、例えばグループメンバー間でのプッシュメッセージ交換が実現できます。詳細については[「プッシュ通知機能 - "Push to User" 通知」]({% page_url android-push_to_user-ja %})を参照してください。  
+
+ * **"Direct Push"** : アプリ開発者が、アプリ利用者に直接メッセージを通知する仕組みです。この仕組みを使うと、例えばある特定のユーザに対して直接アラートを送ることができます。詳細については[「プッシュ通知機能 - "Direct Push" 通知」]({% page_url android-direct_push-ja %})を参照してください。  
+
+
+## プッシュ通知利用のための準備
+
+### アプリケーションの設定
+
+プッシュ通知機能を利用するには、開発者ポータルにおいてアプリケーションの設定を行う必要があります。まずは[「Android クイックスタート - Kii Cloud SDK の導入手順」]({% page_url android-adding_kii_cloud_to_your_application-ja %})の内容に従い、アプリケーションの設定を行なってください。
+
+### ユーザ端末のインストール
+
+Kii Cloud は Google Cloud Message (GCM) を利用してプッシュ通知を実装しています。このため、ユーザ端末にプッシュ通知を送る準備として、GCM サーバよりユーザ端末に割り当てられた登録ID（`RegId`）を Kii Cloud に送信するインストール処理を行う必要があります。（GCM サーバより登録IDを取得する方法については、[Google による tutorial](http://developer.android.com/google/gcm/gs.html)を参照してください）。
+
+GCM サーバより受け取った `RegId` は、次のように KIi Cloud に送信します。
+
+```java
+KiiUser.pushInstallation().install(regId);
+```
+
+既に登録済の `RegId` は再登録できません。（エラーになります）
+
+
