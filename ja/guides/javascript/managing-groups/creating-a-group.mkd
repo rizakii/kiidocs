@@ -3,3 +3,23 @@ layout: ja-doc
 title: グループの作成
 sort-priority: 10
 ---
+すべてのサインイン済みのユーザーは新しくグループを作成することができ、作成したグループのオーナーとなります。
+
+以下は、"myGroup" グループを作成する例です。 
+
+```javascript
+var groupName = "myGroup";
+
+var group = KiiGroup.groupWithName(groupName);
+group.save({
+  success: function(theGroup) {
+    console.log("Group created!");
+    console.log(theGroup);
+  },
+  failure: function(theGroup, errorString) {
+     console.log("Error creating group: " + errorString);
+  }
+});
+```
+
+この他、同時にグループメンバーを指定してグループを作成することや、URI を指定してグループを作成することもできます。詳細は[こちら]({% page_url references-ja%})の JsDoc を参照してください。
