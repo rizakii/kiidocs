@@ -2,4 +2,120 @@
 layout: ja-doc
 title: Bucket
 sort-priority: 10
+summary: Kii Platform におけるデータ管理を理解するためには、Bucket という概念を理解する必要があります。Cloud 上に浮かんでいる仮想的なバケツを想像してみてください。Cloud 上にデータを保存するためには、このデータの「入れ物」が必要です。Bucket は、いわばこのデータのための「入れ物」に相当します。
 ---
+## Bucket のスコープ
+
+Bucket にはスコープが定義されます。スコープは、この Bucket が誰に属するものであるかを示します。一例として、ある Bucket が特定のグループに属する場合、この Bucket は Group Scope を有しており、対象はこのグループということになります。この場合、Bucket 内の全データは、このグループが存在する限り Kii Cloud に存在し続けます。
+
+また、Bucket のスコープは、この Bucket にデフォルトで適用されるアクセス制御を決定します。以下に、Kii Platform がサポートするスコープの定義と、このスコープを持つ Bucket にデフォルトで適用されるアクセス制御をまとめます。
+
+* **Application Scope** : Bucket があなたのアプリケーションに属していることを意味します。
+    * Authenticated users （サインインが完了した全てのユーザ）に対して、この Bucket に対するフルアクセスを許可します。
+    * Anonymous users （サインインが完了していないユーザ）に対して、この Bucket に対する「検索」および「読み取り」アクセスのみ許可します。
+* **Group Scope** : Bucket があるグループに属していることを意味します。
+    * このグループのオーナーに対して、この Bucket に対するフルアクセスを許可します。
+    * このグループの全メンバーに対して、この Bucket に対する Bucket 削除以外の全アクセスを許可します。
+    * このグループのメンバー以外に対して、この Bucket に対する全アクセスを拒否します。
+* **User Scope** : Bucket があるユーザに属していることを意味します。
+    * このユーザに対して、この Bucket に対するフルアクセスを許可します。
+    * このユーザ以外に対して、この Bucket に対する全アクセスを拒否します。
+
+## Object Bucket を作成する
+
+Object 用の Bucket は次のように作成します：
+
+```javascript
+// Create Application Scope Bucket
+var appBucket = Kii.bucketWithName("my_user");
+
+// Create Group Scope Bucket. (Login required)
+var group = KiiGroup.groupWithName("my_group");
+var groupBucket = group.bucketWithName("score_card");
+
+// Create User Scope Bucket. (Login required)
+var user = KiiUser.getCurrentUser();
+var userBucket = user.bucketWithName("score_card");
+```
+
+* Application Scopeのbucketを作成するには`Kii` インスタンスの`bucketWithName`を呼びます
+* Group Scopeのbucketを作成するには`KiiGroup`インスタンスの1`bucketWithName`を呼びます
+* User Scopeのbucketを作成するには`KiiUser`インスタンスの`bucketWithName`を呼びます
+
+Bucket は bucket 内にオブジェクトが作成されて初めて作成されることに注意してください。  例えば、上記の userBucket は次のように新しくオブジェクトが作成されたタイミングで作られます。
+
+```javascript
+var obj = userBucket.createObject();
+obj.save({
+  success: function(theObject) {
+    console.log("Object saved & bucket created!");
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object and bucket: " + errorString);
+  }
+});
+```
+
+## Bucket に新たな ACL を設定する
+
+Group Scope と User Scope bucket については、ACL を設定して新たなパーミッションを追加することができます（例: Anonymous User に Bucket 内へのデータ作成を許可する)
+
+<p class="callout">データに付与可能な権限としては KiiACLObjectActionRead と KiiACLObjectActionWrite があります。詳しくはセクション「Object のスコープと ACL 設定」を参照してください。</p>
+
+Bucket に付与できるアクセス権限は以下の２つです。
+
+* **KiiACLBucketActionQueryObjects** : Bucket 内のデータを検索するための権限
+* **KiiACLBucketActionCreateObjects** : Bucket 内に新たなデータを作成するための権限
+* **KiiACLBucketActionDropBucket** : Bucket を、その中のデータと共にドロップするための権限
+
+一例として、User Scope のBucket に２つの新しい ACL を追加する例をあげます。この例では、KiiACLBucketActionQueryObjects 権限と BucketActionCreateObjects 権限を Authenticated User （サインイン済のユーザ全員）に対して付与しています。
+
+```javascript
+var user = KiiUser.getCurrentUser();
+var bucket = user.bucketWithName("score_card");
+
+// Create the ACL rules
+var entry1 = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), KiiACLAction.KiiACLBucketActionQueryObjects);
+var entry2 = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), KiiACLAction.KiiACLBucketActionCreateObjects);
+
+// Get the ACL handle and put the rules in the handle
+var acl = bucket.acl();
+acl.putACLEntry(entry1);
+acl.putACLEntry(entry2);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theBucket) {
+    console.log("Bucket ACL updated!");
+  },
+  failure: function(theBucket, errorString) {
+    console.log("Error updating bucket ACL: " + errorString);
+  }
+});
+```
+
+また以下の例は、Anonymous User に対して KiiACLBucketActionQueryObjects 権限と BucketActionCreateObjects 権限を付与しています。
+
+```javascript
+var user = KiiUser.getCurrentUser();
+var bucket = user.bucketWithName("score_card");
+
+// Create the ACL rules
+var entry1 = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLBucketActionQueryObjects);
+var entry2 = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLBucketActionCreateObjects);
+
+// Get the ACL handle and put the rules in the handle
+var acl = bucket.acl();
+acl.putACLEntry(entry1);
+acl.putACLEntry(entry2);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theBucket) {
+    console.log("Bucket ACL updated!");
+  },
+  failure: function(theBucket, errorString) {
+    console.log("Error updating bucket ACL: " + errorString);
+  }
+});
+```
