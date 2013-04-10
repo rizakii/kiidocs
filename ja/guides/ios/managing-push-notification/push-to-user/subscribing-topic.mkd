@@ -1,7 +1,85 @@
 ---
 layout: ja-doc
 title: トピックを購読する/購読解除する
+summary: あるトピックに興味のあるユーザは、このトピックを購読することでトピックに送信されたプッシュメッセージを受け取ることができるようになります。また、トピックの購読を止めることで、プッシュメッセージの受信を止めることができます。
 sort-priority: 20
 page-id: ios-subscribing_topic-ja
 ---
+## トピックを購読する
+
+以下に、サンプルシナリオ#1 向けの例（application scope トピックを購読する例）を
+あげます。
+
+```objc
+ // Instantiate an app-scope topic
+NSString *topicname = @"SendingAlert";
+KiiTopic *topic = [Kii topicWithName:topicname];
+
+// Subscribing the current user to the topic
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error;];
+if (error != nil) {
+  // Topic subscribe failed.
+}
+```
+
+同様に、サンプルシナリオ#2 向けの例（group scope トピックを購読する例）をあげま
+す。
+
+```objc
+ // Assume user is already logged in and a topic is already created.
+ // Instantiating a group and its group-scope topic.
+NSString *groupname = @"MyGroup";
+KiiGroup *group = [KiiGroup gropuWithName:groupname];
+String *topicname = @"GroupTopic";
+KiiTopic *topic = [group topicWithName:topicname];
+
+// Subscribe the current suser to the topic
+// (The current user must be a group member)
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error;];
+if (error != nil) {
+  // Topic subscribe failed.
+}
+```
+
+最後に、サンプルシナリオ#3 向けの例（user scope トピックを購読する例）をあげま
+す。
+
+```objc
+NSError *error;
+
+// Instantiate a user-scope topic.
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Subscribe the current user to the topic.
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error;];
+if (error != nil) {
+  // Topic subscription failed.
+}
+```
+
+いずれの例においても、対象トピックを指定の上 `subscribe` メソッドを実行していま
+す。
+
+
+## トピックの購読を止める
+
+トピックの購読を止めるには、次の例のようにします。  
+（基本的な手順はアプリケーションスコープ/グループスコープのトピックのいずれにつ
+いても同様です）
+
+```objc
+ // Assume that the current user is subscribing to the topic
+KiiUser *user = [KiiUser currentUser];
+KiiTopic *topic = [user topicWithName:@"testTopics"];
+NSError *error = nil;
+
+KiiPushSubscription *unsubscribe = [KiiPushSubscription unsubscribeSynchronous:topic withError:&error;];
+if (error != nil) {
+  // Topic unsubscribe failed.
+}
+```
+
+対象 topic を指定の上 `unsubscribe` メソッドを実行してください。
 
