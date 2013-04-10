@@ -1,0 +1,104 @@
+---
+layout: en-doc
+title: 'Subscribe/Unsubscribe a Topic'
+page-id: android-push_to_user_subscribing_topic-en
+sort-priority: 20
+---
+Subscribing to a topic is necessary to receive "Push to User" notification.  Once a user subscribes to a topic, all push messages sent to this topic will be delivered to the user.
+
+When a user no longer want to receive push messages, the user can stop receiving the messages simply by unsubscribing the topic.
+
+## Subscribing to a topic
+
+Here is a sample snippet for Scenario #1 (subscribing to an app-scope topic).
+
+```java
+try{
+  // Instantiate the already-existing app-scope topic
+  String topicName = "SendingAlert";
+  KiiTopic topic = Kii.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscription(topic);
+} catch (IOException ioe){
+  // Subscription failed.
+} catch (AppException e){
+  // Subscription failed.
+}
+```
+The next sample snippet is for Scenario #2 (subscribing to a group-scope topic).
+
+```java
+try {
+  // Instantiate the already-existing group and its group-scope topic.
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  // (The current user must be a group member)
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscribe(topic);
+} catch (IOException ioe) {
+  // Subscription failed.
+} catch (GroupOperationException goe) {
+  // Subscription failed.
+} catch (AppException e) {
+  // Subscription failed.
+}
+```
+
+The last sample snippet is for Scenario #3 (subscribing to a user-scope topic)
+
+```java
+try{
+  // Instantiate the already-existing user-scope topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Subscribe the current user to the topic.
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.subscribe(topic);
+} catch (IOException ioe ) {
+  // failed.
+} catch (AppExceptioin e) {
+  // failed.
+}
+```
+
+For all examples, here is a brief description of what is happening in the snippet:
+
+* Instantiate a target topic.
+* Create a KiiPushSubscription instance by invoking `pushSubscription` method.
+* Invoke `subscribe` method while specifying the target topic.
+
+If the topic is a group-scoped, the current user of course has to be a group member.  Otherwise, the subscription will be rejected.
+
+
+## Unsubscribing from a topic
+
+Please check the following snippet to see how you can unsubscribe from a topic.  
+(The basic procedure is the same for both an app-scope and group-scope topics, so we will provide one sample snippet only for the unsubscribing).
+
+```java
+// Assume that the current user is subscribing to the topic.
+// (and the target topic is already instantiated)
+
+try {
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.unsubscribe(topic);
+} catch (IOException ioe) {
+  // Unsubscription failed.
+} catch (AppException e) {
+  // Unsubscription failed.
+}
+```
+
+* Create a KiiPushSubscription instance by invoking `pushSubscription` method.
+* Simply invoke `unsubscribe` method while specifying the target topic.

@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
 title: メッセージを受信する
-page-id: android-receiving_push_to_user_message-ja
+page-id: android-push_to_user_receiving_messages-ja
 sort-priority: 40
 ---
 

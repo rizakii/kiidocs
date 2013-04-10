@@ -1,0 +1,104 @@
+---
+layout: en-doc
+title: '"Direct Push" Notification'
+summary: '"Direct Push" notification provides a means to push messages directly to a certain user.  The feature is intended to be used by an app developer only.  An app developer can select any application user and directly push a message to this user by manipulating the developer portal.'
+page-id: android-direct_push-en
+sort-priority: 20
+---
+
+## Push a Message to a User
+
+Pushing a message to a user is done by manipulating the developer portal as follows:
+
+1. Login to the developer portal.
+2. Select your application.  Select "Notification" icon and then click "New Message" button.
+This will bring you the push notification launcher UI.
+
+ ![](01.png)
+
+3. Set the content of your push notification by specifying the following information.
+
+**The push message destination**
+
+First, define to where the push notification is to be sent.
+
+ ![](02.png)
+
+* Select "User" in "Send To" section.
+* Specify the target user with one of the following IDs:
+ * User ID
+ * User name
+ * Email address
+ * Phone number
+* Select the appropriate environments (Developer, Production or Both).
+
+**The push message content:**
+
+Next, define what is to be sent.
+
+ ![](03.png)
+
+* Toggle on/off the predefined fields in "Include" section.<BR />The following values will be set in the push message when the fields are enabled.
+ * App ID: Application ID (AppID) 
+ * Sender: Client ID
+ * When: Timestamp when the push message is sent.
+ * Origin: The value "EXPLICIT" indicating that the message is "Direct Push" notification.
+ * Object Scope: N/A (not applicable for "Direct Push")
+ * Topic ID: N/A (not applicable for "Direct Push")
+* Set arbitrary key-value fields.
+ * You can add more key-value pair field(s) by clicking the "+" button
+ * By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.
+
+**APNS/GCM specific settings**
+
+Finally (and optionally), specify any APNS/GCM specific settings.
+
+ ![](04.png)
+
+* Toggle on/off GCM/APNS specific settings.
+ * For the details on GCM settings, please refer [the documentation by Google](http://developer.android.com/google/gcm/gcm.html#server).
+ * For the details on APNS settings, please refer [the documentation by Apple](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html).<BR />Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.
+
+## Receive a Push Notificaiton
+
+To receive push notifications, you need to implement onMessage() of GCMIntentService.  Kii Cloud SDK provides a helper API to support your application to parse push messages.
+
+Please check the following snippet.
+
+```java
+// GCMIntentService.java
+@Override
+protected void onMessage(Context context, Intent intent) {
+  Bundle extras = intent.getExtras();
+
+  // Get ReceiveMessage instance by passing the bundle received from GCM.
+  ReceivedMessage message = PushMessageBundleHelper.parse(extras);
+
+  // Get the sender of the push message.
+  KiiUser sender = message.getSender();
+
+  // Determine the push notification type and start parsing.
+  MessageType type = message.pushMessageType();
+  switch (type) {
+  case DIRECT＿PUSH:
+
+    // Extract field values.
+    long when = extras.getLong("when");
+    String app_specific_string = extras.getString("app_specific_key1");
+    long app_specific_long = extras.getLong("app_specific_key2");
+    // ... and get more field values as needed.
+
+    break;
+
+  // cases for PUSH_TO_APP and PUSH_TO_USER will follow  
+
+}
+```
+
+Here is what is happening in this snippet:
+
+1. Get a push message as a bundle.
+2. Create a ReceiveMessage instance by invoking `parse` method while passing the bundle.
+3. Get the sender of the push message by invoking `getSender` method.
+4. Determine the type of the push message by invoking `pushMessageType` method.<BR />If the message is "Direct Push", the type will be "DIRECT\_PUSH".
+5. Extract more predefined and application specific values by directly parsing the bundle.  Please refer [Javadoc](http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) for more information on what you can extract as the predefined values.

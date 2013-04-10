@@ -1,0 +1,53 @@
+---
+layout: en-doc
+title: Receive Messages
+page-id: android-push_to_user_receiving_messages-en
+sort-priority: 40
+---
+To receive push notifications, you need to implement onMessage() of GCMIntentService.  Kii Cloud SDK provides a helper API to support your application to parse push messages.
+
+Please check the following snippet.
+
+```java
+// GCMIntentService.java
+@Override
+protected void onMessage(Context context, Intent intent) {
+  Bundle extras = intent.getExtras();
+
+  // Get ReceiveMessage instance by passing the bundle received from GCM.
+  ReceivedMessage message = PushMessageBundleHelper.parse(extras);
+
+  // Get the sender of the push message.
+  KiiUser sender = message.getSender();
+
+  // Determine the push notification type and start parsing.
+  MessageType type = message.pushMessageType();
+  switch (type) {
+  case PUSH_TO_USER:
+    PushToAppMessage pum = (PushToAppMessage) message;
+
+    // Extract the target topic.
+    if (pum.containsKiITopic()) {
+      KiiTopic topic = pum.getKiiTopic();
+
+      // Extract more field values.
+      long when = extras.getLong("when");
+      String app_specific_string = extras.getString("app_specific_key1");
+      long app_specific_long = extras.getLong("app_specific_key2");
+      // ... and get more field values as needed.
+    }
+    break;
+
+  // cases for PUSH_TO_APP and DIRECT_PUSH will follow  
+
+}
+```
+
+Here is what is happening in this snippet:
+
+1. Get a push message as a bundle.
+2. Create a ReceiveMessage instance by invoking `parse` method while passing the bundle.
+3. Get the sender of the push message by invoking `getSender` method.
+4. Determine the type of the push message by invoking `pushMessageType` method.  If the message is "Push to User", the type will be "PUSH\_TO\_USER".
+5. Extract the target topic invoking `getKiiTopic` method.
+6. Extract more predefined and application specific values by directly parsing the bundle.  Please refer [Javadoc](http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiPushSubscription.html) for more information on what you can extract as the predefined values.

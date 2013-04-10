@@ -1,0 +1,31 @@
+---
+layout: en-doc
+title: Check for Subscription Status
+summary: 'Sometimes, you will want to check if the current user is already subscribing to a topic.  For example, your application may want to show a "SUBSCRIBE" button for users who have not yet subscribed to a topic but want to show a "UNSUBSCRIBE" button instead for those users who have already subscribed to the topic.'
+page-id: android-push_to_user_checking_subscription-en
+sort-priority: 25
+---
+Here is a sample snippet for checking the subscription status.  Note that this snippet is for our sample Scenario #1.  (Basic steps are the same for other Scenarios).
+
+```java
+try{
+  // Instantiate the topic in question
+  String topicName = "SendingAlert";
+  KiiTopic topic = Kii.topic(topicName);
+
+  // Check if the current user is already subscribing to the topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  KiiPushSubscription sub = user.pushSubscription();
+  sub.isSubscribed(topic);
+} catch (IOExecption ioe) {
+  // Something went wrong...
+} catch (AppException e) {
+  // Something went wrong...
+}
+```
+
+Here is what is happening in the snippet:
+
+* Instantiate a topic in question.
+* Create a KiiPushSubscription instance by invoking `pushSubscription` method.
+* Invoke `isSubscribed` method to see if the current user is already subscribed to the topic.

@@ -1,0 +1,90 @@
+---
+layout: en-doc
+title: Create a Topic
+summary: 'The topic is a channel for sending push messages.  Without a channel, we have no way to deliver the messages.  Creating a topic, therefore, is a first step to leverage "Push to User" notification feature.<BR />Let us see how we can create a topic for each of our sample scenarios.'
+page-id: android-push_to_user_creating_topic-en
+sort-priority: 10
+---
+
+## Scenario #1: "Broadcasting to all users"
+
+In this scenario, we are using an "app-scope" topic.  This type of topic can only be created by an app developer.  Any users can subscribe to the topic, but only a topic creator (i.e., an app developer) can send push messages to the topic.
+
+Creating an app-scope topic is only supported via Kii REST API.  Please execute the following steps:
+
+1. Follow the steps described in ["REST guides - Admin Features"]({% page_url DUMMY %}) and get an app admin token.
+2. Create an app-scope topic as follows (in this example, we are creating a topic named "SendingAlert"):
+
+  ```sh
+curl -v -X PUT \
+  -H "X-Kii-AppID:{APP_ID}" \
+  -H "X-Kii-AppKey:{APP_KEY}" \
+  -H "Authorization:Bearer {APP_ADMIN_TOKEN}" \
+  "http://api.kii.com/api/apps/{APP_ID}/topics/SendingAlert"
+```
+
+Make sure to replace `{APP_ID}` and `{APP_KEY}` to your application's values.  Also make sure to replace `{APP_ADMIN_TOKEN}` to the token obtained in the previous step.
+
+**Please Note**: We are currently revising our developer portal so as to provide an UI for creating an app-scope topic.  Once this is done, you will be able to easily create an app-scope topic on the developer portal.
+
+
+## Scenario #2: "Group messaging"
+
+In this scenario, we are using a "group-scope" topic.  This type of topic can be created by one of any group members.  All group members can subscribe to the topic, and all of them can send push messages to the topic.
+
+Unlike an app-scope topic, a group-scope topic is usually created dynamically by an application.  Please check the following code snippet to see how you can do this:
+
+```java
+try {
+  // Create a group
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  group.save();
+
+  // Create an instance of group-scope topic.
+  // (assume that the current user is a member of the group)
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Save the topic to Kii Cloud
+  topic.save();
+} catch (IOException ioe) {
+  // failed.
+} catch (GroupOperationException goe) {
+  // failed
+} catch (AppException e) {
+  // failed
+}
+```
+
+Here is a brief description of what is happening in the snippet:
+
+* Create a group-scope topic by invoking `topic` method.
+* Save the topic by invoking `save` method.  You need to invoke `save` method in order to reflect the newly created topic in the Kii Cloud.
+
+
+## Scenario #3: "Pushing my TODO items to all devices"
+
+In this scenario, we are using a "user-scope" topic.  Like a group-scope topic, a user-scope topic is usually created dynamically by an application.
+
+Please check the following code snippet to see how we can create a user-scope topic.
+
+```java
+try{
+   // Create a user-scope group
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Save the topic to Kii Cloud
+  topic.save();
+} catch (IOException ioe ) {
+  // failed.
+} catch (AppExceptioin e) {
+  // failed.
+}
+```
+Here is a brief description of what is happening in the snippet:
+
+* Create a user-scope topic by invoking `topic` method.
+* Save the topic by invoking `save` method.  You need to invoke `save` method in order to reflect the newly created topic in the Kii Cloud.

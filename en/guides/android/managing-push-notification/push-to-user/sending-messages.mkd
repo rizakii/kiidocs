@@ -1,0 +1,127 @@
+---
+layout: en-doc
+title: Send Messages
+summary: 'When a topic is ready, we are ready to send a message to the topic.  The message sent to the topic will be pushed to the topic subscribers.<BR />Let us see how we can send a push message on each of our sample scenarios.'
+page-id: android-push_to_user_sending_messages-en
+sort-priority: 30
+---
+
+## Scenario #1: "Broadcasting to all users"
+
+Only an app developer can send a push message to an app-scope topic.  This can be done on the developer portal by executing the following steps:
+
+1. Login to the developer portal.
+2. Select your application.  Select "Notification" icon and then click "New Message" button.
+
+   This will bring up the push notification launcher UI.
+
+   ![](01.png)
+
+3. Set the content of your push notification by specifying the following information.
+
+   **Push message destination**
+
+   First, define to where the push notification is to be sent.
+
+   ![](02.png)
+
+ * Select "Topic" in "Send To" section.
+ * Put the target topic name in "Topic Name" form.
+ * Select the appropriate environments (Developer, Production or Both).
+ 
+   **Push message cotent**
+
+   Next, define what is to be sent.
+
+   ![](03.png)
+
+ * Toggle on/off the predefined fields in "Include" section.<BR />The following values will be set in the push message when the fields are enabled.
+  * App ID: Application ID (AppID) 
+  * Sender: Client ID
+  * When: Timestamp when the push message is sent.
+  * Origin: The value "EXPLICIT" indicating that the message is "Push To Users" notification.
+  * Object Scope: The value "APP" indicating that the message is pushed via an app-scope topic.
+  * Topic ID: Topic ID of the target topic.
+ * Set arbitrary key-value fields.
+  * You can add more key-value pair field(s) by clicking the "+" button
+  * By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.
+
+   **APNS/GCM specific settings**
+
+   Finally (and optionally), specify any APNS/GCM specific settings.
+
+   ![](04.png)
+
+ * Toggle on/off GCM/APNS specific settings.
+  * For the details on GCM settings, please refer the documentation by Google.
+  * For the details on APNS settings, please refer the documentation by Apple.<BR />Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.
+
+4. Click "Send..." when done.  The corresponding message will be sent to the target topic.
+
+## Scenario #2: "Group messaging"
+
+Any group members can can send a push message to a group-scope topic.  Let us explore how to do this in the following sample snippet:
+
+```java
+try {
+  // Instantiate the already-existing group and its group-scope topic.
+  String groupName = "MyGroup";
+  KiiGroup group = Kii.group(groupName);
+  String topicName = "GroupTopic";
+  KiiTopic topic = group.topic(topicName);
+
+  // Build a push message.
+  Data data = new Data();
+  data.put("From", "Alice");
+  data.put("MsgBody", "Hi all!");
+  data.put("Priority", 1);
+  data.put("Urgent", false);
+  KiiPushMessage message = KiiPushMessage.buildWith(data).build();
+
+  // Send the push message.
+  topic.sendMessage(message);
+} catch (IOException ioe) {
+  // Sending a message failed.
+} catch (GroupOperationException goe) {
+  // Sending a message failed.
+} catch (AppException e){
+  // Sending a message failed.
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+* Create a push message by invoking `buildWith` method while specifying key-value pairs to be included in the message.
+* Send the message by invoking `sendMessage` method.
+
+
+## Scenario #3: "Pushing my TODO items to all devices"
+
+Only a user who owns the topic can send a push message to this topic.  Let us explore how to do this in the following sample snippet.
+
+```java
+try{
+  // Instantiate the already-existing user-scope topic.
+  KiiUser user = KiiUser.getCurrentUser();
+  String topicName = "MyTODO";
+  KiiTopic topic = user.topic(topicName);
+
+  // Build a push message.
+  Data data = new Data();
+  data.put("Item", "Do something");
+  data.put("Done", 0);
+  KiiPushMessage message = KiiPushMessage.buildWith(data).build();
+
+  // Send the push message.
+  topic.sendMessage(message);
+} catch (IOException ioe ) {
+  // failed.
+} catch (AppExceptioin e) {
+  // failed.
+}
+```
+
+Here is a brief description of what is happening in the snippet:
+
+* Create a push message by invoking `buildWith` method while specifying key-value pairs to be included in the message.
+* Send the message by invoking `sendMessage` method.
