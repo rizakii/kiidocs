@@ -3,5 +3,42 @@ layout: ja-doc
 title: アプリを設定する
 sort-priority: 10
 page-id: rest-configuring_your_application-ja
+summary: 開発者ポータル上で新規アプリを作成後、このアプリの設定を変更することができます。設定可能なパラメータは以下の通りです。
 ---
 
+* ユーザのメールアドレス認証のオン/オフ
+* ユーザの電話番号（SMS）認証のオン/オフ
+* 電話番号（SMS）認証メッセージの送信者の設定
+* 電話番号（SMS）認証メッセージのテンプレート設定
+* Facebook 連携用の Facebook's app id
+* 他ユーザに対する、ユーザデータの全フィールド公開のオン/オフ
+
+以下に、アプリを設定している例をあげます。例にもあるように、ここではアプリ管理者トークンを指定する必要があります。アプリ管理者トークン取得方法は「{% page_link rest-admin_features-ja %}」を参照してください。
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/vnd.kii.AppModificationRequest+json" \ 
+    -H 'authorization:Bearer {ADMIN_TOKEN}' \
+    -H 'x-kii-appid:{APP_ID}' \
+    -H 'x-kii-appkey:{APP_KEY}' \
+    https://api-jp.kii.com/api/apps/{APP_ID} \
+    -d '{"emailAddressVerificationRequired" : true,"phoneNumberVerificationRequired" : true, "smsFrom" : "AppSmsSender", "verificationSmsTemplate" : "Your validation code is ${code}, valid for ${valid} hours."}'
+```
+
+* **emailAddressVerificationRequired**  ... メールアドレス認証のオン/オフを設定します。デフォルト値は false （認証しない） です。
+* **phoneNumberVerificationRequired**  ... 電話番号（SMS）認証のオン/オフを設定します。デフォルト値は false （認証しない）です。
+* **smsFrom**  ... 電話番号（SMS）認証メッセージの送信者を設定します。デフォルト値は空です。
+* **verificationSmsTemplate**  ... 電話番号（SMS）認証メッセージのテンプレートを設定します。以下のプレースホルダーが利用可能です。なお、デフォルト値は "Your validation code is ${code}" - valid for ${valid} hours." です。
+    * **${code}**  ... 実際の認証コードに置換されます。
+    * **${valid}**  ... 認証コードの有効期間に置換されます
+* **facebookAppID**  ... Facebook より払いだされた app id を指定します。デフォルト値は空です。
+* **exposeFullUserDataToOthers** ... ユーザデータの全フィールドを、他ユーザに対して公開するかを設定します。デフォルト値は false （公開しない）です。false を指定した場合、次のユーザデータフィールドのみが公開されます："userID", "displayName", "loginName"
+
+Kii Cloud は次のように応答します。
+
+```
+HTTP/1.1 204 No Content
+Server: nginx/1.0.15
+Date: Wed, 20 Jun 2012 06:05:52 GMT
+Connection: keep-alive
+```
