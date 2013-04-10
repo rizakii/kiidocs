@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
 title: Object の検索
-sort-priority: 40
+sort-priority: 50
 ---
 
