@@ -1,0 +1,139 @@
+---
+layout: en-doc
+title: Analyze Event Data
+sort-priority: 20
+---
+Here are four steps to start analyzing your AppData.
+
+1. Define metrics.
+2. Send Event Data from an application.
+3. Check analytics results on the dev portal.
+
+We will pick up the following example throughout this page to explain how to get started with analyzing Event Data:
+
+* The application is to send an event data with the following fields upon the installation.<BR />This Event Data is named "**MyUser**".
+    * **"gender"** ... String (M or F)
+    * **"city"** ... String (San Francisco, Dallas, New York, ...)
+    * **"location"** ... String (UK, EU, JP, ...)
+    * **"children"** ... Int (0, 1,2,3, ...)
+    * **"age"** ... Int (18, 20, 42, 44, ...)
+* Based on these event data, we want to check the following metrics.
+    * **Metric #1**: Average of "**age**" sliced by "**city**", "**location**", "**gender**" and "**children**".
+    * **Metric #2**: Count of users (i.e., count of event data) sliced by "**gender**", "**city**", "**location**", "**children**" and "**age**".
+
+
+## 1. 1. Define Metrics
+
+以下の手順でメトリクスを定義します。
+
+We define our metrics on the dev portal in the following steps.
+
+1. On the dev portal, click "Metrics" icon and then select "Config".
+2. Click "Add" button.
+
+    ![](01.png)
+
+    This will bring up a metric definition screen as shown below.
+
+    ![](02.png)
+
+3. Put a name of the metric in "Name" section.
+4. Toggle "External" at "Data" section so as to select Event RawData.
+5. Define the value to be aggregated in "Aggregated using" section by specifying the following info.
+    * **Aggregation function**: How to aggregate the fact.<BR />The available functions are: **Count**, **Avg** (Average), **Sum**, **Min**, and **Max**.
+    * **Field name**: Which field is to be aggregated as a "fact".<BR />We can specify "*" for the aggregation function "Count".
+    * **Data type**: What data type the field value has.  The available types are: int, float, boolean and string.
+
+    <p class="note">Currently, we do not support multi-byte characters; if you specify a field having either multi-byte field name or field value, you will not get the expected result.</p>
+
+6. Specify the name of the event data in "Filter by Type" section; if none is specified, all event data will be used for creating the metrics.
+
+7. Define how the aggregates are to be sliced and diced (as dimensions) in "Dimensions" section by specifying the following info:
+    * **Label**: How this dimension should be labeled in the analytics results.  This is an optional; if omitted, the original field name will be used as the label.
+    * **Name**: Which field is to be aggregated as a "dimension".  The name should be 1-6 bytes in length, should start with an alphabet, and may contain alphanumeric and underscore(\_).
+    * **Type**: What data type the field value has.  The available types are: int, float, boolean and string.
+
+    For example, please check the following example to see how we define our sample Metric #1.
+
+    ![](03.png)
+
+    Next example shows how we define our sample Metric #2.  Note that in this case, we are specifying "*" for the aggregation target field name.  We can do this when we are specifying "count" as the aggregation function (i.e., count a number of all Event Data sent to Kii Cloud).
+
+    ![](04.png)
+
+8. Click "Save" button.
+
+    The metrics will be saved but not activated yet.  Now click "Config" icon.
+
+    ![](05.png)
+
+9. The Aggregation Rules screen pops up.  Click "Activate".
+
+    ![](05a.png)
+
+10. The metrics will be activated and the indicator will turn green.
+
+    ![](06.png)
+
+    Note that the aggregation rule ID is now shown. We will use this ID when we later fetch the analytic results.
+
+## 2. Send Event RawData from your application
+
+Here is an example of how you can upload an Event RawData.
+
+1. Create a KiiEvent instance by invoking `event` method while specifying an "event type".  This event type can be any string like "installed" or "level up" as the event type.<BR />In our example, we are using "MyUser".
+2. Set arbitrary key-value pairs in the instance with `set` method.  In our example, we will set key-values such as "gender", "city", "location", "children" and "age".
+3. Invoke `push` method to cache the event data.  It will be automatically uploaded to Kii Cloud in an optimal interval.
+
+```javascript
+// Initialize KiiAnalytics with AppID/AppKey
+KiiAnalytics.initialize(appID, appKey);
+
+// Define event type.
+var eventType = "MyUser";
+
+// Set arbitrary key-value pairs
+var extras = {
+  "gender": "M",
+  "city"; "San Francisco",
+  "location": "US",
+  "children": 2,
+  "age": 35
+};
+
+// Upload Event RawData to Kii Cloud
+KiiAnalytics.trackEventWithExtrasAndCallbacks(eventType, extras, {
+  success: function() {
+    console.log("Did succeed");
+  },
+  failure: function(errorString) {
+    console.log("Did fail: " + errorString);
+  }
+});
+```
+
+## 3. Check Analytics Results on Dev Portal
+
+Follow the steps below to view metrics on the dev portal.
+
+1. On the dev portal, click "Metrics" icon and then select "Metrics".
+2. Select the name of the metrics.
+
+    This will bring the default view.
+
+    ![](07.png)
+
+    Note that the dimensions are shown just below a list of the metrics.  Clicking on a dimension will give a sliced view.  For instance, here is a snapshot of the sliced view by selecting "Location" dimension.
+
+    ![](08.png)
+
+    There are two ways to further drill down the results:
+
+
+    1. We can toggle on/off items by clicking row(s) on the table.  In the next sample, the top-3 items ("UK", "IN", and "US") are toggled off.
+
+        ![](09.png)
+
+    2. We can set an additional filter using different dimension.  To do this, click "Filters" button and open a pull-down menu to select the filter.  In the next example, we are selecting the dimension "age" with the value "22".
+
+        ![](10.png)
