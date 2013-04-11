@@ -2,5 +2,52 @@
 layout: ja-doc
 title: Object のスコープと ACL 設定
 sort-priority: 70
+summary: Object は、その Object が作成された Bucket のスコープを引き継ぎます。例えば Application Scope を持つ Bucket の中に Object を作成した場合、この Object は Application Scope を引き継ぎます。
 ---
+## Object のスコープと規定のアクセス制御
 
+Bucket 同様、Object にデフォルトで割り振られるアクセス制御はそのスコープによって決定されます。以下に、各スコープと規定のアクセス制御をまとめます。
+
+* **Application Scope**
+    * Authenticated users（サインインが完了した全てのユーザ）に対して、この Object に対する読み取りと書き込みを許可します。
+    * Anonymous users （サインインが完了していないユーザ）に対して、この Object に対する読み取りのみを許可します。
+* **Group Scope**
+    * このグループの全メンバーに対して、この Object に対する読み取りと書き込みを許可します。
+    * このグループのメンバー以外に対して、この Object に対する全アクセスを拒否します。
+* **User Scope**
+    * このユーザに対して、この Object に対する読み取りと書き込みを許可します。
+    * このユーザ以外に対して、この Object に対する全アクセスを拒否します。
+
+## Object に新たな ACL を設定する
+
+新たな ACL を Object に追加することで、新しいアクセス制限を設定することができます。Object に 設定可能なアクセス権限は以下の２つです。
+
+* **KiiACLObjectActionRead** : Objectの読み取りを許可する。
+* **KiiACLObjectActionWrite** : Objectの更新や削除を許可する。
+
+新たな ACL を Object に設定する例として、Object に対する KiiACLObjectActionRead 権限を Anonymous User に付与するサンプルコードを以下に示します。
+
+```objc
+KiiObject *object = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Create an acl object to hold our rules
+KiiACL *acl = [object objectACL];
+
+// Create a rule
+KiiACLEntry *entry = [KiiACLEntry entryWithSubject:[KiiAnonymousUser aclSubject] andAction:KiiACLObjectActionRead];
+
+// Put the rule in the holder
+[acl putACLEntry:entry];
+
+// Save the acl to the object
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
+
+if(error != nil) {
+    // Updating at least 1 ACLEntry failed
+    // Please check error description and succeeded/failed arrays to see what went wrong...
+}
+```

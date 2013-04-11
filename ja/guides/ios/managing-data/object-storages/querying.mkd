@@ -2,5 +2,122 @@
 layout: ja-doc
 title: Object の検索
 sort-priority: 40
+summary: Kii Cloud 上の Object のうち、ある条件を満たすものを取得する方法として、Kii Cloud SDK は検索機能を提供しています。この機能を用いると、例えば「Bucket より "count" フィールドの値が10より大きい Object を、フィールド値降順で最大で10個取得」などといった条件が指定可能です。
 ---
+## KiiClauseによるQueryの条件定義
 
+アプリ開発者は以下の比較演算子を用いることでQueryの条件定義ができます。
+
+* **equals**
+* **notEquals**
+* **greaterThan**
+* **greaterThanOrEqual**
+* **lessThan**
+* **lessThanOrEqual**
+* **in**
+* **startsWith**
+
+AND/OR の論理演算子を用いて、条件を繋げることもできます。
+
+* **and**
+* **or**
+
+## KiiQueryの組み立て
+
+KiiQuery インスタンスはqueryWithClause メソッドに KiiClause インスタンスを渡すことで生成できます。KiiClause インスタンスを渡さずに KiiQuery インスタンスを生成した場合は、対象 Bucket 内の全ての Object が検索結果としてマッチします（i.e., **all**検索に相当）。
+
+さらにオプションとして、KiiQuery インスタンスの以下のメソッドにより検索結果の並び替えなどができます。
+
+* **sortByAsc**
+* **sortByDesc**
+* **setLimit**
+
+sortByAsc と sorByDesc のどちらも呼ばれていない場合、検索結果の順序は不定です。setLimit が呼ばれていない場合、1回の検索で取得できるObject数の上限は200個です。
+
+## 検索結果
+
+検索結果は NSArray で返されます。各要素は KiiObject です。一度に全ての Object が取得できなかった場合(例えば、setLimit に
+10を指定し、検索結果は30件だった場合)、KiiQuery インスタンスが同時に返されます。この KiiQuery 
+インスタンスを用いて再度検索行うことで、残りのObject を取得できます。
+
+## 検索の例
+
+まずは一番単純な例として Bucket 内の全ての Object を取得する例を考えます。まずは`queryWithClause`メソッドを何の KiiClause も指定せずに（i.e., nil 指定で）実行して "all" クエリを作成します。このあと、検索対象 Bucket の`executeQuery`メソッドを、作成した "all" クエリを指定の上実行します。
+
+以下に検索実行例をあげます（この例では、すべての検索結果が一度に取得されることを想定しています。ページネーションなどは考慮していません）
+
+```objc
+NSError *error;
+
+// Build "all" query
+KiiQuery *all_query = [KiiQuery queryWithClause:nil];
+
+// Create an array to store all the results in
+NSMutableArray *allResults = [NSMutableArray array];
+
+// Create a placeholder for any paginated queries
+KiiQuery *nextQuery;
+
+// Get an array of KiiObjects by querying the bucket
+NSArray *results = [bucket executeQuerySynchronously:all_query
+                                           withError:&error
+                                             andNext:&nextQuery];
+
+// Add all the results from this query to the total results
+[allResults addObjectsFromArray:results];
+```
+
+次に、以下の条件で Object の検索を行うケースを考えます。
+
+* key "gender" の値が "Female" であり、かつ key "age" の値が 18 より大きい
+* 結果を key "age" の昇順でソートすること
+* １回の検索で10件まで取得すること。ページングを用いることで次の10件を取得します。
+
+このような条件の Query を実行する例です。
+
+```objc
+NSError *error;
+
+// Set up our clauses
+KiiClause *clause1 = [KiiClause equals:@"gender" value:@"Female"];
+KiiClause *clause2 = [KiiClause greaterThan:@"age" value:[NSNumber numberWithInt:18]];
+
+// Combine the clauses with an 'AND'
+KiiClause *totalClause = [KiiClause and:clause1, clause2, nil];
+
+// Build the query, sorting by 'age' and taking 10 results at a time
+KiiQuery *query = [KiiQuery queryWithClause:totalClause];
+[query sortByAsc:@"age"];
+[query setLimit:10];
+
+// Create an array to store all the results in
+NSMutableArray *allResults = [NSMutableArray array];
+
+// Create a placeholder for any paginated queries -
+// if all the results can't be returned in one pass
+// using the given criteria. This will be pre-configured
+// for you. A non-nil value means there is more data to retrieve
+KiiQuery *nextQuery;
+
+// Get an array of KiiObjects by querying the bucket
+NSArray *results = [bucket executeQuerySynchronous:query
+                                         withError:&error
+                                           andNext:&nextQuery];
+
+// Add all the results from this query to the total results
+[allResults addObjectsFromArray:results];
+
+// While the query was successful and there is more data to retrieve...
+while(error != nil && nextQuery != nil) {
+    // make the next query, storing the results
+    results = [bucket executeQuerySynchronous:query
+                                    withError:&error
+                                      andNext:&nextQuery];
+
+    // add these results to the total array
+    [allResults addObjectsFromArray:results];
+
+    // set next query
+    query = nextQuery;
+}
+```

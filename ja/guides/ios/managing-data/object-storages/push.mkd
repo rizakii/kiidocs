@@ -3,5 +3,122 @@ layout: ja-doc
 title: '"Push to App" 通知を受け取る'
 sort-priority: 60
 page-id: ios-object_storages_push-ja
+summary: '"Push to App" 通知を使うと、ある Bucket 内の Object に変更があった際に、この事実をアプリが通知として受け取る事ができます。この機能を使うと、サーバ上で発生した変更を、即座にアプリ側に反映させることができます。'
 ---
+”Push to App" で通知可能なイベントには以下のものがあります。
 
+* Bucket 内に新たな Object が作成された。
+* Bucket 内の既存の Object が更新された。
+* Bucket 内の既存の Object が削除された。
+* Bucket 内の既存の Object の ACL が更新された。
+
+Kii Cloud の プッシュ通知を利用する基本手順は次のとおりです。
+
+1. 端末を Kii Cloud に install して、プッシュ通知を受け取れる状態にする
+1. 対象 Bucket を購読 (subscribe) して、Bucket の監視を開始する
+1. 対象 Bucket 内で Object の変更が発生する度に、Push 通知を受け取る
+
+なお、プッシュ通知の利用には、開発者ポータルにてアプリ設計を行う必要があります。アプリ設定方法の詳細については、[こちら]({% page_url ios-adding_kii_cloud_to_your_application-ja %})を参照してください。
+
+## ユーザ端末のインストール
+
+Kii Cloud は APNS (Apple Push Notificaiton Service)
+を利用してプッシュ通知を実装しています。このため、ユーザ端末にプッシュ通知を送る準備として、APNS 
+サーバよりユーザ端末に割り当てられたデバイストークンを Kii Cloud に送信するインストール処理を行う必要があります。
+
+APNS サーバより受け取ったデバイストークンを KIi Cloud に送信する例を以下に示します。
+
+```objc
+// Handling APNS registration response, add this method if it is not available.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  // Hold deviceToken into Kii shared instance
+  [Kii setAPNSDeviceToken:deviceToken];
+
+  // Install a Device to Kii Cloud
+  NSError *error = nil;
+  KiiPushInstallation *installation = [KiiPushInstallation installSynchronousWithError:&error];
+
+  if (error != nil) {
+    NSLog(@"Installation failed : %@", error);
+  } else {
+    NSLog(@"Installation succeeded");
+  }
+}
+```
+
+## Bucket の購読
+
+Bucket を購読して監視を開始する例を以下にあげます。監視を開始すると、以後この Bucket 内の Object に変更が発生する度に、プッシュ通知がアプリに送信されます。
+
+```objc
+// Instantiate a bucket
+KiiBucket *bucket = [Kii bucketWithName:@"test_bucket"];
+KiiObject *obj1 = [bucket createObject];
+NSError *error = nil;
+[obj1 saveSynchronous:&error];
+
+// Subscribe to a bucket
+[KiiPushSubscription subscribe:bucket withBlock:^(KiiPushSubscription *subscription, NSError *retError) {
+  if (nil == retError) {
+    NSLog(@"%@",@"Subscription succeeded");
+  }
+}];
+```
+
+## Bucket 購読の確認
+
+Bucket 購読の有無を確認する例を以下にあげます。
+
+```objc
+NSError *error = nil;
+
+// Instantiate the bucket in question.
+KiiBucket *bucket = [Kii bucketWithName:@"_target_bucket"];
+
+// Check the subscription.
+BOOL subscribed = [KiiPushSubscription checkSubscriptionSynchronous:bucket
+                                                          withError:&error];
+
+if (error != nil){
+  // Something went wrong...
+}
+
+if (subscribed) {
+  NSLog(@"Subscribed!");
+} else {
+  NSLog(@"Not subscribed!");
+}
+```
+
+## "Push to App" 通知の受け取り
+
+Push 通知は、AppDelegate のdidReceiveRemoteNotification を使って受け取ります。
+
+以下に、プッシュ通知を受け取るコードの例を示します。この例では、topic のタイトルと alertBody メッセージをアラートダイアログ上に表示しています。
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  NSLog(@"Received notification: %@", userInfo);
+
+  // Create KiiPushMessage from userInfo.
+  KiiPushMessage *message = [KiiPushMessage messageFromAPNS:userInfo];
+
+  // Get bucket string using getValueOfKiiMessageField. "BUCKET_ID" is enum that is defined in KiiMessageField.
+  NSString *title = [message getValueOfKiiMessageField:BUCKET_ID];
+
+  // Get type string using getValueOfKiiMessageField. "TYPE" is enum that is defined in KiiMessageField.
+  NSString *description = [message getValueOfKiiMessageField:TYPE];
+
+  // Show alert message
+  UIAlertView* alert=[[UIAlertView alloc] initWithTitle:title message:description delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+}
+```
+
+このコードスニペットの概要は以下の通りです。
+
+1. `messageFromAPNS`メソッドを実行して受け取ったプッシュメッセージをパースします。パースした結果は、KiiPushMessage インスタンスに保存されます。
+1. `getValueOfKiiMessgeField`メソッドを実行し、プッシュメッセージより特定のメタデータを抽出します。ここでは、"BUCKET\_ID" と "TYPE" を抽出しています。（プッシュメッセージの解釈方法やメタデータ抽出方法の詳細については [appledoc]({% page_url references-ja %}) を参照してください）
+    * BUCKET\_ID: 監視対象 Bucket の ID。
+    * TYPE: 対象 Bucket にて発生したイベントを示す enum 値。
+1. 取得したメタデータをアラートダイアログ上に表示します。

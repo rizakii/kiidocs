@@ -2,4 +2,25 @@
 layout: ja-doc
 title: Object の取得
 sort-priority: 20
+summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 ---
+以下、Object を URI を指定して取得するサンプルコードです。
+
+```objc
+KiiObject *object2 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+// Retrieve the Object
+[object2 refreshSynchronous:&error];
+if(error != nil) {
+    // Unable to retrieve object based on URI
+    // Please check error description/code to see what went wrong...
+}
+```
+
+基本手順は以下の通りです。
+
+1. `objectWithURI`メソッドで Object の URI を指定して、Object のインスタンスを生成します。
+1. `refreshSynchronous`メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
+
+インスタンス作成後、`refreshSynchoronous`メソッドを呼ぶのを忘れないようにしてください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。

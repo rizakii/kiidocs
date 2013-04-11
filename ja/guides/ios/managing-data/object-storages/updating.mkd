@@ -2,4 +2,58 @@
 layout: ja-doc
 title: Object の更新
 sort-priority: 30
+summary: Kii Cloud SDK は、２種類の Object 更新手段を提供しています。
 ---
+* **フルアップデート**： Object を完全に上書きします。
+
+    今まで Object に保存されていた&nbsp;Key-Value ペアが全て破棄された、新たに指定された Key-Value ペアが Object に保存されます。
+* **部分アップデート**： Object を部分的にアップデートします。
+
+    Object が保存する Key-Value ペアのうち、新たに指定された Key-Value ペアのみが更新されます。それ以外の Key-Value ペアは以前のまま保持されます。
+
+Object より一部の Key-value ペアのみ削除したい場合はフルアップデートを利用してください。（部分アップデートは、Key-Value ペア の削除をサポートしていません）
+
+## フルアップデート
+
+Object をフルアップデートする例を以下にあげます。全ての Key-Value ペアをセット後に`saveAllFieldsSynchronous`メソッドをコールすることで Object が完全に上書きされます。
+
+```objc
+NSError *error;
+
+// Create/add new values
+[object2 setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object2 setObject:@"John Doe Jr" forKey:@"name"];
+[object2 setObject:@"john_jr@example.com" forKey:@"email"];
+
+// This will remove all key/value pairs on the server,
+// replacing them with the locally-generated data
+[object2 saveAllFieldsSynchronous:TRUE withError:&error];
+
+if(error != nil) {
+    // Unable to save all fields of object
+    // Please check error description/code to see what went wrong...
+}
+```
+
+## 部分アップデート
+
+Object を部分アップする例を以下にあげます。更新する Key-Value ペアをセット後に`saveSynchronous`メソッドをコールすることで、Object が部分的にアップデートされます。
+
+```objc
+KiiObject *object1 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+// Create/add new values
+[object1 setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object1 setObject:@"John Doe Jr" forKey:@"name"];
+[object1 setObject:@"john_jr@example.com" forKey:@"email"];
+
+// This will append the local key/value pairs with the data
+// that already exists on the server
+[object1 saveSynchronous:&error];
+
+if(error != nil) {
+    // Unable to save fields to object
+    // Please check error description/code to see what went wrong...
+}
+```

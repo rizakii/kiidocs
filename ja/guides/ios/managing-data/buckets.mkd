@@ -2,4 +2,134 @@
 layout: ja-doc
 title: Bucket
 sort-priority: 10
+summary: Kii Platform におけるデータ管理を理解するためには、Bucket という概念を理解する必要があります。Cloud 上に浮かんでいる仮想的なバケツを想像してみてください。Cloud 上にデータを保存するためには、このデータの「入れ物」が必要です。Bucket は、いわばこのデータのための「入れ物」に相当します。
 ---
+## Bucket のスコープ
+
+Bucket にはスコープが定義されます。スコープは、この Bucket が誰に属するものであるかを示します。一例として、ある Bucket が特定のグループに属する場合、この Bucket は Group Scope を有しており、対象はこのグループということになります。この場合、Bucket 内の全データは、このグループが存在する限り Kii Cloud に存在し続けます。
+
+また、Bucket のスコープは、この Bucket にデフォルトで適用されるアクセス制御を決定します。以下に、Kii Platform がサポートするスコープの定義と、このスコープを持つ Bucket にデフォルトで適用されるアクセス制御をまとめます。
+
+* **Application Scope** : Bucket がアプリケーションに属していることを意味します。
+    * Authenticated users （サインインが完了した全てのユーザ）に対して、この Bucket に対するフルアクセスを許可します。
+    * Anonymous users （サインインが完了していないユーザ）に対して、この Bucket に対する「検索」および「読み取り」アクセスのみ許可します。
+* **Group Scope** : Bucket があるグループに属していることを意味します。
+    * このグループのオーナーに対して、この Bucket に対するフルアクセスを許可します。
+    * このグループの全メンバーに対して、この Bucket に対する Bucket 削除以外の全アクセスを許可します。
+    * このグループのメンバー以外に対して、この Bucket に対する全アクセスを拒否します。
+* **User Scope** : Bucket があるユーザに属していることを意味します。
+    * このユーザに対して、この Bucket に対するフルアクセスを許可します。
+    * このユーザ以外に対して、この Bucket に対する全アクセスを拒否します。
+
+## Object Bucket の作成
+
+Object 用の Bucket は次のように作成します
+
+```objc
+NSError *error;
+
+// Create Application Scope Bucket
+KiiBucket *bucket1 = [Kii bucketWithName:@"my_user"];
+
+// Create Group Scope Bucket
+KiiGroup* group = [KiiGroup groupWithName:@"my_group"];
+KiiBucket *bucket2 = [group bucketWithName:@"score_card"];
+
+// Create User Scope Bucket
+KiiBucket *bucket3 = [[KiiUser currentUser] bucketWithName:@"my_private"];
+```
+
+* Application Scope の Bucket: Kii クラスが提供する`bucketWithName`をコールして作成
+* Group Scope の Bucket: KiiGroup クラスが提供する`bucketWithName`をコールして作成
+* User Scope の Bucket: KiiUser クラスが提供する`bucketWithName`をコールして作成
+
+Bucket は明示的に save されるものでない点に注意してください。Bucket は、その中に Object が初めて save されたタイミングで自動的に作られます。例えば、上記の例における bucket1 は、以下のようにその中に Object が作成され、これが save されたタイミングで生成されます。
+
+```objc
+KiiObject *obj1 = [bucket1 createObject];
+[obj1 saveSynchronous:&error];
+```
+
+## File Bucket の作成
+
+File 用の Bucket は次のように作成します（File Storage は User Scope のみサポートしています）：
+
+```objc
+NSError *error;
+// Create a file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"my_backup"];
+```
+
+* KiiUser クラスの`fileBucketWithName`メソッドをコールして作成
+
+File Bucket は明示的に save されるものでない点に注意してください。File Bucket は、その中に File が初めて save されたタイミングで自動的に作られます。例えば、上記の例における bucket は、以下のようにその中に File が生成され、これが save されたタイミングで生成されます。
+
+```objc
+NSString *localPath = [[NSBundle mainBundle] resourcePath];
+localPath = [localPath stringByAppendingPathComponent:@"sample_upload.png"];
+
+KiiFile *file = [bucket fileWithLocalPath:localPath];
+[file saveFileSynchronous:&error];
+```
+
+## Bucket に新たな ACL を設定する
+
+Group Scope と User Scope のBucket については ACL を設定して新たなパーミッションを追加することができます（例: Anonymous User に Bucket 内へのデータ作成を許可する)
+
+<p class="callout">データ単位で付与可能なアクセス権限としてKiiACLObjectActionReadとKiiACLObjectActionWriteが存在します。詳細はセクション「ObjectのスコープとACL設定」と「FileのスコープとACL設定」を参照してください。</p>
+
+Bucketに付与できるアクセス権限は以下の通りです。
+
+* **KiiACLBucketActionQueryObjects** : Bucket 内のデータを検索するための権限
+* **KiiACLBucketActionCreateObjects** : Bucket 内に新たなデータを作成するための権限
+* **KiiACLBucketActionDropBucket** : Bucket を、その中のデータと共にドロップするための権限
+
+一例として、User Scope のBucket に２つの新しい ACL を追加する例をあげます。この例では、KiiACLBucketActionQueryObjects 権限と KiiACLBucketActionCreateObjects 権限を Authenticated User （サインイン済のユーザ全員）に対して付与しています。
+
+```objc
+KiiBucket *bucket = [[KiiUser currentUser] bucketWithName:@"my_private"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Create ACLs
+KiiACLEntry *entry = [KiiACLEntry entryWithSubject:[KiiAnyAuthenticatedUser aclSubject] andAction:KiiACLBucketActionQueryObjects];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:[KiiAnyAuthenticatedUser aclSubject] andAction:KiiACLBucketActionCreateObjects];
+
+// Set the ACLs on Bucket
+KiiACL *acl = [bucket bucketACL];
+[acl putACLEntry:entry];
+[acl putACLEntry:entry2];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
+
+if (error != nil) {
+    // Updating at least 1 ACLEntry failed
+    // Please check error description and succeeded/failed arrays to see what went wrong...
+}
+```
+
+別の例です。この例では、KiiACLBucketActionQueryObjects 権限と KiiACLBucketActionCreateObjects 権限を Anonymous Users に付与しています。
+
+```objc
+KiiBucket *bucket = [[KiiUser currentUser] bucketWithName:@"my_private"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Create ACLs
+KiiACLEntry *entry = [KiiACLEntry entryWithSubject:[KiiAnonymousUser aclSubject] andAction:KiiACLBucketActionQueryObjects];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:[KiiAnonymousUser aclSubject] andAction:KiiACLBucketActionCreateObjects];
+
+// Set the ACLs on Bucket
+KiiACL *acl = [bucket bucketACL];
+[acl putACLEntry:entry];
+[acl putACLEntry:entry2];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
+
+if (error != nil) {
+    // Updating at least 1 ACLEntry failed
+    // Please check error description and succeeded/failed arrays to see what went wrong...
+}
+```

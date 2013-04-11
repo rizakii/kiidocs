@@ -3,3 +3,26 @@ layout: ja-doc
 title: Object の作成
 sort-priority: 10
 ---
+ある Bucket インスタンスの `createObject` メソッドを実行すると、この Bucket 内に Object が生成されます。生成された Object の `setObject` メソッドを用いて、任意の Key-Value ペアを Object 内にセットできます。セットした Key-Value ペアは、`saveSynchronous` メソッドを実行することで Kii Cloud に反映されます。
+
+Object 作成のサンプルコードを以下にあげます。
+
+```objc
+KiiBucket *bucket = [Kii bucketWithName:@"mydata"];
+NSError *error;
+
+// Create an object with key/value pairs
+KiiObject *object = [bucket createObject];
+[object setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object setObject:@"John Doe" forKey:@"name"];
+[object setObject:@"john@example.com" forKey:@"email"];
+
+// Save the object
+[object saveSynchronous:&error];
+if (error != nil) {
+    // Saving object failed
+    // Please check error description/code to see what went wrong...
+}
+```
+
+`saveSynchronous`メソッドを呼ぶのを忘れないようにしてください。このメソッドを呼ぶまで、Object の内容は Kii Cloud に反映されません。
