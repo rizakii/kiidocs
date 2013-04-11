@@ -1,0 +1,122 @@
+---
+layout: en-doc
+title: Social Network Integration
+sort-priority: 30
+summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
+---
+Currently, Kii Platform supports the following social networks:
+
+ * Facebook:  http://www.faceboo,com/
+ * Twitter: http://www.twitter.com/ (coming soon)
+ * RenRen: http://www.renren.com/ (coming sson)
+
+## Integrate Facebook with Kii Platform
+
+To get started, you must set up your app's Facebook ID.  Please execute the following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](01.png)
+
+2. Click "Settings" to bring your application configuration menu.
+
+3. Put your Facebook App ID.
+
+    ![](02.png)
+
+
+## Sign-in with the external accounts
+
+Here is a sample code snippet for letting non-user sign-in with their Facebook account.  First, you need to include the following code in your \<head\> tag:
+
+```html
+<script>
+  ...
+  window.fbAsyncInit = function() {
+    // initialize the Kii SDK
+    Kii.initialize(MY_KII_APP_ID, MY_KII_APP_KEY);
+
+    // set options required by Facebook's API
+    var options = {
+      channelUrl : null,
+      status : true,
+      cookie : true,
+      xfbml : true
+    };
+
+    // Initialize the SNS for later use
+    KiiSocialConnect.setupNetwork(
+      KiiSocialNetworkName.FACEBOOK,
+      MY_FACEBOOK_API_KEY, null, options);
+
+    ... // other code here
+  };
+
+  // required to load the Facebook API connections
+  (function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script');
+    js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document));
+  ...
+</script>
+```
+
+The actual registration code is as follow:
+
+```javascript
+ // SNS Registration
+var loginCallbacks = {
+  // successfully connected to facebook
+  success : function(user, network) {
+    console.log("Connected user " + user + " to network: " + network);
+  },
+  // unable to connect
+  failure : function(user, network, error) {
+    console.log("Unable to connect to " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.logIn(KiiSocialNetworkName.FACEBOOK, null, loginCallbacks);
+```
+
+## Linking the existing users with their external accounts
+
+You can link the existing users with their external accounts as follows.  By linking the external accounts, your users will be able to sign-in with their external accounts in addition to their existing passwords.
+
+```javascript
+var linkCallbacks = {
+  // successfully connected to facebook
+  success : function(user, network) {
+    console.log("Linked user " + user + " to network: " + network);
+  },
+  // unable to connect
+  failure : function(user, network, error) {
+    console.log("Unable to link to " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.linkCurrentUserWithNetwork(
+    KiiSocialNetworkName.FACEBOOK, null, linkCallbacks);
+```
+
+## Unlink the existing users with their external accounts
+
+You can unlink the existing users with their external accounts as follows.
+
+```javascript
+var unlinkCallbacks = {
+  success: function(user, network) {
+    console.log("Unlinked user " + user + " from network: " + network);
+  },
+  failure: function(user, network, error) {
+    console.log("Unable to unlink from " + network + ". Reason: " + error);
+  }
+};
+
+KiiSocialConnect.unLinkCurrentUserFromNetwork(
+  KiiSocialNetworkName.FACEBOOK, unlinkCallbacks);
+```

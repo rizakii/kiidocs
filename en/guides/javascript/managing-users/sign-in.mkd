@@ -1,0 +1,60 @@
+---
+layout: en-doc
+title: Sign in
+sort-priority: 20
+summary: Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
+---
+
+## Sign-in with a password
+
+Here is a sample code snippet for authenticating a user.  Simpy invoke the `authenticate` method with a username (or a phone number or an email address) and a password combination.
+
+
+```javascript
+var username = "user123456789";
+var password = "123ABC";
+
+// Authenticate the user
+KiiUser.authenticate(username, password, {
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User authenticated!");
+    console.log(theUser);
+  },
+  // Called on a failed authentication
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error authenticating: " + errorString);
+  }
+})
+```
+
+## Sign-in with an access token
+
+For maintaining a user session when returning to the app, the Kii SDK allows developers to authenticate using a Kii-provided access token. This keeps your user from having to type in credentials each time -- or from needing to store them on the device. By keeping this token in persistent storage, you allow the user to authenticate seamlessly between sessions.
+
+Here is a sample code snippet for authenticating a user with an access token.  To retrieve the access token for a user, use KiiUser's `getAccessToken` method while the user is signed-in. By invoking the `authenticateWithToken` method with this access token, your user will be authenticated once again.
+
+
+```javascript
+ // Get an access token
+var access_token = KiiUser.getAccessToken();
+
+...
+
+// Authenticate the user with the access token
+KiiUser.authenticateWithToken(access_token, {
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User authenticated!");
+    console.log(theUser);
+  },
+  // Called on a failed authentication
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error authenticating: " + errorString);
+  }
+})
+```

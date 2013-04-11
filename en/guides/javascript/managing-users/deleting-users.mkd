@@ -1,0 +1,20 @@
+---
+layout: en-doc
+title: Deleting Users
+sort-priority: 60
+summary: Sometimes when a user wishes to remove themselves from your application, you will want to permanently delete his/her user account.
+---
+The following sample shows how you can delete a user:
+
+```javascript
+var user = KiiUser.getCurrentUser();
+user.delete({
+  // Called on successful deletion
+  success: function(theUser) {
+    console.log("User deleted!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error deleting user: " + errorString);
+  }
+});
+```

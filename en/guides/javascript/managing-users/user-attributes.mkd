@@ -1,0 +1,83 @@
+---
+layout: en-doc
+title: User Attributes
+sort-priority: 50
+---
+Kii SDK allows you to manage custom user profiles by allowing arbitrary key-value pairs for any KiiUser. Also, by default, KiiUser has the following predefined keys:
+
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+As long as key name does not collide with any of the predefined keys, you can add arbitrary keys like “age”, “gender” and “birthday”
+
+## Setting predefined attributes
+
+Many of the predefined keys are used internally by the SDK; their values will be automatically set by Kii Platform and you won't have to bother with them. However, for the following predefined keys, there are dedicated methods for changing the values:
+
+* email
+* phoneNumber
+* country
+
+The following snippets show how to change these values.
+
+```javascript
+var user = KiiUser.getCurrentUser();
+
+// Change email
+user.changeEmail("mynewemail@example.com", {
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+
+// Change phone number
+user.changePhone("+14085550000", {
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+
+// Change country
+user.set("country", "US");
+user.save({
+  success: function(theUser) {
+    console.log("User's email changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's email: " + errorString);
+  }
+});
+```
+
+## Setting arbitrary attributes
+
+To set arbitrary key-value pairs, use the `set` method as shown:
+
+```javascript
+var user = KiiUser.getCurrentUser();
+user.set("gender", "male");
+user.set("score", 500);
+user.save({
+  // Called on successful information change
+  success: function(theUser) {
+    console.log("User's information changed!");
+  },
+  failure: function(theUser, errorString) {
+    console.log("Error changing user's information: " + errorString);
+  }
+});
+```

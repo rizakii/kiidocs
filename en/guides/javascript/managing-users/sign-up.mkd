@@ -1,0 +1,191 @@
+---
+layout: en-doc
+title: Sign Up
+sort-priority: 10
+---
+<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check "Social Network Integration" section for more details.</p>
+
+Kii Platform allows users to register with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses.
+
+Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check "Social Network Integration" section for more details
+When setting an email address or phone number to a user, you may let Kii Cloud takes the steps to verify their credentials -- either through a verification email or an SMS. Users won't be able to authenticate with that credential until they've been validated. This way, you can prevent fake identities -- all built into Kii Platform!
+
+## User Sign-up
+
+The following snippet shows how to sign up a user with his/her username and password.  In this case, a new user account is created with a username "user\_123456" and a password "123ABC".
+
+
+```javascript
+var username = "user_123456";
+var password = "123ABC";
+
+// Create the KiiUser object
+var user = KiiUser.userWithUsername(username, password);
+
+// Register the user, defining callbacks for when the process completes
+user.register({
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User registered!");
+    console.log(theUser);
+  },
+  // Called on a failed registration
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error registering: " + errorString);
+  }
+});
+```
+
+Here is another example.  The following snippet shows how you can create a new account with a username "user\_123456", an email address "user\_123456@example\.com" and a password "123ABC".
+
+
+```javascript
+var username = "user_123456";
+var emailAddress = "user_123456@example.com";
+var password = "123ABC";
+
+// Create the KiiUser object
+var user = KiiUser.userWithEmailAddressAndUsername(emailAddress, username, password);
+
+// Register the user, defining callbacks for when the process completes
+user.register({
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User registered!");
+    console.log(theUser);
+  },
+  // Called on a failed registration
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error registering: " + errorString);
+  }
+});
+```
+The following snippet shows how to sign up a user with a username "user\_123456", a phone number "+819012345678" and a password "123ABC".
+
+
+```javascript
+var username = "user_123456";
+var phoneNumber = "+819012345678";
+var password = "123ABC";
+
+// Create the KiiUser object
+var user = KiiUser.userWithPhoneNumberAndUsername(phoneNumber, username, password);
+
+// Register the user, defining callbacks for when the process completes
+user.register({
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User registered!");
+    console.log(theUser);
+  },
+  // Called on a failed registration
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error registering: " + errorString);
+  }
+});
+```
+
+You can also create a new account without username, like the following snippets.
+
+* Sign-up with a combination of an email and a password
+
+```javascript
+ // Sign up with email/password, NO USERNAME
+var emailAddress = "user_123456@example.com";
+var password = "123ABC";
+
+// Create the KiiUser object
+var user = KiiUser.userWithEmailAddress(emailAddress, password);
+
+// Register the user, defining callbacks for when the process completes
+user.register({
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User registered!");
+    console.log(theUser);
+  },
+  // Called on a failed registration
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error registering: " + errorString);
+  }
+});
+```
+
+* Sign-up with a combination of a phone number and a password
+
+```javascript
+ // Sign up with phone/password, NO USERNAME
+var phoneNumber = "+819012345678";
+var password = "123ABC";
+
+// Create the KiiUser object
+var user = KiiUser.userWithPhoneNumber(phoneNumber, password);
+
+// Register the user, defining callbacks for when the process completes
+user.register({
+  // Called on successful registration
+  success: function(theUser) {
+    // Print some info to the log
+    console.log("User registered!");
+    console.log(theUser);
+  },
+  // Called on a failed registration
+  failure: function(theUser, errorString) {
+    // Print some info to the log
+    console.log("Error registering: " + errorString);
+  }
+});
+```
+Note that in these cases, the email and phone number (SMS) verification must be disabled (please check the next section for more details on the verification mechanism).
+
+Other sign-up patterns, such as signing-up with {email address, phone number, password} and {username, email address, phone number, password}, are also supported.  Please refer KiiUser Class description in [Kii Cloud SDK JSDoc]({% page_url references-en %}) for details.
+
+
+## Enabling email and/or phone verification
+
+You can configure your application to verify the user's email address and/or phone number.   You can toggle the verification on and off on the dev portal as follows:
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](01.png)
+
+2. Click "Settings" to bring your application configuration menu.
+
+3. Toggle SMS/Phone verification.
+
+    ![](02.png)
+
+   When enabled, the email address and/or phone number will be verified as follows:
+
+    **Email Verification:**
+    When the email verification is enabled and an account is registered with an email address, Kii Cloud will send an email to that user with a verification link.  Signing in with the specified email address will be allowed only when the user verifies themselves by clicking this link.
+
+    **Phone (SMS) Verification:**
+    When the phone verification is enabled and an account is registered with a phone number, Kii Cloud will send an SMS message with a verification code. Your application should then ask the user to type in the verification code to complete verification.  Signing-in with the specified phone number will be allowed only when your user verifies themselves by submitting the correct code.
+
+    *Please Note*: You must specify a valid mobile phone number in an international phone number format (starting with + and your country code) in order to properly begin the SMS verification process. 
+
+4. After receiving the SMS verification code from the user, your application should invoke the `verifyPhoneNumber` method to complete the verification process.
+
+
+```javascript
+var user = Kii.currentUser();
+
+// verify the phone number using a code sent via SMS
+user.verifyPhoneNumber("012345", {
+  success: function(theUser) {
+    // do something with the verified user
+  },
+  failure: function(theUser, anErrorString) {
+    // do something with the error response
+  }
+});
+```
