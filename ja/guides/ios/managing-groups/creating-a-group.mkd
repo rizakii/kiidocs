@@ -3,3 +3,22 @@ layout: ja-doc
 title: グループの作成
 sort-priority: 10
 ---
+サインイン済みユーザであれば誰でも新しいグループを作成できます。グループを作成したユーザはそのグループのオーナーになります。
+
+基本手順は以下の通りです。
+
+1. `groupWithName`  メソッドを使用して KiiGroup インスタンスを生成します。
+1. `saveSynchronous`  メソッドをコールして KiiGroup の作成リクエストを送信します。
+
+```objc
+NSError *error;
+NSString *groupName = @"myGroup";
+
+KiiGroup* group = [KiiGroup groupWithName:groupName];
+[group saveSynchronous:&error];
+
+if (error != nil) {
+    // Group creation failed
+    // Please check error description/code to see what went wrong...
+}
+```
