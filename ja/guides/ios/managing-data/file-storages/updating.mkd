@@ -2,5 +2,52 @@
 layout: ja-doc
 title: File のアップデート
 sort-priority: 30
+summary: Kii Cloud SDK は、２種類の File 更新手段を提供しています。
 ---
+* **メタデータのみ更新**:
 
+    File のメタデータのみアップデートします。実ファイルは更新されないため、短い時間で更新が完了します
+* **ファイル全体を更新**:
+
+    File のメタデータと実ファイルの双方をアップデートします
+
+## メタデータのみの更新
+
+メタデータのみを更新する例です。メタデータの編集後、`saveMetaData`メソッドを呼ぶことで編集内容が Kii Cloudに反映されます。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Update the file's metadata
+[file setOptional:@"some extra data"];
+
+// Save the metadata
+[file saveMetaDataSynchronous:&error];
+if (error != nil) {
+  // Updating file metadata failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## ファイル全体の更新
+
+ファイル全体を更新する例です。`setLocalPath`メソッドで新しいファイルのパスを指定した後、必要に応じてメタデータの編集を行った後に`saveFileSynchronous`メソッドを呼ぶことで、ファイル全体の更新が Kii Cloud に反映されます。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Set a path for new content to be uploaded to this file
+[file setLocalPath:@"my/local/path"];
+
+// and update some metadata
+[file setOptional:@"some extra data"];
+
+// finally, save the metadata + upload the new file body
+[file saveFileSynchronous:&error];
+if (error != nil) {
+  // Updating file failed
+  // Please check error description/code to see what went wrong...
+}
+```
