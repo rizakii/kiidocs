@@ -1,5 +1,0 @@
----
-layout: ja-doc
-title: Bucket の ACL 設定
-sort-priority: 20
----
