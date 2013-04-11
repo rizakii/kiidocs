@@ -2,5 +2,23 @@
 layout: ja-doc
 title: File の公開
 sort-priority: 60
+summary: Kii Platform は、ファイルの公開機能を提供しています。公開されたファイルには URL が割り振られ、任意のユーザがこの URL を使ってファイルをダウンロードできるようになります。
 ---
+ファイルを公開する際には有効期限を UNIX時間（ミリ秒）で設定することもできます。設定した有効期限が過ぎると、URLは無効となりファイルをダウンロードすることができなくなります。逆に有効期限を設定しなかった場合は、URL が無効になることはなくずっと公開されたままとなります。
 
+ファイルの公開を実施しているサンプルを以下にあげます。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Publish the file
+NSString* url = [file publishSynchronous:&error];
+
+if (error != nil) {
+  // Publishing file failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+ファイルの公開にはREAD権限が必要な点に注意してください。

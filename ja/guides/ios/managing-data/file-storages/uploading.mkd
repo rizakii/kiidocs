@@ -3,4 +3,28 @@ layout: ja-doc
 title: File のアップロード
 sort-priority: 10
 ---
+ファイルをアップロードするには、まず、対応する KiiFile インスタンスを作成します。これは KiiFileBucket  インスタンスのメソッドを呼ぶことでできます。この際に KiiFile へ自動的にメタデータのセットが行われますが、必要に応じて一部メタデータの更新をすることでもできます。最後に、KiiFile インスタンスの save メソッドを呼ぶことで、メタデータとファイル本体を Kii Cloud にアップロードできます。
 
+ファイルのアップロードを行うサンプルを以下に示します。
+
+```objc
+NSError *error;
+
+// Create bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"my_private"];
+
+// Get a local filepath to upload
+NSString *localPath = [[NSBundle mainBundle] resourcePath];
+localPath = [localPath stringByAppendingPathComponent:@"sample_upload.png"];
+
+// Create a KiiFile using the local filepath
+KiiFile *file = [bucket fileWithLocalPath:localPath];
+
+// Save the file metadata + body to the server
+[file saveFileSynchronous:&error];
+
+if (error != nil) {
+    // Saving file failed
+    // Please check error description/code to see what went wrong...
+}
+```

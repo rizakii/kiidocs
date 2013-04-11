@@ -2,5 +2,40 @@
 layout: ja-doc
 title: File の Trashcan への移動と復元
 sort-priority: 40
+summary: Kii Cloud は、Kii Cloud Trashcan という機能を提供しています。これは、クライアントで削除された File を一時的に保存しておくゴミ箱に相当します。
 ---
+Kii Cloud Trashcan は、Microsoft Windows や MacOS のゴミ箱と同様の働きをします。ファイルがゴミ箱に移動すると、このファイルは一旦隠されます。例えばユーザがファイルの検索を行った場合、ゴミ箱内のファイルは検索の対象から外れます（ファイルがゴミ箱より復元されると再度検索の対象になります）
 
+## ファイルをTrashcanに移動する
+
+Trashcanへファイルを移動するには、`moveToTrashSynchronous`メソッドを呼び出します。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Move the file to Trashcan
+[file moveToTrashSynchronous:&error];
+
+if (error != nil) {
+  // Moving file to trash failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## Trashcanからファイルを復元する
+
+Trashcanからファイルを復元するには、`restoreFromTrashSynchronous`メソッドを呼び出します。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Restore the file from Trashcan
+[file restoreFromTrashSynchronous:&error];
+
+if (error != nil) {
+  // Restoring file from trash failed
+  // Please check error description/code to see what went wrong...
+}
+```
