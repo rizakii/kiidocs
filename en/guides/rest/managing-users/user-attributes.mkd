@@ -1,0 +1,134 @@
+---
+layout: en-doc
+title: User Attributes
+sort-priority: 50
+#page-id: foo-bar-baz
+---
+Kii SDK allows you to manage custom user profiles by allowing arbitrary key-value pairs for any KiiUser. Also, by default, KiiUser has the following predefined keys:
+
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+As long as key name does not collide with any of the predefined keys, you can add arbitrary keys like “age”, “gender” and “birthday”
+
+## Setting user attributes upon sign-up
+
+Many of the predefined keys are used internally by the API; their values will be automatically set by Kii Platform and you won't have to bother with them. However, for the following predefined keys, there are dedicated methods for changing the values:
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+     "https://api.kii.com/api/apps/{APP_ID}/users" \
+    -d '{ \
+        "loginName":"test004",\
+        "displayName":"person test004",\
+        "country":"JP", \
+        "password":"hogehoge", \
+        "emailAddress":"test004@testkii.com", \
+        "phoneNumber":"+819098439216", \
+        "followers":5, \
+        "friends":400, \
+        "status":"available" \
+    }'
+```
+
+ Kii Cloud will respond with the UserID as follows:
+
+```
+< HTTP/1.1 201 Created
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Location: https://api.kii.com/api/apps/{API_ID}/users/{USER_ID}
+< Content-Type: application/vnd.kii.RegistrationResponse+json
+< Content-Length: 55
+< Date: Tue, 26 Jun 2012 14:47:02 GMT
+<
+{
+  "userID" : {USER_ID}
+}
+```
+
+## Retrieving user attributes
+
+You can retrieve the attributes by sending a GET request as follows:
+
+```sh
+curl -v -X GET \
+  -H "Authorization:Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me"
+```
+
+Kii Cloud will respond with a list of user attributes as follows:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
+< Content-Length: 386
+< Date: Tue, 26 Jun 2012 14:52:42 GMT
+<
+{
+  "userID" : {USER_ID},
+  "internalUserID" : 102906630093406208,
+  "loginName" : "test004",
+  "displayName" : "person test004",
+  "country" : "JP",
+  "emailAddress" : "test004@testkii.com",
+  "emailAddressVerified" : true,
+  "phoneNumber" : "+819098439216",
+  "phoneNumberVerified" : false,
+  "followers" : 5,
+  "friends" : 400,
+  "status" : "available"
+}
+```
+
+## Modifying arbitrary attributes
+
+Arbitrary fields can be modified easily, as shown in the following example:
+
+```sh
+curl -v -X POST \
+    -H "Authorization:Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "content-type:application/vnd.kii.UserUpdateRequest+json" \
+    "https://api.kii.com/api/apps/{APP_ID}/users/me" \
+    -d '{"friends":401, "age":28}'
+```
+
+**Please Note**: This is not a partial update to the object, it will replace any existing fields:
+
+* If the specified arbitrary field is new, it will be added as a new user attribute
+* If the specified arbitrary field already exists, its value will be replaced with the new one
+* If the existing arbitrary field is not specified, it will be removed from the user attributes
+
+In the above sample, for example, "followers" and "status" will be removed, "friends" will be updated, and "age" will be created on the user profile.
+
+Kii Cloud will respond with the modification time in UNIX time (msec) like the following:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
+< Content-Length: 34
+< Date: Tue, 26 Jun 2012 15:43:05 GMT
+<
+{
+  "modifiedAt" : 1340725385432
+}
+```
