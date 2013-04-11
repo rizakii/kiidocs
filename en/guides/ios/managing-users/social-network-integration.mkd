@@ -1,0 +1,88 @@
+---
+layout: en-doc
+title: Social Network Integration
+sort-priority: 30
+summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
+---
+Currently, Kii Platform supports the following social networks:
+
+* Facebook
+* Twitter (coming soon)
+* RenRen (coming soon)
+
+## Integrate Facebook with Kii Platform
+
+To get started, you must set up your app's Facebook ID.  Please execute the
+following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](01.png)
+
+1. Click "Settings" to bring your application configuration menu.
+
+1. Put your Facebook App ID.
+
+    ![](02.png)
+
+## Configuring Info.plist
+
+Put the following snippet in your info.plist.  Be sure to put a prefix "fb" in
+front or your Facebook app key.
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb{FACEBOOK_APP_KEY}</string>
+        </array>
+    </dict>
+</array>
+```
+
+## Configuring AppDelegate.m
+
+To leverage the social network integration, please put the following snippet in
+AppDelegate.m
+
+```objc
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+        
+     return [KiiSocialConnect handleOpenURL:url];
+}
+```
+
+## Sign-in with the external accounts
+
+Here is a sample code snippet for letting your user login with their Facebook
+account.
+
+```objc
+- (void) myRegistrationFinished:(KiiUser*)user
+                   usingNetwork:(KiiSocialNetworkName)network
+                      withError:(NSError*)error {
+
+      // the user has logged in successfully
+      if(error == nil) {
+          // do something with the user
+      }
+}
+
+- (void) myRegistrationMethod {
+        [KiiSocialConnect setupNetwork:kiiSCNFacebook
+                               withKey:FACEBOOK_APP_KEY
+                             andSecret:nil
+                            andOptions:nil];
+
+        [KiiSocialConnect logIn:kiiSCNFacebook
+                   usingOptions:nil
+                   withDelegate:self
+                    andCallback:@selector(myRegistrationFinished:usingNetwork:withError:)];
+
+    }
+```
