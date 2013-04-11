@@ -1,0 +1,46 @@
+---
+layout: en-doc
+title: Adding/Removing Group Members
+sort-priority: 50
+---
+## Adding Group Members
+
+A group owner can add additional members to the group with the `addUser` method:
+
+```javascript
+var group = KiiGroup.gropuWithURI("_URI_OF_THE_GROUP_");
+var user1 = KiiUser.userWithURI("_URI_OF_THE_USER_");
+
+// Add user1 to the group
+group.addUser(user1);
+group.save({
+  success: function(theGroup) {
+    console.log("Group saved!");
+    console.log(theGroup);
+  },
+  failure: function(theGroup, errorString) {
+    console.log("Error saving group: " + errorString);
+  }
+});
+```
+
+## Removing Group Members
+
+A group owner can remove existing members from the group with the `removeUser` method:
+
+```javascript
+var group = KiiGroup.gropuWithURI("_URI_OF_THE_GROUP_");
+var user1 = KiiUser.userWithURI("_URI_OF_THE_USER_");
+
+// Remove user1 from the group
+group.removeUser(user1);
+group.save({
+  success: function(theGroup) {
+    console.log("Group saved!");
+    console.log(theGroup);
+  },
+  failure: function(theGroup, errorString) {
+    console.log("Error saving group: " + errorString);
+  }
+});
+```

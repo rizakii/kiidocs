@@ -1,0 +1,21 @@
+---
+layout: en-doc
+title: Listing Group Members
+sort-priority: 40
+---
+A group owner can get a list of members who are in the group with the `getMemberList` method.  This method will return a list of KiiUser instances representing group members. 
+
+Here is an example:
+
+```javascript
+group.getMemberList({
+  success: function(theGroup, theMembers) {
+    console.log("Group retrieved!");
+    console.log(theGroup);
+    console.log(theMembers);
+  },
+  failure: function(theGroup, errorString) {
+    console.log("Error retrieving group members: " + errorString);
+  }
+});
+```

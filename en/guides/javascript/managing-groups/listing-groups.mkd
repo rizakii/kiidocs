@@ -1,0 +1,24 @@
+---
+layout: en-doc
+title: Listing Groups
+sort-priority: 30
+---
+A user can get a list of groups in which he/she belongs by invoking `memberOfGroups` method.
+
+```javascript
+// Get the current login user
+var user = Kii.currentUser();
+
+// Get a list of groups in which the current user is a member
+user.memberOfGroups({
+  success: function(theUser, groupList) {
+    for(var i=0; i<group.List.length; i++) {
+      var g = groupList[i];
+      // do something with the results
+    }
+  },
+  failure: function(theUser, anErrorString) {
+    // do something with the error response
+  }
+});
+```

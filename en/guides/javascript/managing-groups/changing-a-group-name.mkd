@@ -1,0 +1,20 @@
+---
+layout: en-doc
+title: Changing a Group Name
+sort-priority: 20
+---
+A group owner can change a name of the existing group with the `changeGroupName` method:
+
+```javascript
+var newGroupName = "myNewGroupName";
+
+group.changeGroupName(newGroupName, {
+  success: function(theGroup) {
+    console.log("Group name changed!");
+    console.log(theGroup);
+  },
+  failure: function(theGroup, errorString) {
+    console.log("Error changing group name: " + errorString);
+  }
+});
+```

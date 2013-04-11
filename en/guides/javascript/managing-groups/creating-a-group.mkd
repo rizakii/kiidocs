@@ -1,0 +1,25 @@
+---
+layout: en-doc
+title: Creating a Group
+sort-priority: 10
+---
+Any authenticated user has the ability to create a new group.  This user becomes, by default, the group's owner.
+
+The following snippet shows how to create a Group.
+
+```javascript
+var groupName = "myGroup";
+
+var group = KiiGroup.groupWithName(groupName);
+group.save({
+  success: function(theGroup) {
+    console.log("Group created!");
+    console.log(theGroup);
+  },
+  failure: function(theGroup, errorString) {
+     console.log("Error creating group: " + errorString);
+  }
+});
+```
+
+You can also create a group and specify its members at the same time.  Please refer the [JSDoc]({% page_url references-en%}) for the details.
