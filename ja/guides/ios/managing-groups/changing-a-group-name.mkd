@@ -3,3 +3,14 @@ layout: ja-doc
 title: グループ名の変更
 sort-priority: 20
 ---
+グループのオーナーは、以下のサンプルのように`changeGroupNameSynchronous`メソッドを使ってグループ名を変更できます。
+
+```objc
+NSError *error;
+[group changeGroupNameSynchronous:@"myNewGroupName" withError:&error];
+
+if (error != nil) {
+    // Group name change failed
+    // Please check error description/code to see what went wrong...
+}
+```
