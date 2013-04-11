@@ -3,4 +3,17 @@ layout: ja-doc
 title: Object の削除
 sort-priority: 50
 ---
+Object を削除するには、次の例のように`deleteSynchronous`メソッドをコールします。
 
+```objc
+KiiObject *object = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+[object deleteSynchronous:&error];
+if(error != nil) {
+    // Unable to delete object
+    // Please check error description/code to see what went wrong...
+}
+```
+
+Object は`deleteSynchronous`メソッドを呼ぶことで削除されます。別途`saveSynchronous`メソッドを呼ぶ必要はありません。
