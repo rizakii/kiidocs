@@ -1,0 +1,15 @@
+---
+layout: en-doc
+title: Deleting Users
+summary: Sometimes when a user wishes to remove&nbsp;themselves&nbsp;from your application, you will want to permanently delete his/her user account.
+sort-priority: 60
+---
+The following sample shows how you can delete a user:
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization:Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me"
+```
