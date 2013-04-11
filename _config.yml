@@ -8,4 +8,9 @@ redcarpet:
 
 base-url: http://documentation.kii.com/
 
+external-keys:
+  google:       '011947291164067706467:czagiboexqa'
+  disqus:       'kiidoc'
+
+
 # vim:set ts=8 sts=2 sw=2 tw=0 et:
