@@ -1,0 +1,19 @@
+---
+layout: en-doc
+title: Deleting Users
+sort-priority: 60
+summary: Sometimes when a user wishes to remove themselves from your application, you will want to permanently delete his/her user account.
+---
+The following sample shows how you can delete a user:
+
+```objc
+NSError *error;
+
+KiiUser *user = [KiiUser currentUser];
+[user deleteSynchronous:&error];
+
+if(error != nil) {
+    // User deletion failed
+    // Please check error description/code to see what went wrong...
+}
+```

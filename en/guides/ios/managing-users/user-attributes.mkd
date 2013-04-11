@@ -1,0 +1,76 @@
+---
+layout: en-doc
+title: User Attributes
+sort-priority: 50
+summary: "Kii SDK allows you to manage custom user profiles by allowing arbitrary key-value pairs for any KiiUser. Also, by default, KiiUser has the following predefined keys:"
+---
+* userID
+* internalUserID
+* loginName
+* displayName
+* country
+* emailAddress
+* emailAddressVerified
+* phoneNumber
+* phoneNumberVerified
+* password
+
+As long as key name does not collide with any of the predefined keys, you can
+add arbitrary keys like “age”, “gender” and “birthday”
+
+## Setting predefined attributes
+
+Many of the predefined keys are used internally by the SDK; their values will
+be automatically set by Kii Platform and you won't have to bother with them.
+However, for the following predefined keys, there are dedicated methods for
+changing the values:
+
+* email
+* phoneNumber
+* country
+
+The following snippets show how to change these...
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser currentUser];
+
+// User - Setting predefined attributes (profile - email)
+[user changeEmailSynchronous:@"myNewEmail@example.com" withError:&error];
+if(error != nil) {
+  // Email change failed
+  // Please check error description/code to see what went wrong...
+}
+
+// User - Setting predefined attributes (profile - phone number)
+[user changePhoneSynchronous:@"+15555555555" withError:&error];
+if(error != nil) {
+  // Email change failed
+  // Please check error description/code to see what went wrong...
+}
+
+// User - Setting predefined attributes (profile - country)
+[user setCountry:@"JP"];
+[user saveSynchronous:&error];
+if(error != nil) {
+  // Country change failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## Setting arbitrary attributes
+
+To set arbitrary key-value pairs, use the `setObject` method as shown:
+
+```objc
+NSError *error;
+KiiUser *user = [KiiUser currentUser];
+[user setObject:@"male" forKey:@"gender"];
+[user setObject:[NSNumber numberWithInt:500] forKey:@"score"];
+[user saveSynchronous:&error];
+
+if(error != nil) {
+  // User object save failed
+  // Please check error description/code to see what went wrong...
+}
+```

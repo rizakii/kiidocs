@@ -1,0 +1,51 @@
+---
+layout: en-doc
+title: Sign In
+sort-priority: 20
+summary: Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
+---
+## Sign-in with a password
+
+Here is a sample code snippet for authenticating a user.  Simply invoke the
+`authenticateSynchronous` method with a username (or a phone number or an email
+address) and a password combination.
+
+```objc
+NSString *username = @"user123456";
+NSString *password = @"123ABC";
+
+NSError *error;
+[KiiUser authenticateSynchronous:username
+                    withPassword:password
+                        andError:&error];
+
+if (error != nil) {
+  // Sign-in failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## Sign-in with an access token
+
+For maintaining a user session when returning to the app, the Kii SDK allows
+developers to authenticate using a Kii-provided access token. This keeps your
+user from having to type in credentials each time -- or from needing to store
+them on the device. By keeping this token in persistent storage, you allow the
+user to authenticate seamlessly between sessions.
+
+Here is a sample code snippet for authenticating a user with an access token.
+To retrieve the access token for a user, use `KiiUser`'s `accessToken`
+attribute while the user is signed-in. By invoking the
+`authenticateWithTokenSynchronous` method with this access token, your user
+will be authenticated once again.
+
+```objc
+NSString *token = @"jQEDGSlrRRUBTs7ryAVTrp8d_v5A1m44kcDSJEOs9c0";
+
+NSError *error;
+[KiiUser authenticateWithTokenSynchronous:token andError:&error];
+if (error != nil) {
+  // Sign-in failed
+  // Please check error description/code to see what went wrong...
+}
+```
