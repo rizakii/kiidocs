@@ -3,4 +3,29 @@ layout: ja-doc
 title: File のダウンロード
 sort-priority: 20
 ---
+File にアサインされた URI を元に、File を Kii Cloud より取得することができます。以下に File のダウンロードを実施している例をあげます。
 
+```objc
+NSError *error;
+
+// Get the file based on an existing file URI
+KiiFile *file2 = [KiiFile fileWithURI:file.objectURI];
+[file2 getFileMetadataSynchronous:&error];
+
+// Getting the metadata was successful
+if(error == nil) {
+    // so get the file body as well - and save it to my/path/to/file
+    [file2 getFileBodySynchronous:@"my/path/to/file" withError:&error];
+}
+
+if (error != nil) {
+    // Downloading file failed
+    // Please check error description/code to see what went wrong...
+}
+```
+
+基本的な手順は下記の通りです
+
+1. `fileWithURI`メソッドでファイルの URI を指定し、KiiFile のインスタンスを作成します。
+1. `getFileMetadataSynchronous`メソッドを呼び出し、ファイルのメタデータを取得します。
+1. `getFileBodySynchronous`メソッドを呼び出し、ファイルのBody（実際にはファイルの中身）をダウンロードします。この際、ダウンロードしたファイルの保存先ファイルパスを指定します。
