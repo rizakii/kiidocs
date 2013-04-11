@@ -12,7 +12,7 @@ In this scenario, we are using an "app-scope" topic.  This type of topic can onl
 
 Creating an app-scope topic is only supported via Kii REST API.  Please execute the following steps:
 
-1. Follow the steps described in ["REST guides - Admin Features"]({% page_url DUMMY %}) and get an app admin token.
+1. Follow the steps described in ["REST guides - Admin Features"]({% page_url android-rest_admin-en %}) and get an app admin token.
 2. Create an app-scope topic as follows (in this example, we are creating a topic named "SendingAlert"):
 
   ```sh

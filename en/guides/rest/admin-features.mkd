@@ -2,4 +2,5 @@
 layout: en-doc
 title: Admin Features
 sort-priority: 50
+page-id: android-rest_admin-en
 ---
