@@ -1,0 +1,96 @@
+---
+layout: en-doc
+title: Social Network Integration
+summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
+sort-priority: 30
+---
+Currently, Kii Platform supports the following social networks:
+
+* Facebook
+* Twitter (coming soon)
+* RenRen (coming soon)
+
+## Integrate Facebook with Kii Platform
+
+To get started, you must set up your app's Facebook ID.  Please execute the following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+    ![](01.png)
+1. Click "Settings" to bring your application configuration menu.
+1. Put your Facebook App ID.
+    ![](02.png)
+
+## Sign-up/sign-in using external accounts
+
+Here is an example for registering or authenticating a user with your application using their Facebook account:
+
+```sh
+curl -v -X POST \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "content-type:application/vnd.kii.AuthTokenFacebookRequest+json" \
+  "https://api.kii.com/api/apps/{APP_ID}/integration/facebook" \
+  -d '{"accessToken":{ACCESS_TOKEN_PROVIDED_BY_FACEBOOK}}'
+```
+
+Once the user's identity has been verified with Facebook, Kii Cloud will check if the user is new or existing within your application.  If it is a new user, Kii Cloud will automatically create a new account.
+
+Upon the successful sign-up/sign-in, Kii Cloud will return an access token for the user along with this user's User ID and the expiration time of the token in UNIX time (msec):
+
+```
+< 200
+< Content-Type: application/json
+<
+{
+  "id" : {USER_ID},
+  "access_token" : {ACCESS_TOKEN},
+  "expires_in" : 9223372036854775,
+  "new_user_created": true
+}
+```
+
+The "new\_user\_created" key will be set as true if Kii Cloud performed a registration for the new user.
+
+Linking the existing users with their external accounts
+
+By linking existing applications with their social accounts, they will have an alternative to authentication - in addition to their existing passwords.
+
+```sh
+curl -v -X POST \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "content-type:application/vnd.kii.LinkFacebookRequest+json" \
+    "https://api.kii.com/api/apps/{APP_ID}/users/me/facebook/link" \
+    -d '{"accessToken":{ACCESS_TOKEN_PROVIDED_BY_FACEBOOK}}'
+```
+
+If successful, Kii Cloud will respond as shown:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Date: Mon, 14 May 2012 22:55:41 GMT
+<
+```
+
+## Unlink the existing users with their external accounts
+
+You can unlink the existing users with their external accounts in the following manner:
+
+```sh
+curl -v -X POST \
+    -H "x-kii-appid:japp" \
+    -H "x-kii-appkey:dummy" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    "https://api.kii.com/api/apps/{APP_ID}/users/me/facebook/unlink"
+```
+
+If successful, Kii Cloud will respond as shown:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Date: Mon, 14 May 2012 22:55:41 GMT
+<
+```
