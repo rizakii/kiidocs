@@ -1,0 +1,13 @@
+---
+layout: en-doc
+title: Managing Data
+summary: Kii Cloud Storage SDK provides two types of storage for managing application data. Based on your application's requirements, you may wish to utilize one or both of these.
+sort-priority: 30
+---
+* **Object Storage**: For storing arbitrary key/value pairs as JSON-style
+  objects. You can freely define your objects by adding any key-value pairs
+  without setting any schemas or doing any extra customization.
+* **File Storage**: For storing any files, such as images and movies. Not only
+  you can upload/download files, but also you can publish the file by URL or
+  put it in the trash (i.e., a temporal place where deleted files are stored in
+  Kii Cloud; later users can restore any files they've mistakenly deleted).

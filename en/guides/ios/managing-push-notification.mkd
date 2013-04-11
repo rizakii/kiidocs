@@ -1,0 +1,65 @@
+---
+layout: en-doc
+title: Managing Push Notifications
+sort-priority: 50
+---
+Kii Cloud supports the following three types of push notifications.
+
+* **"Push to App"** notification: This mechanism will let your applications
+  know when a new event occurred on the Cloud; for example, your apps will be
+  able to get a push notification when a new Object is created in a bucket.  
+  Please check ['Receiving "Push to App" Notification']({% page_url ios-object_storages_push-en %})
+  section for more details.
+
+* **"Push to User"** notification: This mechanism will let you and your
+  application users quickly send messages to other users; for example, you
+  application users will be able to exchange push messages among their group
+  members  
+  Please refer ['"Push to User" Notification']({% page_url ios-push_to_user-en %})
+  section for more details.
+
+* **"Direct Push"** notification: This mechanism will let you reach directly to
+  your application users; for example, you will be able to directly send an
+  alert message to a certain user.
+  Please refer ['"Direct Push" Notification']({% page_url ios-direct_push-en %})
+  section for more details.
+
+## Preparation for Leveraging Push Notifications
+
+### Configuring Your Application
+
+To leverage Push notification features, you need to configure your application
+accordingly on the developer portal.  Check
+["iOS Quick Start - Adding Kii Cloud SDK to Your Application"]({% page_url ios-adding_kii_cloud_to_your_application-en %})
+section to check how you can configure your application. 
+
+### Installing User Devices
+
+In order for Kii Cloud to deliver push messages to a user device, your
+application needs to install the device to Kii Cloud by sending the
+corresponding device token assigned by APNS server.
+
+Here is a sample snippet for installing a device to Kii Cloud.  In the snippet,
+we are setting a device token obtained from the APNS server.
+
+```objc
+ // Handling APNS registration response, add this method if it is not available.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  // Hold deviceToken into Kii shared instance
+  [Kii setAPNSDeviceToken:deviceToken];
+
+  // Install a Device to Kii Cloud
+  NSError *error = nil;
+  KiiPushInstallation *installation = [KiiPushInstallation installSynchronousWithError:&error;];
+
+  if (error != nil) {
+    NSLog(@"Installation failed : %@", error);
+  } else {
+    NSLog(@"Installation succeeded");
+  }
+}
+```
+
+Once invoked, the device token will be saved on Kii Cloud.  If the device token
+is already registered on Kii Cloud, the registration will fail.
+
