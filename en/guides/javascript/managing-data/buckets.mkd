@@ -1,0 +1,129 @@
+---
+layout: en-doc
+title: Buckets
+sort-priority: 10
+summary: 'In order to fully leverage the power of Kii Platform, it is important to understand the concept of "buckets". The best way to understand a bucket in this sense is to imagine a virtual bucket floating in Kii Cloud. There can be any number of buckets belonging to the application, a user or a group. They are defined by the developer, and hold all data objects and files. A great way to understand is to try it yourself! So read on for some examples...'
+---
+## Bucket Scopes
+
+Each bucket has a "scope", which determines to whom the bucket belongs.  For example, if a bucket belongs to a specific group, this bucket has "Group Scope" and all the data in this bucket will be kept as long as the group exists in Kii Cloud.  The scope also affects the default access control applied to the data that is created within this bucket.
+
+These are three bucket scopes supported by Kii Platform:
+
+* **Application Scope**: The bucket belongs to your application.
+    * Authenticated users (i.e., all users who have been signed-in) will have full access to the bucket by default.
+    * Anonymous users (i.e., users who have not yet signed-in) can only query and read data in the bucket by default.
+* **Group Scope**: The bucket belongs to a specific user group.
+    * The group owner will have full access to the bucket by default.
+    * The group members will have full access to the bucket except "dropping bucket" by default.
+    * All non-group members will have no access to the bucket by default.
+* **User Scope**: The bucket belongs to a user.
+    * The user will have full access to the bucket by default.
+    * Other user will have no access to the bucket by default.
+
+## Creating Object Buckets
+
+Here are examples of how you can create Object buckets:
+
+```javascript
+// Create Application Scope Bucket
+var appBucket = Kii.bucketWithName("my_user");
+
+// Create Group Scope Bucket. (Login required)
+var group = KiiGroup.groupWithName("my_group");
+var groupBucket = group.bucketWithName("score_card");
+
+// Create User Scope Bucket. (Login required)
+var user = KiiUser.getCurrentUser();
+var userBucket = user.bucketWithName("score_card");
+```
+
+* Invoke the `bucketWithName` method on Kii instance to create an Application Scope bucket
+* Invoke the `bucketWithName` method on KiiGroup instance to create a Group Scope bucket
+* Invoke the `bucketWithName` method on KiiUser instance to create a User Scope bucket.
+
+**Please note**: A bucket can not be explicitly saved, it will only be created when an object is saved to it.  For example, userBucket in the above example will be created when an object is created and saved to the bucket as follows:
+
+```javascript
+var obj = userBucket.createObject();
+obj.save({
+  success: function(theObject) {
+    console.log("Object saved & bucket created!");
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object and bucket: " + errorString);
+  }
+});
+```
+
+## Set a new ACL on Bucket
+
+For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
+
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections.</p>
+
+The possible access controls that can be applied to a bucket are:
+
+* **KiiACLBucketActionQueryObjects**: Allow the subject to query data in the bucket.
+* **KiiACLBucketActionCreateObjects**: Allow the subject to create new data in the bucket.
+* **KiiACLBucketActionDropBucket**: Allowing to drop the bucket with all contents.
+
+Here is a sample code snippet for adding two new ACLs on a User Scope bucket.  In this example, both KiiACLBucketActionQueryObjects and KiiACLBucketActionCreateObjects permissions are granted to authenticated users.
+
+
+```javascript
+var user = KiiUser.getCurrentUser();
+var bucket = user.bucketWithName("score_card");
+
+// Create the ACL rules
+var entry1 = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), KiiACLAction.KiiACLBucketActionQueryObjects);
+var entry2 = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), KiiACLAction.KiiACLBucketActionCreateObjects);
+
+// Get the ACL handle and put the rules in the handle
+var acl = bucket.acl();
+acl.putACLEntry(entry1);
+acl.putACLEntry(entry2);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theBucket) {
+    console.log("Bucket ACL updated!");
+  },
+  failure: function(theBucket, errorString) {
+    console.log("Error updating bucket ACL: " + errorString);
+  }
+});
+```
+Here is what is happening in the snippet:
+
+1. Create KiiACL instance on the bucket by invoking `acl` method.
+2. Define an ACL entry by invoking the `putACLEntry` method on the KiiACL instance.  Here, `KiiAnyAuthenticatedUser` is specified as an ACL's subject so as to grant the permission to all Authenticated Users.
+3. Invoke the `save` method on the KiiACL instance to reflect the permissions.
+
+
+In the next example, both KiiACLBucketActionQueryObjects and KiiACLBucketActionCreateObjects permissions to a User Scope bucket are granted to anonymous users.
+
+
+```javascript
+var user = KiiUser.getCurrentUser();
+var bucket = user.bucketWithName("score_card");
+
+// Create the ACL rules
+var entry1 = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLBucketActionQueryObjects);
+var entry2 = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLBucketActionCreateObjects);
+
+// Get the ACL handle and put the rules in the handle
+var acl = bucket.acl();
+acl.putACLEntry(entry1);
+acl.putACLEntry(entry2);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theBucket) {
+    console.log("Bucket ACL updated!");
+  },
+  failure: function(theBucket, errorString) {
+    console.log("Error updating bucket ACL: " + errorString);
+  }
+});
+```

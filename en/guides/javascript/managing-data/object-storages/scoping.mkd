@@ -1,0 +1,49 @@
+---
+layout: en-doc
+title: Scoping Objects
+sort-priority: 60
+summary: All objects have a "scope".  This scope determines the default access control applied to the object upon its creation. For example, an object created in an "Application Scope" bucket will have "Application Scope".
+---
+## Object Scopes and Default Access Control
+
+For each scope, the following default access control is applied to objects:
+
+* **Application Scope**
+    * Authenticated users (i.e., all users who have been signed-in) can read and write the object by default.
+    * Anonymous users (i.e., users who have not yet signed-in) can only read the object by default.
+* **Group Scope**
+    * All group members can read and write the object by default.
+    * All non-group members cannot read and write the object by default.
+* **User Scope**
+    * The user can read and write the object by default.
+    * Other user cannot read and write the object by default.
+
+## Set a new ACL on an Object
+
+New access permission can be applied to an object by adding a new ACL.  The possible access controls that can be granted on an object are:
+
+* **KiiACLObjectActionRead**: Allowing to read the object.
+* **KiiACLObjectActionWrite**: Allowing to modify and delete the object.
+
+Here is a sample snippet for granting KiiACLObjectActionRead permission to anonymous users.
+
+```javascript
+var object = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+
+// create the ACL rule
+var entry = KiiACLEntry.entryWithSubject(new KiiAnonymousUser(), KiiACLAction.KiiACLObjectActionRead);
+
+// Get the ACL handle and put the rule in the handle
+var acl = object.objectACL();
+acl.putACLEntry(entry);
+
+// Save the ACL to the server
+acl.save({
+  success: function(theObject) {
+    console.log("Object ACL updated!");
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error updating object ACL: " + errorString);
+  }
+});
+```

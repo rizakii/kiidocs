@@ -1,0 +1,23 @@
+---
+layout: en-doc
+title: Deleting Objects
+sort-priority: 40
+---
+You can delete an object by invoking the `delete` method:
+
+```javascript
+var object = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+
+// Delete the Object
+object.delete({
+  success: function(theDeletedObject) {
+    console.log("Object deleted!");
+    console.log(theDeletedObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error deleting object: " + errorString);
+  }
+});
+```
+
+**Please Note**: The object will be deleted from the server upon calling the `delete` method; you do not need to invoke the `save` method.

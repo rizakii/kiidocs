@@ -1,0 +1,62 @@
+---
+layout: en-doc
+title: Updating Objects
+sort-priority: 30
+---
+Kii SDK supports the following two object update methods:
+
+* **Full update**: Completely overwrite an object. All previous key-values stored in the object will be discarded. The local key-value pairs will be saved to the object.
+* **Partial update**: This will update only key/value pairs that have been changed locally, preserving existing key/value pairs.
+
+Note: If you wish to remove key-value pairs, please use full update; partial update does not support key-value pair removal.
+
+
+## Full Update
+
+The below is an example of how you can fully update an object.  Note that this update process uses the `saveAllFields` method:
+
+
+```javascript
+// Create/add new values
+var object2 = KiiObject.objectWithURI(object.objectURI());
+object2.set("myid", 1);
+object2.set("name", "John Doe Jr");
+object2.set("email", "john_jr@example.com");
+
+// This will remove all key/value pairs on the server,
+// replacing them with the locally-generated data
+object2.saveAllFields({
+  success: function(theObject) {
+    console.log("Object saved!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object: " + errorString);
+  }
+});
+```
+
+## Partial Update
+
+The below is an example of how you can partially update an object.  Note that this update process uses the `save` method:
+
+
+```javascript
+// Create/add new values
+var object2 = KiiObject.objectWithURI(object.objectURI());
+object2.set("myid", 1);
+object2.set("name", "John Doe Jr");
+object2.set("email", "john_jr@example.com");
+
+// This will append the local key/value pairs to the data
+// that already exists on the server
+object2.save({
+  success: function(theObject) {
+    console.log("Object saved!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object: " + errorString);
+  }
+});
+```

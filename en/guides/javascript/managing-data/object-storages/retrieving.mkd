@@ -1,0 +1,27 @@
+---
+layout: en-doc
+title: Retrieving Objects
+sort-priority: 20
+summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
+---
+The following sample code illustrates how to retrieve an object with its URI:
+
+```javascript
+var object2 = KiiObject.objectWithURI("_URI_OF_THE_OBJECT_");
+object2.refresh({
+  success: function(theObject) {
+    console.log("Object refreshed!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error refreshing object: " + errorString);
+  }
+});
+```
+
+The basic steps are as follows:
+
+1. Instantiate an object with the `objectWithURI` method while specifying the object's URI.
+2. Refresh the object with the `refresh` method.
+
+**Please Note**: Do not forget to invoke the refresh method after instantiating the object, or your local object will not be updated to the latest key-values.

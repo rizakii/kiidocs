@@ -1,0 +1,38 @@
+---
+layout: en-doc
+title: Creating Objects
+sort-priority: 10
+summary: Your application can create an object by invoking the corresponding method of the KiiBucket class instance. Once an object is created, you can set various key/value pairs within the object. When you are finished with setting the key-value pairs, invoke the save method to store it on Kii Cloud.
+---
+In the following example, an object is created in "app_bucket" bucket with an Application scope:
+
+```javascript
+// Create an application scope bucket named "app_bucket"
+var appBucket = Kii.bucketWithName("app_bucket");
+
+// Create the object with key/value pairs
+var obj = appBucket.createObject();
+obj.set("myid", 1);
+obj.set("name", "John Doe");
+obj.set("email", "john@example.com");
+
+// Save the object
+obj.save({
+  success: function(theObject) {
+    console.log("Object saved!");
+    console.log(theObject);
+  },
+  failure: function(theObject, errorString) {
+    console.log("Error saving object: " + errorString);
+  }
+});
+```
+
+The basic steps are as follows:
+
+1. Prepare a bucket.
+2. Create an object instance in this bucket with the `createObject` method.
+3. Set key-value pairs in the object with the `set` method
+4. Save the object with the `save` method
+
+Do not forget to invoke the `save` method, or your objects will not be saved in Kii Cloud!

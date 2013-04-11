@@ -1,0 +1,124 @@
+---
+layout: en-doc
+title: Querying for Objects
+sort-priority: 50
+summary: 'Kii SDK makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The SDK allows you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...'
+---
+
+## Defining query condition with Kii Clause
+
+You can define a query condition using the following comparison operators:
+
+* **equals**
+* **notEquals**
+* **greaterThan**
+* **greaterThanOrEqual**
+* **lessThan**
+* **lessThanOrEqual**
+* **inWIthIntValue, inWithLongValue, inWithDoubleValue, inWithStringValue**
+* **startsWith**
+
+You can concatenate multiple query conditions using AND/OR logical operators:
+
+* **and**
+* **or**
+
+## Constructing KiiQuery
+
+Use queryWithClause method to create a KiiQuery object with an actual query based on a KiiClause object passed as a parameter.  If no KiiClause object is passed, the query generated will match with all Objects in the bucket (equivalent to "**all**" query).
+
+Optionally, you can use the following methods to fine-tune the query results:
+
+* **sortByAsc**
+* **sortByDesc**
+* **setLimit**
+
+If neither sortByAsc nor sorByDesc is specified, the query results will be in arbitrary order.  If setLimit is not specified, the maximum number of the query results will be 200.
+
+## Parse through KiiQueryResult (Pagination)
+
+The result of query will be returned as NSArray with KiiObject as elements.  If the result has the multiple pages (e.g., you've specified setLimit to 10, and the actual query result has 30 matching objects), Kii Cloud will return a KiiQuery instance along with the query result.  You can get the remaining query results by executing query with this KiiQuery instance.
+
+## Query Examples
+
+Let us start with a simplest example; querying all objects in a bucket.  
+
+To get all objects in a bucket, you first create an "all" query using `KiiQuery.queryWithClause()` without any KiiClause object as a parameter, then invoke `executeQuery` method of the target bucket with the "all" query.  Alternatively, you can just invoke `executeQuery` method while passing null as a parameter.
+
+
+```javascript
+// Prepare the target bucket to be queried
+var bucket = Kii.bucketWithName("my_bucket");
+
+// Build "all" query
+var all_query = KiiQuery.queryWithClause();
+
+// Define the callbacks
+var queryCallbacks = {
+  success: function(queryPerformed, resultSet, nextQuery) {
+    // do something with the results
+    for(var i=0; i<resultSet.length; i++) {
+      // do something with the object
+      // resultSet[i]; // could be KiiObject, KiiGroup, KiiUser, etc
+    }
+    if(nextQuery != null) {
+      bucket.executeQuery(nextQuery, queryCallbacks);
+    }
+  },
+  failure: function(queryPerformed, anErrorString) {
+    // do something with the error response
+  }
+}
+
+// Execute the query
+bucket.executeQuery(all_query, queryCallbacks);
+// alternatively, you can also do:
+// bucket.executeQuery(null, queryCallbacks);
+```
+
+In the next example, we will be querying objects with the following conditions:
+
+* The key "gender" has the value "Female".
+* The key "age" is greater than 18.
+* Sort the results in an ascending order by the key "age".
+* Limit the result to 10 objects per query.  Use pagination for getting the next 10 objects.
+
+The following code illustrates how you can execute such a query.
+
+
+```javascript
+// Prepare the target bucket to be queried
+var bucket = Kii.bucketWithName("my_bucket");
+
+// Create the conditions for the query
+var clause1 = KiiClause.equals("gender", "Female");
+var clause2 = KiiClause.greaterThan("age", 18);
+
+// Merge the conditions together with an AND
+var totalClause = KiiClause.and(clause1, clause2);
+
+// Build the query with the clauses and some other parameters
+var query = KiiQuery.queryWithClause(totalClause);
+query.setLimit(10);
+query.sortByAsc("age");
+
+// Define the callbacks
+var queryCallbacks = {
+  success: function(queryPerformed, resultSet, nextQuery) {
+    // do something with the results
+    for(var i=0; i<resultSet.length; i++) {
+      // do something with the object
+      // resultSet[i]; // could be KiiObject, KiiGroup, KiiUser, etc
+    }
+    if(nextQuery != null) {
+      bucket.executeQuery(nextQuery, queryCallbacks);
+    }
+  },
+  failure: function(queryPerformed, anErrorString) {
+    // do something with the error response
+  }
+}
+
+// Execute the query
+bucket.executeQuery(query, queryCallbacks);
+```
