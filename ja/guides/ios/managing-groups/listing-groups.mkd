@@ -3,3 +3,23 @@ layout: ja-doc
 title: グループ一覧の取得
 sort-priority: 30
 ---
+ユーザは、自分が属するグループの一覧を`memberOfGroups`メソッドで取得できます。 このメソッドはグループの一覧を KiiGroup の List として返却します。
+
+グループの一覧を取得するサンプルコードを以下に示します。
+
+```objc
+// Get the current login user
+KiiUser* user = [KiiUser currentUser];
+
+// Get a list of groups in which the current user is a member
+NSError* error = nil;
+NSArray* mygroups = [user memberOfGroupsSynchronous:&error];
+if (error == nil) {
+    for (KiiGroup* group in mygroups) {
+        // do something with each group
+    }
+} else {
+    // Getting a group list failed
+    // Please check error description/code to see what went wrong...
+}
+```
