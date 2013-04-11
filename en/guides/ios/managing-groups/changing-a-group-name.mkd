@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Changing a Group Name
+sort-priority: 20
+---
+A group owner can change a name of the existing group with the
+`changeGroupNameSynchronous` method:
+
+```objc
+KiiGroup *group = ...;
+NSError *error;
+[group changeGroupNameSynchronous:@"myNewGroupName" withError:&error];
+
+if (error != nil) {
+  // Group name change failed
+  // Please check error description/code to see what went wrong...
+}
+```

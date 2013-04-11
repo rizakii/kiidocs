@@ -1,0 +1,26 @@
+---
+layout: en-doc
+title: Creating a Group
+sort-priority: 10
+---
+Any authenticated user has the ability to create a new group.  This user
+becomes, by default, the group's owner.
+
+```objc
+NSError *error;
+NSString *groupName = @"myGroup";
+
+KiiGroup* group = [KiiGroup groupWithName:groupName];
+[group saveSynchronous:&error];
+
+if (error != nil) {
+  // Group creation failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+The basic steps for group creation are as follows:
+
+1. Create a `KiiGroup` instance with `groupWithName` method
+1. Register this `KiiGroup` instance with `saveSynchronous` method
+

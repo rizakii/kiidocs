@@ -1,0 +1,28 @@
+---
+layout: en-doc
+title: Listing Group Members
+sort-priority: 40
+---
+A group owner can get a list of members who are in the group with the
+`getMemberListSynchronous` method. This method will return a list of KiiUser
+instances representing group members. Here's an example:
+
+```objc
+KiiGroup *group = ...;
+NSError *error;
+NSArray *members = [group getMemberListSynchronous:&error];
+
+if (err != nil) {
+  // Get member list failed
+  // Please check error description/code to see what went wrong...
+}
+
+// request was successful
+else {
+  // iterate through the member list
+  for(KiiUser *user in members) {
+    // do something with the user
+    [user describe];
+  }
+}
+```
