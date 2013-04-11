@@ -18,25 +18,25 @@
 
 <header>
 <div class="logo">
-  <a href="{% page_url top-ja %}">Kii Developer</a>
+  <a href="/">Kii Developer</a>
 </div>
 <div id="google-search">{% include google-search.html %}</div>
 <nav class="main">
 <ul>
   <li class="apps"><a href="http://developer.kii.com/#apps">Apps</a></li>
   <li class="sdk"><a href="http://developer.kii.com/#sdks">SDK</a></li>
-  <li class="doc selected"><a href="{% page_url top-ja %}">Documentation</a></li>
+  <li class="doc selected"><a href="{% page_url top-en %}">Documentation</a></li>
 </ul>
 </nav>
 <nav class="doc">
 <ul>
-  <li class="app"><a href="{% page_url quickstart-ja %}">はじめに</a></li>
-  <li class="app"><a href="{% page_url guides-ja %}">リファレンスガイド</a></li>
-  <li class="app"><a href="{% page_url references-ja %}">詳細ドキュメント</a></li>
-  <li class="app"><a href="{% page_url samples-ja %}">サンプルコード集</a></li>
+  <li class="app"><a href="{% page_url quickstart-en %}">Getting Started</a></li>
+  <li class="app"><a href="{% page_url guides-en %}">Guides</a></li>
+  <li class="app"><a href="{% page_url references-en %}">References</a></li>
+  <li class="app"><a href="{% page_url samples-en %}">Snippets and Samples</a></li>
   <ul class="languages">
-    <li class="en"><a href="{{ page.url | replace: '/ja/', '/en/' }}">English</a></li>
-    <li class="ja selected"><a href="{{ page.url }}">日本語</a></li>
+    <li class="en selected"><a href="{{ page.url }}">English</a></li>
+    <li class="ja"><a href="{{ page.url | replace: '/en/', '/ja/' }}">日本語</a></li>
   </ul>
 </ul>
 </nav>
