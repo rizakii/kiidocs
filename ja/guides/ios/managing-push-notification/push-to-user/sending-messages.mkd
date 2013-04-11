@@ -1,7 +1,154 @@
 ---
 layout: ja-doc
 title: メッセージを送信する
+summary: トピックの作成が完了したら、いよいよプッシュメッセージの送信です。トピックにメッセージを送信すると、このトピックを購読している全てのユーザに対してメッセージがプッシュされます。ここでは、サンプルシナリオのそれぞれを例に取り、メッセージ送信の方法を説明していきます。
 sort-priority: 30
 page-id: ios-sending_push_to_user_messages-ja
 ---
+## シナリオ#1: 全アプリユーザへの一斉送信
+
+Application Scope トピックへのメッセージ送信は、アプリ開発者のみ行うことができます。実際には、開発者ポータルにて以下の手順を実施してメッセージ送信を行います。
+
+1. 開発者ポータルにログイン。
+1. 対象アプリケーションを選択後、"Notification" アイコンをクリックし、さらに
+   "New Message" ボタンをクリック。  
+   これにより、プッシュメッセージ送信 UI が表示されます。
+
+    ![](01.png)
+
+1. 以下の情報を入力し、送信するプッシュメッセージを指定します。
+    1. メッセージ送信先に関する情報**
+
+        まずは、プッシュメッセージ通知先を指定します。
+
+        ![](02.png)
+        * "Send To:" セクションにて "Topic" を選択。
+        * "Topic Name" フォームに、送信先トピック名を入力。
+        * 適当な環境（Developer, Production, Both）を選択。
+
+    1. メッセージの内容に関する情報**
+        次に、メッセージの内容を指定します。
+
+        ![](03.png)
+        * "Include" セクションにて、メッセージに含める既定フィールドを指定しま
+          す。
+
+            それぞれの規定フィールドを有効にした場合にメッセージに追加される値
+            は以下の通りです。
+            * App ID: アプリケーションの AppID
+            * Sender: Client ID
+            * When: プッシュメッセージ送信時のタイムスタンプ
+            * Origin: "Push to Users" メッセージであることを示す"EXPLICIT" とい
+              う値
+            * Object Scope: アプリケーションスコープのトピックに送信されたメッ
+              セージであることを示す "APP" という値
+            * Topic ID: 対象トピックのTopic ID
+       * メッセージに含める任意フィールド（key-value ペア）を指定します。
+            * "+" ボタンを押すと、さらにフィールドを追加できます。
+            * "Droid" と "Apple" アイコンを押すと、それぞれのフィールドの送信先
+              が制御できます（Android 端末のみに送信、iOS 端末のみに送信等）。
+
+    1. APNS/GCM の詳細設定**
+
+        最後に、必要に応じて APNS/GCM の詳細設定を行います。
+
+        ![](04.png)
+        * GCM/APNS の詳細設定を行う場合は、トグルボタンを有効にします。
+            * GCM 詳細設定の各項目については、
+              [Google による解説](http://developer.android.com/google/gcm/gcm.html#server)
+              を参照してください。
+            * APNS 詳細設定の各項目については、
+              [Apple による解説](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)
+              を参照してください。
+
+              なお、バックグラウンドで起動されているアプリにプッシュメッセージ
+              を送信するためには、こちらの Alert 関連情報を設定する必要がありま
+              す。
+
+
+1. 設定が完了したら "Send..." ボタンを押下しすると、対象トピックにメッセージが
+   送信されます。
+
+
+## シナリオ#2: グループメッセージング
+
+Group scope トピックには、任意のグループメンバーがメッセージを送ることができま
+す。以下に、メッセージ送信を行うコード例をあげます。
+
+```objc
+ // Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Show message"];
+
+// Set more data
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"str" forKey:@"str"];
+[dictionary setObject:[NSNumber numberWithInt:1] forKey:@"int"];
+[dictionary setObject:[NSNumber numberWithBool:FALSE] forKey:@"bool"];
+[dictionary setObject:[NSNumber numberWithDouble:1.12] forKey:@"double"];
+[apnsFields setSpecificData:dictionary];
+
+// Create and send a message.
+// GCM fields is set nil, so the message will not send to Android devices.
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+[topic sendMessageSynchronous:message withError:&error;];
+
+if (error != nil) {
+  // There was a problem.
+}
+```
+
+ここでは、以下の処理を実行しています。
+
+* `createFields` メソッドを実行し、APNS メッセージフィールドインスタンスを作成
+  します。
+* `setAlertBody` メソッドを実行し、APNS メッセージに APNS alert プロパティを設
+  定します。
+* Dictionary を作成後、これにメッセージに入れる key-value ペアを設定します。こ
+  の後、この dictionary を指定の上 `setSpecificData` メソッドを実行します。
+* `composeMessageWithAPNSFields` メソッドを実行し、push メッセージを作成します。
+* `sendMessage` メソッドを実行し、topic に push メッセージを送信します。
+
+
+## シナリオ#3: TODO リストを全てのデバイスにプッシュ
+
+User scope トピックには、このトピックの owner のみがメッセージを送信できます。
+以下に、メッセージ送信を行うコード例をあげます。
+
+```objc
+NSError *error;
+
+// Instantiate a user-scope topic.
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Show message"];
+
+// Build a push message.
+// GCM fields is set nil, so the message will not send to Android devices
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"Do Something" forKey:@"Item"];
+[dictionary setObject:[NSNumber numberWithInt:1] forKey:@"Done"];
+[apnsFields setSpecificData:dictionary];
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+
+// Send the push message.
+[topic sendMessageSynchronous:message withError:&error;];
+if (error != nil) {
+  // Topic subscription failed.
+}
+```
+
+ここでは以下の処理をしています。
+
+* `createFields` メソッドを実行し、APNS メッセージフィールドのインスタンスを作
+  成。
+* `setAlertBody` メソッドを実行し、APNS メッセージの APNS アラートメッセージを
+  セット。
+* `setSpecificData` メソッドを実行し、任意フィールドの値をセット。
+* `composeMessageWithAPNSFields` メソッドを実行し、プッシュメッセージを作成。
+* `sendMessage` メソッドを実行し、メッセージを送信。
 
