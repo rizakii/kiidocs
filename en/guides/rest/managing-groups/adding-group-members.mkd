@@ -1,0 +1,16 @@
+---
+layout: en-doc
+title: Adding Group Members
+sort-priority: 40
+---
+A group owner can add additional members in the group as shown below:
+
+```sh
+curl -v -X PUT \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:s{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/members/{USER_ID}"
+```
+
+Kii Cloud will return a 200 (already a member) or 201 (added as a new member) response based on the result.
