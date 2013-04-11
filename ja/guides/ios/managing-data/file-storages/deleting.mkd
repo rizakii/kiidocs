@@ -3,4 +3,20 @@ layout: ja-doc
 title: File の完全削除
 sort-priority: 50
 ---
+ファイルを完全に削除するには、`shredFileSynchronous`メソッドを呼びます。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Shred the file
+[file shredFileSynchronous:&error];
+
+if (error != nil) {
+  // Moving file to trash failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+一度削除したファイルは復元できない点に注意してください。
 
