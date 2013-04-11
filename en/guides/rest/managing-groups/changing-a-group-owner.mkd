@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Changing a Group Owner
+sort-priority: 30
+---
+A group owner can delegate the ownership to another user as shown:
+
+```sh
+curl -v -X PUT \
+  -H "content-type: application/vnd.kii.GroupOwnerChangeRequest+json" \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "http://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/owner" \
+  -d '{"owner" : {USER_ID}}'
+```
+
+Once the ownership is delegated, the former group owner becomes a group member.

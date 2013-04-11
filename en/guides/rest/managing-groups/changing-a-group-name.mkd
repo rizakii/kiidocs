@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Changing a Group Name
+sort-priority: 20
+---
+A group owner can change a name of the existing group as shown:
+
+```sh
+curl -v -X PUT \
+    -H "content-type: text/plain" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}"
+    -H "x-kii-appid: APP_ID} \
+    -H "x-kii-appkey:{APP_KEY} \
+    -d "New name" \
+    "https://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/name"
+```
+
+Kii Cloud will return a 200 response if the rename is successful.

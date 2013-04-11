@@ -1,0 +1,34 @@
+---
+layout: en-doc
+title: Listing Groups
+sort-priority: 50
+---
+A user can get a list of groups in which he/she belongs as shown below:
+
+```sh
+curl -v -X GET \
+    -H"accept: application/vnd.kii.GroupsRetrievalResponse+json"\
+    -H"Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api.kii.com/api/apps/{APP_ID}/groups?is_member={USER_ID}"
+```
+
+Kii Cloud wll respond with a list of groups like the following example:
+
+```
+< 200
+< Content-Type: application/vnd.kii.GroupsRetrievalResponse+json
+<
+{
+  "groups" : [{
+    "groupID" : "{GROUP_ID_#1}",
+    "name" : "{NAME_OF_GROUP_#1}",
+    "owner" : "{USER_ID_OF_GROUP_#1_OWNER}"
+  }, {
+    "groupID" : "{GROUP_ID_#2}",
+    "name" : "{NAME_OF_GROUP_#2}",
+    "owner" : "{USER_ID_OF_GROUP_#2_OWNER}"
+  } ]
+}
+```
