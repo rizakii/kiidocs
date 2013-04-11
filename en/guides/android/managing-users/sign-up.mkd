@@ -2,7 +2,7 @@
 layout: en-doc
 title: Sign up
 sort-priority: 10
-page-id: android-sing_up-en
+page-id: android-sign_up-en
 ---
 Getting users registered with your application is the first step for user management.
 

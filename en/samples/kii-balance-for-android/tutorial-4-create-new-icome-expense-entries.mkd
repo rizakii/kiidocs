@@ -65,4 +65,4 @@ Moving to {% page_link tutorial_5_update_and_delete_entries-en %}.
 * Want to learn more on what you can put in an Object?  
   * Check {% page_link android-object_storages-en %} section.
 * Want to send a push notification when a new Object is created? 
-  * Check {% page_link andorid-receiving_push_notification-en %} section.
+  * Check {% page_link android-object_storages_push-en %} section.
