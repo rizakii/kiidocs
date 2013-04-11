@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Listing Groups
-#sort-priority: 50
+sort-priority: 50
 ---
 A user can get a list of groups in which he/she belongs as shown below:
 
