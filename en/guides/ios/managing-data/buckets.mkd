@@ -1,0 +1,153 @@
+---
+layout: en-doc
+title: Buckets
+sort-priority: 10
+summary: 'In order to fully leverage the power of Kii Platform, it is important to understand the concept of "buckets". The best way to understand a bucket in this sense is to imagine a virtual bucket floating in Kii Cloud. There can be any number of buckets belonging to the application, a user or a group. They are defined by the developer, and hold all data objects and files. A great way to understand is to try it yourself! So read on for some examples...'
+---
+## Bucket Scopes
+
+Each bucket has a "scope", which determines to whom the bucket belongs.  For example, if a bucket belongs to a specific group, this bucket has "Group Scope" and all the data in this bucket will be kept as long as the group exists in Kii Cloud.  The scope also affects the default access control applied to the data that is created within this bucket.
+
+These are three bucket scopes supported by Kii Platform:
+
+* **Application Scope** : The bucket belongs to your application
+    * Authenticated users (i.e., all users who have been signed-in) will have
+      full access to the bucket by default
+    * Anonymous users (i.e., users who have not yet signed-in) can only query
+      and read data in the bucket by default
+* **Group Scope** : The bucket belongs to a user group
+    * The group owner will have full access to the bucket by default
+    * The group members will have full access to the bucket except "dropping
+      bucket" by default
+    * All non-group members will have no access to the bucket by default
+* **User Scope** : The bucket belongs to a user
+    * The user will have full access to the bucket by default
+    * Other user will have no access to the bucket by default
+
+## Creating Object Buckets
+
+Here are examples of how you can create Object buckets:
+
+```objc
+NSError *error;
+
+// Create Application Scope Bucket
+KiiBucket *bucket1 = [Kii bucketWithName:@"my_user"];
+
+// Create Group Scope Bucket
+KiiGroup* group = [KiiGroup groupWithName:@"my_group"];
+KiiBucket *bucket2 = [group bucketWithName:@"score_card"];
+
+// Create User Scope Bucket
+KiiBucket *bucket3 = [[KiiUser currentUser] bucketWithName:@"my_private"];
+```
+
+* Invoke the `bucketWithName` method on `Kii` instance to create an Application
+  Scope bucket
+* Invoke the `bucketWithName` method on `KiiGroup` instance to create a Group
+  Scope bucket
+* Invoke the `bucketWithName` method on `KiiUser` instance to create a User
+  Scope bucket
+
+**Please Note:** a bucket can not be explicitly saved, it will only be created
+when an object is saved to it.  For example, bucket1 in the above example will
+be created when an object is created and saved to the bucket as follows:
+
+```objc
+KiiObject *obj1 = [bucket1 createObject];
+[obj1 saveSynchronous:&error];
+```
+
+## Creating File Buckets
+
+File buckets are the same concept as object buckets, with the exception that a file bucket can only have **User Scope**, meaning that the bucket will be fully accessible only to the user. Here is an example for creating a file bucket:
+
+```objc
+NSError *error;
+// Create a file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"my_backup"];
+```
+
+* Invoke the `fileBucket` method on KiiUser instance to create a User Scope
+  file bucket
+
+**Please Note:** a file bucket will not be explicitly saved, it will only be
+created when a file is saved to it.  For example, fileBucket in the above
+example will be created when a file is created and saved to the bucket as
+shown:
+
+```objc
+NSString *localPath = [[NSBundle mainBundle] resourcePath];
+localPath = [localPath stringByAppendingPathComponent:@"sample_upload.png"];
+
+KiiFile *file = [bucket fileWithLocalPath:localPath];
+[file saveFileSynchronous:&error];
+```
+
+## Set a new ACL on Bucket
+
+For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
+
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections</p>
+
+The possible access controls that can be applied to a bucket are:
+
+* **KiiACLBucketActionQueryObjects** : Allowing to query data in the bucket
+* **KiiACLBucketActionCreateObjects** : Allowing to create new data in the
+  bucket
+* **KiiACLBucketActionDropBucket** : Allowing to drop the bucket with all
+  contents
+
+Here is an example for adding two new ACLs on a User Scope bucket.  In this
+example, both `KiiACLBucketActionQueryObjects` and
+`KiiACLBucketActionCreateObjects` permissions are granted to authenticated
+users.
+
+```objc
+KiiBucket *bucket = [[KiiUser currentUser] bucketWithName:@"my_private"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Create ACLs
+KiiACLEntry *entry = [KiiACLEntry entryWithSubject:[KiiAnyAuthenticatedUser aclSubject] andAction:KiiACLBucketActionQueryObjects];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:[KiiAnyAuthenticatedUser aclSubject] andAction:KiiACLBucketActionCreateObjects];
+
+// Set the ACLs on Bucket
+KiiACL *acl = [bucket bucketACL];
+[acl putACLEntry:entry];
+[acl putACLEntry:entry2];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
+
+if (error != nil) {
+  // Updating at least 1 ACLEntry failed
+  // Please check error description and succeeded/failed arrays to see what went wrong...
+}
+```
+
+In the next example, both `KiiACLBucketActionQueryObjects` and
+`KiiACLBucketActionCreateObjects` permissions are granted to anonymous users.
+
+```objc
+KiiBucket *bucket = [[KiiUser currentUser] bucketWithName:@"my_private"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Create ACLs
+KiiACLEntry *entry = [KiiACLEntry entryWithSubject:[KiiAnonymousUser aclSubject] andAction:KiiACLBucketActionQueryObjects];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:[KiiAnonymousUser aclSubject] andAction:KiiACLBucketActionCreateObjects];
+
+// Set the ACLs on Bucket
+KiiACL *acl = [bucket bucketACL];
+[acl putACLEntry:entry];
+[acl putACLEntry:entry2];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
+
+if (error != nil) {
+  // Updating at least 1 ACLEntry failed
+  // Please check error description and succeeded/failed arrays to see what went wrong...
+}
+```
