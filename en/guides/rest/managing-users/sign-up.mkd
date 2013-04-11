@@ -1,0 +1,133 @@
+---
+layout: en-doc
+title: Sign Up
+summary: Getting users registered with your application is the first step for user management.
+sort-priority: 10
+---
+<p class="callout"">Alternatively, you can let your users sign-in via external social network services like Facebook. &nbsp;Please check "Social Network Integration" section for more details</p>
+
+Kii Platform allows users to register with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses.
+
+When setting an email address or phone number to a user, you may let Kii Cloud takes the steps to verify their credentials -- either through a verification email or an SMS. Users won't be able to authenticate with that credential until they've been validated. This way, you can prevent fake identities -- all built into Kii Platform!
+
+## User Sign-up
+
+The following snippet shows how to sign up a user with his/her username and password.  In this case, a new user account is created with a username "user\_123456" and a password "123ABC".  (In this sample the optional fields "displayName" and "country" are also defined)
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users" \
+  -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC"}'
+```
+
+Kii Cloud will return the user ID as shown if the sign-up is successful:
+
+```
+HTTP/1.1 201 Created
+Server: Apache-Coyote/1.1
+Location: http://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}
+Content-Type: application/vnd.kii.RegistrationResponse+json
+Transfer-Encoding: chunked
+Date: Mon, 23 Apr 2012 00:22:38 GMT
+
+{
+  "userID" : {USER_ID}
+}
+```
+
+Here is another example.  The following snippet shows how you can create a new account with a username "user\_123456", an email address "user\_123456@example\.com" and a password "123ABC".
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users" \
+  -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC", "emailAddress":"user_123456@example.com"}'
+```
+
+The following snippet shows how to sign up a user with a username "user\_123456", a phone number "+819012345678" and a password "123ABC".
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.RegistrationRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users" \
+  -d '{"loginName":"user_123456", "displayName":"person test000", "country":"JP", "password":"123ABC", "phoneNumber":"+819012345678"}'
+```
+
+When you are specifying the phone number with a local phone format, be sure to set the correct 2-letter country code in "country" attribute.
+
+## Enabling email and/or phone verification
+
+You can configure your application to verify the user's email address and/or phone number.   You can toggle the verification on and off either via the dev portal or via REST admin API (please refer [here]({% page_url references-en %})).
+
+Here are how you can toggle the verification features on the dev portal:
+
+1. Click "Edit" button at your application console on the dev portal.
+    ![](01.png)
+
+1. Click "Settings" to bring your application configuration menu.
+1. Toggle SMS/Phone verification.
+    ![](02.png)
+
+When enabled, the email address and/or phone number will be verified as follows:
+
+### Email Verification:
+
+When the email verification is enabled and an account is registered with an email address, Kii Cloud will send an email to that user with a verification link.  Signing in with the specified email address will be allowed only when the user verifies themselves by clicking this link.
+
+### Phone Verification:
+
+When the phone verification is enabled and an account is registered with a phone number, Kii Cloud will send an SMS message with a verification code. Your application should then ask the user to type in the verification code to complete verification.  Signing-in with the specified phone number will be allowed only when your user verifies themselves by submitting the correct code. 
+
+After receiving the SMS verification code from the user, your application should invoke the following flow in order to complete the verification process:
+
+1. Get the user's token
+
+    Send the following POST request to retrieve the user's token:
+
+    ```sh
+    curl -v -X POST \
+      -H "content-type:application/json" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api.kii.com/api/oauth2/token" \
+      -d '{"username":"user_123456", "password":"123ABC"}'
+    ```
+
+    Kii Cloud will return the user token ash shown:
+
+    ```
+    < HTTP/1.1 200 OK
+    < Server: Apache-Coyote/1.1
+    < Content-Type: application/json
+    < Transfer-Encoding: chunked
+    < Date: Mon, 14 May 2012 22:52:52 GMT
+    <
+    {
+      "id" : {USER_ID},
+      "access_token" : {ACCESS_TOKEN},
+      "expires_in" : 9223372036854775
+    }
+    ```
+
+    Here, {ACCESS\_TOKEN} is the user token.  Kii Cloud will also return the expiration time of the user token in UNIX time (msec).
+
+1. Send the verification code with the user token.
+
+    Send the following POST request to confirm the verification code, ensuring the user token is sent as the HTTP header "Authorization: Bearer {ACCESS\_TOKEN}"
+
+    ```sh
+    curl -v -X POST \
+      -H "Authorization: Bearer {ACCESS_TOKEN}" \
+      -H "content-type:application/vnd.kii.AddressVerificationRequest+json" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      "https://api.kii.com/api/apps/{APP_ID}/users/me/phone-number/verify" \
+      -d '{"verificationCode":"12345"}'
+    ```
