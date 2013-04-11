@@ -65,6 +65,8 @@ summary: イベントデータ（Event Data）の解析を行う基本的なス�
 
 1. Aggregation Rules 設定画面が表示されます。ここで "Activate" ボタンをクリックします。
 
+    ![](05a.png)
+
 1. Aggregation Rule が有効になり、インジケーターが緑色に変わります。
 
     ![](06.png)
