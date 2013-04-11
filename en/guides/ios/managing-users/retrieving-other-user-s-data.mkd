@@ -1,0 +1,74 @@
+---
+layout: en-doc
+title: Retrieving Other User's Data
+sort-priority: 70
+summary: You can access other user's data by specifying his/her username, email address or phone number.
+---
+The amount of information returned by Kii Cloud depends on the application
+setting; if the application option "Expose Full User Data To Others" is
+enabled, the response will be a full user data.  Otherwise, the response will
+only contain only the following field values:
+
+* UserID
+* LoginName
+* DisplayName
+
+## How to toggle the option "Expose Full User Data to Others"
+
+Please execute the following steps on the dev portal.
+
+1. Click "Edit" button at your application console on the dev portal.
+
+    ![](01.png)
+1. Click "Settings" and select "User Management".
+1. Toggle "Expose Full User Data To Others" option.
+
+    ![](02.png)
+
+## How to Access Other user's Data
+
+### Accessing user data with username:
+
+The following sample shows how you can retrieve a user data by his/her username.
+
+```objc
+NSString *username = @"user_123456";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByUsernameSynchronous:username 
+                                              withError:&error];
+if (error != nil) {
+  // Please check error to see what went wrong...
+}
+```
+
+### Accessing user data with email address:
+
+The following sample shows how you can retrieve a user data by his/her email address.  You must specify the verified email address.
+
+```objc
+NSString *email = @"user_123456@example.com";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByEmailSynchronous:email 
+                                           withError:&error];
+if (error != nil) {
+  // Please check error to see what went wrong...
+}
+```
+
+### Accessing user data with phone number:
+
+The following sample shows how you can retrieve a user data by his/her phone
+number. You must specify the verified phone number.
+
+Note that you must specify the phone number in an international phone number
+format (starting with + and your country code).
+
+```objc
+NSString *phone = @"+819012345678";
+NSError *error = nil;
+KiiUser *found = [KiiUser findUserByPhoneSynchronous:phone 
+                                           withError:&error];
+if (error != nil) {
+  // Please check error to see what went wrong...
+}
+```
