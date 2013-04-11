@@ -2,5 +2,129 @@
 layout: ja-doc
 title: イベントデータの解析
 sort-priority: 20
+summary: イベントデータ（Event Data）の解析を行う基本的なステップは以下の通りです。
 ---
+1. メトリクスを定義する。
+1. アプリよりイベントデータを送信する。
+1. 開発者ポータルで解析結果を確認する。
+
+以後、以下のサンプルシナリオを例に取り、実際に Evebt Data の解析を行う手順を解説していきます。
+
+* アプリのインストール時に、以下のイベントデータを送信している（このイベントデータには "MyUser" という名前をつける者とする）
+    * **"gender"** ... ユーザ性別を示す文字列 (M or F)
+    * **"city"** ... ユーザが居住する都市を示す文字列 (San Francisco, Dallas, New York, ...)
+    * **"location"** ... ユーザが居住する国を示す文字列 (UK, EU, JP, ...)
+    * **"children"** ... ユーザの子供の数を示す整数値 (0, 1,2,3, ...)
+    * **"age"** ... ユーザの年齢 (18, 20, 42, 44, ...)
+
+* 集めたイベントデータを元に、以下のメトリクスを用いて解析を行いたい。
+    * **メトリクス#1：** **"age"**の平均値を、**"city", "location", "gender" **および **"children"**毎に評価
+    * **メトリクス#2：** イベントデータ総数を、**"gender", "city", "location", "children" **および**"age"**毎に評価
+
+## 1. メトリクスを定義する
+
+以下の手順でメトリクスを定義します。
+
+1. 開発者ポータルにて、"Metrics" アイコンをクリック後、"Config" を選択します。
+1. "Add" ボタンを押下します。
+    ![](01.png)
+
+    以下のように Aggregation Rules 定義画面が表示されます。
+
+    ![](02.png)
+1. "Name" セクションに Aggregation Rule の名前を入力します。
+1. "Data" セクションの "Event Data" を選択します。
+1. "Aggregated using" セクションに以下の情報を入力し、ファクトの集計方法を定義します。
+    * **Aggregation function** : ファクトの集計方法。指定可能な集計関数は**Count**, **Avg** (平均), **Sum** , **Min** , **Max**のいずれかです。
+    * **Field name** : ファクトとして集計するイベントデータのフィールド名。集計関数として Count を指定した場合、field name として"*" を指定することができます。
+    * **Data type** : フィールド値のタイプ。指定可能なタイプは int, float, boolean, string のいずれかです。
+
+    <p class="note">現バージョンにおいては、マルチバイト文字はサポートされません。マルチバイト文字を含むフィールド名やマルチバイト値を持つフィールドを指定した場合、期待通りの結果が表示されないことがあります。</p>
+
+1. "Filter by Type" セクションに、解析対象とするイベントデータのタイプを指定します。指定を省略した場合は、すべてのイベントデータが集計対象となります。
+1. "Dimensions" セクションに以下の情報を入力し、集計に利用するディメンションを定義します。
+    * **Label** : ディメンションの解析結果上におけるラベル。指定を省略した場合は、イベントデータのフィールド名がラベルとして適用されます。
+    * **Name** : ディメンションとして利用するイベントデータのフィールド名。
+    * **Type** : フィールドデータのタイプ。指定可能なタイプは int, float, boolean, stringのいずれかです。
+
+    一例として、我々のサンプルシナリオにおけるメトリクス＃１は次のように定義します。
+
+    ![](03.png)
+
+    同様に我々のサンプルシナリオにおけるメトリクス＃２の指定方法を以下にあげます。この例では、集計関数として Count を指定しているため、集計対象フィールド名として "*" を指定しています。
+
+    ![](04.png)
+
+1. 設定が完了したら "Save" ボタンをクリックします。
+    設定した Aggregation Rule が一覧に表示されますが、まだこの段階では有効になっていません。
+
+    "Config" アイコンをクリックします。
+
+    ![](05.png)
+
+1. Aggregation Rules 設定画面が表示されます。ここで "Activate" ボタンをクリックします。
+1. Aggregation Rule が有効になり、インジケーターが緑色に変わります。
+    ![](06.png)
+
+    Aggregation Rule ID が表示されることを確認してください。後ほど解析結果の詳細を Android Analytics SDK 経由で取得する際にこの ID を利用します。
+
+## 2. アプリよりイベントデータを送信する
+
+イベントデータの送信方法は次の通りです。
+
+1. `event`メソッドを用いて KiiEvent インスタンスを生成します。この際、必要に応じてイベントタイプを指定します。イベントタイプには "installed" や "level up" など任意の文字列を利用できます。我々のサンプルシナリオでは"MyUser" を使います。
+1. `set`メソッドを用いて任意の key-value ペアをセットします。我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
+1. `push`メソッドでイベントデータをキャッシュします。Kii Analytics SDK は、キャッシュされたイベントデータを適切なタイミングで Kii Cloud にアップロードします。
+
+イベントデータを送信するサンプルコードを以下にあげます。
+
+```objc
+// Initialize KiiAnalytics with AppID/AppKey
+[KiiAnalytics beginWithID:APP_ID andKey:APP_KEY];
+
+// Define event type.
+NSString *eventType = @"MyUser";
+
+// Set arbitrary key-value pairs
+NSMutableDictionary* extras = [NSMutableDictionary dictionary];
+[extras setObject:@"M" forKey:@"gender"];
+[extras setObject:@"San Francisco" forKey:@"city"]
+[extras setObject:@"US" forKey:@"location"];
+[extras setObject:[NSNumber numberWithInt:2] forKey:@"children"];
+[extras setObject:[NSNumber numberWithInt:35] forKey:@"age"];
+
+// Upload Event RawData to Kii Cloud
+BOOL success = [KiiAnalytics trackEvent:eventType withExtras:extras];
+if (!success) {
+  // There was something wrong with trackEvent.
+}
+```
+
+## 3. 開発者ポータルで解析結果を確認する
+
+開発者ポータルにて、次の操作を行います。
+
+1. "Metrics" アイコンをクリック後、"Metrics" を選択肢ます。
+1. 対象メトリクスを選択肢ます。
+
+    以下のデフォルトビューが表示されます。
+
+    ![](07.png)
+
+    メトリクス名一覧のすぐ下に、ディメンションが表示されています。これらのうち１つをクリックすると、このディメンションにより分割されたビューが表示されます。
+
+    一例として、ディメンション "Location" を選択した際のビューを以下にあげます。
+
+    ![](08.png)
+
+    解析結果をさらに絞り込む方法を次に示します。
+
+    1. 左下に表示されているテーブルの行をクリックすることで、対象データのオン/オフができます。次の例では、トップ３アイテム（"UK", "IN", and "US"） を無効化しています。
+        ![](09.png)
+
+    1. さらに別ディメンションを用いたフィルタをかけることもできます。"Filters" の下の "None" というボタンを押下し、表示されるプルダウンメニューより新たなフィルタを定義します。
+
+        次の例では、"age" の値が 22 であるデータに解析結果を絞り込んでいます。
+
+        ![](10.png)
 
