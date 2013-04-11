@@ -1,0 +1,48 @@
+---
+layout: en-doc
+title: Creating a Group
+sort-priority: 10
+---
+Any authenticated user has the ability to create a new group. This user becomes, by default, the group's owner. Here is an example for creating a group with some initial group members:
+
+```sh
+curl -v -X POST \
+    -H "accept: application/vnd.kii.GroupCreationResponse+json" \
+    -H "content-type: application/vnd.kii.GroupCreationRequest+json" \
+    -H "Authorization: Bearer {ACCESS_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api.kii.com/api/apps/{APP_ID}/groups" \
+    -d '{ \
+        "name" : "testing group", \
+        "owner" : {USER_ID}, \
+        "members" : [ \
+            {USER_ID_OF_MEMBER_1}, \
+            {USER_ID_OF_MEMBER_2} \
+        ] \
+    }'
+```
+
+Kii Cloud will return a group ID as a response
+
+```
+< 201
+< Location: http://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID} 
+< Content-Type: application/vnd.kii.GroupCreationResponse+json
+<{
+  "groupID" : {GROUP_ID}
+}
+```
+
+If the owner of te group does not exist, a 404 error response with a code USER\_NOT\_FOUND will be returned.  If any of the predefined member(s) do not exist, the group will be created without them. In this case, Kii Cloud will send a list of non-existing users in the response as follows:
+
+```
+< 201
+< Location: http://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}
+< Content-Type: application/vnd.kii.GroupCreationResponse+json
+<
+{
+  "groupID" : {GROUP_ID},
+  "notFoundUsers" : [ {NON_EXISTING_USER_ID_1}, ... ]
+}
+```
