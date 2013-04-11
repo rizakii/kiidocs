@@ -3,3 +3,23 @@ layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
 ---
+グループのオーナーは、グループメンバーの一覧を`getMemberListSynchronous`メソッドにより取得できます。
+
+```objc
+NSError *error;
+NSArray *members = [group getMemberListSynchronous:&error];
+
+if (err != nil) {
+    // Get member list failed
+    // Please check error description/code to see what went wrong...
+}
+
+// request was successful
+else {
+    // iterate through the member list
+    for(KiiUser *user in members) {
+        // do something with the user
+        [user describe];
+    }
+}
+```

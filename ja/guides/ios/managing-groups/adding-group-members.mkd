@@ -3,3 +3,46 @@ layout: ja-doc
 title: グループメンバーの追加と削除
 sort-priority: 50
 ---
+## グループメンバーの追加
+
+グループのオーナーは、`addUser`メソッドを使ってグループにメンバーを追加することができます。
+
+```objc
+KiiUser *user1 = [KiiUser userWithURI:@"_URI_FOR_USER1"];
+KiiUser *user2 = [KiiUser userWithURI:@"_URI_FOR_USER2"];
+NSString *groupName = @"myGroup";
+
+// Add user1 and user2 to the group
+NSError *error;
+KiiGroup* group = [KiiGroup groupWithName:groupName];
+[group addUser:user1];
+[group addUser:user2];
+[group saveSynchronous:&error];
+
+if (error != nil) {
+    // Group add members failed
+    // Please check error description/code to see what went wrong...
+}
+```
+
+## グループメンバーの削除
+
+グループのオーナーは、`removeUser`メソッドを使ってグループからメンバーを削除できます。
+
+```objc
+KiiUser *user1 = [KiiUser userWithURI:@"_URI_FOR_USER1"];
+KiiUser *user2 = [KiiUser userWithURI:@"_URI_FOR_USER2"];
+NSString *groupName = @"myGroup";
+
+// Remove user1 and user2 from the group
+NSError *error;
+KiiGroup* group = [KiiGroup groupWithName:groupName];
+[group removeUser:user1];
+[group removeUser:user2];
+[group saveSynchronous:&error];
+
+if (error != nil) {
+    // Group remove members failed
+    // Please check error description/code to see what went wrong...
+}
+```
