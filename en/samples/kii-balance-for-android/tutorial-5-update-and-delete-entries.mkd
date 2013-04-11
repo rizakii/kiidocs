@@ -78,6 +78,6 @@ This is the end of the tutorials!  Hope you get the hang of using the basic Kii 
 #### Want to explore more?
 
 * Want to partially update an Object? 
-  * Check {% page_link android-updaring_objects-en %} section.
+  * Check {% page_link android-object_storages_updating-en %} section.
 * Want to send a push notification when a Object is update or deleted? 
-  * Check {% page_link android-receiving_push_notification-en %} section.
+  * Check {% page_link android-object_storages_push-en %} section.

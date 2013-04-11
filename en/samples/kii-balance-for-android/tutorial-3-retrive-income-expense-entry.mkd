@@ -68,4 +68,4 @@ Moving to {% page_link tutorial_4_create_new_income_expense_entries-en %}...
 * Want to change the sorting order?  Want to support pagination?  
   * Check {% page_link android-object_storages-en %} section.
 * Want to share the entries among multiple users?  Want to learn more about bucket scoping.  
-  * Check {% page_link android-bucket-en %} section.
+  * Check {% page_link android-buckets-en %} section.
