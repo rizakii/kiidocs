@@ -2,5 +2,50 @@
 layout: ja-doc
 title: File のスコープと ACL 設定
 sort-priority: 70
+summary: File は常に User Scope を持ちます。
 ---
+## 規定のアクセス制御
 
+User Scope を持つファイルは、次にあげた規定のアクセス制御を持ちます。
+
+* **User Scope**
+    * このユーザに対して、この File に対する読み取りと書き込みを許可します。
+    * このユーザ以外に対して、この File に対する全アクセスを拒否します。
+
+
+## File に新たな ACL を設定する
+
+新しいACLを設定することで、File へ新しいアクセス制限を設定できます。設定できるアクセス制限は下記の通りです。
+
+* **KiiACLFileActionRead** : ファイルの読み取りを許可する。
+* **KiiACLFileActionWrite** : ファイルの更新と削除を許可する。
+
+以下の例では、特定のユーザ（user1）に対して、File のKiiACLFileActionRead 権限と KiiACLFileActionWrite 権限を付与しています。
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+KiiUser *user1 = [KiiUser userWithURI:@"_URI_FOR_USER1"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Get the file's ACL handle
+KiiACL *acl = [file fileACL];
+
+// Create some ACL rules
+KiiACLEntry *entry1 = [KiiACLEntry entryWithSubject:user1 andAction:KiiACLFileActionWrite];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:user1 andAction:KiiACLFileActionRead];
+
+// Put them in the handle
+[acl putACLEntry:entry1];
+[acl putACLEntry:entry2];
+
+// Save the ACL
+[acl saveSynchronous:&error;
+          didSucceed:&succeeded;
+             didFail:&failed;];
+if (error != nil) {
+  // Setting file ACL failed
+  // Please check error description and succeeded/failed arrays
+  // to see what went wrong...
+}
+```
