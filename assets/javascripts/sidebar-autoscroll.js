@@ -9,7 +9,7 @@ $(function() {
     var parent = target.parent();
     var targetTop = target.offset().top;
     $(window).scroll(function() {
-      var scrollTop = $('body').scrollTop();
+      var scrollTop = $(window).scrollTop();
       var offset = 0;
       var max = parent.height() - target.height();
       if (scrollTop > targetTop) {
