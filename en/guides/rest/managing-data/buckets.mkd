@@ -1,0 +1,138 @@
+---
+layout: en-doc
+title: Buckets
+summary: In order to fully leverage the power of Kii Platform, it is important to understand the concept of "buckets". The best way to understand a bucket in this sense is to imagine a virtual bucket floating in Kii Cloud. There can be any number of buckets belonging to the application, a user or a group. They are defined by the developer, and hold all data objects and files. A great way to understand is to try it yourself! So read on for some examples...
+sort-priority: 10
+---
+## Bucket Scopes
+
+Each bucket has a "scope", which determines to whom the bucket belongs.  For example, if a bucket belongs to a specific group, this bucket has "Group Scope" and all the data in this bucket will be kept as long as the group exists in Kii Cloud.  The scope also affects the default access control applied to the data that is created within this bucket.
+
+These are three types of bucket scopes supported by Kii Platform:
+
+* **Application Scope** : The bucket belongs to your application
+    * Authenticated users (i.e., all users who have been signed-in) will have full access to the bucket by default
+    * Anonymous users (i.e., users who have not yet signed-in) can only query and read data in the bucket by default
+* **Group Scope** : The bucket belongs to a user group
+    * The group owner will have full access to the bucket by default
+    * The group members will have full access to the bucket except "dropping bucket" by default
+    * All non-group members will have no access to the bucket by default
+* **User Scope** : The bucket belongs to a user
+    * The user will have full access to the bucket by default
+    * Other user will have no access to the bucket by default
+
+## Object Buckets and Resource URL
+
+The scope of the bucket determines the resource URL for accessing this bucket. For example:
+
+* **Application Scope Bucket** : https\://api.kii.com/api/apps/\<APP\_ID\>/buckets/\<BUCKET\_NAME\>
+* **Group Scope Bucket** : https\://api.kii.com/api/apps/\<APP\_ID\>/groups/\<GROUP\_ID\>/buckets/\<BUCKET\_NAME\>
+* **User Scope Bucket** : https\://api.kii.com/api/apps/\<APP\_ID\>/users/\<selector\>/buckets/\<BUCKET\_NAME\>
+
+Check the following example to see how you can read, write and create the objects in your buckets
+
+### App Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+### Group Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/groups/{GROUP_ID}/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+### User Scope Bucket
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects" \
+  -d '{"score":"1800", "name":"game1"}'
+```
+
+## Creating File Buckets
+
+File buckets are the same concept as object buckets, with the exception that a file bucket can only have **User Scope**, meaning that the bucket will be fully accessible only to the user. To differentiate between File Buckets and Object Buckets when posting data, use a bucket ID with the prefix**"sync:"**when working with files.
+
+Check out the following example to see how you can create a file object in a file bucket:
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects" \
+  -d '{"path":"/mnt/esb/README.txt","title":"title-1334915984"}'
+```
+
+## Set a new ACL on Bucket
+
+For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
+
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections</p>
+
+The possible access controls that can be applied to a bucket are:
+
+* **QUERY\_OBJECTS\_IN\_BUCKET** : Allow the subject to query data in the bucket
+* **CREATE\_OBJECTS\_IN\_BUCKET** : Allow the subject to create new data in the bucket
+* **DROP\_BUCKET\_WITH\_ALL\_CONTENT** : Allow the subject to drop the bucket with all the contained data
+
+Here is a sample API call for adding two new ACLs on a User Scope bucket.  In this example, the CREATE\_OBJECTS\_IN\_BUCKET permission is granted to a user with an id {USER\_ID\_2}:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:{USER_ID_2}"
+```
+
+You can also grant permissions to Anonymous Users, Authenticated Users and Groups.  Check out the following examples:
+
+### Granting permission to Anonymous Users:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:ANONYMOUS_USER"
+```
+
+### Granting permission to Authenticated Users:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/UserID:ANY_AUTHENTICATED_USER"
+```
+
+### Granting permission to Group:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/acl/CREATE_OBJECTS_IN_BUCKET/GroupID:{GROUP_ID}"
+```

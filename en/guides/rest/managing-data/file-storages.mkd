@@ -1,0 +1,37 @@
+---
+layout: en-doc
+title: File Storage
+summary: File storage allows your application to manage virtually any file and its associated metadata. The APIs allow you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL.
+sort-priority: 30
+---
+The following common metadata fields are predefined, describing your file:
+
+* **\_id**: The internal identifier assigned by Kii Cloud
+* **title**: The default value will be the file name
+* **created**: The date the file was created on Kii Cloud in UNIX time (msec)
+* **modified**: The date the file was last updated on Kii Cloud in UNIX time (msec)
+* **path**: The file's path
+* **size**: The size of the file (in bytes)
+* **mimetype**:The content-type of the file
+* **type**: Specify if the object represents files or folders.
+* **trashed**: A flag indicating whether the file is in Kii Cloud Trashcan - the default value is false
+* **optional**: A custom field which can hold an arbitrary string value (up to 512 bytes of UTF-8 encoded content)
+
+## Encoding File path in URL
+
+In order to manipulate files, you will need to specify the file path accordingly.  For some REST API calls, you will need to encode the file path in a URL.
+
+The encoding rules are as follows:
+
+* Use '-' to encode a slash (/)
+* Use "." to escape a string
+* Repeat the escape string to escape the escape string
+
+Here are some examples of this:
+
+Original               |Encoded
+-----------------------|-----------------------
+/var/log/kii/error.log |-var-log-kii-error..log
+/var/-log-/--.jpg      |-var-.-log.--.-.-..jpg
+///---.jpg             |---.-.-.-..jpg
+.././../...jpg         |....-..-....-......jpg
