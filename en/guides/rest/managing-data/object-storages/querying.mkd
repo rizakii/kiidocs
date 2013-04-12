@@ -1,0 +1,191 @@
+---
+layout: en-doc
+title: Querying for Objects
+summary: 'Kii Platform makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The APIs allow you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...'
+sort-priority: 50
+---
+To query for objects, you'll need to construct a QueryRequest object and send it as shown in the following example:
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.QueryRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"eq", "field":"name", \
+  "value":"John Doe"}, "orderBy":"name", "descending":false},  \
+  "paginationKey":"asd12ijdfasdfjadfjgk", "bestEffortLimit": 10}'
+```
+
+## QueryRequset Object
+
+Here is an example of a QueryRequest object:
+
+```javascript
+{
+  "bucketQuery":{
+    "clause":{"type":"eq", "field":"name", "value":"John Doe"},
+    "orderBy":"name",
+    "descending": false
+  },
+  "paginationKey":"asd12ijdfasdfjadfjgk",
+  "bestEffortLimit":10
+}
+```
+
+* "**bucketQuery**" defines the query condition.  This is composed of the following:
+    * "**clause**" specifies the query clause(s).  See the "Query Clause" section below for more details
+    * "**orderBy**" and " **descending**" specify how the query result is sorted.  The query result will be sorted based on the field defined by "orderBy", while the sort order will be in descending order by default, unless "descending" is specified as **false**.
+* "**paginationKey**" is used to get the next result set when the previous query response was not able to contain all results that met the query condition. See the "Pagination" section below for more details
+* "**bestEffortLimit**" is used to limit the number of objects to be returned in the query response. If this value is not specified, the default value 200 will be applied.
+
+## Query Clause
+
+A QueryClause object is defined using one or more of the following clauses:
+
+* **EqualClause**: Check for equality
+
+    ```javascript
+    { "type":"eq",  "field":"name",  "value":"John Doe" }
+    ```
+
+* **PrefixClause**: Check if a given field value starts with the specified value.  _Only works for strings_
+
+    ```javascript
+    { "type":"prefix",  "field":"name",  "prefix":"John" }
+    ```
+
+* **RangeClause**: Check if a given field value fits within the specified range
+
+    ```javascript
+    {
+      "type": "range",
+      "field" : "age",
+      "upperLimit":10,
+      "upperIncluded":true,
+      "lowerLimit":3,
+      "lowerIncluded":false
+    }
+    ```
+
+    Refer the following examples for defining range:
+
+    * age >= 20 :  {"type":"range", "field":"age", "lowerLimit": 20}
+    * age > 20 : {"type":"range", "field":"age", "lowerLimit": 20, "lowerIncluded": false}
+    * 20 <= age < 30 : {"type":"range", "field":"age", "lowerLimit": 20, "upperLimit":30, "upperIncluded":false}
+
+* **AllClause**: Special clause which returns all objects in the bucket
+
+    ```javascript
+    { "type":"all" }
+    ```
+
+* **InClause**: Check if a given field value has one of the specified values.
+
+    ```javascript
+    {
+      "type" : "in",
+      "field" : "lastName",
+      "values" : [ "García", "Smith", "Lopez", "Simpson" ]
+    }
+    ```
+
+* **HasFieldClause**: Check if an object has the specified field. ThefieldTypecan be "STRING", "INTEGER", "DECIMAL" or "BOOLEAN".
+
+    ```javascript
+    {
+      "type" : "hasField",
+      "field" : "name",
+      "fieldType" : "STRING"
+    }
+    ```
+
+* **AndClause**: A boolean clause to concatenate a list of clauses with a logical "AND" operator.
+
+    ```javascript
+    {
+      "type":"and",
+      "clauses":[
+        {"type":"prefix", "field":"name", "prefix":"John"},
+        {"type":"eq","field":"age", "value":30}
+      ]
+    }
+    ```
+
+* **OrClause**: A boolean clause to concatenate a list of clauses with a logical "OR" operator
+
+    ```javascript
+    {
+      "type":"or",
+      "clauses":[
+        {"type":"eq", "field":"name", "value":"John"},
+        {"type":"eq","field":"age", "value":30}
+      ]
+    }
+    ```
+
+* **NotClause**:  A boolean clause to negate a comparison with a logical "NOT" operator
+
+    ```javascript
+    {
+      "type" : "not",
+      "clause" : {"type":"eq", "field":"name", "value":"John"}
+    }
+    ```
+
+## Pagination
+
+When the "bestEffortLimit" key is specified and the number of objects in the result set is larger than the limit, Kii Platform will only return objects up to the defined limit.  When this happens, the response will include a "nextPaginationKey" as shown:
+
+```javascript
+{
+  "queryDescription": "WHERE ( 1=1 )",
+  "results": [....],
+  "nextPaginationKey": "200/200"
+}
+```
+
+By specifying the "nextPaginationKey" value when making the next query request, you will be able to retrieve the next result set.  Here is an example:
+
+```sh
+curl -v -X POST \
+  -H"Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.QueryRequest+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"all"}}, "paginationKey":"200/200"}'
+```
+
+**Please Note:** Kii Platform does not take a snapshot of the query result, so if you request the next result set for a query that was made in the past, the results may be skewed.
+
+## Query Example
+
+Here is an example of QueryRequset with multiple clauses.  This example defines the following query conditions:
+
+* { "age" <=18 OR "age" > 65 } AND { "gender" is equal to "Female" }
+* Sort the results using "age" in descending order.
+* Limit the number of objects in the result set to 100.
+
+```javascript
+{
+ "bucketQuery" : {
+  "clause" : {
+   "type" : "and",
+   "clauses" : [
+    {"type":"or",
+     "clause" : [
+       {"type":"range", "field":"age", "lowerIncluded":false, "upperLimit":18, "upperIncluded":true },
+       {"type":"range", "field":"age", "lowerIncluded":false, "lowerLimit":65, "upperIncluded":true }
+     ]
+    },
+    {"type":"eq", "field":"gender", "value":"Female" }
+   ]
+  },
+  "orderBy" : "age",
+  "descending" : true
+ },
+ "bestEffortLimit" : 100
+}
+```
