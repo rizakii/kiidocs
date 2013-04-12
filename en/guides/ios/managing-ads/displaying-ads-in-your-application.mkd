@@ -1,0 +1,19 @@
+---
+layout: en-doc
+title: Displaying Ads in Your Application
+summary: Displaying Ads in Your Application
+sort-priority: 10
+---
+Here is how to display ads in your application.
+
+1. In your project, open the view controller you want to place your ad in.
+
+    Example: MyViewController.m
+1. Place the following code in your viewDidLoad method:
+
+```objc
+KiiAdnet *adView = [KiiAdnet requestAdWithDelegate:self
+                    withApplicationId:@"<my-application-id>"
+                    andApplicationKey:@"<my-application-key>"];
+[self.view addSubview:adView];
+```
