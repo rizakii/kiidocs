@@ -1,0 +1,84 @@
+---
+layout: en-doc
+title: Scoping Objects
+summary: 'All objects have a "scope". &nbsp;This scope determines the default access control applied to the object upon its creation.&nbsp;For example, an object created in an "Application Scope" bucket will have "Application Scope".'
+sort-priority: 60
+---
+## Object Scopes and Default Access Control
+
+For each scope, the following default access control is applied to objects:
+
+* **Application Scope**
+    * Authenticated users (i.e., all users who have been signed-in) can read and write the object by default
+    * Anonymous users (i.e., users who have not yet signed-in) can only read the object by default
+* **Group Scope**
+    * All group members can read and write the object by default
+    * All non-group members cannot read and write the object by default
+* **User Scope**
+    * The user can read and write the object by default
+    * Other user cannot read and write the object by default
+
+## Granting Permission
+
+Custom permission can be applied onto an object by adding a new ACL.  The possible access controls that can be granted on an object are:
+
+* **READ\_EXISTING\_OBJECT**: Allow the subject to read the object
+* **WRITE\_EXISTING\_OBJECT**: Allow the subject to modify and delete the object
+
+Here are examples for granting the READ\_EXISTING\_OBJECT permission:
+
+### Granting the READ\_EXISTING\_OBJECT Permission to Anonymous Users:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
+```
+
+### Granting the READ\_EXISTING\_OBJECT Permission to Authenticated Users:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANY_AUTHENTICATED_USER"
+```
+
+### Granting the READ\_EXISTING\_OBJECT Permission to a Group:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer 156758cd-bd4e-4398-aa7d-c091d19b3073" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/GroupID:{GROUP_ID}"
+```
+
+### Granting the READ\_EXISTING\_OBJECT Permission** **to a User:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:{USER_ID}"
+```
+
+## Revoking Permission
+
+In order to revoke permission, simply send a DELETE request to the corresponding ACL
+
+### Revoking the WRITE\_EXISTING\_OBJECT Permission from Anonymous Users:
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization:bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/WRITE_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
+```
+
+**Please Note:** You can revoke permission from Authenticated Users, Groups, or Users in a similar manner. Simply change "UserID:ANONYMOUS\_USER" to "UserID:ANY\_AUTHENTICATED\_USER", "GroupID:{GROUD\_ID}" and "UserID:{USER\_ID}", accordingly.
