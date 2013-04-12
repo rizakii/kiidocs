@@ -8,7 +8,8 @@ page-id: android-adding_kii_cloud_to_your_application-ja
 
 下記の手順に従って、KiiCloudSDK をアプリケーションのプロジェクトに追加してください。
 
-1.  KiiCloudStorageSDK の Java ライブラリ（KiiCloudStorageSDK-xxx.jar）をライブラリパス（{your android application project root}/libs）にコピーします。
+1.  KiiCloudStorageSDK の Java ライブラリ（KiiCloudStorageSDK-xxx.jar）をライブラリパス（{あなたの application project のルート}/libs）にコピーします。
+
 2.  AndroidManifest.xml を更新し、必要なパーミッションを追加します。
 
     ```xml
@@ -16,7 +17,7 @@ page-id: android-adding_kii_cloud_to_your_application-ja
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     ```
 
-    なお、android.permission.WRITE_EXTERNAL_STORAGE は、File Storage (KiiFile 関連）機能を利用するときのみ設定が必要です。
+    なお、android.permission.WRITE\_EXTERNAL\_STORAGE は、File Storage (KiiFile 関連）機能を利用するときのみ設定が必要です。
 
 3.  SDK を導入するクラスに com.kii.cloud.storage をインポートし、Kii.initialize() を呼び出します。
 
@@ -33,31 +34,33 @@ page-id: android-adding_kii_cloud_to_your_application-ja
     }
     ```
 
-    "APPID" / "APPKEY" の項目は、開発者ポータルにて取得した "Application ID" / "Application Key" を設定してください。また Site は、開発者ポータルにて指定した Country に対応する値（Site.JP または Site.US のいづれか）を指定してください。
+    `APPID` と `APPKEY` の項目は、開発者ポータルにて取得した Application ID と Application Key を設定してください。また Site は、開発者ポータルにて指定した Country に対応する値（Site.JP または Site.US）を指定してください。
 
 ## Push 通知の設定
 
 Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定を行なってください。
 
-1.  **Google Cloud Messaging (GCM) の設定**
+### Google Cloud Messaging (GCM) の設定
 
-    Kii Push 通知は Google Cloud Messaging (GCM) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは GCM の設定（e.g., Google API プロジェクトの作成、GCM サービスの有効化、GCM API key の取得等）を行う必要があります。
+Kii Push 通知は Google Cloud Messaging (GCM) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは GCM の設定（e.g., Google API プロジェクトの作成、GCM サービスの有効化、GCM API key の取得等）を行う必要があります。
 
-    詳細は、Google による tutorial を参照してください。
+詳細は、[Google による tutorial](http://developer.android.com/google/gcm/gs.html) を参照してください。
 
-2.  **GCM API key の設定**
+### GCM API key の設定
 
-    1\.で取得した GCM API Key を Kii Cloud に設定します。以下の操作を開発者ポータルで行なってください。
+取得した GCM API Key を Kii Cloud に設定します。
 
-    1.  アプリケーションコンソールにて "Edit" ボタンをクリックします。
+以下の操作を開発者ポータルで行なってください。
 
-        ![](01.png)
+1.  アプリケーションコンソールにて "Edit" ボタンをクリックします。
 
-    2.  "Setting" をクリックした後、"Push Notifications" を選択します。
+    ![](01.png)
 
-        次のような Push 通知設定画面が表示されることを確認してください。
+2.  "Settings" をクリックした後、"Push Notifications" を選択します。
 
-        ![](02.png)
+    次のような Push 通知設定画面が表示されることを確認してください。
+
+    ![](02.png)
 
     GCM Key をアップロードしてください。
 

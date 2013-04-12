@@ -3,7 +3,7 @@ layout: en-doc
 title: Adding Kii Analytics SDK to Your Application
 summary: 
 sort-priority: 40
-#page-id: foo-bar-baz
+page-id: ios-adding_kii_analytics_to_your_application-en
 ---
 ## Configuring your project
 
@@ -32,6 +32,4 @@ Follow the steps below to enable Kii Ads in your application.
     }
     ```
 
-Insert your application's credentials (i.e., `___APPID___` and `___APPKEY___`) in the specified parameters in this method.
-
-You may also customize the default site based on your location to optimize performance. The currently supported values are: `kiiAnalyticsSiteUS` (United States) and `kiiAnalyticsSiteJP` (Japan).
+    Insert your application's credentials (i.e., APPID and APPKEY) in the specified parameters in this method.  Also put your Country (kiiAnalyticsSiteUS or kiiAnalyticsSiteJP) that you've specified on the developer's portal.

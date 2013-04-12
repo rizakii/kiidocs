@@ -4,26 +4,26 @@ title: Android Quick Start
 sort-priority: 10
 page-id: android-quickstart-en
 ---
-## Registering your application on the Kii Developer Portal
+## Registering your App on the Kii Developer Portal
 
 In order to utilize the Kii SDKs, you must first register your application in the developer portal. Once registered, your application will have an associated App Key and App ID to be used with the SDKs.
 
 ### Register an application
 
-1. Log in on to the developer portal: http://developer.kii.com
+1. Log in on to the developer portal: https://developer.kii.com
 2. Press the "Create App" button.
 
     This will bring "Create An App" menu.
 
     ![](01.png)
 
-3. Enter the name of your app, select the mobile platforms you'd like to utilize and click "Create" button
+3. Enter the name of your app, select your country and the mobile platforms you'd like to utilize and click "Create" button.
 
-4. Select the newly created app and then click "Access Keys"
+4. Select the newly created app and then click "Access Keys".
 
     ![](02.png)
 
-    These are your application's credentials.  These values will be used by Kii to distinguish your app from other apps.
+    These are your application's credentials.  These values will be used by Kii Cloud to distinguish your application from other apps.
 
 ## Downloading Android Client SDK
 
@@ -36,3 +36,4 @@ To integrate the SDK with your existing app, check out the following resources:
 * For cloud storage: {% page_link android-adding_kii_cloud_to_your_application-en %}
 * For sync: {% page_link android-adding_kii_sync_to_your_application-en %}
 * For advertising: {% page_link android-adding_kii_ads_to_your_application-en %}
+* For analytics: {% page_link android-adding_kii_analytics_to_your_application-en %}
