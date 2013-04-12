@@ -1,5 +1,5 @@
 ---
-layout: ja-doc
+layout: en-doc
 title: File Storage
 summary: File storage allows your application to manage virtually any file and its associated metadata. The APIs allow you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL.
 sort-priority: 30
