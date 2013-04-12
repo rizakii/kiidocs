@@ -8,21 +8,19 @@ page-id: ios-quickstart-ja
 
 まず初めに、アプリケーションを開発者ポータルに登録する必要があります。登録が完了すると、Kii Platform はあなたのアプリケーション用に Application ID と Application Key を払い出します。
 
-開発者ポータルへのアプリケーション登録の手順は次の通りです。
+開発者ポータルにおけるアプリケーション登録の手順は次の通りです。
 
-1.  開発者ポータル（[http://developer.kii.com](http://developer.kii.com)）にログインする
+1.  開発者ポータル（[https://developer.kii.com](https://developer.kii.com)）にログイン。
 
-2.  "Create App" ボタンをクリックし、表示されるメニューにアプリケーション名とアプリケーション開発プラットフォーム等を入力後、"Create" ボタンをクリックする
+2.  "Create App" ボタンをクリックし、表示されるメニューにアプリケーション名とアプリケーション開発プラットフォーム等を入力。入力が完了したら "Create" ボタンをクリック。
 
     ![](/assets/images/commons/starts_01.png)
 
-3.  作成されたアプリケーションを選択後、"Access Keys" をクリックする
+3.  作成されたアプリケーションを選択後、"Access Keys" をクリック。
 
     ![](/assets/images/commons/starts_02_access_key.png)
 
-以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。これらの値は、Kii Cloud があなたのアプリケーションを識別する際に利用されます。
-
-<br/>
+以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。Kii Cloud は、あなたのアプリケーションを識別するためにこれらの値を利用します。
 
 ## iOS Client SDK をダウンロードする
 
@@ -30,5 +28,6 @@ page-id: ios-quickstart-ja
 
 ダウンロード完了後、SDK を設定してアプリケーションに導入してください。
 
-*   Kii Cloud SDK の設定方法は、セクション「{% page_link ios-adding_kii_cloud_to_your_application-ja %}」を参照してください
-*   Kii Ads SDK の設定方法は、セクション「{% page_link ios-adding_kii_ads_to_your_application-ja %} 」を参照してください
+*   Kii Cloud SDK の設定方法は、セクション「{% page_link ios-adding_kii_cloud_to_your_application-ja %}」を参照してください。
+*   Kii Ads SDK の設定方法は、セクション「{% page_link ios-adding_kii_ads_to_your_application-ja %} 」を参照してください。
+*   Kii Analytics SDK の設定方法は、セクション「{% page_link ios-adding_kii_analytics_to_your_application-ja %} 」を参照してください。

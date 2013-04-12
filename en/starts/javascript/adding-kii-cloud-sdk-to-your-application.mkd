@@ -45,6 +45,4 @@ http://code.jquery.com/jquery-1.8.2.min.js
     </head>
     ```
 
-    Insert your application's credentials in the specified parameters in this method.
-
-    You may also customize the default site based on your location to optimize performance. The currently supported values are: `KiiSite.US` (United States) and `KiiSite.JP` (Japan).
+    Insert your application's credentials (i.e., APPID and APPKEY) in the specified parameters in this method.  Also put your Country (KiiSite.US or KiiSite.JP) that you've specified on the developer's portal.

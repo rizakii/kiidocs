@@ -38,48 +38,48 @@ page-id: ios-adding_kii_cloud_to_your_application-ja
 
 Kii Cloud の Push 通知を利用したい場合は、さらに以下の設定を行なってください。
 
-1. **Apple Push Notification Service (APNS) の設定**
+### Apple Push Notification Service (APNS) の設定
 
-    Kii Push 通知は、Apple Push Notification Service (APNS) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは APNS の諸設定（e.g., SSL証明書や秘密鍵の作成）を行う必要があります。
+Kii Push 通知は、Apple Push Notification Service (APNS) を利用しています。このため、Kii Push 通知の設定に先立ち、まずは APNS の諸設定（e.g., SSL証明書や秘密鍵の作成）を行う必要があります。
 
-    詳細は Apple による[こちらのドキュメント](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008194-CH1-SW1)を参照してください。
+詳細は [Apple によるこちらのドキュメント](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008194-CH1-SW1)を参照してください。
 
-2. **Kii Cloud への証明書および秘密鍵の設定**
+### Kii Cloud への証明書および秘密鍵の設定
 
-    開発者ポータルで以下の操作を行い、証明書と秘密鍵を Kii Cloud に登録してください。
+開発者ポータルで以下の操作を行い、証明書と秘密鍵を Kii Cloud に登録してください。
 
-    1. アプリケーションコンソールにて "Edit" ボタンをクリックします。
+1. アプリケーションコンソールにて "Edit" ボタンをクリック。
 
-        ![](ios_quick_kiicloud_01_e.png)
+     ![](ios_quick_kiicloud_01_e.png)
 
-    2. "Setting" をクリックした後、"Push Notifications" を選択します。
+2. "Settings" をクリックした後、"Push Notifications" を選択。
 
-        次のような Push 通知設定画面が表示されることを確認してください。
+    次のような Push 通知設定画面が表示されることを確認してください。
 
-        ![](ios_quick_kiicloud_02_e.png)
+    ![](ios_quick_kiicloud_02_e.png)
 
-    Development (Sandbox) および Production 環境用に、それぞれ証明書と秘密鍵をアップロードしてください。（Development / Production 環境に関する詳細は、Apple によるこちらのドキュメントを参照してください）
+    Development (Sandbox) および Production 環境用に、それぞれ証明書と秘密鍵をアップロードしてください。（Development / Production 環境に関する詳細は、[Apple によるこちらのドキュメント](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ProvisioningDevelopment/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1) を参照してください）
 
     設定が完了したら "Save" ボタンを押下してください。
 
-3. **プロジェクトの設定**
+### プロジェクトの設定
 
-    下記のコードを、application:DidFinishLaunchingWithOptions: メソッドに追加します。この例では、APNS を Development モードで有効にしています。
+下記のコードを、application:DidFinishLaunchingWithOptions: メソッドに追加します。この例では、APNS を Development モードで有効にしています。
 
-    ```objc
-    // Application startup
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-      // Kii initialization
-      [Kii beginWithID:@"___APPID___"
-                andKey:@"___APPKEY___"
-               andSite:kiiSiteUS];
+```objc
+// Application startup
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  // Kii initialization
+  [Kii beginWithID:@"___APPID___"
+            andKey:@"___APPKEY___"
+           andSite:kiiSiteUS];
 
-      // Enable push with DevelopmentMode
-      [Kii enableAPNSWithDevelopmentMode:YES
-                    andNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                          UIRemoteNotificationTypeSound |
-                                          UIRemoteNotificationTypeAlert)];
+  // Enable push with DevelopmentMode
+  [Kii enableAPNSWithDevelopmentMode:YES
+                andNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                      UIRemoteNotificationTypeSound |
+                                      UIRemoteNotificationTypeAlert)];
 
-      return TRUE;
-    }
-    ```
+  return TRUE;
+}
+```

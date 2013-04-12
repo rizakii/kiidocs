@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Kii Analytics SDK の導入手順
 sort-priority: 40
+page-id: ios-adding_kii_analytics_to_your_application-ja
 ---
 ## プロジェクトの設定
 
@@ -30,6 +31,6 @@ sort-priority: 40
     }
     ```
 
-    `__APP_ID__` と `__APP_KEY__` には、それぞれあなたのアプリの Application ID と Application Key を設定してください。
 
-    また、`Site` は `kiiAnalyticsSiteJP` （日本）または `kiiAnalyticsSiteUS` （米国） が選択可能です。`Site` はKii Cloud サーバの物理的なロケーションを指定します。サービスの展開に最適な `Site` を選択してください。
+    ここで、`___APPID___` と `___APPKEY___` は開発者ポータルで取得したものを指定します。
+またSite は、開発者ポータルで指定した Country に合わせ kiiAnalyticsSiteJP または kiiAnalyticsSiteUS のいずれかを設定してください。

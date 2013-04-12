@@ -22,7 +22,7 @@ Follow the steps below to add Kii Cloud SDK to your application's project:
 
     `android.permission.WRITE_EXTERNAL_STORAGE` is required only if you are using File Storage (KiiFile related) feature.
 
-3. Add the following code to initialize the SDK
+3. Add the following code to initialize the SDK.
 
     ```java
     import com.kii.cloud.storage
@@ -37,33 +37,31 @@ Follow the steps below to add Kii Cloud SDK to your application's project:
     }
     ```
 
-    Insert your application's credentials in the specified parameters in this method.
-
-    You may also customize the default site based on your location to optimize performance. The currently supported values are: Site.US (United States) and Site.JP (Japan).
+    Insert your application's credentials (i.e., APPID and APPKEY) in the specified parameters in this method.  Also put your Country (Site.US or Site.JP) that you've specified on the developer's portal.
 
 ## Configuring Push Notification
 
 If you want to leverage Kii Cloud push notification feature, follow the steps below:
 
-1. Set up Google Cloud Messaging (GCM)
+### Set up Google Cloud Messaging (GCM)
 
-    Kii Push notification leverages Google Cloud Messaging (GCM) mechanism.  You therefore need to set up your application (e.g., create a Google API project, enable the GCM service, and obtain a GCM API key, configure your application) so as to enable GCM.
+Kii Push notification leverages Google Cloud Messaging (GCM) mechanism.  You therefore need to set up your application (e.g., create a Google API project, enable the GCM service, and obtain a GCM API key, configure your application) so as to enable GCM.
 
-    Please refer the [tutorial](http://developer.android.com/google/gcm/gs.html) provided by Google for the details.
+Please refer the [tutorial](http://developer.android.com/google/gcm/gs.html) provided by Google for the details.
 
-2. Configuring your GCM API key
+### Configuring your GCM API key
 
-    In addition to the general GCM setup, you need to register your GCM API key in order to leverage Kii Push notification mechanism.  
+In addition to the general GCM setup, you need to register your GCM API key in order to leverage Kii Push notification mechanism.  
 
-    Please execute the following steps on the dev portal:
+Please execute the following steps on the dev portal:
 
-  1. Click "Edit" button at your application console.
+1. Click "Edit" button at your application console.
 
-        ![](01.png)
+    ![](01.png)
 
-  2. Click "Settings" to bring your application configuration menu.
-  3. Put your GCM key.
+2. Click "Settings" to bring your application configuration menu.
+3. Put your GCM key.
 
-        ![](02.png)
+    ![](02.png)
 
     Click "Save" when done.

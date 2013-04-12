@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Kii Analytics SDK の導入手順
 sort-priority: 40
+page-id: android-adding_kii_analytics_to_your_application-ja
 ---
 ## プロジェクトの設定
 
@@ -30,14 +31,12 @@ sort-priority: 40
     // Example of initialize in Activity's onCreate() method 
     public void onCreate(Bundle savedInstanceState) { 
         super.onCreate(savedInstanceState); 
-        KiiAnalytics.initialize(this, "{APP_ID}", "{APP_KEY}", Site.US);
+        KiiAnalytics.initialize(this, "{APPID}", "{APPKEY}", Site.US);
         ....
     }
     ```
 
-`{APP_ID}` と `{APP_KEY}` には、それぞれあなたのアプリの Application ID と Application Key を設定してください。
-
-`Site` は `Site.JP` または `Site.US` が選択可能です。Site はKii Cloud サーバの物理的なロケーションを指定します。サービスの展開に最適なSiteを選択してください。
+`APPID` と `APPKEY` の項目は、開発者ポータルにて取得した Application ID と Application Key を設定してください。また Site は、開発者ポータルにて指定した Country に対応する値（Site.JP または Site.US）を指定してください。
 
 ## Proguard の設定
 
