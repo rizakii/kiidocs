@@ -156,9 +156,9 @@ T.B.D.
 
 ### Layout tree
 
-* \_layouts/default.html
-  * \_layouts/en.html
-    * \_layout/en-doc.html
-    * \_layout/rest-api.html
-  * \_layouts/ja.html
-    * \_layouts/ja-doc.html
+*   \_layouts/default.html
+    *   \_layouts/en.html
+        *   \_layout/en-doc.html
+        *   \_layout/rest-api.html
+    *   \_layouts/ja.html
+        *   \_layouts/ja-doc.html
