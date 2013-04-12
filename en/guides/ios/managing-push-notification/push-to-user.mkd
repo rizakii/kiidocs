@@ -3,6 +3,7 @@ layout: en-doc
 title: '"Push to User" Notification'
 summary: '"Push to User" notification provides a means to push messages with a publisher-subscriber model. The feature will let you and your app users to quickly send messages to other users while providing a way to scope to whom the messages are sent.'
 sort-priority: 10
+page-id: ios-push_to_user-en
 ---
 ## How "Push to User" notification works
 
@@ -31,7 +32,7 @@ A topic can have either one of the following scopes.
     * Only this user can subscribe to the topic.
     * Only this user can send push message to this topic.
 
-Please note that these are the default rules.  You can tweak the rules by applying ACL entries (white list entries) onto a topic. Please refer {% page_link ios-setting_topic_acl-en %}for the details
+Please note that these are the default rules.  You can tweak the rules by applying ACL entries (white list entries) onto a topic. Please refer {% page_link ios-settings_topic_acl-en %}for the details
 
 ## "Push to User" three sample scenarios
 
