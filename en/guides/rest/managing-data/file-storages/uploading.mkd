@@ -1,0 +1,109 @@
+---
+layout: en-doc
+title: Uploading Files and Folders
+sort-priority: 10
+#page-id: foo-bar-baz
+---
+Uploading a file is handled by performing the following steps:
+
+1. Uploading the file metadata
+1. Uploading the file body
+
+In Step 1, you will receive the ObjectID from Kii Cloud, which can then be used in Step 2 to upload the file body. &nbsp;Kii Cloud will then concatenate the metadata and the file body.
+
+**Please Note:** In most use cases you won't need to worry about folders, Kii Cloud will automatically create them when you upload a file. &nbsp;For example, Kii Cloud will automatically generate folders for; "my/" and "my/folder/" when you upload a file with the path "my/folder/README.txt". &nbsp;The only case when you must explicitly create a folder is when you wish to create an empty folder.
+
+## Uploading Files
+
+### Uploading File Metadata
+
+Here is an example for uploading file metadata:
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects" \
+  -d '{"path":"my/folder/README.txt","title":"My_README"}'
+```
+
+#### Be sure to:
+
+* Specify application/vnd.kii.KiiFile+json for HTTP the "content-type" header field
+* Prepend the Bucket ID with the "sync:" prefix
+
+Kii Cloud will return the objectID and the creation time in UNIX time (msec) as a response as shown:
+
+```javascript
+{
+  "createdAt" : 1335469002121,
+  "objectID" : "79497721924288512-601",
+  "dataType" : "application/vnd.kii.KiiFile+json"
+}
+```
+
+### Uploading File Body
+
+Here is two examples for uploading a file body.
+
+* You can use any HTTP  "content-type" header field _except_  "application/vnd.kii.folder".
+* Specify the {OBJECT\_ID} that was received when the file metadata was created
+* Make sure that the Bucket ID starts with "sync:"
+
+* **Example**: Uploading a text file by directly specifying its content
+
+    ```sh
+    curl -v -X PUT \
+      -H "Authorization: Bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      -H "content-type:text/plain" \
+      "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/body" \
+      -d '___RAW_TEXT_COMES_HERE___'
+    ```
+
+* **Example**: Uploading a binary file (jpg file) by specifying its file name
+
+    ```sh
+     curl -v -X PUT \
+      -H "Authorization: Bearer {ACCESS_TOKEN}" \
+      -H "x-kii-appid:{APP_ID}" \
+      -H "x-kii-appkey:{APP_KEY}" \
+      -H "content-type:text/plain" \
+      "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/body" \
+      --data-binary '@sample.jpg'
+    ```
+
+Kii Cloud will respond with the modified time in UNIX time (msec) as shown:
+
+```javascript
+{ "modifiedAt" : 1335469019510 }
+```
+
+## Uploading Folders
+
+Here is an example for creating an empty folder:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "If-None-Match:*" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-"
+  -d '{}'
+```
+
+* Specify application/vnd.kii.KiiFile+json for HTTP  "content-type" header field.
+* Make sure that the Bucket ID starts with "sync:".
+* Make sure that the encoded path end with "-" (representing "/").  This will tell Kii Cloud that this metadata is representing folder, not file.
+* Send an empty JSON for the metadata (HTTP body).
+
+Kii Cloud will respond with the modified time in UNIX time (msec) as shown:
+
+```javascript
+{ "modifiedAt" : 1345115675909 }
+```

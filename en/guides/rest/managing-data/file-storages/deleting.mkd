@@ -1,0 +1,29 @@
+---
+layout: en-doc
+title: Deleting Files and Folders
+sort-priority: 50
+---
+You can permanently delete files and folders in one of two ways:
+
+* DELETE the file that is already in Trashcan (i.e., the file's "trashed" metadata field is set to true)
+* DELETE the file while specifying its file path
+
+## Deleting a Trashed File or Folder
+
+By deleting a file that exists within the Trashcan, it will be permanently deleted.  Actually, the REST API call is identical to moving the file into the trashcan. In other words, you can permanently delete a file by sending DELETE twice (the first DELETE will move the file into Trashcan, and the second DELETE will permanently delete the file; do not forget that you need to change the prefix of the bucket name for the second DELETE).
+
+**Please Note:** When you delete a folder, all files and subfolders inside this folder will be also deleted.
+
+## Bypassing the Trashcan
+
+Alternatively, you can bypass the Trashcan and directly eradicate a file or folder by sending DELETE with its file path.  Here is an example of permanently deleting a folder (tmp/data/):
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization: Bearer {ACCESS_TOKE}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-"
+```
+
+**Please Note:** Permanently deleting a folder will also delete all files and subfolders within this folder
