@@ -99,3 +99,7 @@ div.gsc-control-cse {
   border-bottom: 1px solid #666;
   padding: 0.2em 0.9em;
 }
+
+.gcse-search {
+  height: 33px;
+}
