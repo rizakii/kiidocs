@@ -1,0 +1,149 @@
+---
+layout: en-doc
+title: Send Messages
+summary: When a topic is ready, we are ready to send a message to the topic. The message sent to the topic will be pushed to the topic subscribers.
+sort-priority: 40
+page-id: ios-sending_push_to_user_messages-en
+---
+Let us see how we can send a push message on each of our sample scenarios.
+
+## Scenario #1: "Broadcasting to all users"
+
+Only an app developer can send a push message to an app-scope topic.  This can be done on the developer portal by executing the following steps:
+
+1. Login to the developer portal.
+1. Select your application.  Select "Notification" icon and then click "New Message" button.  
+
+    This will bring up the push notification launcher UI.
+
+    ![](01.png)
+
+1. Set the content of your push notification by specifying the following information.
+    * Push message destination
+
+        First, define to where the push notification is to be sent.
+
+        ![](02.png)
+
+        * Select "Topic" in "Send To" section.
+        * Put the target topic name in "Topic Name" form.
+        * Select the appropriate environments (Developer, Production or Both).
+    * Push message content
+
+        Next, define what is to be sent.
+
+        ![](03.png)
+
+        * Toggle on/off the predefined fields in "Include" section.
+
+            The following values will be set in the push message when the fields are enabled.
+
+            * App ID: Application ID (AppID) 
+            * Sender: Client ID
+            * When: Timestamp when the push message is sent.
+            * Origin: The value "EXPLICIT" indicating that the message is "Push To Users" notification.
+            * Object Scope: The value "APP" indicating that the message is pushed via an app-scope topic.
+            * Topic ID: Topic ID of the target topic.
+        * Set arbitrary key-value fields.
+            * You can add more key-value pair field(s) by clicking the "+" button
+            * By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.
+    * APNS/GCM specific settings
+
+        Finally (and optionally), specify any APNS/GCM specific settings.
+
+        ![](04.png)
+
+        * Toggle on/off GCM/APNS specific settings.
+            * For the details on GCM settings, please refer
+            [the documentation by Google](http://developer.android.com/google/gcm/gcm.html#server)* .
+            * For the details on APNS settings, please refer
+[the documentation by Apple](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)* .  
+
+                Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.
+
+
+1. Click "Send..." when done.  The corresponding message will be sent to the target topic.
+
+## Scenario #2: "Group messaging"
+
+Any group members can can send a push message to a group-scope topic.  Let us explore how to do this in the following sample snippet:
+
+```objc
+NSError *error;
+
+// Instantiating a group and its group-scope topic.
+NSString *groupname = @"MyGroup";
+KiiGroup *group = [KiiGroup gropuWithName:groupname];
+String *topicname = @"GroupTopic";
+KiiTopic *topic = [group topicWithName:topicname];
+
+// Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Show message"];
+
+// Build a push message.
+// GCM fields is set nil, so the message will not send to Android devices.
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"Alice" forKey:@"From"];
+[dictionary setObject:@"Hi all!" forKey:@"MsgBody"];
+[dictionary setObject:[NSNumber numberWithInt:1] forKey:@"Priority"];
+[dictionary setObject:[NSNumber numberWithBool:FALSE] forKey:@"Urgent"];
+[dictionary setObject:[NSNumber numberWithDouble:1.12] forKey:@"Weight"];
+[apnsFields setSpecificData:dictionary];
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+
+// Send the message.
+[topic sendMessageSynchronous:message withError:&error;];
+
+if (error != nil) {
+  // There was a problem.
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+* Create an APNS message field instance by invoking `createFields` method.
+* Set APNS alert property in the APNS message by invoking `setAlertBody` method.
+* Set other user-defined fields by creating a dictionary, setting key-values and by invoking `setSpecificData` method.
+* Create a push message by invoking `composeMessageWithAPNSFields` method.
+* Send the message by invoking `sendMessage` method.
+
+
+## Scenario #3: "Pushing my TODO items to all devices"
+
+Only a user who owns the topic can send a push message to this topic.  Let us explore how to do this in the following sample snippet.
+
+```objc
+NSError *error;
+
+// Instantiate a user-scope topic.
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Show message"];
+
+// Build a push message.
+// GCM fields is set nil, so the message will not send to Android devices
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"Do Something" forKey:@"Item"];
+[dictionary setObject:[NSNumber numberWithInt:1] forKey:@"Done"];
+[apnsFields setSpecificData:dictionary];
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+
+// Send the push message.
+[topic sendMessageSynchronous:message withError:&error;];
+if (error != nil) {
+  // Topic subscription failed.
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+* Create an APNS message field instance by invoking `createFields`  method.
+* Set APNS alert property in the APNS message by invoking `setAlertBody`  method.
+* Set other user-defined fields by creating a dictionary, setting key-values and by invoking `setSpecificData`  method.
+* Create a push message by invoking `composeMessageWithAPNSFields`  method.
+* Send the message by invoking `sendMessage`  method.
