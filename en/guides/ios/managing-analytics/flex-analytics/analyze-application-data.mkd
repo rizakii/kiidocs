@@ -1,0 +1,163 @@
+---
+layout: en-doc
+title: Analyze Application Data
+sort-priority: 10
+summary: Here are three steps for analyzing application data (App Data).
+---
+1. Define metrics
+1. Check analytics results on the dev portal
+
+We will pick up the following scenario throughout this page for describing how
+to get started with analyzing Application Data:
+
+* The game application uses Objects to store user's highest score like this:
+
+    `{ "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }`
+
+    * A key "**Score**" having an integer value representing the user's score
+      (10, 20, ... 100)
+    * A key "**Level**" having a string value representing the user's level
+      ("Easy", "Normal", "Hard")
+    * A key "**AppVersion**" having an integer value representing the version
+      of the application (1, 2, 3, ...)
+
+* Now, we want to check how well our users are playing. Based on the above
+  application data, we want to check the following metrics:
+    * **Metric #1:** Average of **"Score"**, sliced by **"Level"** and
+      **"AppVersion"**.
+    * **Metric #2:** Total count of data (i.e., total score data uploaded),
+      sliced by **"Score"**, **"Level"** and **"AppVersion"**.
+
+## 1. Define Metrics
+
+We define our metrics on the dev portal in the following steps.
+
+1. Select the application on the dev portal.
+
+1. Click on "Metrics" icon (the icon with bar graphs).
+
+1. Select "Config" and press "Add" button.  
+    ![](01.png)
+
+    This will bring up the Aggregation Rules definition screen. 
+
+    ![](02.png)
+1. Select "App Data" since we are going to analyze the application data.
+1. Press "Select a conversion rule".
+
+    This will bring up a list of Conversion Rules.
+
+    ![](03.png)
+1. Click "+" button to open the conversion rule definition UI.
+
+1. Define how Kii Cloud will interpret application data (i.e., Conversion Rule)
+   by filling the following information.
+    * **NAME**: The name of the conversion rule.
+    * **BUCKET NAME** and **SCOPE**: The name and scope of the source bucket in
+      which the app data to be analyzed are stored.
+    * **COLUMNS**: Definition of data fields to be analyzed.  Each column is
+      composed of the following three information.
+        * **Name**: The name assigned to the field.
+        * **Source**: The field name.
+        * **Type**: The type of the field value (int, string, float, or
+          boolean).
+
+
+        <p class="note">Currently, we do not support multi-byte characters; if you specify a field having either multi-byte field name or field value, you will not get the expected result.</p>
+
+        For example, please check the following example to see how we define
+        the conversion rule for our sample scenario.
+
+        ![](04.png)
+    * Name the conversion rule as "High Score Tracking"
+    * Specify the app-scope bucket "score" as the data source.
+    * Define the following three columns:
+        * Name "UserScope" for the data field "Score" with the data type "int".
+        * Name "UserLvel" for the data field "Level" with the data type
+          "string".
+        * Name "AppVersion" for the data field "AppVersion" with the data type
+          "int".
+
+    Click "Save" button when done.
+1. The new conversion rule appears on the Conversion Rule List.
+    ![](05.png)
+
+    Click the new rule to apply it onto our aggregation rule.
+1. We will go back to the Aggregation Rules UI, with the new conversion rule
+   being applied.
+
+    Now we configure the rest of the aggregation rule.  
+    * Define **"Aggregate using"** section by specifying the following info.
+        * **Aggregation function:** how to aggregate the "fact".  
+          The available functions are: **Count**, **Avg** (Average), **Sum**,
+          **Min** and **Max**.
+        * **Column:** which column is to be aggregated as a "fact".
+    * Define **"Dimensions"** section by enabling the column(s) to be used for
+      slicing and dicing the aggregates.
+
+    For example, check the following snapshot to see how we configure the rule for our sample Metric #1.
+
+    ![](06.png)
+
+    Now let see how we set up our sample Metric #2:
+
+    ![](07.png)
+
+    Click "Save" button when done.
+
+1. We will now see the new Aggregation Rule on the list; the rule is not
+   enabled yet.
+    ![](08.png)
+
+    Click "Config" button.
+
+1. We will be directed to the Aggregation Rule UI.
+
+    ![](09.png)
+
+    Click "Activate".  The indicator will turn green.
+
+    ![](10.png)
+
+Note that the aggregation rule ID is now shown. We will use the ID when we are
+to fetch the analytics results from the client SDK.
+
+## 2. Check Analytics Results on the Dev Portal
+
+Follow the steps below to view the metrics on the dev portal.
+
+1. On the dev portal, click "Metrics" icon and then select "Metrics".
+1. Select the name of the metrics.  
+   (let us assume that we have selected Metrics #2 "Counting # of scores" for
+   now)
+
+    This will bring the default view.
+
+    ![](11.png)
+
+    Note that our dimensions are shown just below a list of the metrics.
+    Clicking on a dimension will give us a sliced view.  For instance, here is
+    a sliced view we will get when we select "UserScore" dimension.
+
+    ![](12.png)
+
+    There are two ways to further drill down the results:
+
+    1. We can toggle on/off items by clicking on the table rows.  In the next
+       sample, all but the rows with "UserScore" of 80, 90 and 100 are toggled
+       off.
+        ![](13.png)
+
+    1. We can set an additional filter using different dimension.  To do this,
+       click "Filters" button and open a pull-down menu to select a new filter.
+       For example, we can further drill down the results by selecting the
+       dimension "AppVersion" with the value "5".
+
+        The portal will select the best graph for showing the sliced results.
+
+        For example, the portal will show bar graphs instead of a pie graph when
+        we select our sample Metric #2 ("Tracking Average scores"), as shown in
+        the following screen capture.
+
+        ![](14.png)
+
