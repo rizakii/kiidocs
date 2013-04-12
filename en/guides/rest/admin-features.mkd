@@ -3,4 +3,47 @@ layout: en-doc
 title: Admin Features
 sort-priority: 50
 page-id: android-rest_admin-en
+summary: REST API supports features that can be only leveraged by application developers. Those features are mainly for maintaining and configuring your application and thus should be accessible only to the developers.
 ---
+## Getting app admin token
+
+<p class="callout">You can also use the app admin token when invoking non-admin features.  In this case, the admin token will act as a "super user" token; you will be able to leverage any features.  In this case, make sure that you do not use "/me" literal in Resource URL.</p>
+
+To access admin features, you will need to provide an application admin token.  Kii Cloud will determine if you have the right to access these APIs by checking the token.
+
+In order to get the app admin token, you need to provide your application's Client ID and Client Secret.  You can get these values on the dev portal:
+
+1. Login on the dev portal and select your application.
+1. Click "Access Keys".
+
+You will now see your "Client ID" and "Client Secret".  Be sure to keep these values secure.
+
+Once you get the Client ID and Secret, you are ready to get the app admin token as follows:
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/json" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    "https://api.kii.com/api/oauth2/token" \
+    -d '{"client_id":{CLIENT_ID}, "client_secret":{CLIENT_SECRET}}'
+```
+
+Put your Client ID and Client Secret in {CLIENT\_ID} and {CLIENT\_SECRET}, respectively.
+
+If the given Client ID and Secret are correct, Kii Platform will return a response as shown; the value set in "access\_token" and "expires\_in" are the app admin 
+token and its expiration time (in UNIX time, msec), respectively.
+
+```
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 14 May 2012 17:36:41 GMT
+
+{
+  "id" : "f00685f32fde76290b4bcdc2a36b9b73",
+  "access_token" : "99026627-b41e-478d-b497-5ba418e7f78c",
+  "expires_in" : 9223372036854775
+}
+```

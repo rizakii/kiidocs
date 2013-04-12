@@ -1,0 +1,44 @@
+---
+layout: en-doc
+title: Configuring Your Application
+sort-priority: 10
+page-id: rest-configuring_your_application-en
+---
+Once you've created your application on the dev portal, you can tweak your application. &nbsp;In particular, you can configure the following parameters:
+
+* Enable/disable user email verification.
+* Enable/disable user phone number (SMS) verification.
+* Set the sender of the SMS verification message.
+* Set the template for the SMS verification message.
+* Facebook's app id for facebook integration.
+* Control the exposure of user data to others.
+
+Check the following example for how you can configure your application.  This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+
+```sh
+curl -v -X POST \
+    -H "content-type:application/vnd.kii.AppModificationRequest+json" \
+    -H 'authorization:Bearer {ADMIN_TOKEN}' \
+    -H 'x-kii-appid:{APP_ID}' \
+    -H 'x-kii-appkey:{APP_KEY}' \
+    https://api.kii.com/api/apps/{APP_ID} \
+   -d '{"emailAddressVerificationRequired" : true,"phoneNumberVerificationRequired" : true, "smsFrom" : "AppSmsSender", "verificationSmsTemplate" : "Your validation code is ${code}, valid for ${valid} hours."}'
+```
+
+* **emailAddressVerificationRequired** ... Set if you want to enable the email verification.  The default setting is false.
+* **phoneNumberVerificationRequired** ... Set if you want to enable the phone number verification.  The default setting is false.
+* **smsFrom** ... Set the sender of the SMS message for the phone number verification.  The default setting is an empty.
+* **verificationSmsTemplate** ... Define the template of the SMS message for the phone number verification.  You can use the following placeholders.  The default template is "Your validation code is ${code}" - valid for ${valid} hours."
+    * **${code}** ... This will be replaced with the actual verification code
+    * **${valid}** ... This will be replaced with the period of the verification code.
+* **facebookAppID** ... Set the app id given by Facebook.  The default value is an empty.
+* **exposeFullUserDataToOthers** ... Set if you want to expose all user data fields to other users.  The default setting is false.  If set false, only the following user data fields will become visible to other users: "userID", "displayName" and "loginName"
+
+Kii Cloud will respond like this.
+
+```
+HTTP/1.1 204 No Content
+Server: nginx/1.0.15
+Date: Wed, 20 Jun 2012 06:05:52 GMT
+Connection: keep-alive
+```

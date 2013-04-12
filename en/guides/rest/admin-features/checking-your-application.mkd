@@ -1,0 +1,39 @@
+---
+layout: en-doc
+title: Checking Your Application
+sort-priority: 30
+---
+You can check your application settings as follows. This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+
+```sh
+curl -v -X GET \
+    -H "content-type:application/json" \
+    -H 'authorization:Bearer {ADMIN_TOKEN}' \
+    -H 'x-kii-appid:{APP_ID}' \
+    -H 'x-kii-appkey:{APP_KEY}' \
+    https://api.kii.com/api/apps/{APP_ID}
+```
+
+Kii Cloud will return the settings as follows:
+
+```
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Content-Length: 501
+Content-Type: application/vnd.kii.AppRetrievalResponse+json
+Date: Thu, 25 Oct 2012 06:02:31 GMT
+Server: nginx/1.0.15
+{
+    "appID": {APP_ID},
+    "clientID": {CLIENT_ID},
+    "clientSecret": {CLIENT_SECRET},
+    "description": "app_description",
+    "emailAddress": "you@example.com",
+    "emailAddressVerificationRequired": false,
+    "facebookAppID": {FACEBOOK_APP_ID},
+    "phoneNumberVerificationRequired": false,
+    "smsFrom": "AppSmsSender",
+    "verificationSmsTemplate": "Your validation code is ${code}, valid for ${valid} hours."
+}
+```

@@ -1,0 +1,75 @@
+---
+layout: en-doc
+title: Configuring Push Notification
+summary: To leverage KIi Cloud push notification mechanism, you need to configure your application accordingly; for example, you need to set the proper GCM Key in order to enable Kii push notification for Android.
+sort-priority: 20
+---
+## Set your GCM Key to your application
+
+Here is how you can set your GCM Key to your application.  You need to send an app admin token for this operation.
+
+```sh
+curl -v -X PUT \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H "content-type:application/vnd.kii.GCMKeyRegistrationRequest+json" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api.kii.com/api/apps/{APP_ID}/configuration/gcm" \
+  -d '{"gcmKey":"{GCM_KEY}"}'
+```
+
+You can also use the same API for replacing your GCM key.  In this case, the newly specified GCM Key will replace the old one.
+
+## Check your application's GCM Key
+
+### Confirm if your application already has its GCM Key assigned:
+
+Here is how you can check if you've already set a GCM Key for your application.
+
+```sh
+curl -v -X HEAD \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```
+
+### Retrieve your application's GCM Key:
+
+You can retrieve the GCM Key set on your application as follows:
+
+```sh
+curl -v -X GET \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```
+
+Kii Cloud will respond as follows:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Access-Control-Allow-Origin: *
+< Content-Type: application/vnd.kii.GCMKeyRetrievalResponse+json
+< Content-Length: 58
+< Date: Fri, 16 Nov 2012 17:11:53 GMT
+<
+{
+  "gcmKey" : "AIzaSyCxZLKEhrRMUtTpw9kRdPoWb71A9LZZyDY"
+* Connection #0 to host api.kii.com left intact
+* Closing connection #0
+```
+
+## Remove your application's GCM Key
+
+Here is how you can remove the GCM Key
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization:bearer {APP_ADMIN_TOKEN}" \
+  -H 'x-kii-appid:{APP_ID}' \
+  -H 'x-kii-appkey:{APP_KEY}' \
+  "https://api.kii.com/api/apps/{APP_ID}/configuration/gcm"
+```
