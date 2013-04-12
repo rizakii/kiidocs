@@ -1,0 +1,96 @@
+---
+layout: en-doc
+title: Basic Analytics
+summary: Basic Analytics provides "out-of-the-box" analysis on your application. You can fetch the predefined analytics results with no configuration. All results will be automatically aggregated and will be ready to be presented for you.
+sort-priority: 10
+---
+## Checking Basic Analytics Results on Dev Portal
+
+To check the basic analytics results on the dev portal, login into the dev portal and select your application.  This will bring you to the application dashboard.
+
+![](01.png)
+
+On the dashboard, you will see several icons on the left side.  Press these icons will bring up the corresponding basic metrics.
+
+### "User" metrics
+
+Clicking "User" icon will bring you to user-related metrics.
+
+![](02.png)
+
+You can view the following metrics on the graph:
+
+* Number of newly signed up users.
+* Number of deleted users.
+
+You can toggle "Cumulative" and "Discrete".  "Cumulative" view will give you the total number.  "Discrete" view will give you the number per day.
+
+You can also freely change the data view range (e.g., 1 day, 1 week, 1 month).
+
+### "Object" metrics
+
+Clicking "Object" icon will bring you to object-related metrics.
+
+![](03.png)
+
+You can view the following metrics on the graph:
+
+* Number of objects being created.
+* Number of objects being deleted.
+
+You can toggle "Cumulative" and "Discrete".  "Cumulative" view will give you the total number.  "Discrete" view will give you the number per day.
+
+You can also freely change the data view range (e.g., 1 day, 1 week, 1 month).
+
+### "File" metrics
+
+Clicking "File" icon will bring you to file-related metrics.
+
+![](04.png)
+
+You can view the following metrics on the graph:
+
+* Number of files being created.
+* Number of files being deleted.
+* Number of files being moved to Kii Cloud Trashcan.
+* Number of files being restored from Kii Cloud Trashcan.
+* Number of files being deleted from Kii Cloud Trashcan.
+* Size of files being created (in byte).
+* Size of files being deleted (in byte).
+* Number of users who start to use File Storage.
+* Number of users who were using File Storage but deleted.
+
+You can toggle "Cumulative" and "Discrete".  "Cumulative" view will give you the total number.  "Discrete" view will give you the number per day.
+
+You can also freely change the data view range (e.g., 1 day, 1 week, 1 month).
+
+### "Sync" metrics
+
+Clicking "Sync" icon will bring you to sync-related metrics.
+
+![](05.png)
+
+You can view the following metrics on the graph:
+
+* Number of sync sessions processed.
+
+You can toggle "Cumulative" and "Discrete".  "Cumulative" view will give you the total number.  "Discrete" view will give you the number per day.
+
+You can also freely change the data view range (e.g., 1 day, 1 week, 1 month).
+
+### "Advertisement" metrics
+
+Clicking "Advertisement" icon will bring you to advertising-related metrics.  
+
+![](06.png)
+
+You can check the following metrics on the graph.
+
+* Number of impressions for each ad network.
+* Number of clicks for each ad network.
+
+For all metrics, you can toggle a line on the graph by the corresponding toggle buttons.
+
+You can toggle "Cumulative" and "Discrete".  "Cumulative" view will give you the total number.  "Discrete" view will give you the number per day.
+
+You can also freely change the data view range (e.g., 1 day, 1 week, 1 month).
