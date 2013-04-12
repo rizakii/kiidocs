@@ -1,0 +1,35 @@
+---
+layout: en-doc
+title: Receive Messages
+summary: Once a user subscribes to a topic, a push message will be sent to the user whenever someone sends it to the topic.
+sort-priority: 40
+page-id: ios-push_to_user_receiving_messages-en
+---
+We can get push messages through didReceiveRemoteNotification in AppDelegate.
+
+Here is a sample snippet of receiving a push message.  In this example, we are showing an alert dialog with a topic title and alertBody message.
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  NSLog(@"Received notification: %@", userInfo);
+
+  // Create KiiPushMessage from userInfo.
+  KiiPushMessage *message = [KiiPushMessage messageFromAPNS:userInfo];
+  // Get Topic string using getValueOfKiiMessageField. "TOPIC" is enum that is defined in KiiMessageField.
+  NSString *title = [message getValueOfKiiMessageField:TOPIC];
+  // Show alert message
+  [message showMessageAlertWithTitle:title];
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+1. Invoke `messageFromAPNS` method to parse the incoming push message. The
+   parsed result is stored as a KiiPushMessage instance.
+1. Fetch the specific metadata from the message by invoking
+   `getValueOfKiiMessageField` method. In the snippet, we are fetching "TOPIC"
+   metadata.  
+   (Please refer [appledoc]({% page_url references-en %}) for more information
+   on how to fetch other metadata set in a push message).
+1. Show an alert message by invoking `showMessageAlertWithTitle` method.
+
