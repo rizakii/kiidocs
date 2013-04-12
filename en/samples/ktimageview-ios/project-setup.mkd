@@ -21,11 +21,11 @@ code is commented and kept as simple as possible.
 
 In this example, users must be logged in before they can upload images. To
 handle this, we dropped in another module from KiiToolkit
-([KTLoginViewController](http://documentation.kii.com/en/ktloginviewcontroller-ios)).
+({% page_link ios-tutorial_login_view_controller-en %}).
 
 The logic here is simple: if there is not an authenticated user when one of our
 view controllers appear, show the registration/authentication view.
-[KTLoginViewController](http://documentation.kii.com/en/ktloginviewcontroller-ios)
+{% page_link ios-tutorial_login_view_controller-en %}
 will handle the rest.
 
 Now that the user is logged in, we can upload some pictures...
