@@ -1,0 +1,34 @@
+---
+layout: en-doc
+title: Uploading Files
+summary: Upload local files to Kii Cloud
+sort-priority: 10
+---
+To upload a file, create a `KiiFile` instance by invoking the
+`fileWithLocalPath` method of your user's `KiiFileBucket` instance. This will
+automatically create the corresponding metadata within `KiiFile`. Before
+uploading, you can optionally update some of the metadata -- but must invoke
+the `saveFileSynchronous` method to upload the file to the cloud. Here's an
+example:
+
+```objc
+NSError *error;
+
+// Create bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"my_private"];
+
+// Get a local filepath to upload
+NSString *localPath = [[NSBundle mainBundle] resourcePath];
+localPath = [localPath stringByAppendingPathComponent:@"sample_upload.png"];
+
+// Create a KiiFile using the local filepath
+KiiFile *file = [bucket fileWithLocalPath:localPath];
+
+// Save the file metadata + body to the server
+[file saveFileSynchronous:&error];
+
+if (error != nil) {
+  // Saving file failed
+  // Please check error description/code to see what went wrong...
+}
+```

@@ -1,0 +1,51 @@
+---
+layout: en-doc
+title: Updating Files
+sort-priority: 30
+summary: 'Kii SDK supports the following two methods for updating files:'
+---
+* **Update metadata only**: This will only update the file metadata. Use this
+  method when the content of the file has not changed.
+* **Update the whole file**: This will update both the file metadata and the
+  file content itself (i.e., replacing the file with the new one)
+
+## Updating Only Metadata
+
+The below is an example of how you can update only metadata  After editing the metadata, use the `saveMetaDataSynchronous` method to upload the change(s) onto Kii Cloud.
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Update the file's metadata
+[file setOptional:@"some extra data"];
+
+// Save the metadata
+[file saveMetaDataSynchronous:&error];
+if (error != nil) {
+  // Updating file metadata failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## Update the whole file
+
+The below is an example of how you can update the whole file.  After editing the metadata (if needed), use the `saveFileSynchronous` method with the local file to upload.
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Set a path for new content to be uploaded to this file
+[file setLocalPath:@"my/local/path"];
+
+// and update some metadata
+[file setOptional:@"some extra data"];
+
+// finally, save the metadata + upload the new file body
+[file saveFileSynchronous:&error];
+if (error != nil) {
+  // Updating file failed
+  // Please check error description/code to see what went wrong...
+}
+```

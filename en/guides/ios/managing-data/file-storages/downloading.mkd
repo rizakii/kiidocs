@@ -1,0 +1,26 @@
+---
+layout: en-doc
+title: Downloading Files
+summary: If you know the URI of the file you wish to download, you can directly retrieve the file from Kii Cloud
+sort-priority: 20
+---
+The following sample code illustrates how to retrieve an object via its URI:
+
+```objc
+NSError *error;
+
+// Get the file based on an existing file URI
+KiiFile *file2 = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+[file2 getFileMetadataSynchronous:&error];
+
+// Getting the metadata was successful
+if(error == nil) {
+  // so get the file body as well - and save it to my/path/to/file
+  [file2 getFileBodySynchronous:@"my/path/to/file" withError:&error];
+}
+
+if (error != nil) {
+  // Downloading file failed
+  // Please check error description/code to see what went wrong...
+}
+```

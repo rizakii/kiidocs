@@ -1,0 +1,54 @@
+---
+layout: en-doc
+title: Scoping Files
+sort-priority: 70
+summary: Since all file buckets are User Scope, when files are created they default to being only accessible to that user
+---
+## Default Access Control
+
+For all files, the following default access control will be applied:
+
+* **User Scope**
+    * The user can read and write the object by default
+    * Other users cannot read and write the object by default
+
+## Set a new ACL on a File
+
+New access permission can be applied onto a file by adding a new ACL.  The
+possible access controls that can be granted on an object are as follows:
+
+* **KiiACLFileActionRead**: Allowing to read the file.
+* **KiiACLFileActionWrite**: Allowing to modify and delete the file.
+
+Here is a sample snippet for granting read/write permission to another user:
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+KiiUser *user1 = [KiiUser userWithURI:@"_URI_FOR_USER1"];
+NSError *error;
+NSArray *succeeded, *failed;
+
+// Get the file's ACL handle
+KiiACL *acl = [file fileACL];
+
+// Create some ACL rules
+KiiACLEntry *entry1 = [KiiACLEntry entryWithSubject:user1
+                                          andAction:KiiACLFileActionWrite];
+KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:user1
+                                          andAction:KiiACLFileActionRead];
+
+// Put them in the handle
+[acl putACLEntry:entry1];
+[acl putACLEntry:entry2];
+
+// Save the ACL
+[acl saveSynchronous:&error;
+          didSucceed:&succeeded;
+             didFail:&failed;];
+
+if (error != nil) {
+  // Setting file ACL failed
+  // Please check error description and succeeded/failed arrays 
+  // to see what went wrong...
+}
+```

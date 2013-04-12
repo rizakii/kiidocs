@@ -1,0 +1,24 @@
+---
+layout: en-doc
+title: Deleting Files
+sort-priority: 50
+---
+You can permanently delete a file by invoking the `shredFileSynchronous`
+method.  The file will be permanently deleted; you cannot restore the file.
+
+```objc
+KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
+NSError *error;
+
+// Shred the file
+[file ShredFileSynchronous:&error];
+
+if (error != nil) {
+  // Moving file to trash failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+**Please Note:** The file will be deleted from the server immediately when
+invoking the `shredFileSynchronous` method - you do not need to invoke the
+`saveFile` method.
