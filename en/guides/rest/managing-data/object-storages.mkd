@@ -1,0 +1,29 @@
+---
+layout: en-doc
+title: Object Storage
+summary: Object storage allows your application to manage and store JSON-style objects with arbitrary key/value pairs. You can freely define your objects by adding any JSON-encodable data without ever having to do any server-side customization.
+sort-priority: 20
+---
+## Predefined Keys
+
+Some key/value pairs will be automatically created and updated by the server when an object is saved on Kii Cloud.  The predefined attributes on the server are listed below:
+
+* **\_id** ... The object's internal identifier assigned by Kii Cloud
+* **\_created** ... The object's created date in UNIX time (msec)
+* **\_modified** ... The object's last updated date in UNIX time (msec)
+
+## Arbitrary Keys
+
+As long as your key name does not collide with any of the predefined keys mentioned above, you can use any arbitrary name.
+
+A key's associated value can be any of the following JSON-encodable types:
+
+* String
+* Boolean
+* Int
+* Long
+* Double
+* JSON
+* JSON Array
+
+
