@@ -1,0 +1,136 @@
+---
+layout: en-doc
+title: Querying for Objects
+sort-priority: 40
+summary: 'Kii SDK makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The SDK allows you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...'
+---
+## Defining query condition with KiiClause
+
+You can define a query condition using the following comparison operators:
+
+* **equals**
+* **notEquals**
+* **greaterThan**
+* **greaterThanOrEqual**\
+* **lessThan**
+* **lessThanOrEqual**
+* **in**
+* **startsWith**
+
+You can concatenate multiple query conditions using AND/OR logical operators:
+
+* **and**
+* **or**
+
+## Constructing KiiQuery
+
+Use queryWithClause method to create a KiiQuery object with an actual query
+based on a KiiClause object passed as a parameter.  If no KiiClause object is
+passed, the query generated will match with all Objects in the bucket
+(equivalent to "**all**" query).
+
+Optionally, you can use the following methods to fine-tune the query results:
+
+* **sortByAsc**
+* **sortByDesc**
+* **setLimit**
+
+If neither sortByAsc nor sorByDesc is specified, the query results will be in
+arbitrary order.  If setLimit is not specified, the maximum number of the query
+results may be up to 200.
+
+## Parse through Query Result
+
+The result of query will be returned as NSArray with KiiObject as elements.  If
+the result has the multiple pages (e.g., you've specified setLimit to 10, and
+the actual query result has 30 matching objects), Kii Cloud will return a
+KiiQuery instance along with the query result.  You can get the remaining query
+results by executing query with this KiiQuery instance.
+
+## Query Examples
+
+Let us start with a simplest example; querying all objects in a bucket.  You
+first create an "all" query by invoking `queryWithClause` method without any
+clause, then invoke `executeQuery` method of the target bucket with the "all"
+query.  
+(In this example, let us forget about pagination; we assume that all query
+results fit in one page)
+
+```objc
+NSError *error;
+
+// Build "all" query
+KiiQuery *all_query = [KiiQuery queryWithClause:nil];
+
+// Create an array to store all the results in
+NSMutableArray *allResults = [NSMutableArray array];
+
+// Create a placeholder for any paginated queries
+KiiQuery *nextQuery;
+
+// Get an array of KiiObjects by querying the bucket
+NSArray *results = [bucket executeQuerySynchronously:all_query
+                                           withError:&error
+                                             andNext:&nextQuery];
+
+// Add all the results from this query to the total results
+[allResults addObjectsFromArray:results];
+```
+
+In the next example, we will be querying objects with the following conditions:
+
+* The key "gender" has the value "Female".
+* The key "age" is greater than 18.
+* Sort the results in an ascending order by the key "name"
+* Limit the result to 10 objects per query.  Use pagination for getting the
+  next 10 objects
+
+The following code illustrates how you can execute such query:
+
+```objc
+NSError *error;
+
+// Set up our clauses
+KiiClause *clause1 = [KiiClause equals:@"gender"
+                                 value:@"Female"];
+KiiClause *clause2 = [KiiClause greaterThan:@"age"
+                                      value:[NSNumber numberWithInt:18]];
+
+// Combine the clauses with an 'AND'
+KiiClause *totalClause = [KiiClause and:clause1, clause2, nil];
+
+// Build the query, sorting by 'age' and taking 10 results at a time
+KiiQuery *query = [KiiQuery queryWithClause:totalClause];
+[query sortByAsc:@"age"];
+[query setLimit:10];
+
+// Create an array to store all the results in
+NSMutableArray *allResults = [NSMutableArray array];
+
+// Create a placeholder for any paginated queries -
+// if all the results can't be returned in one pass
+// using the given criteria. This will be pre-configured
+// for you. A non-nil value means there is more data to retrieve
+KiiQuery *nextQuery;
+
+// Get an array of KiiObjects by querying the bucket
+NSArray *results = [bucket executeQuerySynchronous:query
+                                         withError:&error
+                                           andNext:&nextQuery];
+
+// Add all the results from this query to the total results
+[allResults addObjectsFromArray:results];
+
+// While the query was successful and there is more data to retrieve...
+while(error != nil && nextQuery != nil) {
+  // make the next query, storing the results
+  results = [bucket executeQuerySynchronous:query
+                                  withError:&error
+                                    andNext:&nextQuery];
+  // add these results to the total array
+  [allResults addObjectsFromArray:results];
+
+  // set next query
+  query = nextQuery;
+}
+```
