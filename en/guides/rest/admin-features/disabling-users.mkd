@@ -1,0 +1,27 @@
+---
+layout: en-doc
+title: Disabling Users
+summary: You can disable users via REST API. Disabled users will not be able to log in, reset his/her password, or verify his/her account. All tokens issued to this user will be also invalidated.
+sort-priority: 50
+---
+Use the property "disabled" to toggle a user; setting the property value "true" will disable the user.  Setting the value to "false" will enable the user again.
+
+Here is an example of disabling a user.  This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+
+```sh
+curl -v -X PUT \
+    -H "Authorization: Bearer {ADMIN_TOKEN}" \
+    -H "x-kii-appid:{APP_ID}" \
+    -H "x-kii-appkey:{APP_KEY}" \
+    -H "content-type: application/vnd.kii.UserStatusUpdateRequest+json" \
+    "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/status" \
+    -d '{"disabled": true}'
+```
+
+Kii Cloud is respond as follow if the user is successfully disabled.
+
+```
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+Date: Mon, 14 May 2012 18:41:45 GMT
+```
