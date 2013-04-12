@@ -1,0 +1,85 @@
+---
+layout: en-doc
+title: Create a Topic
+summary: 'The topic is a channel for sending push messages. Without a channel, we have no way to deliver the messages. Creating a topic, therefore, is a first step to leverage "Push to User" notification feature.'
+sort-priority: 10
+page-id: ios-creating_topic-en
+---
+Let us see how we can create a topic for each of our sample scenarios.
+
+## Scenario #1: "Broadcasting to all users"
+
+In this scenario, we are using an "app-scope" topic.  This type of topic can only be created by an app developer.  Any users can subscribe to the topic, but only a topic creator (i.e., an app developer) can send push messages to the topic.
+
+Creating an app-scope topic is only supported via Kii REST API.  Please execute the following steps:
+
+1. Follow the steps described in {% page_link android-rest_admin-en %} and get an app admin token.
+1. Create an app-scope topic as follows (in this example, we are creating a topic named "SendingAlert"):
+
+```sh
+curl -v -X PUT \
+  -H "X-Kii-AppID:{APP_ID}" \
+  -H "X-Kii-AppKey:{APP_KEY}" \
+  -H "Authorization:Bearer {APP_ADMIN_TOKEN}" \
+  "http://api.kii.com/api/apps/{APP_ID}/topics/SendingAlert"
+```
+
+Make sure to replace {APP\_ID} and {APP\_KEY} to your application's values.  Also make sure to replace {APP\_ADMIN\_TOKEN} to the token obtained in the previous step.
+
+<p class="note">We are currently revising our developer portal so as to provide an UI for creating an app-scope topic.  Once this is done, you will be able to easily create an app-scope topic on the developer portal.</p>
+
+## Scenario #2: "Group messaging"
+
+In this scenario, we are using a "group-scope" topic.  This type of topic can be created by one of any group members.  All group members can subscribe to the topic, and all of them can send push messages to the topic.
+
+Unlike an app-scope topic, a group-scope topic is usually created dynamically by an application.  Please check the following code snippet to see how you can do this:
+
+```objc
+NSError *error;
+
+// Create a group
+NSString *groupname = @"MyGroup";
+KiiGroup *group = [KiiGroup groupWithName:groupname];
+
+// Create instance of group scope topic.
+// (assume that the current suser is a member of the group)
+NSString *topicname = @"GroupTopic";
+KiiTopic *topic = [group topicWithName:topicname];
+
+// Save the topic to Kii Cloud.
+[topic saveSynchronous:&error;];
+if (error != nil) {
+  // Topic creation failed.
+}
+```
+
+Here is a brief description of what is happening in the snippet:
+
+* Create a group-scope topic by invoking `topicWithName` method.
+* Save the topic by invoking `save` method.
+
+## Scenario #3: "Pushing my TODO items to all devices"
+
+In this scenario, we are using a "user-scope" topic.  Like a group-scope topic, a user-scope topic is usually created dynamically by an application.
+
+Please check the following code snippet to see how we can create a user-scope topic.
+
+```objc
+NSError *error;
+
+// Create a user-scope group
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Save the topic to Kii Cloud
+[topic saveSynchronous:&error;];
+if (error != nil) {
+  // Topic creation failed.
+}
+```
+
+Here is a brief description of what is happening in the snippet:
+
+* Create a user-scope topic by invoking `topicWithName`  method.
+* Save the topic by invoking `save`  method.

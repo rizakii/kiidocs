@@ -1,0 +1,90 @@
+---
+layout: en-doc
+title: Subscribe&#47;Unsubscribe a Topic
+summary: Subscribing to a topic is necessary to receive "Push to User" notification. Once a user subscribes to a topic, all push messages sent to this topic will be delivered to the user.
+sort-priority: 20
+page-id: ios-subscribing_topic-en
+---
+When a user no longer want to receive push messages, the user can stop receiving the messages simply by unsubscribing the topic.
+
+## Subscribing to a topic
+
+Here is a sample snippet for Scenario #1 (subscribing to an app-scope topic).
+
+```objc
+NSError *error;
+
+// Instantiate an app-scope topic.
+NSString *topicname = @"SendingAlert";
+KiiTopic *topic = [Kii topicWithName:topicname];
+
+// Subscribing the current user to the topic.
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error];
+if (error != nil) {
+  // Topic subscribe failed.
+}
+```
+
+The next sample snippet is for Scenario #2 (subscribing to a group-scope topic).
+
+```objc
+NSError *error;
+
+// Instantiating a group and its group-scope topic.
+NSString *groupname = @"MyGroup";
+KiiGroup *group = [KiiGroup gropuWithName:groupname];
+String *topicname = @"GroupTopic";
+KiiTopic *topic = [group topicWithName:topicname];
+
+// Subscribe the current user to the topic
+// (The current user must be a group member)
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error];
+if (error != nil) {
+  // Topic subscribe failed.
+}
+```
+
+The last sample snippet is for Scenario #3 (subscribing to a user-scope topic)
+
+```objc
+NSError *error;
+
+// Instantiate a user-scope topic.
+KiiUser* user = [KiiUser currentUser];
+NSString *topicname = @"MyTODO";
+KiiTopic *topic = [user topicWithName:topicname];
+
+// Subscribe the current user to the topic.
+KiiPushSubscription *subscription = [KiiPushSubscription subscribeSynchronous:topic withError:&error];
+if (error != nil) {
+  // Topic subscription failed.
+}
+```
+
+For all examples, here is a brief description of what is happening in the snippets:
+
+* Instantiate a target topic.
+* Invoke `subscribe` method while specifying the target topic.
+
+If the topic is a group-scoped, the current user of course has to be a group member.  Otherwise, the subscription will be rejected.
+
+## Unsubscribing from a topic
+
+Please check the following snippet to see how you can unsubscribe from a topic.  (The basic procedure is the same for both an app-scope and group-scope topics, so we will provide one sample snippet only for the unsubscribing).
+
+```objc
+NSError *error;
+
+// Assume that the current user is subscribing to the topic.
+// (and the target topic is already instantiated)
+KiiUser *user = [KiiUser currentUser];
+KiiTopic *topic = [user topicWithName:@"testTopics"];
+NSError *error = nil;
+
+KiiPushSubscription *unsubscribe = [KiiPushSubscription unsubscribeSynchronous:topic withError:&error];
+if (error != nil) {
+  // Topic unsubscribe failed.
+}
+```
+
+Simply invoke `unsubscribe` method while specifying the target topic.

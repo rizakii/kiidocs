@@ -1,0 +1,34 @@
+---
+layout: en-doc
+title: Check for Subscription Status
+summary: Sometimes, you will want to check if the current user is already subscribing to a topic. &nbsp;For example, your application may want to show a "SUBSCRIBE" button for users who have not yet subscribed to a topic but want to show a "UNSUBSCRIBE" button instead for those users who have already subscribed to the topic.
+sort-priority: 30
+#page-id: foo-bar-baz
+---
+Here is a sample snippet for checking the subscription status.  Note that this snippet is for our sample Scenario #1.  (Basic steps are the same for other Scenarios).
+
+```objc
+NSError *error = nil;
+
+// Instantiate the topic in question.
+KiiTopic *topic = [Kii topicWithName:@"SendingAlert"];
+
+// Check if the current user is already subscribing to the topic.
+BOOL subscribed = [KiiPushSubscription checkSubscriptionSynchronous:topic
+                                                          withError:&error];
+
+if (error != nil){
+  // Something went wrong...
+}
+
+if (subscribed){
+  NSLog(@"Subscribed!");
+} else {
+  NSLog(@"Not subscribed!");
+}
+```
+
+Here is what is happening in the snippet:
+
+* Instantiate a topic in question.
+* Invoke `checkSubscription` method to see if the current user is already subscribed to the topic.
