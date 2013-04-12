@@ -17,9 +17,9 @@ When a file instance is created, the SDK automatically stores the following comm
 * **MimeType**: The content-type of the file determined by the file extension
   (application/octet-stream will be assigned if the SDK cannot determine the
   mimetype)
-* **Thumbnail**: If a file is an image, the SDK will create a thumbnail by
-  default and store it as metadata. You can override the custom thumbnail or
-  retrieve it at any time.
+* **Thumbnail**: If a file is an image or movie, the SDK will create a
+  thumbnail by default and store it as metadata. You can override the custom
+  thumbnail or retrieve it at any time.
 * **Trashed flag**: A flag indicating if the file is in Kii Cloud Trashcan or
   not; the default value is false
 
