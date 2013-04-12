@@ -1,0 +1,80 @@
+---
+layout: en-doc
+title: Updating Objects
+sort-priority: 30
+---
+Kii SDK supports the following two object update methods:
+
+* **Full update**: Completely overwrite an object. _All previous key-values stored in the object will be discarded._ The local&nbsp;key-value pairs will be saved to the object.
+* **Partial update**: This will update only key/value pairs that have been changed locally, preserving existing key/value pairs.
+
+Note: If you wish to remove key-value pairs, please use full update; partial update does not support key-value pair removal.
+
+## Full Update
+
+Here is an example for doing a full update on an object:
+
+```sh
+curl -v -X PUT \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "content-type:application/vnd.{APP_ID}.mydata+json" \
+  -H"x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "If-Match:1" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}" \
+  -d "{"score":2300, "name":"game1"}"
+```
+
+Kii Platform will respond with the modification time in UNIX time (msec) like:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< ETag: "2"
+< Content-Type: application/vnd.kii.ObjectUpdateResponse+json
+< Transfer-Encoding: chunked
+< Date: Mon, 14 May 2012 23:50:48 GMT
+<
+{
+  "modifiedAt" : 1337039448517
+}
+```
+
+## Partial Update
+
+The next example shows how to partially update an object.  Notice that "**X-HTTP-Method-Override: PATCH**" is sent in the HTTP header. This will specify a partial object update.
+
+```sh
+curl -v -X POST \
+  -H "Authorization: Bearer {ACCESSS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "If-Match:2" \
+  -H "X-HTTP-Method-Override:PATCH" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}" \
+  -d '{"score":5000}'
+```
+
+Kii Platform will return a response like the following:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< ETag: "3"
+< Content-Type: application/vnd.sandbox.mydata+json
+< Transfer-Encoding: chunked
+< Date: Tue, 15 May 2012 00:03:03 GMT
+<
+{
+  "score":5000,
+  "name":"game1",
+  "_created":1337039114613,
+  "_id":"d8dc9f29-0fb9-48be-a80c-ec60fddedb54",
+  "_modified":1337040183711,
+  "_owner":"ff43674e-b62c-4933-86cc-fd47bb89b398",
+  "_dataType":"mydata",
+  "_version":"3"
+}
+```
+
+Notice that "score" now has the value 5000 and all other field values are retained.  You can also see both the creation and modification time are returned in UNIX time (msec).

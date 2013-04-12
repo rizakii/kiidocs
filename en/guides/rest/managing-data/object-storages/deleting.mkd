@@ -1,0 +1,17 @@
+---
+layout: en-doc
+title: Deleting Objects
+sort-priority: 40
+---
+You can delete an object by invoking delete API:
+
+```sh
+curl -v -X DELETE \
+  -H "Authorization: {ACCESS_TOKEN}" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  -H "If-Match:1" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Kii Cloud will respond with a 204 response if the object has been successfully deleted.
