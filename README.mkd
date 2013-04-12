@@ -1,3 +1,153 @@
 # documentation.kii.com
 
-Rules.
+
+## Before starting.
+
+Before starting please read about
+[Jekyll](https://github.com/mojombo/jekyll/wiki).
+
+To execute jekyll on your PC, which require:
+
+*   [ruby 1.9.3-p392 or above](http://www.ruby-lang.org/): 2.0.0-p0 recommended
+    to free from stress.
+*   jekyll and redcarpet
+*   [python 2.7.4 or above](http://python.org/)
+
+### Install instruction.
+
+1.  Install ruby.
+
+    For Windows:  use [RubyInstaller](http://rubyinstaller.org/).  Install ruby
+    core and devkit.
+
+    For others: See your OS package system.
+
+2.  Install jekyll and redcarpet.
+
+    ```
+    $ gem install jekyll
+    $ gem install redcarpet
+    ```
+
+    For Windows: recommended to downgrade directory\_watcher module.
+
+    ```
+    $ gem install directory_watcher -v 1.4.1
+    $ gem uninstall directory_watcher -v 1.5.1
+    ```
+
+3.  Install python.
+
+    It is used by syntax highlighting (pygment.rb)
+
+## Usage
+
+Just type `jekyll`.  It generate/update all files into `_site/` directory.  It
+tooks several times (maximum about 1min).  To release those, transfer all files
+in `_site/` to public server.
+
+To see your changes on local machine try this.
+
+```
+$ jekyll --auto --server
+```
+
+Then open http://127.0.0.1:4000/ by using your favorite WEB browser.
+
+
+## Editing work flow.
+
+See directories and files under `en/` and `ja/`, feel it.
+
+### YAML header.
+
+YAML header should be includes:
+
+*   layout (mandatory)
+*   title (mandatory)
+*   sort-priority (option)
+*   page-id (option)
+
+#### layout
+
+use `en-doc` for English, use `ja-doc` for Japanese.
+
+#### sort-priority
+
+To sort pages in a same directory, add this header with integer value.  Smaller
+value are put to front of list in left side navigator.
+
+#### page-id
+
+Make page references abstract, we use `page-id` in YAML header of most of
+pages.  `page-id` consists two or three parts:
+
+    {platform}-{title}-{language}
+
+      or
+
+    {title}-{language}
+
+Each parts should not contain `-` characters.  For example `en/guides.mkd` has
+two parts `page-id`:
+
+```yaml
+---
+layout: en-doc
+title: Guides
+page-id: guides-en
+sort-priority: 20
+---
+```
+
+Example of three parts `page-id`, see `en/starts/android.mkd`:
+
+```yaml
+---
+layout: en-doc
+title: Android Quick Start
+sort-priority: 10
+page-id: android-quickstart-en
+---
+```
+
+
+### Contens
+
+#### page\_link/page\_url
+
+Usage: `{% page_link {page-id} %}` or `{% page_url {page-id} %}`
+
+`page_link` is expanded to:
+
+```html
+<a href="{linked page's URL}">{linked page's title}</a>
+```
+
+See `en/samples.mkd` for an example of `page_link`.page_url
+
+`page_url` is expanded to:
+
+```
+{linked page's URL}
+```
+
+See `en.html` for an example of `page_url`.page_url
+
+
+## Process
+
+T.B.D.
+
+### How to deploy to staging server.
+
+T.B.D.
+
+### How to deploy to production server.
+
+T.B.D.
+
+
+## Tips
+
+T.B.D.
