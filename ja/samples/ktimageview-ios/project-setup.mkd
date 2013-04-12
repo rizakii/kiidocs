@@ -1,0 +1,159 @@
+---
+layout: ja-doc
+title: Project Setup
+summary: In this tutorial, we will create a very simple application that does the following.
+sort-priority: 20
+page-id: ios-tutorial_image_view_project_setup-ja
+---
+1. Allow users to register and authenticate with the app
+2. Generate random images on the fly and upload them to Kii Cloud
+3. Download images and display them quickly and easily using KTImageView
+
+If you don't have the shell project used for this tutorial,
+[download it here](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Stubbed.zip)
+
+For simplicity's sake, we have filled in the code for the non-KTImageView
+sections. Feel free to poke around the other classes within the project - the
+code is commented and kept as simple as possible.
+
+
+## User Authentication
+
+In this example, users must be logged in before they can upload images. To
+handle this, we dropped in another module from KiiToolkit
+({% page_link ios-tutorial_login_view_controller-ja %}).
+
+The logic here is simple: if there is not an authenticated user when one of our
+view controllers appear, show the registration/authentication view.
+{% page_link ios-tutorial_login_view_controller-ja %}
+will handle the rest.
+
+Now that the user is logged in, we can upload some pictures...
+
+
+## Image Uploading
+
+We have already created a viewcontroller named `UploadViewController` for the
+first tab which looks something like this:
+
+<p align="center"><img src="01.png" alt="" style="border:0;" /></p>
+
+When you tap the "Generate New Image" button, the method `generateNewImage:` is
+called. This method changes the background color of the label shown to a random
+color and updates the text to the current date.
+
+This gives you the ability to create lots of random, dynamically-generated
+views without too much work
+
+Now that you have a new random view, we will turn it into an image data blob
+using some slick code and upload it by clicking the "Upload New Image" button.
+This will call the `uploadNewImage:` method and perform the work to generate the
+image and upload it to the logged in user's file bucket.
+
+This code is very simple and comes complete with error checking and all the
+things you need; it's also a great snippet for uploading images to Kii Cloud,
+so if you're not familiar, definitely check it out.
+
+
+## Downloading Images
+
+Now on to the good stuff. We want to use KTImageView to download and display
+images nicely in our UI. We'll make a very simple design which gets the list of
+images on a button press and selects two at random to display in KTImageViews.
+
+First, lets open up the `DownloadViewController.xib` file. You'll see that the
+view is already created, but we need to make a few small tweaks to get it
+working properly.
+
+Click on the UIImageView in the center of the screen and navigate to the
+Identity Inspector. You'll notice this class name is UIImageView by default. We
+want to utilize the KTImageView, and need to let the app know this - so change
+the Class name in the 'Custom Class' section to KTImageView.
+
+<p align="center"><img src="02.png" alt="" style="border:0;" /></p>
+
+Now we need to be able to access the KTImageView from code, so connect the firstImageView outlet to the KTImageView (as shown)
+
+<p align="center"><img src="03.png" alt="" style="border:0;" /></p>
+
+Ok, that's all for the UI. Now let's move over to the code - open up the
+`DownloadViewController.m` file.
+
+Remember we said we'd show two downloaded images? We only created one in the
+UI, so for practice, let's create one in the code too. It's easy - just create
+a new KTImageView object as you would a UIImageView:
+
+```objc
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"Download";
+        
+        /* ADD THIS CODE */
+        _secondImageView = [[KTImageView alloc] initWithFrame:CGRectMake(20, 178, 280, 150)];
+        [self.view addSubview:_secondImageView];
+        /* END ADD */
+        
+    }
+    return self;
+}
+```
+
+Easy enough, right? The logic for the method when the 'download' button is
+clicked (`downloadNewImages:`) is also pre-filled.  The pseudocode is as
+follows:
+
+1. clear the images from the current UI
+2. get a list of images from the server
+3. if we have images to display, show them
+4. else, show a proper error
+
+To show the images, let's implement the `showImages:` method. It will need to
+take one or two of the KiiFiles returned from our query above and attach them
+to the KTImageViews for display. You can do that as shown:
+
+```objc
+- (void) showImages:(NSArray*)results
+{
+    
+    // mix up the results so we get random-ish images each time
+    NSMutableArray *shuffledResults = [NSMutableArray arrayWithArray:results];
+    [shuffledResults shuffle];
+
+    if(shuffledResults.count > 0) {
+        
+        // get the file object from the list
+        KiiFile *file1 = [shuffledResults objectAtIndex:0];
+        
+        // attach the file to the KTImageView
+        [_firstImageView setImageFile:file1];
+        
+        // start loading the image
+        [_firstImageView show];
+    }
+    
+    if(shuffledResults.count > 1) {
+        
+        // get the file object from the list
+        KiiFile *file2 = [shuffledResults objectAtIndex:1];
+
+        // attach the file to the KTImageView
+        [_secondImageView setImageFile:file2];
+
+        // start loading the image
+        [_secondImageView show];
+    }
+}
+```
+
+The chunk of code we just added is all that is needed to load the KiiFile
+images into the appropriate views. Now build and run the app to see it in
+action. The more files you upload, the more variety you'll see in the download
+tab.
+
+<p align="center"><img src="04.png" alt="" style="border:0;" /></p>
+
+----
+
+Next {% page_link ios-tutorial_image_view_finishing_up-ja %} &gt;&gt;

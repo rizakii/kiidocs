@@ -1,0 +1,26 @@
+---
+layout: ja-doc
+title: 'KTLoginViewController - iOS'
+summary: <p>This is a full tutorial, including a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTLoginViewController.</p><p class="note center">Dont know what KiiToolkit is? Check out the link <a href="http://blog.kii.com/?p=190">here</a></p>
+sort-priority: 20
+page-id: ios-tutorial_login_view_controller-ja
+---
+## What is KTLoginViewController?
+KTLoginViewController is an iOS view controller designed specifically for Kii
+Cloud, which provides a complete user authentication interface with only two
+lines of code:
+
+```objc
+KTLoginViewController *loginView = [[KTLoginViewController alloc] init];
+[self presentViewController:loginView animated:TRUE completion:nil];
+```
+
+By initializing and presenting the KTLoginViewController, you can take
+advantage of a pre-built UI and logic for user authentication, user
+registration and 'forgot password' functionality out-of-the-box. As with all
+features within KiiToolkit, the view controller(s) are fully customizable to
+match the look and feel of your application.
+
+----
+
+Next {% page_link ios-tutorial_login_view_controller_getting_started-ja %} &gt;&gt;

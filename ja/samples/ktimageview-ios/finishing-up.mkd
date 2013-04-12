@@ -1,0 +1,39 @@
+---
+layout: ja-doc
+title: Finishing Up
+sort-priority: 30
+page-id: ios-tutorial_image_view_finishing_up-ja
+---
+## Customization
+
+KTImageView shows a progress bar by default while the image is loading. This
+bar can be accessed and customized by accessing KTImageView's
+`progressIndicator` property. You can learn more about the KTProgressBar (also
+a part of [KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS))
+[here](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/KTUI).
+
+
+## Resources
+
+To download the completed sample project, click [here](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Complete.zip).
+
+
+## Having Issues?
+
+Read through the console output or ensure you have entered your app's credentials in the AppDelegate.m file as shown:
+
+```objc
+[Kii beginWithID:@"" 
+          andKey:@""];
+```
+
+## Wrapping Up
+
+Hopefully that's enough to get you started with KTImageView. You can get a lot
+more information on our
+[GitHub project page](https://github.com/KiiPlatform/KiiToolkit-iOS)
+including more detailed examples and full documentation.
+
+KiiToolkit is open source and constantly growing and evolving. If you have any
+ideas or would like to contribute, check out our
+[Github project page](https://github.com/KiiPlatform/KiiToolkit-iOS).

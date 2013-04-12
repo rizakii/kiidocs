@@ -1,0 +1,128 @@
+---
+layout: ja-doc
+title: Customization
+summary: Aside from being totally open-source, you can access all UI elements via properties of the view controller classes for easy manipulation. Let's change the graphics and the colors to make these views look more like our app.
+sort-priority: 30
+page-id: ios-tutorial_login_view_controller_customization-ja
+---
+Go back into our showLoginView method and get your code to look like this:
+
+```objc
+@implementation ViewController
+
+- (void) showLoginView
+{
+    // create the login view
+    KTLoginViewController *loginView = [[KTLoginViewController alloc] init];
+
+    // get the registration view
+    KTRegistrationViewController *registrationView = loginView.registrationView;
+
+    // and the forgot password view
+    KTForgotPasswordViewController *forgotView = loginView.forgotPasswordView;
+
+    // we want to ask the user for an email address and a username
+    registrationView.displayFields = KTRegistrationFieldEmailAddress | KTRegistrationFieldLoginName;
+
+    // update our title images
+    loginView.titleImage.image = [UIImage imageNamed:@"title"];
+    registrationView.titleImage.image = [UIImage imageNamed:@"title"];
+    forgotView.titleImage.image = [UIImage imageNamed:@"title"];
+
+    // update our background images
+    loginView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+    registrationView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+    forgotView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+
+    // update the buttons
+    [loginView.loginButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+    [loginView.registerButton setGradientColors:[UIColor colorWithHex:@"004614"], [UIColor colorWithHex:@"012700"], nil];
+    [loginView.forgotButton setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.3f]];
+    [registrationView.registerButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+    [forgotView.sendResetButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+
+    loginView.loginButton.borderColor = [UIColor blackColor];
+    loginView.registerButton.borderColor = [UIColor blackColor];
+    registrationView.registerButton.borderColor = [UIColor blackColor];
+    forgotView.sendResetButton.borderColor = [UIColor blackColor];
+
+    // show the view
+    [self presentViewController:loginView animated:TRUE completion:nil];
+}
+
+- (void) viewDidAppear:(BOOL) animated
+{
+...
+```
+
+That's a lot to digest, so let's break it down...
+
+```objc
+// get the registration view
+KTRegistrationViewController *registrationView = loginView.registrationView;
+
+// and the forgot password view
+KTForgotPasswordViewController *forgotView = loginView.forgotPasswordView;
+```
+
+Remember there is a registration view and a 'forgot password' view that can
+also be shown from this tool. When we customize the views, we want to make sure
+we customize all views - so the code above prepares all variables for easy
+customization.
+
+```objc
+// we want to ask the user for an email address and a username
+registrationView.displayFields = KTRegistrationFieldEmailAddress | KTRegistrationFieldLoginName;
+```
+
+The standard registration view only requires username and password. The code
+above specifies which fields should be shown to the user; in this case we ask
+for email address and username.
+
+```objc
+// update our title images
+loginView.titleImage.image = [UIImage imageNamed:@"title"];
+registrationView.titleImage.image = [UIImage imageNamed:@"title"];
+forgotView.titleImage.image = [UIImage imageNamed:@"title"];
+```
+
+This code updates the logos in each of the views managed by
+KTLoginViewController. The 'title.png' resource is included in the sample
+project and shows our sample app title 'Kiistagram'.
+
+```objc
+// update our background images
+loginView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+registrationView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+forgotView.backgroundImage.image = [UIImage imageNamed:@"bg"];
+```
+
+This code updates the background image to a 'bg.png' resource, which gives the
+views the same feel as the rest of our sample app.
+
+```objc
+// update the buttons
+[loginView.loginButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+[loginView.registerButton setGradientColors:[UIColor colorWithHex:@"004614"], [UIColor colorWithHex:@"012700"], nil];
+[loginView.forgotButton setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.3f]];
+[registrationView.registerButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+[forgotView.sendResetButton setGradientColors:[UIColor colorWithHex:@"8e8e8e"], [UIColor colorWithHex:@"4c4c4c"], nil];
+
+loginView.loginButton.borderColor = [UIColor blackColor];
+loginView.registerButton.borderColor = [UIColor blackColor];
+registrationView.registerButton.borderColor = [UIColor blackColor];
+forgotView.sendResetButton.borderColor = [UIColor blackColor];
+```
+
+Finally, we want to update the buttons to have color schemes that better fit
+our app's design. In this case, we use KTButtons ([also part of KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/KTUI#wiki-ktbutton)) -
+which provide nice buttons with gradient backgrounds without any image
+resources. We pass in our color schemes and the toolkit takes care of the rest.
+
+Now that our customization is complete, build and run the app to see our new
+design in action.
+
+<img src="01.png" alt="" style="border:0; margin:30px;" />
+----
+
+Next {% page_link ios-tutorial_login_view_controller_finshing_up-ja %} &gt;&gt;

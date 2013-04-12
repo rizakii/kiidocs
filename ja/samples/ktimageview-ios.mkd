@@ -1,0 +1,26 @@
+---
+layout: ja-doc
+title: KTImageView - iOS
+summary: <p>This is a full tutorial which includes a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTImageView.</p><p class="note center">Don't know what KiiToolkit is? Check out the link <a href="http://blog.kii.com/?p=190">here</a></p>
+sort-priority: 30
+page-id: ios-tutorial_image_view-ja
+---
+## What is KTImageView?
+
+KTImageView is an iOS view designed specifically for Kii Cloud, which provides asynchronous download and display of an image file stored in Kii Cloud. This class is a wrapper for commonly-developed logic, and comes with progress/completion/error callbacks as well as a loading progress bar.
+
+
+Implementation can be as simple as:
+
+```objc
+KTImageView *iv = [KTImageView createWithFrame:myFrame
+                                    andKiiFile:myFile];
+[self.view addSubview:iv];
+```
+
+As with all features within KiiToolkit, this view and its components are fully
+customizable to match the look and feel of your application.
+
+----
+
+Next {% page_link ios-tutorial_image_view_getting_started-ja %} &gt;&gt;

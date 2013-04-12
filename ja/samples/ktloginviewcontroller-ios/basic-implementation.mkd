@@ -1,0 +1,54 @@
+---
+layout: ja-doc
+title: Basic Implementation
+summary: <p>In this tutorial, our sample application requires that a user has a registered account in order to use the app. Therefore, we want to show the login screen when the main view controller appears and there is <em>not</em> a user logged in. By displaying the KTLoginViewController, the user will be able to log into their account or register with your application.</p>
+sort-priority: 20
+page-id: ios-tutorial_login_view_controller_basic_impl-ja
+---
+We can achieve this in ViewController.m in the `viewDidAppear:` method as
+shown:
+
+```objc
+- (void) viewDidAppear:(BOOL)animated
+{
+    // if there is no user logged in
+    if(![KiiUser loggedIn]) {
+        // show the login view
+        [self showLoginView];
+    }
+}
+```
+
+Now we need to create the `showLoginView` method in our ViewController.m which
+can be done as shown:
+
+```objc
+@implementation ViewController
+
+- (void) showLoginView
+{
+    KTLoginViewController *loginView = [[KTLoginViewController alloc] init];
+    [self presentViewController:loginView animated:TRUE completion:nil];
+}
+
+- (void) viewDidAppear:(BOOL) animated
+{
+...
+```
+
+The chunk of code we just added is all that is needed to create and show our
+`KTLoginViewController`. Now build and run to see it in action. You can already
+start creating users and authenticating.
+
+<img src="01.png" alt="" style="border:0; margin:30px;" />
+
+Pretty cool huh? One problem... my app is called Kiistagram, not Kii. Plus the
+rest of my app looks nothing like this login screen.
+
+<p class="center">
+No problem! The views are fully customizable
+</p>
+
+----
+
+Next {% page_link ios-tutorial_login_view_controller_customization-ja %} &gt;&gt;
