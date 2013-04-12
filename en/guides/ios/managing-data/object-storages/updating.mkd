@@ -1,0 +1,62 @@
+---
+layout: en-doc
+title: Updating Objects
+sort-priority: 30
+summary: "Kii SDK supports the following two object update methods:"
+---
+* **Full update**: Completely overwrite an object. All previous key-values
+  stored in the object will be discarded. The local key-value pairs will be
+  saved to the object.
+* **Partial update**: This will update only key/value pairs that have been
+  changed locally, preserving existing key/value pairs.
+
+Note: If you wish to remove key-value pairs, please use full update; partial
+update does not support key-value pair removal.
+
+## Full Update
+
+The below is an example of how you can fully update an object. Note that this
+update process uses the `saveAllFieldsSynchronous` method:
+
+```objc
+KiiObject *object2 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+// Create/add new values
+[object2 setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object2 setObject:@"John Doe Jr" forKey:@"name"];
+[object2 setObject:@"john_jr@example.com" forKey:@"email"];
+
+// This will remove all key/value pairs on the server,
+// replacing them with the locally-generated data
+[object2 saveAllFieldsSynchronous:TRUE withError:&error];
+
+if(error != nil) {
+  // Unable to save all fields of object
+  // Please check error description/code to see what went wrong...
+}
+```
+
+## Partial Update
+
+The below is an example of how you can partially update an object.  Note that
+this update process uses the `saveSynchronous` method:
+
+```objc
+KiiObject *object1 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+// Create/add new values
+[object1 setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object1 setObject:@"John Doe Jr" forKey:@"name"];
+[object1 setObject:@"john_jr@example.com" forKey:@"email"];
+
+// This will append the local key/value pairs with the data
+// that already exists on the server
+[object1 saveSynchronous:&error];
+
+if(error != nil) {
+  // Unable to save fields to object
+  // Please check error description/code to see what went wrong...
+}
+```

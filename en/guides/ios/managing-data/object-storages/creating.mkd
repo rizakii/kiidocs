@@ -1,0 +1,30 @@
+---
+layout: en-doc
+title: Creating Objects
+summary: Your application can create an object by invoking the corresponding method of the KiiBucket class instance. Once an object is created, you can set various key/value pairs within the object. When you are finished with setting the key-value pairs, invoke the save method to store it on Kii Cloud.
+sort-priority: 10
+---
+In the following example, an object is created in the "mydata" bucket, which
+has Application Scope.
+
+```objc
+KiiBucket *bucket = [Kii bucketWithName:@"mydata"];
+NSError *error;
+
+// Create an object with key/value pairs
+KiiObject *object = [bucket createObject];
+[object setObject:[NSNumber numberWithInt:1] forKey:@"myid"];
+[object setObject:@"John Doe" forKey:@"name"];
+[object setObject:@"john@example.com" forKey:@"email"];
+
+// Save the object
+[object saveSynchronous:&error];
+
+if (error != nil) {
+  // Saving object failed
+  // Please check error description/code to see what went wrong...
+}
+```
+
+**Do not forget to invoke the** `save` **method, or your objects will not be saved in Kii Cloud!**
+

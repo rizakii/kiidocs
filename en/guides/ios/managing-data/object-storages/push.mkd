@@ -1,0 +1,134 @@
+---
+layout: en-doc
+title: 'Receiving "Push to App" notification'
+sort-priority: 60
+page-id: ios-object_storages_push-en
+summary: 'A "Push to App" notification mechanism will let your application know that there were some changes on object(s) in a bucket.  By leveraging this notification feature, your application can quickly fetch the changes that occur on the server-side.'
+---
+The changes that can be notified by this push notification include:
+
+* A new Object is created in the bucket.
+* An existing Object in the bucket is updated.
+* An existing Object in the bucket is deleted.
+* An ACL of an existing Object in the bucket is modified.
+
+Here are the basic steps to utilize Kii Cloud push notification.
+
+1. Install a device to make it ready to receive a push notification from Kii
+   Cloud.
+1. Subscribe a bucket so as to start monitoring the bucket for changes.
+1. Receive a push notification when something occurs in the bucket.
+
+You will also need to configure your application on the dev portal.  Please
+refer [here]({% page_url ios-adding_kii_cloud_to_your_application-en %}) to
+check how you can configure your application.
+
+## Install a Device to Kii Cloud
+
+Here is a sample snippet for installing a device to Kii Cloud.  Here, we are
+setting a device token obtained from the APNS server.
+
+```objc
+ // Handling APNS registration response, add this method if it is not available.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  // Hold deviceToken into Kii shared instance
+  [Kii setAPNSDeviceToken:deviceToken];
+
+  // Install a Device to Kii Cloud
+  NSError *error = nil;
+  KiiPushInstallation *installation = [KiiPushInstallation installSynchronousWithError:&error];
+
+  if (error != nil) {
+    NSLog(@"Installation failed : %@", error);
+  } else {
+    NSLog(@"Installation succeeded");
+  }
+}
+```
+
+## Subscribe to a Kii Bucket
+
+Here is a sample snippet for subscribing a bucket.  Once subscribed, your
+device will be ready to receive push notifications whenever something occurs
+inside the bucket.
+
+```objc
+ // Instantiate a bucket
+KiiBucket *bucket = [Kii bucketWithName:@"test_bucket"];
+KiiObject *obj1 = [bucket createObject];
+NSError *error = nil;
+[obj1 saveSynchronous:&error];
+
+// Subscribe to a bucket
+[KiiPushSubscription subscribe:bucket withBlock:^(KiiPushSubscription *subscription, NSError *retError) {
+  if (nil == retError) {
+    NSLog(@"%@",@"Subscription succeeded");
+  }
+}];
+```
+
+## Check if Subscribed to a Kii Bucket
+
+Here is a sample snippet for checking the subscription status.
+
+```objc
+NSError *error = nil;
+
+// Instantiate the bucket in question.
+KiiBucket *bucket = [Kii bucketWithName:@"_target_bucket"];
+
+// Check the subscription.
+BOOL subscribed = [KiiPushSubscription checkSubscriptionSynchronous:bucket
+                                                          withError:&error];
+
+if (error != nil){
+  // Something went wrong...
+}
+
+if (subscribed) {
+  NSLog(@"Subscribed!");
+} else {
+  NSLog(@"Not subscribed!");
+}
+```
+
+## Receive a "Push to App" Notification
+
+We can get push messages through didReceiveRemoteNotification in AppDelegate.
+
+Here is a sample snippet of receiving a push message.  In this example, we are
+showing an alert dialog with a topic title and alertBody message.
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  NSLog(@"Received notification: %@", userInfo);
+
+  // Create KiiPushMessage from userInfo.
+  KiiPushMessage *message = [KiiPushMessage messageFromAPNS:userInfo];
+
+  // Get bucket string using getValueOfKiiMessageField. "BUCKET_ID" is enum that is defined in KiiMessageField.
+  NSString *title = [message getValueOfKiiMessageField:BUCKET_ID];
+
+  // Get type string using getValueOfKiiMessageField. "TYPE" is enum that is defined in KiiMessageField.
+  NSString *description = [message getValueOfKiiMessageField:TYPE];
+
+  // Show alert message
+  UIAlertView* alert=[[UIAlertView alloc] initWithTitle:title message:description delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+1. Invoke `messageFromAPNS` method to parse the incoming push message. The
+   parsed result is stored as a KiiPushMessage instance.
+1. Fetch the specific metadata from the message by invoking
+   `getValueOfKiiMessgeField` method. In the snippet, we are fetching
+   "BUCKET\_ID" and "TYPE" metadata.  
+    (Please refer [appledoc]({% page_url references-en %}) for more information
+    on how to fetch and interpret metadata in a push message).
+    * BUCKET\_ID: the target bucket id.
+    * TYPE: the enum denoting the change that occurred in the target bucket.
+
+1. Show an alert message.
+
