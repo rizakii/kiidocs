@@ -1,0 +1,28 @@
+---
+layout: en-doc
+title: Retrieving Objects
+sort-priority: 20
+---
+The following sample code illustrates how to retrieve an object's contents using its object ID:
+
+```sh
+curl -v -X GET \
+  -H "Authorization: Bearer {ACCESS_TOKEN}" \
+  -H "x-kii-appid:sandbox" \
+  -H "x-kii-appkey:dummy" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Kii Cloud will return the object as a response, as shown in the following example:
+
+```
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Last-Modified: Tue, 15 May 2012 00:03:03 GMT
+< ETag: "3"
+< Content-Type: application/vnd.{APP_ID}.mydata+json
+< Transfer-Encoding: chunked
+< Date: Tue, 15 May 2012 00:07:03 GMT
+<
+{"score":5000,"name":"game1","_created":1337039114613,"_id":"d8dc9f29-0fb9-48be-a80c-ec60fddedb54","_modified":1337040183711,"_owner":"ff43674e-b62c-4933-86cc-fd47bb89b398","_dataType":"mydata","_version":"3"}
+```
