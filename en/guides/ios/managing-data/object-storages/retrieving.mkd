@@ -1,0 +1,24 @@
+---
+layout: en-doc
+title:  Retrieving Objects
+sort-priority: 20
+summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
+---
+The following sample code illustrates how to retrieve an object with its URI:
+
+```objc
+KiiObject *object2 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
+NSError *error;
+
+// Retrieve the Object
+[object2 refreshSynchronous:&error;];
+if(error != nil) {
+  // Unable to retrieve object based on URI
+  // Please check error description/code to see what went wrong...
+}
+```
+
+**Please Note:** Do not forget to invoke the `refreshSynchronous` method after
+instantiating the object, or your local object will not be updated to the
+latest key-values.
+
