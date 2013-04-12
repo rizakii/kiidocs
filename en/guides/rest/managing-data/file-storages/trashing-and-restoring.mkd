@@ -1,0 +1,83 @@
+---
+layout: en-doc
+title: Trashing and Restoring Files
+summary: Kii Cloud provides a mechanism called Kii Cloud Trashcan for files that have been deleted temporarily.
+sort-priority: 40
+---
+This Trashcan is similar to&nbsp;the features supported on your favorite OS. When a user moves a file into the trash the file becomes invisible to file queries, as if it has been removed from the system. However, the user can later restore their files from the trash and they will become visible again.
+
+## Trashing Files and Folders
+
+To move a file into the Trashcan, DELETE the file while specifying its ObjectID as follows:
+
+```sh
+curl -v -X DELETE
+  -H "Authorization: Bearer {ACCESS_TOKEN}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}"
+```
+
+Kii Cloud will respond with:
+
+```
+< HTTP/1.1 204 No Content
+< Server: Apache-Coyote/1.1
+< Date: Tue, 24 Apr 2012 08:28:11 GMT
+<
+```
+
+## Getting Trashed Files and Folders
+
+All trashed files and folders will be put in a dedicated file bucket, which has a "sync.trash:" prefix.  For instance: if the ID of your original file bucket is "sync:mydata", the trash bucket will become "sync.trash:mydata".
+
+Therefore, you can retrieve a list of all files and folders in Trashcan as shown:
+
+```sh
+curl -v -X POST \
+  -H 'Authorization: Bearer {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}'
+  -H 'X-Kii-AppKey: {APP_KEY}'
+  -H 'Content-Type: application/vnd.kii.QueryRequest+json' \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/query" \
+  -d '{"bucketQuery":{"clause":{"type":"all"}}}'
+```
+
+Kii Cloud will return a list of files and folders inside Trashcan:
+
+```
+< HTTP/1.1 200 OK
+< Server: nginx/1.0.15
+< Date: Fri, 12 Oct 2012 03:13:37 GMT
+< Content-Type: application/vnd.kii.QueryResponse+json
+< Connection: keep-alive< Access-Control-Allow-Origin: *
+< Content-Length: 221
+<
+{
+ "queryDescription": "WHERE ( 1=1 )",
+ "results": [{"title":"test","mimetype":"text\/plain","modified":1350011599546,"trashed":true, "type":"File","size":4,"created":1350011598431,"_id":"141869934425669632-204499"}]
+}
+```
+
+## Restoring Files and Folders
+
+When a file is moved into the Trashcan, its "trashed" metadata field becomestrue.  To restore the file from Trashcan, change this field value tofalse as shown:
+
+```sh
+curl -v -X PUT \
+  -H "content-type:application/vnd.kii.KiiFile+json" \
+  -H "Authorization: Bearer {ACCESS_TOKEN}"  \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/{OBJECT_ID}" \
+  -d "{"trashed":false}"
+```
+
+Kii Cloud will respond with:
+
+```
+< HTTP/1.1 204 No Content
+< Server: Apache-Coyote/1.1
+< Date: Tue, 24 Apr 2012 10:43:40 GMT
+<
+```
