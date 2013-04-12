@@ -1,0 +1,88 @@
+---
+layout: en-doc
+title: Direct Push to Users
+summary: '"Direct Push" notification provides a means to push messages directly to a certain user. The feature is intended to be used by an app developer only. An app developer can select any application user and directly push a message to this user by manipulating the developer portal.'
+sort-priority: 20
+---
+## Push a Message to a User
+
+Pushing a message to a user is done by manipulating the developer portal as follows:
+
+1. Login to the developer portal.
+1. Select your application.  Select "Notification" icon and then click "New Message" button.
+
+    This will bring you the push notification launcher UI.
+
+    ![](01.png)
+
+1. Set the content of your push notification by specifying the following information.
+    * The push message destination
+
+        First, define to where the push notification is to be sent.
+
+        ![](02.png)
+
+        * Select "User" in "Send To" section.
+        * Specify the target user with one of the following IDs:
+            * User ID
+            * User name
+            * Email address
+            * Phone number
+        * Select the appropriate environments (Developer, Production or Both).
+    * The push message content:
+
+        Next, define what is to be sent.
+
+        ![](03.png)
+
+        * Toggle on/off the predefined fields in "Include" section.
+
+            The following values will be set in the push message when the fields are enabled.
+            * App ID: Application ID (AppID)
+            * Sender: Client ID
+            * When: Timestamp when the push message is sent.
+            * Origin: The value "EXPLICIT" indicating that the message is "Direct Push" notification.
+            * Object Scope: N/A (not applicable for "Direct Push")
+            * Topic ID: N/A (not applicable for "Direct Push")
+
+        * Set arbitrary key-value fields.
+            * You can add more key-value pair field(s) by clicking the "+" button
+            * By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.
+    * APNS/GCM specific settings
+
+        Finally (and optionally), specify any APNS/GCM specific settings.
+
+        ![](04.png)
+
+        * Toggle on/off GCM/APNS specific settings.
+            * For the details on GCM settings, please refer [the documentation by Google](http://developer.android.com/google/gcm/gcm.html#server).
+            * For the details on APNS settings, please refer [the documentation by Apple](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html).  
+
+                Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.
+
+## Receive a Push Notificaiton
+
+We can get push messages through didReceiveRemoteNotification in AppDelegate.
+
+Here is a sample snippet of receiving a push message.  In this example, we are showing an alert dialog with a topic title and alertBody message.
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  NSLog(@"Received notification: %@", userInfo);
+
+  // Create KiiPushMessage from userInfo.
+  KiiPushMessage *message = [KiiPushMessage messageFromAPNS:userInfo];
+  // Get Topic string using getValueOfKiiMessageField. "TOPIC" is enum that is defined in KiiMessageField.
+  NSString *title = [message getValueOfKiiMessageField:TOPIC];
+  // Show alert message
+  [message showMessageAlertWithTitle:title];
+}
+```
+
+Here is a brief description of what is happening in the snippet.
+
+1. Invoke `messageFromAPNS` method to parse the incoming push message.  The parsed result is stored as a KiiPushMessage instance.
+1. Fetch the specific metadata from the message by invoking `getValueOfKiiMessgeField` method.  In the snippet, we are fetching "TOPIC" metadata.
+
+    (Please refer [appledoc]({% page_url references-en %})  for more information on how to fetch other metadata set in a push message).
+1. Show an alert message by invoking `showMessageAlertWithTitle` method.
