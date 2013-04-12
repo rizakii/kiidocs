@@ -1,5 +1,5 @@
 ---
-layout: ja-doc
+layout: en-doc
 title: Scoping Files
 summary: Since all file buckets are User Scope, when files are created they default to being only accessible to that user.
 sort-priority: 70

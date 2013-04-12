@@ -1,0 +1,234 @@
+---
+layout: en-doc
+title: Analyze Event Data
+sort-priority: 20
+---
+Here are four steps for analyzing Event Data.
+
+1. Define metrics
+1. Send Event Data from an application
+1. Check analytics results on the dev portal
+1. Fetch analytics results using REST API
+
+We will pick up the following sample scenario throughout this page for describing&nbsp;how to get started with analyzing Event Data:
+
+* The application is to send an event data with the following fields upon the installation.  
+    This Event Data is named **"MyUser"**:
+    * **"gender"** ... String (M or F)
+    * **"city"** ... String (San Francisco, Dallas, New York, ...)
+    * **"location"** ... String (UK, EU, JP, ...)
+    * **"children"** ... Int (0, 1,2,3, ...)
+    * **"age"** ... Int (18, 20, 42, 44, ...)
+
+* Based on these event data, we want to check the following metrics:
+    * **Metric #1**: Average of **"age"** sliced by **"city", "location", "gender"** and **"children"**
+    * **Metric #2**: Count of users (i.e., count of event data) sliced by **"gender", "city", "location", "children"** and **"age"**
+
+## 1. Define Metrics
+
+We define our metrics on the dev portal in the following steps.
+
+1. On the dev portal, click "Metrics" icon and then select "Config".
+1. Click "Add" button.
+    ![](01.png)
+
+    This will bring up a metric definition screen as shown below.
+
+    ![](02.png)
+
+1. Put a name of the metric in "Name" section.
+1. Toggle "External" at "Data" section so as to select Event RawData.
+1. Define the value to be aggregated in "Aggregated using" section by specifying the following info.
+    * **Aggregation function** : how to aggregate the fact. The available functions are: **Count**, **Avg** (Average), **Sum**, **Min**, and **Max**.
+    * **Field name** : which field is to be aggregated as a "fact". We can specify "*" for the aggregation function "Count".
+    * **Data type** : what data type the field value has. The available types are: int, float, boolean and string.
+
+    <p class="note">Currently, we do not support multi-byte characters; if you specify a field having either multi-byte field name or field value, you will not get the expected result.<p>
+1. Specify the name of the event data in "Filter by Type" section; if none is specified, all event data will be used for creating the metrics.
+1. Define how the aggregates are to be sliced and diced (as dimensions) in "Dimensions" section by specifying the following info:
+    * **Label** : how this dimension should be labeled in the analytics results.  This is an optional; if omitted, the original field name will be used as the label.
+    * **Name** : which field is to be aggregated as a "dimension".  The name should be 1-6 bytes in length, should start with an alphabet, and may contain alphanumeric and underscore(\_).
+    * **Type** : what data type the field value has. The available types are: int, float, boolean and string.
+
+    For example, please check the following example to see how we define our sample Metric #1.
+
+    ![](03.png)
+
+    Next example shows how we define our sample Metric #2.  Note that in this case, we are specifying "*" for the aggregation target field name.  We can do this when we are specifying "count" as the aggregation function (i.e., count a number of all Event Data sent to Kii Cloud).
+
+    ![](04.png)
+
+1. Click "Save" button.  The metrics will be saved but not activated yet.
+
+    Now click "Config" icon.
+
+    ![](05.png)
+
+1. The Aggregation Rules screen pops up.  Click "Activate".
+    ![](06.png)
+
+1. The metrics will be activated and the indicator will turn green.
+    ![](07.png)
+
+    Note that the aggregation rule ID is now shown.  We will use this ID when we later fetch the analytic results.
+
+## 2. Send Event RawData from your application
+
+When uploading Event RawData directly via REST API, you need to define the following mandatory properties together with your Event RawData key-value pairs:
+
+* **\_type**  ... String value defining the event type.  You can specify any string like "installed" or "level up".
+* **\_deviceID**  ... String value uniquely identifying the source device.
+* **\_triggeredAt**  ... Long value specifying the time when the event has occured (UNIX time in ms).
+* **\_uploadedAt**  ... Long value specifying the time when the event was uploaded (UNIX time in ms).
+
+Your Event RawData key-value pairs can be anything, provided that they follow these rules:
+
+* Key name must be between 1 to 64 characters (UTF-8).
+* Value should be of JSON number, string, boolean, or array.
+    * Value cannot be null or empty.
+    * Array values must be of JSON number, string, or boolean.
+    * Number can have up to38 digit precision and can be between 10^-128 to 10^126.
+* Cumulative size of key-value pairs should not exceed 2KB (UTF-8).
+
+When uploading Event RawData, you can either upload single event one at the time, or you can upload multiple event data at once.
+
+Here is an example of uploading single event:
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.EventRecord+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/events" \
+  -d '{"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764053", "_uploadedAt":"1350450764053", "gender":"M", "city":"San Francisco", "location":"USA", "children":2, "age":35}'
+```
+
+You can also send multiple events at once like the following example:
+
+```sh
+curl -v -X POST\
+  -H "content-type:application/vnd.kii.EventRecord+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/events" \
+  -d '[ {"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764053", "_uploadedAt":"1350450764099", "gender":"M", "city":"San Francisco", "location":"USA","children":2, "age":35}, {"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764100", "_uploadedAt":"1350450764183", "gender":"F", "city":"San Francisco", "location":"USA", "children":0, "age":12} ]'
+```
+
+## 3. Check Analytics Results on Dev Portal
+
+Follow the steps below to view metrics on the dev portal.
+
+1. On the dev portal, click "Metrics" icon and then select "Metrics".
+1. Select the name of the metrics.
+
+    This will bring the default view.
+
+    ![](08.png)
+
+    Note that the dimensions are shown just below a list of the metrics.  Clicking on a dimension will give a sliced view.  For instance, here is a snapshot of the sliced view by selecting "Location" dimension.
+
+    ![](09.png)
+
+    There are two ways to further drill down the results:
+
+    1. We can toggle on/off items by clicking row(s) on the table.  In the next sample, the top-3 items ("UK", "IN", and "US") are toggled off.
+
+        ![](10.png)
+
+    1. We can set an additional filter using different dimension.  To do this, click "Filters" button and open a pull-down menu to select the filter.  In the next example, we are selecting the dimension "age" with the value "22".
+
+        ![](11.png)
+
+## 4. Fetch Analytics Results using REST API
+
+We can extract the analytics results via REST API in two formats:
+
+* Tabular Result: The aggregated results are returned for a combination of dimensions.
+* Grouped Result: The aggregated results are returned for a value of the specified dimension.
+
+### Tabular Result:
+
+Here is an example of fetching a tabular result.  Here, we are fetching the aggregates analyzed from 2012-12-1 to 2013-1-31.
+
+```
+  -H 'Authorization: {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}' \
+  -H 'X-Kii-AppKey: {APP_KEY}' \
+  -H 'Accept: application/vnd.kii.TabularAnalyticResult+json' \
+  "https://qa21.internal.kii.com/api/apps/{APP_ID}/analytics/{AGGREGATION_RULE_ID}/data?startDate=2012-12-1&endDate=2013-1-31"
+```
+
+Kii Cloud will return the result like the following.
+
+```javascript
+{
+  "labels" : [ {
+    "label" : "Gender",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "City",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "Location",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "No. Of Children",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "Age",
+    "type" : "DIMENSION"
+  }, {
+    "label" : "Count",
+    "type" : "FACT"
+  } ],
+  "snapshots" : [ {
+    "createdAt" : 1357862400000,
+    "data" : [ [ "M", "San Francisco", "US", 1, 40, 1 ],  (...snip...)  , [ "F", "Tokyo", "JP", 2, 39, 2 ] ]
+  }, {
+    "createdAt" : 1357948800000,
+    "data" : [ [ "F", "New York", "US", 3, 35, 2 ],  (...snip...)  , [ "F", "Kyoto", "JP", 0, 18, 1 ] ]
+
+  (... snip ...)
+
+  } ]
+}
+```
+
+We can also specify some filters (e.g., only fetch the aggregates for "Age"= 22).  Please refer [the detailed REST API documentation]({% page_url references-en %}) to learn more.
+
+## Grouped Result:
+
+Here is an example of fetching a grouped result.  Here, we are fetching the aggregates analyzed from 2012-12-1 to 2013-1-31 while grouping the results with the dimension "Location".
+
+```sh
+curl -v -X GET
+  -H 'Authorization: {ACCESS_TOKEN}' \
+  -H 'X-Kii-AppID: {APP_ID}' \
+  -H 'X-Kii-AppKey: {APP_KEY}' \
+  -H 'Accept: application/vnd.kii.GroupedAnalyticResult+json' \
+  "https://qa21.internal.kii.com/api/apps/{APP_ID}/analytics/{AGGREGATION_RULE_ID}/data?startDate=2012-12-1&endDate=2013-1-31&Group=Location"
+```
+
+Kii Cloud will return the result like the following.
+
+```javascript
+{
+  "snapshots" : [ {
+    "name" : "New York",
+    "data" : [ 10, 10, 11,  (...snip...)   , 12 ],
+    "pointStart" : 1357862400000,
+    "pointInterval" : 86400000
+  }, {
+    "name" : "Tokyo",
+    "data" : [ 5, 8, 10,  (...snip...)   , 15],
+    "pointStart" : 1357862400000,
+    "pointInterval" : 86400000
+ }, {
+
+  (... snip ...)
+
+  } ]
+}
+```
+
+We can also specify some filters (e.g., only fetch the aggregates for "Age"= 22). Please refer [the detailed REST API documentation]({% page_url references-en %}) to learn more.
