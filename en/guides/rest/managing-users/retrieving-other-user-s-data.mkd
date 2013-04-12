@@ -2,7 +2,7 @@
 layout: en-doc
 title: Retrieving Other User's Data
 summary: You can access other user's data by specifying his/her username, email address or phone number.
-#sort-priority: 70
+sort-priority: 70
 ---
 The amount of information returned by Kii Cloud depends on the application setting; if the application option _"Expose Full User Data To Others"_ is enabled, the response will be a full user data. &nbsp;Otherwise, the response will only contain only the following field values:
 
