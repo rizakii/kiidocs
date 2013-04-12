@@ -15,9 +15,7 @@ summary: Flex Analytics 機能を使うと、カスタムな指標でアプリ�
 
 * ゲームアプリにおいて、ユーザのハイスコア保存用に次のような Object を利用している。
 
-    ```javascript
-    { "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }
-    ```
+    `{ "Score" : 100,  "Level" : "Easy" , "AppVersion" : 1 }`
 
     * キー "**Score**" は、ユーザのスコアを整数値として保存
     * キー "**Level**" は、ユーザのレベル（"Easy", "Normal", "Hard"）を文字列として保存
