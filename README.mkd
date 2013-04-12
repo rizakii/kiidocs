@@ -112,7 +112,7 @@ page-id: android-quickstart-en
 ```
 
 
-### Contens
+### Contents
 
 #### page\_link/page\_url
 
