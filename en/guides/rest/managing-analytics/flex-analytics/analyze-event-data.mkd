@@ -232,5 +232,3 @@ Kii Cloud will return the result like the following.
 ```
 
 We can also specify some filters (e.g., only fetch the aggregates for "Age"= 22). Please refer [the detailed REST API documentation]({% page_url references-en %}) to learn more.
-
-
