@@ -1,40 +1,29 @@
 ---
 layout: ja-doc
-title: Getting Started
-summary: <p>In this tutorial, we'll show how you can add this module to your application and customize it to make it your own. In order to follow along, we recommend a few small preparations below</p>
+title: はじめに
+summary: <p>このチュートリアルでは、あなたのアプリに KTLoginViewController モジュールを追加し、カスタマイズする方法について説明します。チュートリアルを進めるにあたり準備が必要な事項を以下にまとめます。</p>
 sort-priority: 10
 page-id: ios-tutorial_login_view_controller_getting_started-ja
 ---
-## Register For Kii Cloud
+## Kii Cloud への登録
 
-If you aren't already, you'll need to become a registered Kii Cloud developer
-with the **Kii SDK** and **KiiToolkit** included in your application. Don't
-worry, it's **completely free** to get started - all you need is an email to
-sign up.
+Kii Cloud へのユーザ登録がまだの場合は、登録を行い Kii SDK と KiiToolkit ってください。登録は完全に**無料**です。
 
-To register for Kii and/or get the required libraries, follow the instructions
-[found here](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/Getting-Started)
+Kii Cloud への登録方法および必要ライブラリの取得方法については、[こちら（英語）](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/Getting-Started)を参照してください。
 
 
-## Project Setup
+## プロジェクトのセットアップ
 
-We'll be walking through this tutorial based on the sample project
-[found here](http://blog.kii.com/downloads/KTLoginViewExample-Stubbed.zip).
-The sample comes complete with SDKs and graphical resources included, but has
-the code stubbed out for you to work along with the tutorial.
+このチュートリアルでは、[こちら](http://blog.kii.com/downloads/KTLoginViewExample-Stubbed.zip)のサンプルプロジェクトを用いて解説を行います。このサンプルには SDK 本体と画像リソースが含まれていますが、チュートリアル用にコードの一部が抜けた状態になっています。
 
-If you'd like to skip ahead to a completed version, you can download that at
-the end of the tutorial. 
+完全なコードは[こちら](http://blog.kii.com/downloads/KTLoginViewExample-Complete.zip)より入手可能です。
 
 <p class="note">
-<strong>Note:</strong> With both samples, you'll need to plug in your own
-<strong>App ID</strong> and <strong>App Key</strong> (retrievable from your app
-within the developer portal at
-<a href="http://developer.kii.com">http://developer.kii.com</a>)
+<strong>注意:</strong> いずれのサンプルについても、あなたのアプリ用の <strong>App ID</strong> と <strong>App Key</strong> を埋め込む必要があります (これらの値は、開発者ポータル <a href="https://developer.kii.com">https://developer.kii.com</a> より入手してください)
 </p>
 
-Once you've downloaded the sample app, open it up in XCode and continue on...
+サンプルアプリのダウンロードが完了したら、XCode でこれを開いてください。これで準備は完了です。
 
 ----
 
-Next {% page_link ios-tutorial_login_view_controller_basic_impl-ja %} &gt;&gt;
+次は: {% page_link ios-tutorial_login_view_controller_basic_impl-ja %} &gt;&gt;

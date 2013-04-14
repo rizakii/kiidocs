@@ -1,11 +1,11 @@
 ---
 layout: ja-doc
-title: Customization
-summary: Aside from being totally open-source, you can access all UI elements via properties of the view controller classes for easy manipulation. Let's change the graphics and the colors to make these views look more like our app.
+title: カスタマイズ
+summary: 'ビューコントローラクラスのプロパティを設定することにより、全ての UI エレメントを容易に操作することができます。ここでは、画像や色を変更し、ビューをよりあなたのアプリ寄りに変更する方法について説明します'
 sort-priority: 30
 page-id: ios-tutorial_login_view_controller_customization-ja
 ---
-Go back into our showLoginView method and get your code to look like this:
+`showLoginView` メソッドをもう一度見てみましょう。以下のようになっているはずです。
 
 ```objc
 @implementation ViewController
@@ -55,7 +55,8 @@ Go back into our showLoginView method and get your code to look like this:
 ...
 ```
 
-That's a lot to digest, so let's break it down...
+長いコードですので、一つずつ見て行きましょう。
+
 
 ```objc
 // get the registration view
@@ -65,19 +66,14 @@ KTRegistrationViewController *registrationView = loginView.registrationView;
 KTForgotPasswordViewController *forgotView = loginView.forgotPasswordView;
 ```
 
-Remember there is a registration view and a 'forgot password' view that can
-also be shown from this tool. When we customize the views, we want to make sure
-we customize all views - so the code above prepares all variables for easy
-customization.
+このツールは、ユーザ登録用のビューとパスワードリセット用のビューを提供していることを思い出してください。ビューのカスタマイズを行う際には、全てのビューをカスタマイズ剃る必要があります。上に示したコードは、このカスタマイズを容易に行うための変数を提供しています。
 
 ```objc
 // we want to ask the user for an email address and a username
 registrationView.displayFields = KTRegistrationFieldEmailAddress | KTRegistrationFieldLoginName;
 ```
 
-The standard registration view only requires username and password. The code
-above specifies which fields should be shown to the user; in this case we ask
-for email address and username.
+標準的なユーザ登録のビューは、ユーザに対してユーザ名とパスワードの入力を要求します。上のコードは、ユーザに対してどのフィールドを要求するのかを指定しています。上の例では、ユーザのメールアドレスとユーザ名を要求しています。
 
 ```objc
 // update our title images
@@ -86,9 +82,7 @@ registrationView.titleImage.image = [UIImage imageNamed:@"title"];
 forgotView.titleImage.image = [UIImage imageNamed:@"title"];
 ```
 
-This code updates the logos in each of the views managed by
-KTLoginViewController. The 'title.png' resource is included in the sample
-project and shows our sample app title 'Kiistagram'.
+このコードは、KTLoginViewController が管理するビューにおいて利用されるロゴを指定しています。上の例では、サンプルプロジェクトに含まれている 'title.png' リソースが指定されており、この結果としてサンプルアプリは 'Kiistagram' というタイトルを表示しています。
 
 ```objc
 // update our background images
@@ -97,8 +91,7 @@ registrationView.backgroundImage.image = [UIImage imageNamed:@"bg"];
 forgotView.backgroundImage.image = [UIImage imageNamed:@"bg"];
 ```
 
-This code updates the background image to a 'bg.png' resource, which gives the
-views the same feel as the rest of our sample app.
+このコードは、バックグラウンド画像として 'bg.png' を指定しています。適切な画像を指定することで、アプリ全体としての統一感を出すようにしています。
 
 ```objc
 // update the buttons
@@ -114,15 +107,11 @@ registrationView.registerButton.borderColor = [UIColor blackColor];
 forgotView.sendResetButton.borderColor = [UIColor blackColor];
 ```
 
-Finally, we want to update the buttons to have color schemes that better fit
-our app's design. In this case, we use KTButtons ([also part of KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/KTUI#wiki-ktbutton)) -
-which provide nice buttons with gradient backgrounds without any image
-resources. We pass in our color schemes and the toolkit takes care of the rest.
+最後に、アプリ全体の統一感を出すためにボタンの色を調整します。上の例では、画像リソースなしにグラデーション付きボタンを提供する KTButtons ([KiiToolkit に同封](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/KTUI#wiki-ktbutton)) を利用しています。これにより、カラースキームを指定するだけで、ボタンが自動的に作成されています。
 
-Now that our customization is complete, build and run the app to see our new
-design in action.
+カスタマイズは以上です。実際にアプリをビルドして実行し、新たなデザインが適用されることを確認してください。
 
 <img src="01.png" alt="" style="border:0; margin:30px;" />
 ----
 
-Next {% page_link ios-tutorial_login_view_controller_finshing_up-ja %} &gt;&gt;
+次は: {% page_link ios-tutorial_login_view_controller_finshing_up-ja %} &gt;&gt;

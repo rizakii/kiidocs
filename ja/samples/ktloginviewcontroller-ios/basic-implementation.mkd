@@ -1,12 +1,11 @@
 ---
 layout: ja-doc
-title: Basic Implementation
-summary: <p>In this tutorial, our sample application requires that a user has a registered account in order to use the app. Therefore, we want to show the login screen when the main view controller appears and there is <em>not</em> a user logged in. By displaying the KTLoginViewController, the user will be able to log into their account or register with your application.</p>
+title: 基本的な実装方法
+summary: <p>今回我々が使用するサンプルアプリは、ユーザがアカウントを登録済であることを前提としています。そこで、メインビューコントローラが起動しユーザがログイン<em>していない</em>場合、ログインスクリーンを表示しなければなりません。ここでは、KTLoginViewController を用いてログインスクリーンを表示する方法について説明します。</p>
 sort-priority: 20
 page-id: ios-tutorial_login_view_controller_basic_impl-ja
 ---
-We can achieve this in ViewController.m in the `viewDidAppear:` method as
-shown:
+ログインスクリーン表示は、次のようにViewController.m の the `viewDidAppear:` を用いて行います。
 
 ```objc
 - (void) viewDidAppear:(BOOL)animated
@@ -19,8 +18,7 @@ shown:
 }
 ```
 
-Now we need to create the `showLoginView` method in our ViewController.m which
-can be done as shown:
+次に、以下のように ViewController.m の `showLoginView` メソッドを実装します。
 
 ```objc
 @implementation ViewController
@@ -36,19 +34,16 @@ can be done as shown:
 ...
 ```
 
-The chunk of code we just added is all that is needed to create and show our
-`KTLoginViewController`. Now build and run to see it in action. You can already
-start creating users and authenticating.
+`KTLoginViewController` 表示のために必要なコードは以上です。実際にビルド＆実行してみてください。ユーザ登録および認証が既に行える状態になっているはずです。
 
 <img src="01.png" alt="" style="border:0; margin:30px;" />
 
-Pretty cool huh? One problem... my app is called Kiistagram, not Kii. Plus the
-rest of my app looks nothing like this login screen.
+基本的な実装は以上です。ただし、恐らくこのままでは使い物にはならないでしょう。例えば、Kii と大きく表示されている今の画面は恐らく都合が悪いでしょう。また、画面のデザインも、あなたのアプリにあわせてカスタマイズ剃る必要があるでしょう。
 
 <p class="center">
-No problem! The views are fully customizable
+しかし大丈夫。このビューは全面的にカスタマイズ可能です!
 </p>
 
 ----
 
-Next {% page_link ios-tutorial_login_view_controller_customization-ja %} &gt;&gt;
+次は: {% page_link ios-tutorial_login_view_controller_customization-ja %} &gt;&gt;

@@ -1,26 +1,22 @@
 ---
 layout: ja-doc
-title: Finishing Up
+title: まとめ
 sort-priority: 40
 page-id: ios-tutorial_login_view_controller_finshing_up-ja
 ---
-## Resources
+## リソース
 
-To download the completed sample project, click [here](http://blog.kii.com/downloads/KTLoginViewExample-Complete.zip).
+サンプルプロジェクトの完全版は、[こちら](http://blog.kii.com/downloads/KTLoginViewExample-Complete.zip) よりダウンロードできます。
 
-## Having Issues?
+## うまくいかないときは？
 
-Read through the console output or ensure you have entered your app's
-credentials in the AppDelegate.m file as shown:
+コンソール出力を確認してみていださく。また、以下のように、AppDelegate.m ファイルに正しくアプリの認証情報が指定されていることを再度確認してください。
 
 ```objc
 [Kii beginWithID:@"<INSERT YOUR APP ID HERE>" 
           andKey:@"<INSERT YOUR APP KEY HERE>"];
 ```
 
-## Wrapping Up
+## おわりに
 
-Hopefully that's enough to get you started with KTLoginViewController. You can
-get a lot more information on our
-[GitHub project page](https://github.com/KiiPlatform/KiiToolkit-iOS)
-including more detailed examples and full documentation.
+KTLoginViewController を利用する上で必要な基本情報は以上です。より詳しくは、[GitHub プロジェクトページ](https://github.com/KiiPlatform/KiiToolkit-iOS) にあるより詳細な例やドキュメントを参照してください。

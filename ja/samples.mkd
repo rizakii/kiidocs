@@ -4,5 +4,15 @@ title: サンプルコード集
 page-id: samples-ja
 sort-priority: 40
 ---
+## サンプルアプリ
+
 * {% page_link android-sample_balance-ja %}
-* （近日中にさらにサンプルアプリが追加される予定です。もしサンプルアプリを投稿したいという方がいらっしゃいましたら support@kii.com までご連絡ください）
+
+## チュートリアル
+
+* {% page_link ios-tutorial_login_view_controller-ja %}
+  * カスタマイズ可能なユーザ管理 UI モジュールを提供する [KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS) プラグイン。
+* {% page_link ios-tutorial_image_view-en %}
+  * Kii Cloud に保存された画像を簡単かつ非同期にやりとりする UI を提供する [KiiToolkit](https://github.com/KiiPlatform/KiiToolkit-iOS) プラグイン。
+
+_近日中にさらにコンテンツが追加される予定です。貢献したいという方がいらっしゃいましたら、我々の [GitHub ページ](https://github.com/KiiPlatform) を訪れるか [support@kii.com](mailto:support@kii.com) までご連絡ください。_
