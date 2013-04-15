@@ -62,12 +62,12 @@ You can configure your application to verify the user's email address and/or pho
 
 1. Click "Edit" button at your application console on the dev portal.
 
-    ![](00.png)
+    ![](01.png)
 
 2. Click "Settings" to bring your application configuration menu.
 3. Toggle SMS/Phone verification.
 
-    ![](01.png)
+    ![](02.png)
 
 When enabled, the email address and/or phone number will be verified as follows:
 
