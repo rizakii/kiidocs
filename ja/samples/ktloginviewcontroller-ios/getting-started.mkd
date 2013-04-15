@@ -7,7 +7,7 @@ page-id: ios-tutorial_login_view_controller_getting_started-ja
 ---
 ## Kii Cloud への登録
 
-Kii Cloud へのユーザ登録がまだの場合は、登録を行い Kii SDK と KiiToolkit ってください。登録は完全に**無料**です。
+Kii Cloud へのユーザ登録がまだの場合は、登録を行い Kii SDK と KiiToolkit を取得してください。登録は完全に**無料**です。
 
 Kii Cloud への登録方法および必要ライブラリの取得方法については、[こちら（英語）](https://github.com/KiiPlatform/KiiToolkit-iOS/wiki/Getting-Started)を参照してください。
 

@@ -1,87 +1,61 @@
 ---
 layout: ja-doc
-title: Project Setup
-summary: In this tutorial, we will create a very simple application that does the following.
+title: 実装方法
 sort-priority: 20
 page-id: ios-tutorial_image_view_project_setup-ja
 ---
-1. Allow users to register and authenticate with the app
-2. Generate random images on the fly and upload them to Kii Cloud
-3. Download images and display them quickly and easily using KTImageView
+このチュートリアルでは、以下を実装したサンプルアプリを作成します。
 
-If you don't have the shell project used for this tutorial,
-[download it here](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Stubbed.zip)
+1. アプリを使ってユーザ登録および認証を行う。
+2. ランダムな画像を生成の上、これを Kii Cloud にアップロードする。
+3. 画像をダウンロードし、KTImageView を使ってこれを素早く表示する。
 
-For simplicity's sake, we have filled in the code for the non-KTImageView
-sections. Feel free to poke around the other classes within the project - the
-code is commented and kept as simple as possible.
+このチュートリアル用のプロジェクトをまだダウンロードしていない場合は、[こちら](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Stubbed.zip) よりダウンロードしてください。なお、KTImageView 以外の部分については既にコーディングが完了した状態になっています。
 
+## ユーザ認証
 
-## User Authentication
+今回のアプリにおいては、画像のアップロードに先立ちユーザはログインする必要があります。この機能は、KiiToolkit の別のモジュールを使って実現します ({% page_link ios-tutorial_login_view_controller-ja %})。
 
-In this example, users must be logged in before they can upload images. To
-handle this, we dropped in another module from KiiToolkit
-({% page_link ios-tutorial_login_view_controller-ja %}).
+このモジュールは次のように動作します。ビューコントローラが表示された際にまだ認証済ユーザが存在しない場合、モジュールは登録・認証画面を表示します。あとは {% page_link ios-tutorial_login_view_controller-ja %} が面倒を見てくれます。
 
-The logic here is simple: if there is not an authenticated user when one of our
-view controllers appear, show the registration/authentication view.
-{% page_link ios-tutorial_login_view_controller-ja %}
-will handle the rest.
-
-Now that the user is logged in, we can upload some pictures...
+ユーザのログインが完了したら、次は画像のアップロードです...
 
 
-## Image Uploading
+## 画像のアップロード
 
-We have already created a viewcontroller named `UploadViewController` for the
-first tab which looks something like this:
+プロジェクトには、以下の様なビューを表示する `UploadViewController` というビューコントローラが同封されています。
 
 <p align="center"><img src="01.png" alt="" style="border:0;" /></p>
 
-When you tap the "Generate New Image" button, the method `generateNewImage:` is
-called. This method changes the background color of the label shown to a random
-color and updates the text to the current date.
+"Generate New Image" ボタンをタップすると、`generateNewImage:` メソッドが呼び出されます。このメソッドはラベルのバックグラウンドカラーをランダムに変更し、現在の日時をテキストとして埋め込みます。この機能は、容易に大量のランダム画像を動的に生成するお手伝いをします。
 
-This gives you the ability to create lots of random, dynamically-generated
-views without too much work
+次に、"Upload New Image" をタップすると、生成されたビューが BLOB 型の画像データに変換され、`uploadNewImage:` メソッドが呼び出されます。これにより、画像が生成され、これがユーザの File Bucket にアップロードされます。
 
-Now that you have a new random view, we will turn it into an image data blob
-using some slick code and upload it by clicking the "Upload New Image" button.
-This will call the `uploadNewImage:` method and perform the work to generate the
-image and upload it to the logged in user's file bucket.
-
-This code is very simple and comes complete with error checking and all the
-things you need; it's also a great snippet for uploading images to Kii Cloud,
-so if you're not familiar, definitely check it out.
+プロジェクト内のコードはシンプルにまとめられており、必要となるエラー処理など必要な処理をすべて含んだ形になっています。
 
 
-## Downloading Images
+## 画像のダウンロード
 
-Now on to the good stuff. We want to use KTImageView to download and display
-images nicely in our UI. We'll make a very simple design which gets the list of
-images on a button press and selects two at random to display in KTImageViews.
+次に、KTImageView を使って画像をダウンロードし、 UI 上に綺麗に表示する方法を説明します。ここでは、ボタン押下を契機に Kii Cloud より画像一覧リストを取得し、この中より2つをランダムにピックアップの上 KTImageView に表示するシンプルな方法を採用します。
 
-First, lets open up the `DownloadViewController.xib` file. You'll see that the
-view is already created, but we need to make a few small tweaks to get it
-working properly.
+始めに `DownloadViewController.xib` ファイルを開きましょう。既にビューが作成されていますが、正しく動作させるにはいくつか調整が必要です。
 
-Click on the UIImageView in the center of the screen and navigate to the
-Identity Inspector. You'll notice this class name is UIImageView by default. We
-want to utilize the KTImageView, and need to let the app know this - so change
-the Class name in the 'Custom Class' section to KTImageView.
+画面中央の UIImageView をクリックし、Identity Inspector に移動してください。クラス名が UIImageView になっていますが、今回は KTImageView を使用したいので 'Custom Class' セクション内のクラスを KTImageView に変更します。
 
 <p align="center"><img src="02.png" alt="" style="border:0;" /></p>
 
-Now we need to be able to access the KTImageView from code, so connect the firstImageView outlet to the KTImageView (as shown)
+変更が終わったら、以下に示すように firstImageView アウトレットを KTImageView と紐付けします。
 
 <p align="center"><img src="03.png" alt="" style="border:0;" /></p>
 
-Ok, that's all for the UI. Now let's move over to the code - open up the
-`DownloadViewController.m` file.
+これで UI の準備は完了です。
 
-Remember we said we'd show two downloaded images? We only created one in the
-UI, so for practice, let's create one in the code too. It's easy - just create
-a new KTImageView object as you would a UIImageView:
+コード内部に移りましょう。`DownloadViewController.m` ファイルを開いてください。
+
+表示する2つの画像のうち、1つ分については既に UI インタフェースを使って作成済です。ここでは、コードを直接編集してもう1つ分を追加しましょう。
+
+追加方法は非常に簡単です。UIImageView と同様に、新たな KTImageView オブジェクトを作成してください。
+
 
 ```objc
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -100,18 +74,15 @@ a new KTImageView object as you would a UIImageView:
 }
 ```
 
-Easy enough, right? The logic for the method when the 'download' button is
-clicked (`downloadNewImages:`) is also pre-filled.  The pseudocode is as
-follows:
+'download' ボタンがクリックされた場合のロジックも既にコーディングされています。
+以下に、処理の流れを簡単にまとめます。
 
-1. clear the images from the current UI
-2. get a list of images from the server
-3. if we have images to display, show them
-4. else, show a proper error
+1. 現在の UI から画面をクリア。
+2. サーバより画像一覧リストを取得。
+3. 表示すべき画像がある場合はこれを表示する。
+4. 画像がない場合は、適切なエラーを表示する。
 
-To show the images, let's implement the `showImages:` method. It will need to
-take one or two of the KiiFiles returned from our query above and attach them
-to the KTImageViews for display. You can do that as shown:
+画像の表示を行うに `showImages:` メソッドを実装しましょう。ここでは、クエリ結果として返ってきた KiiFile の1つないしは2つを KTImageView に渡して表示を行なっています。
 
 ```objc
 - (void) showImages:(NSArray*)results
@@ -147,13 +118,10 @@ to the KTImageViews for display. You can do that as shown:
 }
 ```
 
-The chunk of code we just added is all that is needed to load the KiiFile
-images into the appropriate views. Now build and run the app to see it in
-action. The more files you upload, the more variety you'll see in the download
-tab.
+上記のコードを追加するだけでビューへの KiiFile のローディングは完了です。実際にビルドを行い、正しく画像が表示されることを確認してみてください。より多くの画像をアップロードするほど、ダウンロードタブに表示される画像のバリエーションが増えるはずです。
 
 <p align="center"><img src="04.png" alt="" style="border:0;" /></p>
 
 ----
 
-Next {% page_link ios-tutorial_image_view_finishing_up-ja %} &gt;&gt;
+次は: {% page_link ios-tutorial_image_view_finishing_up-ja %} &gt;&gt;

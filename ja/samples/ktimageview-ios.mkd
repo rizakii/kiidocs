@@ -1,16 +1,17 @@
 ---
 layout: ja-doc
 title: KTImageView - iOS
-summary: <p>This is a full tutorial which includes a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTImageView.</p><p class="note center">Don't know what KiiToolkit is? Check out the link <a href="http://blog.kii.com/?p=190">here</a></p>
+summary: <p>ここでは、KiiToolkit に含まれる KTImageView というコンポーネントについて解説してきます。</p><p class="note center">KiiToolkit に関する詳細は<a href="http://blog.kii.com/?p=190">こちら</a>を確認してください。</p>
 sort-priority: 30
 page-id: ios-tutorial_image_view-ja
 ---
-## What is KTImageView?
+## KTImageView とは何か?
 
 KTImageView is an iOS view designed specifically for Kii Cloud, which provides asynchronous download and display of an image file stored in Kii Cloud. This class is a wrapper for commonly-developed logic, and comes with progress/completion/error callbacks as well as a loading progress bar.
 
+KTImageView は Kii Cloud 利用のために設計された iOS ビューです。このビューを使うと、Kii Cloud に保存した画像ファイルの非同期ダウンロード・表示を容易に実現することができます。また画像ダウンロードに伴うプログレスバーの表示、ダウンロード完了通知、エラー発生時のコールバックなどといったロジックも内包されています。
 
-Implementation can be as simple as:
+実装は次のように非常にシンプルです。
 
 ```objc
 KTImageView *iv = [KTImageView createWithFrame:myFrame
@@ -18,9 +19,8 @@ KTImageView *iv = [KTImageView createWithFrame:myFrame
 [self.view addSubview:iv];
 ```
 
-As with all features within KiiToolkit, this view and its components are fully
-customizable to match the look and feel of your application.
+KiiToolKit の他の機能同様、あなたのアプリにあわせてビューのルック＆フィールをカスタマイズすることも可能です。
 
 ----
 
-Next {% page_link ios-tutorial_image_view_getting_started-ja %} &gt;&gt;
+次は: {% page_link ios-tutorial_image_view_getting_started-ja %} &gt;&gt;
