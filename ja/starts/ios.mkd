@@ -14,11 +14,11 @@ page-id: ios-quickstart-ja
 
 2.  "Create App" ボタンをクリックし、表示されるメニューにアプリケーション名とアプリケーション開発プラットフォーム等を入力。入力が完了したら "Create" ボタンをクリック。
 
-    ![](/assets/images/commons/starts_01.png)
+    ![](01.png)
 
 3.  作成されたアプリケーションを選択後、"Access Keys" をクリック。
 
-    ![](/assets/images/commons/starts_02_access_key.png)
+    ![](02.png)
 
 以上の手順により、あなたのアプリケーション用の Application ID と Application Key が表示されます。Kii Cloud は、あなたのアプリケーションを識別するためにこれらの値を利用します。
 
