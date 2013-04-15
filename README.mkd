@@ -162,3 +162,18 @@ T.B.D.
         *   \_layout/rest-api.html
     *   \_layouts/ja.html
         *   \_layouts/ja-doc.html
+
+### Helper scripts
+
+#### Generated Pages Uploader
+
+    $ jekyll
+    $ sh scripts/sync.sh
+
+#### Symmetrical Files Checker
+
+    $ sh scripts/symmetrical_check.sh en ja
+
+    $ sh scripts/symmetrical_check.sh en/starts/android en/starts/ios
+
+    $ sh scripts/symmetrical_check.sh {dir1} {dir2}
