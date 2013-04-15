@@ -50,13 +50,13 @@ Kii Push 通知は、Apple Push Notification Service (APNS) を利用してい�
 
 1. アプリケーションコンソールにて "Edit" ボタンをクリック。
 
-     ![](ios_quick_kiicloud_01_e.png)
+     ![](01.png)
 
 2. "Settings" をクリックした後、"Push Notifications" を選択。
 
     次のような Push 通知設定画面が表示されることを確認してください。
 
-    ![](ios_quick_kiicloud_02_e.png)
+    ![](02.png)
 
     Development (Sandbox) および Production 環境用に、それぞれ証明書と秘密鍵をアップロードしてください。（Development / Production 環境に関する詳細は、[Apple によるこちらのドキュメント](http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ProvisioningDevelopment/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1) を参照してください）
 
