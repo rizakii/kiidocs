@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rsync -rlptDv --delete-after _site/ "kiidoc@kiidoc.muraoka-design.com:htdocs"
+rsync -rlptDv --delete-after _site/ "kiidocs@docs101us.internal.kii.com:/ext/ebs/html"
