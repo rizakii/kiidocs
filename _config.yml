@@ -14,5 +14,6 @@ external-keys:
 
 flags:
   sidebar-autoscroll: true
+  robots-disallow-all: true
 
 # vim:set ts=8 sts=2 sw=2 tw=0 et:
