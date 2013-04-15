@@ -69,11 +69,11 @@ We define our metrics on the dev portal in the following steps.
 
 9. The Aggregation Rules screen pops up.  Click "Activate".
 
-    ![](05a.png)
+    ![](06.png)
 
 10. The metrics will be activated and the indicator will turn green.
 
-    ![](06.png)
+    ![](07.png)
 
     Note that the aggregation rule ID is now shown. We will use this ID when we later fetch the analytic results.
 
@@ -121,19 +121,19 @@ Follow the steps below to view metrics on the dev portal.
 
     This will bring the default view.
 
-    ![](07.png)
+    ![](08.png)
 
     Note that the dimensions are shown just below a list of the metrics.  Clicking on a dimension will give a sliced view.  For instance, here is a snapshot of the sliced view by selecting "Location" dimension.
 
-    ![](08.png)
+    ![](09.png)
 
     There are two ways to further drill down the results:
 
 
     1. We can toggle on/off items by clicking row(s) on the table.  In the next sample, the top-3 items ("UK", "IN", and "US") are toggled off.
 
-        ![](09.png)
+        ![](10.png)
 
     2. We can set an additional filter using different dimension.  To do this, click "Filters" button and open a pull-down menu to select the filter.  In the next example, we are selecting the dimension "age" with the value "22".
 
-        ![](10.png)
+        ![](11.png)
