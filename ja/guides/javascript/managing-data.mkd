@@ -3,5 +3,6 @@ layout: ja-doc
 title: データ管理機能
 sort-priority: 30
 summary: Kii Cloud SDK は、データ管理向けストレージとして以下の Object Storage を提供します。
+page-id: javascript-managing_data-ja
 ---
 * **Object Storage**: 任意の Key-Value により構成される JSON オブジェクトを格納するためのストレージです。サーバ側のカスタマイズなしに、アプリケーションの用途に合わせ自由なフォーマットの JSON オブジェクトを取り扱うことができます。

@@ -2,6 +2,7 @@
 layout: en-doc
 title: Managing Data
 sort-priority: 30
+page-id: android_managing_data-en
 ---
 Kii Cloud Storage SDK provides two types of storage for managing application data. Based on your application's requirements, you may wish to utilize one or both of these.
 

@@ -16,24 +16,30 @@ platform or language.
 
 <br/>
 
-Each client SDK supports the following features:
+Each client SDK/REST API supports the following features:
 
 * Android SDK
-  * User Management
-  * Group Management
-  * Data Management (JSON object management and file management with folder sync extension)
-  * Ads Management
-  * Push Notification Management
-  * Analytics Management
+  * [User Management]({% page_url android-managing_users-en %})
+  * [Group Management]({% page_url android-managing_groups-en %})
+  * [Data Management]({% page_url android_managing_data-en %}) (JSON object management and file management with folder sync extension)
+  * [Ads Management]({% page_url android-managing_ads-en %})
+  * [Push Notification Management]({% page_url android-managing_push-en %})
+  * [Analytics Management]({% page_url android-managing_analytics-en %})
 * iOS SDK
-  * User Management
-  * Group Management
-  * Data Management (JSON object management and file management)
-  * Ads Management
-  * Push Notification Management
-  * Analytics Management
+  * [User Management]({% page_url ios-managing_users-en %})
+  * [Group Management]({% page_url ios-managing_groups-en %})
+  * [Data Management]({% page_url ios-managing_data-en %}) (JSON object management and file management)
+  * [Ads Management]({% page_url ios-managing_ads-en %})
+  * [Push Notification Management]({% page_url ios-managing_push-en %})
+  * [Analytics Management]({% page_url ios-managing_analytics-en %})
 * Javascript SDK
-  * User Management
-  * Group Management
-  * Data Management (JSON object management)
-  * Analytics Management
+  * [User Management]({% page_url javascript-managing_users-en %})
+  * [Group Management]({% page_url javascript-managing_groups-en %})
+  * [Data Management]({% page_url javascript-managing_data-en %}) (JSON object management)
+  * [Analytics Management]({% page_url javascript-managing_analytics-en %})
+* REST API
+  * [User Management]({% page_url rest-managing_users-en %})
+  * [Group Management]({% page_url rest-managing_groups-en %})
+  * [Data Management]({% page_url rest-managing_data-en %}) (JSON object management and file management)
+  * [Analytics Management]({% page_url rest-managing_analytics-en %})
+  * [Admin Features]({% page_url rest-admin_features-en %})

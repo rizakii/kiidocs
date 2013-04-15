@@ -2,6 +2,7 @@
 layout: en-doc
 title: Managing Push Notifications
 sort-priority: 50
+page-id: ios-managing_push-en
 ---
 Kii Cloud supports the following three types of push notifications.
 

@@ -3,7 +3,7 @@ layout: en-doc
 title: Checking Your Application
 sort-priority: 30
 ---
-You can check your application settings as follows. This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+You can check your application settings as follows. This call requires an admin token.  Please refer {% page_link rest-admin_features-en %} to learn how to get the admin token.
 
 ```sh
 curl -v -X GET \

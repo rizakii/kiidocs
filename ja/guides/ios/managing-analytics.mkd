@@ -3,6 +3,7 @@ layout: ja-doc
 title: アプリ解析機能
 sort-priority: 40
 summary: Kii Cloud は2種類のアプリ解析機能を提供します。
+page-id: ios-managing_analytics-ja
 ---
 * **Basic Analytics**: アプリの基本的な解析を、既定のメトリクスを用いて行います。
 * **Flex Analytics**: アプリの詳細な解析を、カスタム可能なメトリクスを用いて行います。

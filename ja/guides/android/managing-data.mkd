@@ -2,6 +2,7 @@
 layout: ja-doc
 title: データ管理機能
 sort-priority: 30
+page-id: android-managing_data-ja
 ---
 Kii Cloud SDK は、データ管理向けストレージとして以下の２つを提供します。
 

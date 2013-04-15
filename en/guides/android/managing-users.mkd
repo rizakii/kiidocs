@@ -2,5 +2,6 @@
 layout: en-doc
 title: Managing Users
 summary: User management is fundamental to the success of your application.  Kii SDK provides various features to let your application onboard, manage and leverage your application's users.  All of the tasks required for standard applications are simplified by our SDK, making it easy to get your application up and running.
+page-id: android-managing_users-en
 sort-priority: 10
 ---

@@ -6,7 +6,7 @@ sort-priority: 50
 ---
 Use the property "disabled" to toggle a user; setting the property value "true" will disable the user.  Setting the value to "false" will enable the user again.
 
-Here is an example of disabling a user.  This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+Here is an example of disabling a user.  This call requires an admin token.  Please refer {% page_link rest-admin_features-en %} to learn how to get the admin token.
 
 ```sh
 curl -v -X PUT \

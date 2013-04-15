@@ -2,7 +2,7 @@
 layout: en-doc
 title: Admin Features
 sort-priority: 50
-page-id: android-rest_admin-en
+page-id: rest-admin_features-en
 summary: REST API supports features that can be only leveraged by application developers. Those features are mainly for maintaining and configuring your application and thus should be accessible only to the developers.
 ---
 ## Getting app admin token

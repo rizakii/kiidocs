@@ -19,26 +19,27 @@ sort-priority: 20
 それぞれの Client SDK および REST API により利用可能な Kii Platform の機能を以下にまとめます。
 
 * Android client SDK：
-  * ユーザ管理機能
-  * グループ管理機能
-  * データ管理機能（JSON 型 Object の管理機能と、フォルダ同期を含む File 管理機能）
-  * 広告管理機能
-  * プッシュ通知機能
-  * アナリティクス（収益化支援）機能
+  * [ユーザ管理機能]({% page_url android-managing_users-ja %})
+  * [グループ管理機能]({% page_url android-managing_groups-ja %})
+  * [データ管理機能]({% page_url android-managing_data-ja %})（JSON 型 Object の管理機能と、フォルダ同期を含む File 管理機能）
+  * [広告管理機能]({% page_url android-managing_ads-ja %})
+  * [プッシュ通知機能]({% page_url android-managing_push-ja %})
+  * [アナリティクス（収益化支援）機能]({% page_url android-managing_analytics-ja %})
 * iOS client SDK：
-  * ユーザ管理機能
-  * グループ管理機能
-  * データ管理機能（JSON 型 Object の管理機能と File 管理機能）
-  * 広告管理機能
-  * プッシュ通知機能
-  * アナリティクス（収益化支援）機能
+  * [ユーザ管理機能]({% page_url ios-managing_users-ja %})
+  * [グループ管理機能]({% page_url ios-managing_groups-ja %})
+  * [データ管理機能]({% page_url ios-managing_data-ja %})（JSON 型 Object の管理機能と File 管理機能）
+  * [広告管理機能]({% page_url ios-managing_ads-ja %})
+  * [プッシュ通知機能]({% page_url ios-managing_push-ja %})
+  * [アナリティクス（収益化支援）機能]({% page_url ios-managing_analytics-ja %})
 * Javascript client SDK：
-  * ユーザ管理機能
-  * グループ管理機能
-  * データ管理機能（JSON 型 Object の管理機能）
-  * アナリティクス（収益化支援）機能
+  * [ユーザ管理機能]({% page_url javascript-managing_users-ja %})
+  * [グループ管理機能]({% page_url javascript-managing_groups-ja %})
+  * [データ管理機能]({% page_url javascript-managing_data-ja %})（JSON 型 Object の管理機能）
+  * [アナリティクス（収益化支援）機能]({% page_url javascript-managing_analytics-ja %})
 * REST API
-  * ユーザ管理機能
-  * グループ管理機能
-  * データ管理機能（JSON 型 Object の管理機能と File 管理機能）
-  * アナリティクス（収益化支援）機能
+  * [ユーザ管理機能]({% page_url rest-managing_users-ja %})
+  * [グループ管理機能]({% page_url rest-managing_groups-ja %})
+  * [データ管理機能]({% page_url rest-managing_data-ja %})（JSON 型 Object の管理機能と File 管理機能）
+  * [アナリティクス（収益化支援）機能]({% page_url rest-managing_analytics-ja %})
+  * [アプリ管理者向け機能]({% page_url rest-admin_features-ja %})

@@ -13,7 +13,7 @@ Once you've created your application on the dev portal, you can tweak your appli
 * Facebook's app id for facebook integration.
 * Control the exposure of user data to others.
 
-Check the following example for how you can configure your application.  This call requires an admin token.  Please refer {% page_link android-rest_admin-en %} to learn how to get the admin token.
+Check the following example for how you can configure your application.  This call requires an admin token.  Please refer {% page_link rest-admin_features-en %} to learn how to get the admin token.
 
 ```sh
 curl -v -X POST \
