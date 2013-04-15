@@ -7,8 +7,6 @@ page-id: ios-tutorial_image_view-ja
 ---
 ## KTImageView とは何か?
 
-KTImageView is an iOS view designed specifically for Kii Cloud, which provides asynchronous download and display of an image file stored in Kii Cloud. This class is a wrapper for commonly-developed logic, and comes with progress/completion/error callbacks as well as a loading progress bar.
-
 KTImageView は Kii Cloud 利用のために設計された iOS ビューです。このビューを使うと、Kii Cloud に保存した画像ファイルの非同期ダウンロード・表示を容易に実現することができます。また画像ダウンロードに伴うプログレスバーの表示、ダウンロード完了通知、エラー発生時のコールバックなどといったロジックも内包されています。
 
 実装は次のように非常にシンプルです。
