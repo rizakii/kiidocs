@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Listing Groups
-sort-priority: 30
+sort-priority: 40
 ---
 A user can get a list of groups in which he/she belongs by invoking
 `memberOfGroups` method.

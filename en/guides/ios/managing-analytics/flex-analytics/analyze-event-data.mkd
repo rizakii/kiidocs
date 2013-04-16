@@ -2,8 +2,10 @@
 layout: en-doc
 title: Analyze Event Data
 sort-priority: 20
-summary: Here are four steps for analyzing Event Data.
+summary: 
 ---
+Here are four steps for analyzing Event Data.
+
 1. Define metrics
 1. Send Event Data from an application
 1. Check analytics results on the dev portal
@@ -83,9 +85,11 @@ We define our metrics on the dev portal in the following steps.
     ![](05.png)
 
 1. The Aggregation Rules screen pops up.  Click "Activate".
+
     ![](06.png)
 
 1. The metrics will be activated and the indicator will turn green.
+
     ![](07.png)
 
     Note that the aggregation rule ID is now shown. We will use this ID when we
@@ -149,6 +153,7 @@ Follow the steps below to view metrics on the dev portal.
 
     1. We can toggle on/off items by clicking row(s) on the table. In the next
        sample, the top-3 items ("UK", "IN", and "US") are toggled off.
+       
         ![](10.png)
 
     1. We can set an additional filter using different dimension. To do this,

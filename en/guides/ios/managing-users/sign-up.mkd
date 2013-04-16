@@ -7,7 +7,7 @@ summary: Getting users registered with your application is the first step for us
 Kii Platform allows users to register with a username/password combination.
 Optionally, registration can occur with phone numbers and/or email addresses.
 
-<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check "Social Network Integration" section for more details</p>
+<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link android-social_network_integration-en %} section for more details</p>
 
 When setting an email address or phone number to a user, you may let Kii Cloud
 takes the steps to verify their credentials -- either through a verification

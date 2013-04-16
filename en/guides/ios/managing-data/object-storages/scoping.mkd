@@ -3,6 +3,7 @@ layout: en-doc
 title: Scoping Objects
 sort-priority: 70
 summary: 'All objects have a "scope". This scope determines the default access control applied to the object upon its creation. For example, an object created in an "Application Scope" bucket will have "Application Scope"'
+page-id: ios-scoping_objects-en
 ---
 ## Object Scopes and Default Access Control
 

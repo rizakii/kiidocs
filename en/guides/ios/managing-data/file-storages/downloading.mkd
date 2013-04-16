@@ -24,3 +24,9 @@ if (error != nil) {
   // Please check error description/code to see what went wrong...
 }
 ```
+
+Here is what is happening in the snippet:
+
+1. Invoke `fileWithURI` method while specifying the file url to create a KiIFile isntance.
+2. Invoke `getFileMetadata` method to download the file metadata.
+3. Invoke `getFileBody` method with the destination file path to download the file body.

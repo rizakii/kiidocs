@@ -16,7 +16,7 @@ update does not support key-value pair removal.
 ## Full Update
 
 The below is an example of how you can fully update an object. Note that this
-update process uses the `saveAllFieldsSynchronous` method:
+update process uses the `saveAllFields` method:
 
 ```objc
 KiiObject *object2 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
@@ -40,7 +40,7 @@ if(error != nil) {
 ## Partial Update
 
 The below is an example of how you can partially update an object.  Note that
-this update process uses the `saveSynchronous` method:
+this update process uses the `save` method:
 
 ```objc
 KiiObject *object1 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];

@@ -22,5 +22,5 @@ if (error != nil) {
 The basic steps for group creation are as follows:
 
 1. Create a `KiiGroup` instance with `groupWithName` method
-1. Register this `KiiGroup` instance with `saveSynchronous` method
+1. Register this `KiiGroup` instance with `save` method
 

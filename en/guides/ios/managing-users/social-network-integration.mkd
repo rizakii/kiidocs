@@ -3,12 +3,13 @@ layout: en-doc
 title: Social Network Integration
 sort-priority: 30
 summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
+page-id: ios-social_network_integration-en
 ---
 Currently, Kii Platform supports the following social networks:
 
-* Facebook
-* Twitter (coming soon)
-* RenRen (coming soon)
+* Facebook (http://www.facebook.com/)
+* Twitter (coming soon) (http://www.twitter.com/)
+* RenRen (coming soon) (http://www.renren.com/)
 
 ## Integrate Facebook with Kii Platform
 

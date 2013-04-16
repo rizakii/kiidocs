@@ -2,8 +2,10 @@
 layout: en-doc
 title: Analyze Application Data
 sort-priority: 10
-summary: Here are three steps for analyzing application data (App Data).
+summary: 
 ---
+Here are three steps for analyzing application data (App Data).
+
 1. Define metrics
 1. Check analytics results on the dev portal
 

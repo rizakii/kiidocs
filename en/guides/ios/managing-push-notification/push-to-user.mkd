@@ -32,7 +32,7 @@ A topic can have either one of the following scopes.
     * Only this user can subscribe to the topic.
     * Only this user can send push message to this topic.
 
-Please note that these are the default rules.  You can tweak the rules by applying ACL entries (white list entries) onto a topic. Please refer {% page_link ios-settings_topic_acl-en %}for the details
+Please note that these are the default rules.  You can tweak the rules by applying ACL entries (white list entries) onto a topic. Please refer {% page_link ios-settings_topic_acl-en %} for the details
 
 ## "Push to User" three sample scenarios
 
@@ -55,9 +55,7 @@ In this scenario, we want our app users to enjoy group messaging by allowing the
 
 Here we will leverage a group-scope topic as follows:
 
-1. An app user creates a user group and invite his/her friends to the group.
-
-    (refer {% page_link ios-managing_groups-en %} for how to realize this).
+1. An app user creates a user group and invite his/her friends to the group.  (Refer {% page_link ios-managing_groups-en %} for how to realize this).
 
 1. The app user creates a new topic that belongs to this group.
 1. The user asks the group members to subscribe to this topic.
@@ -80,6 +78,7 @@ Here are the detailed steps for leveraging "Push to User" notification.
 
 * {% page_link ios-creating_topic-en %}
 * {% page_link ios-subscribing_topic-en %}
+* {% page_link ios-check_subscription-en %}
 * {% page_link ios-sending_push_to_user_messages-en %}
 * {% page_link ios-push_to_user_receiving_messages-en %}
 * {% page_link ios-settings_topic_acl-en %}

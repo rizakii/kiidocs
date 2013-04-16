@@ -3,7 +3,7 @@ layout: en-doc
 title: Deleting Files
 sort-priority: 50
 ---
-You can permanently delete a file by invoking the `shredFileSynchronous`
+You can permanently delete a file by invoking the `shredFile`
 method.  The file will be permanently deleted; you cannot restore the file.
 
 ```objc
@@ -20,5 +20,5 @@ if (error != nil) {
 ```
 
 **Please Note:** The file will be deleted from the server immediately when
-invoking the `shredFileSynchronous` method - you do not need to invoke the
+invoking the `shredFile` method - you do not need to invoke the
 `saveFile` method.

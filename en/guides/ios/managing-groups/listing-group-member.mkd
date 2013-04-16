@@ -1,10 +1,10 @@
 ---
 layout: en-doc
 title: Listing Group Members
-sort-priority: 40
+sort-priority: 50
 ---
 A group owner can get a list of members who are in the group with the
-`getMemberListSynchronous` method. This method will return a list of KiiUser
+`getMemberList` method. This method will return a list of KiiUser
 instances representing group members. Here's an example:
 
 ```objc

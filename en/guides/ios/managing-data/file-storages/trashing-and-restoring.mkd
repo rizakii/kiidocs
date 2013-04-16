@@ -11,7 +11,7 @@ their files from the trash and they will become visible again.
 
 ## Move a File to the Trash
 
-To move a file to the Trashcan, invoke the `moveToTrashSynchronous` method:
+To move a file to the Trashcan, invoke the `moveToTrash` method:
 
 ```objc
 KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
@@ -28,7 +28,7 @@ if (error != nil) {
 
 ## Restoring File from Trashcan
 
-To restore a file from the Trashcan, invoke the `restoreFromTrashSynchronous`
+To restore a file from the Trashcan, invoke the `restoreFromTrash`
 method.
 
 ```objc

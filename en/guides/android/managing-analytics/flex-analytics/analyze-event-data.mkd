@@ -54,7 +54,7 @@ We define our metrics on the dev portal in the following steps.
     * **Type**: what data type the field value has.
 The available types are: int, float, boolean and string.
 
-    **NOTE**: Currently, we do not support multi-byte characters; if you specify a field having either multi-byte field name or field value, you will not get the expected result.
+    <p class="note">Currently, we do not support multi-byte characters; if you specify a field having either multi-byte field name or field value, you will not get the expected result.</p>
 
     For example, please check the following example to see how we define our sample Metric #1.
 

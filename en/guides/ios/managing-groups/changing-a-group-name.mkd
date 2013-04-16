@@ -4,7 +4,7 @@ title: Changing a Group Name
 sort-priority: 20
 ---
 A group owner can change a name of the existing group with the
-`changeGroupNameSynchronous` method:
+`changeGroupName` method:
 
 ```objc
 KiiGroup *group = ...;

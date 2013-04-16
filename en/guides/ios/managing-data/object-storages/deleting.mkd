@@ -1,22 +1,1 @@
----
-layout: en-doc
-title: Deleting Objects
-sort-priority: 50
----
-You can delete an object by invoking the `deleteSynchronous` method:
-
-```objc
-KiiObject *object = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];
-NSError *error;
-
-[object deleteSynchronous:&error];
-if(error != nil) {
-  // Unable to delete object
-  // Please check error description/code to see what went wrong...
-}
-```
-
-**Please Note:** The object will be deleted from the server upon calling the
-`delete` method; you do not need to invoke the `save` method
-
-
+---layout: en-doctitle: Deleting Objectssort-priority: 50---You can delete an object by invoking the `delete` method:```objcKiiObject *object = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];NSError *error;[object deleteSynchronous:&error];if(error != nil) {  // Unable to delete object  // Please check error description/code to see what went wrong...}```**Please Note:** The object will be deleted from the server upon calling the`delete` method; you do not need to invoke the `save` method

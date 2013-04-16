@@ -13,7 +13,7 @@ only contain only the following field values:
 * LoginName
 * DisplayName
 
-## How to toggle the option "Expose Full User Data to Others"
+## Toggling "Expose Full User Data to Others" Option
 
 Please execute the following steps on the dev portal.
 
@@ -25,7 +25,7 @@ Please execute the following steps on the dev portal.
 
     ![](02.png)
 
-## How to Access Other user's Data
+## Accessing Other User's Data
 
 ### Accessing user data with username:
 

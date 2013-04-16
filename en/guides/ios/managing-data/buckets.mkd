@@ -88,7 +88,7 @@ KiiFile *file = [bucket fileWithLocalPath:localPath];
 
 For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
 
-<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections</p>
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer {% page_link ios-scoping_objects-en %} and {% page_link ios-scoping_files-en %} sections</p>
 
 The possible access controls that can be applied to a bucket are:
 

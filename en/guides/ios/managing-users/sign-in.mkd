@@ -7,7 +7,7 @@ summary: Once a user is registered with your application (after completing the u
 ## Sign-in with a password
 
 Here is a sample code snippet for authenticating a user.  Simply invoke the
-`authenticateSynchronous` method with a username (or a phone number or an email
+`authenticate` method with a username (or a phone number or an email
 address) and a password combination.
 
 ```objc
@@ -36,7 +36,7 @@ user to authenticate seamlessly between sessions.
 Here is a sample code snippet for authenticating a user with an access token.
 To retrieve the access token for a user, use `KiiUser`'s `accessToken`
 attribute while the user is signed-in. By invoking the
-`authenticateWithTokenSynchronous` method with this access token, your user
+`authenticateWithToken` method with this access token, your user
 will be authenticated once again.
 
 ```objc

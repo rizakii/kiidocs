@@ -8,7 +8,7 @@ To upload a file, create a `KiiFile` instance by invoking the
 `fileWithLocalPath` method of your user's `KiiFileBucket` instance. This will
 automatically create the corresponding metadata within `KiiFile`. Before
 uploading, you can optionally update some of the metadata -- but must invoke
-the `saveFileSynchronous` method to upload the file to the cloud. Here's an
+the `saveFile` method to upload the file to the cloud. Here's an
 example:
 
 ```objc
