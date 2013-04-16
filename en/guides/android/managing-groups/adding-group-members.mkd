@@ -3,7 +3,7 @@ layout: en-doc
 title: Adding/Removing Group Members
 sort-priority: 30
 ---
-###Adding Group Members
+##Adding Group Members
 
 A group owner can add additional members to the group with `addUser` method:
 
@@ -18,7 +18,7 @@ try {
 }
 ```
 
-###Removing Group Members
+##Removing Group Members
 
 A group owner can remove existing members from the group with `removeUser` method.
 

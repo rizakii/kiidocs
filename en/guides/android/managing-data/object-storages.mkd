@@ -5,18 +5,18 @@ summary: Object storage allows your application to manage and store JSON-style o
 sort-priority: 20
 page-id: android-object_storages-en
 ---
-### Predefined Keys
+## Predefined Keys
 
 Some key/value pairs will be automatically created and updated by the server when an object is saved on Kii Cloud.  You can get the corresponding values by invoking the appropriate getter method. The predefined attributes on the server are listed below:
 
- * \_id ... The Object’s identifier assigned by Kii Cloud.
+ * \_id ... The object’s identifier assigned by Kii Cloud.
  * \_created ... The object’s creation date in UNIX time (in msec).
  * \_modified ... The object’s last updated date in UNIX time (in msec).
 
-*Please Note*: These are internal values; in order to get the created time and last updated time, use `getCreatedTimeand` and `getModifiedTime` method, respectively.  To get the URI of the object, use `toUri` method.  (Raw "_id" is only used internally and you should not need to get this raw value).
+**Please Note**: These are internal values; in order to get the created time and last updated time, use `getCreatedTimeand` and `getModifiedTime` method, respectively.  To get the URI of the object, use `toUri` method.  (Raw "_id" is only used internally and you should not need to get this raw value).
 
 
-### Arbitrary Keys
+## Arbitrary Keys
 
 As long as your key name does not collide with any of the predefined keys mentioned above, you can use any arbitrary name.
 

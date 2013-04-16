@@ -7,7 +7,7 @@ sort-priority: 40
 Kii SDK makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The SDK allows you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...
 
 
-### Defining query conditions with KiiClause
+## Defining query conditions with KiiClause
 
 You can define a query condition using the following comparison operators:
 
@@ -25,7 +25,7 @@ You can also concatenate multiple query conditions using AND/OR logical operator
  * **and**
  * **or**
 
-### Constructing KiiQuery
+## Constructing KiiQuery
 
 KiiQuery() creates an actual query based on a KiiClause object passed as a parameter.  If no KiiClause object is passed, the query generated will match with all Objects in the bucket (equivalent to "all" query).
 
@@ -37,14 +37,14 @@ Optionally, you can use the following methods to fine-tune the query results:
 
 If neither sortByAsc nor sorByDesc is specified, the query results will be in arbitrary order.  If setLimit is not specified, the maximum number of the query results may be up to 200.
 
-### Parsing KiiQueryResult
+## Parsing KiiQueryResult
 
 The result of the query will be returned as KiiQueryResult instance, whose result can be retrieved by invoking the `getResult` method.  This will give you a list of KiiObjects that match with the query condition(s).
 
 If the result has multiple pages (e.g., you've specified setLimit to 10, and the actual query result has 30 matching objects), a KiiObject list returned by getResult will only contain the first page.  To get the next result page, invoke the `getNextQueryResult` method to fetch the next page and then invoke the `getResult` method to get the actual list of KiiObjects contained within the second page.
 
 
-### Query Examples
+## Query Examples
 
 Let us start with a simplest example; querying all objects in a bucket.  。
 

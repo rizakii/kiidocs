@@ -13,7 +13,7 @@ Currently, Kii Platform supports the following social networks:
  * RenRen (coming soon)： [http://www.renren.com/](http://www.renren.com/)
 
 
-###Integrate Facebook with Kii Platform
+##Integrate Facebook with Kii Platform
 
 To get started, you must set up your app's Facebook ID.  Please execute the following steps on the dev portal.
 
@@ -26,7 +26,7 @@ To get started, you must set up your app's Facebook ID.  Please execute the foll
 
     ![](02.png)
 
-###Sign up via Facebook Account
+##Sign up via Facebook Account
 
 Here is a sample code snippet for letting a new application user register via their Facebook account:
 
@@ -45,13 +45,13 @@ conn.logIn(activity, null, new KiiSocialCallBack(){
 });
 ```
 
-The basic steps are:
+Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
-2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is FACEBOOK).
+2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
 3. Start the sign-up process with `logIn` method.  This method is non-blocking, so use a callback to get the results.
 
-###Linking existing users with Facebook
+##Linking existing users with Facebook account
 
 By linking existing applications with their social accounts, they will have an alternative to authentication - in addition to their existing passwords.
 
@@ -70,7 +70,13 @@ conn.link(activity, null, new KiiSocialCallBack(){
 });
 ```
 
-###Unlink the existing users with their external accounts
+Here is what is happening in the snippet:
+
+1. Create an activity for handling sign-up with Facebook.
+2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
+3. Link the current user with `link` method.  This method is non-blocking, so use a callback to get the results.
+
+##Unlink the existing users with Facebook account
 
 You can unlink the existing users with their external accounts in the following manner:
 
@@ -88,3 +94,9 @@ conn.unlink(activity, null, new KiiSocialCallBack(){
   }
 });
 ```
+
+Here is what is happening in the snippet:
+
+1. Create an activity for handling sign-up with Facebook.
+2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
+3. Unlink the current user with `unlink` method.  This method is non-blocking, so use a callback to get the results.

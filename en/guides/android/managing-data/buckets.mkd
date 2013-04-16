@@ -5,7 +5,7 @@ summary: In order to fully leverage the power of Kii Platform, it is important t
 sort-priority: 10
 page-id: android-buckets-en
 ---
-###Bucket Scopes
+##Bucket Scopes
 
 Each bucket has a "scope", which determines to whom the bucket belongs.  For example, if a bucket belongs to a specific group, this bucket has "Group Scope" and all the data in this bucket will be kept as long as the group exists in Kii Cloud.  The scope also affects the default access control applied to the data that is created within this bucket. (Please check "[Setting a new ACL to a Bucket]({% page_url android-buckets_setting_acl-en %})" for more information on how you can tweak the access control).
 

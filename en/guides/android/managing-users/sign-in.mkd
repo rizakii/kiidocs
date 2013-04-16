@@ -5,8 +5,10 @@ sort-priority: 20
 ---
 Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
 
+When a user signs in, he/she can get an access token.  This token can later be used for signing in without providing a username and password.
 
-###Sign-in with a password
+
+##Sign-in with a password
 
 Here is a sample code snippet for authenticating a user.  Simply invoke the `logIn` method with a username (or an international phone number or an email address) and a password combination.
 
@@ -40,7 +42,7 @@ try{
 }
 ```
 
-###Sign-in with an access token
+##Sign-in with an access token
 
 For maintaining a user session when returning to the app, the Kii SDK allows developers to authenticate using a Kii-provided access token. This keeps your user from having to type in credentials each time -- or from needing to store them on the device. By keeping this token in persistent storage, you allow the user to authenticate seamlessly between sessions.
 

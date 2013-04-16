@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
 title: グループメンバーの追加と削除
-sort-priority: 50
+sort-priority: 30
 ---
 ###グループメンバーの追加
 

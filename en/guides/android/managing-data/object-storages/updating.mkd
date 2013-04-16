@@ -11,7 +11,7 @@ Kii SDK supports the following two object update methods:
 
 Note: If you wish to remove key-value pairs, please use full update; partial update does not support key-value pair removal.
 
-### Full Update
+## Full Update
 
 The below is an example of how you can fully update an object.  Note that this update process uses the `saveAllFields` method:
 
@@ -31,7 +31,7 @@ try {
 }
 ```
 
-### Partial Update
+## Partial Update
 
 The below is an example of how you can partially update an object.  Note that this update process uses the `save` method:
 

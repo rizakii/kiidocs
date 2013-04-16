@@ -2,8 +2,9 @@
 layout: en-doc
 title: Scoping Files
 sort-priority: 70
+page-id: android-scoping_files-en
 ---
-### Default Access Control
+## File Scope and Default Access Control
 
 For all files, the following default access control will be applied:
 
@@ -11,7 +12,7 @@ For all files, the following default access control will be applied:
   * The user can read and write the object by default.
   * Other users cannot read and write the object by default.
 
-### Set a new ACL on a File
+## Set a new ACL on a File
 
 New access permission can be applied onto a file by adding a new ACL.  The possible access controls that can be granted on an object are as follows:
 

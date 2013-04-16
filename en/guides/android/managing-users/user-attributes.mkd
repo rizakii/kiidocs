@@ -16,7 +16,7 @@ Kii SDK allows you to manage custom user profiles by allowing arbitrary key-valu
 As long as key name does not collide with any of the predefined keys, you can add arbitrary keys like “age”, “gender” and “birthday”
 
 
-###Setting predefined attributes
+##Setting predefined attributes
 
 Many of the predefined keys are used internally by the SDK; their values will be automatically set by Kii Platform and you won't have to bother with them. However, for the following predefined keys, there are dedicated methods for changing the values:
 
@@ -53,7 +53,7 @@ try{
 }
 ```
 
-###Setting arbitrary attributes
+##Setting arbitrary attributes
 
 To set arbitrary key-value pairs, use `set` method as shown:
 

@@ -7,7 +7,7 @@ Kii Cloud provides a mechanism called Kii Cloud Trashcan for files that have bee
 
 This Trashcan is similar to the features supported on your favorite OS. When a user moves a file into the trash the file becomes invisible to file queries, as if it has been removed from the system.  However, the user can later restore their files from the trash and they will become visible again.
 
-### Move a File to the Trash
+## Move a File to the Trash
 
 To move a file to the Trashcan, invoke the `moveToTrash` method:
 
@@ -27,7 +27,7 @@ try {
 }
 ```
 
-### Restore a File from the Trash
+## Restore a File from the Trash
 
 To restore a file from the Trashcan, invoke the `restoreFromTrash` method.
 

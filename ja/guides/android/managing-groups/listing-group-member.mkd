@@ -1,7 +1,7 @@
 ---
 layout: ja-doc
 title: グループメンバー一覧の取得
-sort-priority: 40
+sort-priority: 50
 ---
 グループのオーナーはメンバーの一覧を `listMembers` メソッドで取得できます。 このメソッドはグループのメンバーの一覧を KiiUser の List として返却します。
 

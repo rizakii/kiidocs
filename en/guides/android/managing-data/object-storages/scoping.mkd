@@ -3,8 +3,9 @@ layout: en-doc
 title: Scoping Objects
 summary: 'All objects have a "scope".  This scope determines the default access control applied to the object upon its creation. For example, an object created in an "Application Scope" bucket will have "Application Scope".'
 sort-priority: 70
+page-id: android-scoping_objects-en
 ---
-### Object Scopes and Default Access Control
+## Object Scopes and Default Access Control
 
 For each scope, the following default access control is applied to objects:
 
@@ -19,7 +20,7 @@ For each scope, the following default access control is applied to objects:
   * Other user cannot read and write the object by default.
 
 
-### Set a new ACL on an Object
+## Set a new ACL on an Object
 
 New access permission can be applied to an object by adding a new ACL.  The possible access controls that can be granted on an object are:
 

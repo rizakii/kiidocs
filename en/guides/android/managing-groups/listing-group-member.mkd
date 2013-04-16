@@ -5,7 +5,7 @@ sort-priority: 50
 ---
 A group owner can get a list of members who are in the group with `listMembers` method.  This method will return a list of KiiUser instances representing group members. 
 
-Here's an example:。
+Here's an example:
 
 ```java
 try {

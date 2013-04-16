@@ -22,7 +22,7 @@ KiiBucket userBucket = Kii.user().bucket("my_private");
  * Invoke the `bucket` method on KiiGroup instance to create a Group Scope bucket.
  * Invoke the `bucket` method on KiiUser instance to create a User Scope bucket
 
-*Please Note*: a bucket can not be explicitly saved, it will only be created when an object is saved to it.  For example, userBucket in the above example will be created when an object is created and saved to the bucket as follows:
+**Please Note**: A bucket can not be explicitly created; it will only be created when an object is saved to it.  For example, userBucket in the above example will be created when an object is created and saved to the bucket as follows:
 
 ```java
 KiiObject object = userBucket.object();
@@ -40,7 +40,7 @@ KiiFileBucket fileBucket = Kii.user().fileBucket("my_backup");
 
  * Invoke the `fileBucket` method on KiiUser instance to create a User Scope file bucket
 
-*Please Note*: a file bucket will not be explicitly saved, it will only be created when a file is saved to it.  For example, fileBucket in the above example will be created when a file is created and saved to the bucket as shown:
+**Please Note**: A file bucket can not be explicitly created; it will only be created when a file is saved to it.  For example, fileBucket in the above example will be created when a file is created and saved to the bucket as shown:
 
 ```java
 KiiFile file = fileBucket.file();

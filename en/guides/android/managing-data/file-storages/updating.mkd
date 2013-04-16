@@ -8,7 +8,7 @@ Kii SDK supports the following two methods for updating files:
  * **Update metadata only**: This will only update the file metadata. Use this method when the content of the file has not changed.
  * **Update the whole file**: This will update both the file metadata and the file content itself (i.e., replacing the file with the new one)
 
-### Updating Only Metadata
+## Updating Only Metadata
 
 The below is an example of how you can update only metadata  After editing the metadata, use the `save` method to upload the change(s) onto Kii Cloud.
 
@@ -30,7 +30,7 @@ try {
 }
 ```
 
-### Update the Whole File
+## Update the Whole File
 
 The below is an example of how you can update the whole file.  After editing the metadata (if needed), use the `save` method with the local file to upload
 

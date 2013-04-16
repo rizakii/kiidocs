@@ -81,7 +81,7 @@ try {
 ```
 
 For actual application development, if you aren't handling threading on your
-own, you may want to use non-blocking APIs instead to keep your main thread
+own, you may want to use non-blocking APIs instead to prevent your main thread
 from freezing the UI.  The following sample code illustrates how to invoke the
 same feature asynchronously, in a non-blocking way:
 

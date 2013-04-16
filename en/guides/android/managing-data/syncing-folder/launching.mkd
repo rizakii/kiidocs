@@ -3,7 +3,7 @@ layout: en-doc
 title: Launching Folder Sync
 sort-priority: 10
 ---
-### Start Syncing
+## Start Syncing
 
 Simply invoke the `sync` method to begin syncing a folder.  Since the `sync` method is a blocking API, you should call the method in a dedicated thread. We strongly advise to **not** invoke the `sync` method in an UI thread!
 
@@ -35,7 +35,7 @@ syncThread.run();
 
 When launching a sync while using an email address or a phone number, not a username, use Account class like the following examples:
 
-#### With an email address
+### With an email address
 
 ```java
 import com.kii.cloud.filesync.KiiFS; 
@@ -54,7 +54,7 @@ try {
 }
 ```
 
-#### With an international phone number
+### With an international phone number
 
 ```java
 import com.kii.cloud.filesync.KiiFS; 
@@ -73,7 +73,7 @@ try {
 }
 ```
 
-#### With a local phone number
+### With a local phone number
 
 ```java
 import com.kii.cloud.filesync.KiiFS; 
@@ -92,7 +92,7 @@ try {
 }
 ```
 
-### Getting Sync Progress
+## Getting Sync Progress
 
 If you want to show the progress of your folder's sync session, set a `ProgressCallback` as shown:
 
@@ -130,14 +130,14 @@ syncThread.run();
 Here, `ProgressCallback` is defined while overriding `onProgressUpdate`.  This callback will return a value (`ProgressInfo`) which represents the current sync session progress.
 
 
-### Conflict Handling
+## Conflict Handling
 
 When syncing files among multiple devices, you may encounter file name duplication.  For example: if a user change a name of a file from "Alice.txt" to "Bob.txt" on one device and at the same time create a new file with the name "Bob.txt", the file names will collide.  In this case, our SDK will automatically preserve both files by renaming one of the files (e.g., renaming to "Bob (1).txt").
 
 Another possible conflict is file operation collision.  For example: a user may delete a file on one device and at the same time rename the file on the other device.  In this case, our SDK will automatically resolve the collision in a way to preserve the user's file (e.g., ignore the deletion and accept the file renaming).
 
 
-### Changing sync folder
+## Changing sync folder
 
 The current SDK supports only one sync target folder.  To change the sync target folder, invoke the `reset` method.  This will reset all sync-related data that is locally stored on the device and the SDK will be ready to accept a new sync target folder.
 

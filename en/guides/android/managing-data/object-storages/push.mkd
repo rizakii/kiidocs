@@ -3,8 +3,8 @@ layout: en-doc
 title: 'Receiving "Push to App" Notifications'
 sort-priority: 60
 page-id: android-object_storages_push-en
+summary: 'A "Push to App" notification mechanism will let your application know that there were some changes on object(s) in a bucket.  By leveraging this notification feature, your application can quickly fetch the changes that occur on the server-side.'
 ---
-A "Push to App" notification mechanism will let your application know that there were some changes on object(s) in a bucket.  By leveraging this notification feature, your application can quickly fetch the changes that occur on the server-side.
 
 The changes that can be notified by this push notification include:
 
@@ -19,9 +19,9 @@ Here are the basic steps to utilize Kii Cloud "Push to App" notification.
 2. Subscribe a bucket so as to start monitoring the bucket for changes.
 3. Receive a push notification when something occurs inside the bucket.
 
-You will also need to configure your application on the developer portal.  Please refer [here]({% page_url android-adding_kii_cloud_to_your_application-en %}) to check how you can configure your application.
+You will also need to configure your application on the developer portal.  Please refer {% page_link android-adding_kii_cloud_to_your_application-en %} section to check how you can configure your application.
 
-### Install a Device to Kii Cloud
+## Install a Device to Kii Cloud
 
 Here is a sample snippet for installing a device to Kii Cloud.  You need to specify the regId that you've received from GCM server.  (Please check the [tutorial by Google](http://developer.android.com/google/gcm/gs.html) to learn more).
 
@@ -30,7 +30,7 @@ Here is a sample snippet for installing a device to Kii Cloud.  You need to spec
 KiiUser.pushInstallation().install(regId);
 ```
 
-### Subscribe a Kii Bucket
+## Subscribe a Kii Bucket
 
 Here is a sample snippet for subscribing a bucket.  Once subscribed, your device will be ready to receive push notifications whenever something occurs inside the bucket.
 
@@ -40,7 +40,7 @@ bucket.object().save();
 user.pushSubscription().subscribeBucket(bucket);
 ```
 
-### Check if Subscribed to a Kii Bucket
+## Check if Subscribed to a Kii Bucket
 
 Here is a sample snippet for checking the subscription.
 
@@ -60,7 +60,7 @@ try{
 }
 ```
 
-### Receive a Push Notificaiton
+## Receive a Push Notificaiton
 
 To receive push notifications, you need to implement onMessage() of GCMIntentService.  Kii Cloud SDK provides a helper API to support your application to parse push messages.
 

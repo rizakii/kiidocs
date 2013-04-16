@@ -1,1 +1,34 @@
----layout: en-doctitle: Managing Push Notificationssort-priority: 50page-id: android-managing_push-en---Kii Cloud supports the following three types of push notifications. * **"Push to App"** notification: This mechanism will let your applications know when a new event occurred on the Cloud; for example, your apps will be able to get a push notification when a new Object is created in a bucket.Please check ['Receiving "Push to App" Notification']({% page_url android-object_storages_push-en %}) section for more details. * **"Push to User"** notification: This mechanism will let you and your application users quickly send messages to other users; for example, you application users will be able to exchange push messages among their group members.Please refer ['"Push to User" Notification']({% page_url android-push_to_user-en %}) section for more details. * **"Direct Push"** notification: This mechanism will let you reach directly to your application users; for example, you will be able to directly send an alert message to a certain user.Please refer ['"Direct Push" Notification']({% page_url android-direct_push-en %}) section for more details.### Preparation for Leveraging Push Notifications#### Configuring Your ApplicationTo leverage Push notification features, you need to configure your application accordingly on the developer portal.  Check ["Androd Quick Start - Adding Kii Cloud SDK to Your Application"]({% page_url android-adding_kii_cloud_to_your_application-en %}) section to learn how you can configure your application.#### Installing User DevicesIn order for Kii Cloud to deliver push messages to a user device, your application needs to install the device to Kii Cloud by sending the corresponding regId (registration ID) assigned by GCM server.  (Please refer [the documentation by Google](http://developer.android.com/google/gcm/gs.html) for the details on how to receive the regID from GCM server).Here is a sample snippet for installing a device to Kii Cloud.  You need to specify the regId that you've received from GCM server.```javaKiiUser.pushInstallation().install(regId);```Once invoked, the regId will be saved on Kii Cloud.  If the regId is already registered on Kii Cloud, the registration will fail.
+---
+layout: en-doc
+title: Managing Push Notifications
+sort-priority: 50
+page-id: android-managing_push-en
+---
+Kii Cloud supports the following three types of push notifications.
+
+ * **"Push to App"** notification: This mechanism will let your applications know when a new event occurred on the Cloud; for example, your apps will be able to get a push notification when a new Object is created in a bucket.
+Please check ['Receiving "Push to App" Notification']({% page_url android-object_storages_push-en %}) section for more details.
+
+ * **"Push to User"** notification: This mechanism will let you and your application users quickly send messages to other users; for example, you application users will be able to exchange push messages among their group members.
+Please refer ['"Push to User" Notification']({% page_url android-push_to_user-en %}) section for more details.
+
+ * **"Direct Push"** notification: This mechanism will let you reach directly to your application users; for example, you will be able to directly send an alert message to a certain user.
+Please refer ['"Direct Push" Notification']({% page_url android-direct_push-en %}) section for more details.
+
+### Preparation for Leveraging Push Notifications
+
+### Configuring Your Application
+
+To leverage Push notification features, you need to configure your application accordingly on the developer portal.  Check ["Androd Quick Start - Adding Kii Cloud SDK to Your Application"]({% page_url android-adding_kii_cloud_to_your_application-en %}) section to learn how you can configure your application.
+
+### Installing User Devices
+
+In order for Kii Cloud to deliver push messages to a user device, your application needs to install the device to Kii Cloud by sending the corresponding regId (registration ID) assigned by GCM server.  (Please refer [the documentation by Google](http://developer.android.com/google/gcm/gs.html) for the details on how to receive the regID from GCM server).
+
+Here is a sample snippet for installing a device to Kii Cloud.  You need to specify the regId that you've received from GCM server.
+
+```java
+KiiUser.pushInstallation().install(regId);
+```
+
+Once invoked, the regId will be saved on Kii Cloud.  If the regId is already registered on Kii Cloud, the registration will fail.
