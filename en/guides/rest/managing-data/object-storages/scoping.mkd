@@ -3,6 +3,7 @@ layout: en-doc
 title: Scoping Objects
 summary: 'All objects have a "scope". &nbsp;This scope determines the default access control applied to the object upon its creation.&nbsp;For example, an object created in an "Application Scope" bucket will have "Application Scope".'
 sort-priority: 60
+page-id: rest-scoping_objects-en
 ---
 ## Object Scopes and Default Access Control
 
@@ -27,7 +28,7 @@ Custom permission can be applied onto an object by adding a new ACL.  The possib
 
 Here are examples for granting the READ\_EXISTING\_OBJECT permission:
 
-### Granting the READ\_EXISTING\_OBJECT Permission to Anonymous Users:
+#### Granting the READ\_EXISTING\_OBJECT Permission to Anonymous Users:
 
 ```sh
 curl -v -X PUT \
@@ -37,7 +38,7 @@ curl -v -X PUT \
   "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
 ```
 
-### Granting the READ\_EXISTING\_OBJECT Permission to Authenticated Users:
+#### Granting the READ\_EXISTING\_OBJECT Permission to Authenticated Users:
 
 ```sh
 curl -v -X PUT \
@@ -47,7 +48,7 @@ curl -v -X PUT \
   "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANY_AUTHENTICATED_USER"
 ```
 
-### Granting the READ\_EXISTING\_OBJECT Permission to a Group:
+#### Granting the READ\_EXISTING\_OBJECT Permission to a Group:
 
 ```sh
 curl -v -X PUT \
@@ -57,7 +58,7 @@ curl -v -X PUT \
   "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/GroupID:{GROUP_ID}"
 ```
 
-### Granting the READ\_EXISTING\_OBJECT Permission** **to a User:
+#### Granting the READ\_EXISTING\_OBJECT Permission to a User:
 
 ```sh
 curl -v -X PUT \
@@ -71,7 +72,7 @@ curl -v -X PUT \
 
 In order to revoke permission, simply send a DELETE request to the corresponding ACL
 
-### Revoking the WRITE\_EXISTING\_OBJECT Permission from Anonymous Users:
+#### Revoking the WRITE\_EXISTING\_OBJECT Permission from Anonymous Users:
 
 ```sh
 curl -v -X DELETE \

@@ -20,12 +20,12 @@ curl -v -X POST \
 
 You can send a request with one of the following "username" values:
 
-* _username_
-* _international phone number_
-* _email address_
-* EMAIL:_email address_
-* PHONE:_international phone number_ (e.g., PHONE:+819012341234)
-* PHONE:_2-letter country code-local phone number_ (e.g., PHONE:JP-9012341234)
+* username
+* international phone number
+* email address
+* EMAIL: email address
+* PHONE: international phone number (e.g., PHONE:+819012341234)
+* PHONE: 2-letter country code-local phone number (e.g., PHONE:JP-9012341234)
 
 Kii Platform will return a response as shown below; the user's token is return as "access\_token" along with this user's User ID and the token expiration time in UNIX time (msec).
 

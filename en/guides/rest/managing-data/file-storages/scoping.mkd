@@ -3,8 +3,9 @@ layout: en-doc
 title: Scoping Files
 summary: Since all file buckets are User Scope, when files are created they default to being only accessible to that user.
 sort-priority: 70
+page-id: rest-scoping_files-en
 ---
-## Default Access Control
+## File Scope and Default Access Control
 
 For all files, the following default access control will be applied:
 
@@ -21,7 +22,7 @@ New access permissions can be applied to a file by adding a new ACL.  The possib
 
 Here are samples for granting the READ\_EXISTING\_OBJECT permission:
 
-* **Granting the READ\_EXISTING\_OBJECT Permission to Anonymous Users:**
+#### Granting the READ\_EXISTING\_OBJECT Permission to Anonymous Users
 
     ```sh
     curl -v -X PUT \
@@ -31,7 +32,7 @@ Here are samples for granting the READ\_EXISTING\_OBJECT permission:
       "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
     ```
 
-* **Granting the READ\_EXISTING\_OBJECT Permission to Authenticated Users:**
+#### Granting the READ\_EXISTING\_OBJECT Permission to Authenticated Users
 
     ```sh
     curl -v -X PUT \
@@ -41,7 +42,7 @@ Here are samples for granting the READ\_EXISTING\_OBJECT permission:
       "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/UserID:ANY_AUTHENTICATED_USER"
     ```
 
-* **Granting the READ\_EXISTING\_OBJECT Permission to a Group:**
+#### Granting the READ\_EXISTING\_OBJECT Permission to a Group
 
     ```sh
     curl -v -X PUT \
@@ -51,7 +52,7 @@ Here are samples for granting the READ\_EXISTING\_OBJECT permission:
       "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/READ_EXISTING_OBJECT/GroupID:{GROUP_ID}"
     ```
 
-* **Granting the READ\_EXISTING\_OBJECT Permission** **to a User:**
+#### Granting the READ\_EXISTING\_OBJECT Permission to a User
 
     ```sh
     curl -v -X PUT \
@@ -65,7 +66,7 @@ Here are samples for granting the READ\_EXISTING\_OBJECT permission:
 
 To revoke permission, simply send a DELETE request to the corresponding ACL.
 
-* **Revoking the WRITE\_EXISTING\_OBJECT Permission from Anonymous Users:**
+#### Revoking the WRITE\_EXISTING\_OBJECT Permission from Anonymous Users
 
     ```sh
     curl -v -X DELETE \

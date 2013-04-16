@@ -3,21 +3,25 @@ layout: en-doc
 title: Social Network Integration
 summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
 sort-priority: 30
+page-id: rest-socal_network_integration-en
 ---
 Currently, Kii Platform supports the following social networks:
 
-* Facebook
-* Twitter (coming soon)
-* RenRen (coming soon)
+* Facebook (https://www.facebook.com/)
+* Twitter (coming soon) (https://www.twitter.com/)
+* RenRen (coming soon) (http://www.renren.com/)
 
 ## Integrate Facebook with Kii Platform
 
 To get started, you must set up your app's Facebook ID.  Please execute the following steps on the dev portal.
 
 1. Click "Edit" button at your application console on the dev portal.
+
     ![](01.png)
+
 1. Click "Settings" to bring your application configuration menu.
 1. Put your Facebook App ID.
+
     ![](02.png)
 
 ## Sign-up/sign-in using external accounts

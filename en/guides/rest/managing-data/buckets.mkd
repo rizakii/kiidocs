@@ -69,7 +69,7 @@ curl -v -X POST \
 
 ## Creating File Buckets
 
-File buckets are the same concept as object buckets, with the exception that a file bucket can only have **User Scope**, meaning that the bucket will be fully accessible only to the user. To differentiate between File Buckets and Object Buckets when posting data, use a bucket ID with the prefix**"sync:"**when working with files.
+File buckets are the same concept as object buckets, with the exception that a file bucket can only have **User Scope**, meaning that the bucket will be fully accessible only to the user. To differentiate between File Buckets and Object Buckets when posting data, use a bucket ID with the prefix **"sync:"** when working with files.
 
 Check out the following example to see how you can create a file object in a file bucket:
 
@@ -87,7 +87,7 @@ curl -v -X POST \
 
 For Group Scope and User Scope buckets, you can apply custom ACLs (Access Control Layers) in order to add a new access permission (e.g., allowing anonymous users to create data in the bucket).
 
-<p class="callout">There are additional access controls that can be granted on the data-level. Please refer to the "Scoping Objects" and "Scoping Files" sections</p>
+<p class="callout">There are additional access controls that can be granted on the data-level. Please refer {% page_link rest-scoping_objects-en %} and {% page_link rest-scoping_files-en %} sections</p>
 
 The possible access controls that can be applied to a bucket are:
 

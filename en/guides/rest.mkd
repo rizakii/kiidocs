@@ -45,8 +45,7 @@ Most of the features provided by Kii Cloud REST API require users to be signed i
 
 * **Authorization: Bearer** - Access token (user token)
 
-Check out the [Managing Users - Sign In]({% page_url rest-sign_in-en %})
-section to see how you can get the user's access token.
+Check out {% page_link rest-sign_in-en %} section to see how you can get the user's access token.
 
 For a REST API that is sent with a user token, you can use "/me" literal in the
 resource URL; "/me" will be replaced with the User ID that correspond to the
