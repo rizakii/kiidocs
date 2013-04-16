@@ -3,7 +3,7 @@ layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
 ---
-Kii Cloud SDK は、所定の属性の参照・設定をするためのメソッドを提供します。
+Kii Cloud SDK は、所定の属性を参照・設定をするためのメソッドを提供します。
 
  * `getUsername`
  * `getEmail`
@@ -13,12 +13,12 @@ Kii Cloud SDK は、所定の属性の参照・設定をするためのメソッ
  * `getDisplayname`/ `setDisplayname`
  * `getCountry`/ `setCountry`
 
-またデベロッパーは任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
+所定の属性に加え、開発者は任意の Key-Value を属性として追加することができます。（例： "age", "gender", "birth"）
 
 
-###所定の属性の設定
+##所定の属性の設定
 
- * ディスプレイネームと、国属性については setter メソッドを使用して変更します。
+ * ディスプレイネームと国属性は所定の setter メソッドを使用して変更します。
  * ユーザ名は変更できません。
  * メールアドレスと電話番号は変更用の API をコールして変更します。
 
@@ -51,11 +51,9 @@ try{
 }
 ```
 
-###任意の属性の設定
+##任意の属性の設定
 
-任意の属性を設定するサンプルコードです。<br />
-`set`メソッドを使用して Key-Value ペアを指定します。<br />
-幾つかの Key は SDK により予約されており、使用することができません。予約されている Key の詳細については[こちら]({% page_url references-ja %})の Javadoc を参照してください。
+次に、任意の属性を設定する例をあげます。属性の設定は `set` メソッドを使って行います。
 
 ```java
 String username = "user_123456";
@@ -72,7 +70,10 @@ try{
 } 
 ```
 
-設定した任意の属性は、次の例のように `keySet` メソッドを使って確認することができます。
+幾つかの Key は SDK により予約されており使用することができません。予約されている Key の詳細については [Javadoc](http://static.kii.com/devportal/docs/storage/com/kii/cloud/storage/KiiUser.html) を参照してください。
+
+
+設定した任意の属性の key 一覧は、次の例のように `keySet` メソッドを使って確認することができます。
 
 ```java
  // Login and refresh KiiUser instance

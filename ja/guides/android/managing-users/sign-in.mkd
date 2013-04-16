@@ -5,13 +5,12 @@ sort-priority: 20
 ---
 サインアップ処理完了後（メールアドレスや電話番号を指定した場合は、これらの認証が完了後）、登録したユーザ名やメールアドレス、電話番号とパスワードによるサインインが有効になります。
 
-また、サインインに成功後、Kii Cloud SDK よりアクセストークンを取得することができます。次回サインイン時には、このアクセストークンを利用することもできます。この場合、取得したアクセストークンをアプリケーション側で安全に保存・管理してください。
+また、サインインに成功後、Kii Cloud SDK よりアクセストークンを取得することができます。次回サインイン時には、このアクセストークンを認証トークンとして利用することで、ユーザ名やパスワードの入力なしにサインインを行うことができます。（この場合、取得したアクセストークンはアプリケーション側で安全に保存・管理する必要があります）
 
 
+##パスワードによるサインイン
 
-###パスワードによるサインイン
-
-以下にユーザ名とパスワードによるサインインの例を示します。メールアドレスや電話番号でサインインする場合も、ユーザ名の代わりにこれらの値を指定して `logIn` メソッドをコールしてください。
+以下にユーザ名とパスワードを用いたサインインを行う例を示します。
 
 ```java
 String username = "user_123456";
@@ -26,14 +25,20 @@ try {
   // Please check AppException to see what went wrong...
 }
 ```
-国内電話番号でサインインする場合は、次の例のように `logInWithLocalPhone` メソッドを利用してください。
+
+メールアドレスや電話番号でサインインする場合は、ユーザ名の代わりにこれらの値を指定の上 `logIn` メソッドを実行してください。
+
+
+また、国内電話番号でサインインする場合は、次の例のように `logInWithLocalPhone` メソッドを利用してください。
 
 ```java
 String phoneNumber = "09051903944";
 String country = "JP";
 String password = "123456";
 try{
-  KiiUser user = KiiUser.logInWithLocalPhone(phoneNumber, password, country);
+  KiiUser user = KiiUser.logInWithLocalPhone(phoneNumber, 
+                                             password, 
+                                             country);
 } catch (IOException e) {
   // Sign-in failed for some reasons
   // Please check IOExecption to see what went wrong...
@@ -43,11 +48,11 @@ try{
 }
 ```
 
-###アクセストークンによるサインイン
+##アクセストークンによるサインイン
 
 一度サインインしたユーザに対して、Kii Cloud はアクセストークンを発行します。アクセストークンは期限が切れるまで有効です。アクセストークンを使用することで、二回目以降はユーザ名やパスワードの入力を省略して Kii Cloud にアクセスすることが可能になります。
 
-アクセストークンによるサインインの例です。アクセストークンを取得するには、`getAccessToken` メソッドをユーザがサインインしている状態でコールしてください。このトークンを `loginWithAccessToken` メソッドをコール時に使用することで、アクセストークンによるサインインが完了します。
+アクセストークンによるサインインの例です。
 
 ```java
  // Get an access token
@@ -73,3 +78,6 @@ try {
   // Please check AppException to see what went wrong...
 }
 ```
+
+* アクセストークンは、ユーザがサインインしている状態で `getAccessToken` メソッドを実行することで取得できます。
+* アクセストークンを用いたサインインは `loginWithAccessToken` メソッドを使って行います。
