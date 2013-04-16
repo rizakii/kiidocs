@@ -3,7 +3,7 @@ layout: en-doc
 title: Sign Up
 sort-priority: 10
 ---
-<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check "Social Network Integration" section for more details.</p>
+<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link javascript-social_network_integration-en %} section for more details.</p>
 
 Kii Platform allows users to register with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses.
 
