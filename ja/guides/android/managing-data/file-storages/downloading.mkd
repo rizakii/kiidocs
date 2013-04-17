@@ -6,7 +6,7 @@ sort-priority: 20
 File にアサインされた URI を元に、File を Kii Cloud より取得することができます。以下に File のダウンロードを実施している例をあげます。
 
 ```java
- // Create a KiiFile instance
+// Create a KiiFile instance
 Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 String destFilePath = "destination file path";

@@ -8,7 +8,7 @@ sort-priority: 40
 グループの一覧を取得するサンプルコードを以下に示します。
 
 ```java
- // Get the current login user
+// Get the current login user
 KiiUser user = KiiUser.getCurrentUser();
 
 // Get a list of groups in which the current user is a member

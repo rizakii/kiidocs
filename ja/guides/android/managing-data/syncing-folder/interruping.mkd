@@ -1,7 +1,6 @@
 ---
 layout: ja-doc
 title: Folder Sync の中断と再開
-summary: 処理中のフォルダ同期を中断する
 sort-priority: 20
 ---
 処理中のフォルダ同期を停止するには、動作中のスレッドを中断してください。

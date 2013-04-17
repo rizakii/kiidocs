@@ -10,12 +10,12 @@ File のメタデータのみアップデートします。実ファイルは更
  * **ファイル全体を更新**:  
 File のメタデータと実ファイルの双方をアップデートします。
 
-### メタデータのみ更新する場合
+## メタデータのみ更新する場合
 
 下記はファイルのメタデータのみ更新する例です。メタデータの編集後に、パラメータ指定なしで `save` メソッドを呼ぶことで、更新したメタデータの内容が KiiCloud に反映されます。
 
 ```java
- // Create a KiiFile instance
+// Create a KiiFile instance
 Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 
@@ -32,12 +32,12 @@ try {
 }
 ```
 
-### ファイル全体を更新する場合
+## ファイル全体を更新する場合
 
 下記はファイル全体（ファイルのBody＋メタデータ）を更新する例です。必要に応じてメタデータを編集した後に、ファイルのパスをパラメータとして指定の上 `save` メソッドを呼ぶことで、ファイル全体の更新内容が KiiCloud に反映されます。
 
 ```java
- // Create a KiiFile instance
+// Create a KiiFile instance
 Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 

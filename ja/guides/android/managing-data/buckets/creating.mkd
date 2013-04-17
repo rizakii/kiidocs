@@ -3,7 +3,7 @@ layout: ja-doc
 title: Bucket の作成
 sort-priority: 10
 ---
-### Object Bucket の作成
+## Object Bucket の作成
 
 Object 用の Bucket は次のように作成します：
 
@@ -18,9 +18,9 @@ KiiBucket groupBucket = Kii.group("Friends").bucket("my_group");
 KiiBucket userBucket = Kii.user().bucket("my_private");
 ```
 
- * Application Scope の Bucket ... Kii クラスが提供する `bucket` をコールして作成
- * Group Scope の Bucket ... KiiGroup クラスが提供する `bucket` をコールして作成
- * User Scope の Bucket ... KiiUser クラスが提供する `bucket` をコールして作成
+ * Application Scope の Bucket ... Kii クラスが提供する `bucket` を実行して作成
+ * Group Scope の Bucket ... KiiGroup クラスが提供する `bucket` を実行して作成
+ * User Scope の Bucket ... KiiUser クラスが提供する `bucket` を実行して作成
 
 Bucket インスタンスを作成した段階では、Kii Cloud 上に Bucket は生成されていないことに注意してください。Bucket は、この中に Object を保存した際に生成されます。例えば、以下の例のように `save` メソッドをコールして Object が生成されたタイミングで userBucket が Kii Cloud上に生成されます。
 
@@ -29,7 +29,7 @@ KiiObject object = userBucket.object();
 object.save();
 ```
 
-### File Bucket の作成
+## File Bucket の作成
 
 File 用の Bucket は次のように作成します（File Storage は User Scope のみサポートしています）。
 

@@ -1,6 +1,6 @@
 ---
 layout: ja-doc
-title: トピック購読の有無を確認する (coming soon)
+title: トピック購読の有無を確認する
 summary: アプリにおいて、ユーザがあるトピックを未購読の場合は「購読する」ボタンを、既に購読済の場合は「購読を解除する」ボタンを表示するケースを考えます。この場合、ユーザがあるトピックを購読済なのか未購読なのかを判定する必要があります。
 sort-priority: 25
 page-id: android-confirming_subscription_topic-ja

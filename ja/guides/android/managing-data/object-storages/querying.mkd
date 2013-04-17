@@ -4,7 +4,7 @@ title: Object の検索
 summary: Kii Cloud 上の Object のうち、ある条件を満たすものを取得する方法として Kii Cloud SDK は検索機能を提供しています。この機能を用いると、例えば「ある Bucket より "count" フィールドの値が10より大きい Object を、フィールド値降順で最大で10個取得」などといった条件が指定可能です。
 sort-priority: 40
 ---
-### KiiClause による Query の条件定義
+## KiiClause による Query の条件定義
 
 アプリ開発者は以下の比較演算子を用いることでクエリの条件定義ができます。
 
@@ -22,7 +22,7 @@ sort-priority: 40
  * **and**
  * **or**
 
-### KiiQuery の組み立て
+## KiiQuery の組み立て
 
 KiiQuery インスタンスは、クエリ条件を指定した KiiClause インスタンスにより構成されます。KiiClause インスタンスなしに KiiQuery インスタンスを作成した場合は、対象 Bucket 内の全ての Object が検索結果としてマッチします（i.e., **all** 検索に相当）
 
@@ -35,13 +35,13 @@ KiiQuery インスタン作成後、さらにオプションとして以下の�
 sortByAsc, sortByDesc のどちらも指定されなかった場合、クエリ結果のソート順は不定となります。setLimit が指定されなかった場合、一度のクエリで受け取れる最大のアイテム数は200となります。
 
 
-### KiiQueryResult の利用
+## KiiQueryResult の利用
 
 クエリの結果は KiiQueryResult インスタンスで返却されます。 `getResult` メソッドをコールすることでクエリ結果を取得できます。
 
 クエリ結果が複数のページにまたがる場合(例: `setLimit` で10を指定して、実際にクエリ条件にマッチする Object が30件あった場合)、 `getResult` で取得できる `KiiObject` のリストは最初のページのものになります。次のページを取得するには `getNextQueryResult` メソッドをコールた後、 `getResult` メソッドを再度コールします。
 
-### Query のサンプルコード
+## Query のサンプルコード
 
 まずは、もっとも単純な検索として Bucket 内の全ての Object を取得する例を考えます。
 

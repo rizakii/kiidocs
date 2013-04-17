@@ -6,12 +6,12 @@ sort-priority: 60
 ---
 ファイルを公開する際には有効期限を UNIX時間（ミリ秒）で設定することもできます。
 設定した有効期限が過ぎると、URLは無効となりファイルをダウンロードすることができなくなります。
-逆に有効期限を設定しなかった場合は、URL が無効になることはなくずっと公開されたままとなります。
+有効期限を設定しなかった場合は、URL は無効にならずファイルは永遠に公開され続けます。
 
 下記はファイルを、現時間より24時間の間に限定して公開したい場合のサンプルです。
 
 ```java
- // Create a KiiFile instance
+// Create a KiiFile instance
 Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 
@@ -35,6 +35,6 @@ try {
 1. KiiFile のインスタンスを作成する。
 2. （必要に応じて有効期限を設定した後で）`publish` メソッドを呼び出す。
 
-なお、ファイルの公開には、このファイルに対する READ\_EXISTING\_OBJECT 権限を有している必要があります。
+なお、ファイルの公開を行うユーザはこのファイルに対する READ\_EXISTING\_OBJECT 権限を有している必要があります。
 
 

@@ -3,8 +3,9 @@ layout: ja-doc
 title: File のスコープと ACL 設定
 summary: File は常に User Scope を持ちます。
 sort-priority: 70
+page-id: android-scoping_files-ja
 ---
-### 規定のアクセス制御
+## 規定のアクセス制御
 
 User Scope を持つファイルは、次にあげた規定のアクセス制御を持ちます。
 
@@ -12,12 +13,12 @@ User Scope を持つファイルは、次にあげた規定のアクセス制御
   * このユーザに対して、この File に対する読み取りと書き込みを許可します。
   * このユーザ以外に対して、この File に対する全アクセスを拒否します。
 
-### File に新たな ACL を設定する
+## File に新たな ACL を設定する
 
 新しいACLを設定することで、File へ新しいアクセス制限を設定できます。設定できるアクセス制限は下記の通りです。
 
  * **READ\_EXISTING\_OBJECT**: File の読み取りを許可
- * **WRITE\_EXISTING\_OBJECT**: File への書き込みや削除を許可
+ * **WRITE\_EXISTING\_OBJECT**: File への書き込みと削除を許可
 
 下記はファイルに対して READ\_EXISTING\_OBJECT と WRITE\_EXISTING\_OBJECT を設定する例です。
 

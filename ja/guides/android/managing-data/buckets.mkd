@@ -5,7 +5,7 @@ summary: Kii Platform におけるデータ管理を理解するためには Buc
 sort-priority: 10
 page-id: android-buckets-ja
 ---
-### Bucket のスコープ
+## Bucket のスコープ
 
 Bucket にはスコープが定義されます。スコープは、この Bucket が誰に属するものであるかを示します。一例として、ある Bucket が特定のグループに属する場合、この Bucket は Group Scope を有しており、対象はこのグループということになります。この場合、Bucket 内の全データは、このグループが存在する限り Kii Cloud に存在し続けます。
 

@@ -5,7 +5,7 @@ summary: Object Storage は、任意 Key-Value ペアにより構成されるJSO
 sort-priority: 20
 page-id: android-object_storages-ja
 ---
-### 所定の Key-Value ペア
+## 所定の Key-Value ペア
 
 以下の Key-Value ペアは、Object の所定値として Kii Cloud により自動的に生成されます。
 
@@ -15,7 +15,7 @@ page-id: android-object_storages-ja
 
 これらの値は基本的には内部的に利用されます。作成時間と最終更新時間は、それぞれ `getCreatedTime` メソッドと `getModifiedTime` メソッドを用いて取得可能です。また、 `toURI` メソッドを使うとObject の URL が取得できます。（"_id" の値自体は内部用識別子であるため、これを直接取得する必要はありません）
 
-### 任意の Key-Value ペア
+## 任意の Key-Value ペア
 
 上記の所定 Key-Value ペアと被らない名前であれば、任意の Key-Value ペアを Object に追加することができます。Value のデータ型としては以下が利用可能です。
 

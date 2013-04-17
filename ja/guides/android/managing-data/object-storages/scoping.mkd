@@ -3,8 +3,9 @@ layout: ja-doc
 title: Object のスコープと ACL 設定
 summary: Object は、その Object が作成された Bucket のスコープを引き継ぎます。例えば Application Scope を持つ Bucket の中に Object を作成した場合、この Object は Application Scope を引き継ぎます。
 sort-priority: 70
+page-id: android-scoping_objects-ja
 ---
-### Object のスコープと規定のアクセス制御
+## Object のスコープと規定のアクセス制御
 
 Bucket 同様、Object にデフォルトで割り振られるアクセス制御はそのスコープによって決定されます。以下に、各スコープと規定のアクセス制御をまとめます。
 
@@ -19,7 +20,7 @@ Bucket 同様、Object にデフォルトで割り振られるアクセス制御
   * このユーザ以外に対して、この Object に対する全アクセスを拒否します。
 
 
-### Object に新たな ACL を設定する
+## Object に新たな ACL を設定する
 
 新たな ACL を Object に追加することで、新たなアクセス制御を設定することができます。Object に設定可能なアクセス権限は以下の２つです。
 
