@@ -3,7 +3,7 @@ layout: ja-doc
 title: File の完全削除
 sort-priority: 50
 ---
-ファイルを完全に削除するには、`shredFileSynchronous`メソッドを呼びます。
+ファイルを完全に削除するには、`shredFile`メソッドを呼びます。
 
 ```objc
 KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];

@@ -21,6 +21,6 @@ if(error != nil) {
 基本手順は以下の通りです。
 
 1. `objectWithURI`メソッドで Object の URI を指定して、Object のインスタンスを生成します。
-1. `refreshSynchronous`メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
+1. `refresh`メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
 
-インスタンス作成後、`refreshSynchoronous`メソッドを呼ぶのを忘れないようにしてください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。
+インスタンス作成後、`refresh`メソッドを呼ぶのを忘れないようにしてください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。

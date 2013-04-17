@@ -15,7 +15,7 @@ Object より一部の Key-value ペアのみ削除したい場合はフルア�
 
 ## フルアップデート
 
-Object をフルアップデートする例を以下にあげます。全ての Key-Value ペアをセット後に`saveAllFieldsSynchronous`メソッドをコールすることで Object が完全に上書きされます。
+Object をフルアップデートする例を以下にあげます。全ての Key-Value ペアをセット後に`saveAllFields`メソッドをコールすることで Object が完全に上書きされます。
 
 ```objc
 NSError *error;
@@ -37,7 +37,7 @@ if(error != nil) {
 
 ## 部分アップデート
 
-Object を部分アップする例を以下にあげます。更新する Key-Value ペアをセット後に`saveSynchronous`メソッドをコールすることで、Object が部分的にアップデートされます。
+Object を部分アップする例を以下にあげます。更新する Key-Value ペアをセット後に`save`メソッドをコールすることで、Object が部分的にアップデートされます。
 
 ```objc
 KiiObject *object1 = [KiiObject objectWithURI:@"_URI_OF_THE_OBJECT_"];

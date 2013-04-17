@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object のスコープと ACL 設定
 sort-priority: 70
 summary: Object は、その Object が作成された Bucket のスコープを引き継ぎます。例えば Application Scope を持つ Bucket の中に Object を作成した場合、この Object は Application Scope を引き継ぎます。
+page-id: ios-scoping_objects-ja
 ---
 ## Object のスコープと規定のアクセス制御
 

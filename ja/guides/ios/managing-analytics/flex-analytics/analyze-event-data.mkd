@@ -18,8 +18,8 @@ summary: イベントデータ（Event Data）の解析を行う基本的なス�
     * **"age"** ... ユーザの年齢 (18, 20, 42, 44, ...)
 
 * 集めたイベントデータを元に、以下のメトリクスを用いて解析を行いたい。
-    * **メトリクス#1：** **"age"**の平均値を、**"city", "location", "gender" **および **"children"**毎に評価
-    * **メトリクス#2：** イベントデータ総数を、**"gender", "city", "location", "children" **および**"age"**毎に評価
+    * **メトリクス#1： **"age"** の平均値を、**"city"**, **"location"**, **"gender"** および **"children"** 毎に評価
+    * **メトリクス#2：** イベントデータ総数を、**"gender"**, **"city"**, **"location"**, **"children"** および **"age"** 毎に評価
 
 ## 1. メトリクスを定義する
 
@@ -27,11 +27,13 @@ summary: イベントデータ（Event Data）の解析を行う基本的なス�
 
 1. 開発者ポータルにて、"Metrics" アイコンをクリック後、"Config" を選択します。
 1. "Add" ボタンを押下します。
+
     ![](01.png)
 
     以下のように Aggregation Rules 定義画面が表示されます。
 
     ![](02.png)
+
 1. "Name" セクションに Aggregation Rule の名前を入力します。
 1. "Data" セクションの "Event Data" を選択します。
 1. "Aggregated using" セクションに以下の情報を入力し、ファクトの集計方法を定義します。

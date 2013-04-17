@@ -3,7 +3,7 @@ layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
 ---
-グループのオーナーは、グループメンバーの一覧を`getMemberListSynchronous`メソッドにより取得できます。
+グループのオーナーは、グループメンバーの一覧を `getMemberList` メソッドにより取得できます。
 
 ```objc
 NSError *error;

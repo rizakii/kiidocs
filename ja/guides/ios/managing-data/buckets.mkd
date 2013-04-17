@@ -76,7 +76,7 @@ KiiFile *file = [bucket fileWithLocalPath:localPath];
 
 Group Scope と User Scope のBucket については ACL を設定して新たなパーミッションを追加することができます（例: Anonymous User に Bucket 内へのデータ作成を許可する)
 
-<p class="callout">データ単位で付与可能なアクセス権限としてKiiACLObjectActionReadとKiiACLObjectActionWriteが存在します。詳細はセクション「ObjectのスコープとACL設定」と「FileのスコープとACL設定」を参照してください。</p>
+<p class="callout">データ単位で付与可能なアクセス権限としてKiiACLObjectActionReadとKiiACLObjectActionWriteが存在します。詳細はセクション「{% page_link ios-scoping_objects-ja %}」と「{% page_link ios-scoping_files-ja %}」を参照してください。</p>
 
 Bucketに付与できるアクセス権限は以下の通りです。
 
@@ -84,7 +84,7 @@ Bucketに付与できるアクセス権限は以下の通りです。
 * **KiiACLBucketActionCreateObjects** : Bucket 内に新たなデータを作成するための権限
 * **KiiACLBucketActionDropBucket** : Bucket を、その中のデータと共にドロップするための権限
 
-一例として、User Scope のBucket に２つの新しい ACL を追加する例をあげます。この例では、KiiACLBucketActionQueryObjects 権限と KiiACLBucketActionCreateObjects 権限を Authenticated User （サインイン済のユーザ全員）に対して付与しています。
+一例として、User Scope のBucket に２つの新しい ACL を追加する例をあげます。この例では、KiiACLBucketActionQueryObjects 権限と KiiACLBucketActionCreateObjects 権限を Authenticated User （サインイン済の全ユーザ）に対して付与しています。
 
 ```objc
 KiiBucket *bucket = [[KiiUser currentUser] bucketWithName:@"my_private"];

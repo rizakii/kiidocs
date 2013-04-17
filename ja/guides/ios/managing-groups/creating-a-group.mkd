@@ -8,7 +8,7 @@ sort-priority: 10
 基本手順は以下の通りです。
 
 1. `groupWithName`  メソッドを使用して KiiGroup インスタンスを生成します。
-1. `saveSynchronous`  メソッドをコールして KiiGroup の作成リクエストを送信します。
+1. `save`  メソッドをコールして KiiGroup の作成リクエストを送信します。
 
 ```objc
 NSError *error;

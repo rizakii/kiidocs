@@ -32,7 +32,7 @@ if (error != nil) {
 
 ## ファイル全体の更新
 
-ファイル全体を更新する例です。`setLocalPath`メソッドで新しいファイルのパスを指定した後、必要に応じてメタデータの編集を行った後に`saveFileSynchronous`メソッドを呼ぶことで、ファイル全体の更新が Kii Cloud に反映されます。
+ファイル全体を更新する例です。`setLocalPath`メソッドで新しいファイルのパスを指定した後、必要に応じてメタデータの編集を行った後に`saveFile`メソッドを呼ぶことで、ファイル全体の更新が Kii Cloud に反映されます。
 
 ```objc
 KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];

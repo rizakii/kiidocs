@@ -100,9 +100,10 @@ page-id: ios-push_to_user-ja
 
 以後、"Push to User" 通知の詳細な利用方法について説明していきます。
 
-* [トピックを作成する]({% page_url ios-creating_topic-ja %})
-* [Topic を購読する/購読を解除する]({% page_url ios-subscribing_topic-ja %})
-* [メッセージを送信する]({% page_url ios-sending_push_to_user_messages-ja %})
-* [メッセージを受信する]({% page_url ios-push_to_user_receiving_messages-ja %})
-* [トピックの ACL を変更する]({% page_url ios-settings_topic_acl-ja %})
+* {% page_link ios-creating_topic-ja %}
+* {% page_link ios-subscribing_topic-ja %}
+* {% page_link ios-confirming_subscription_topic-ja %}
+* {% page_link ios-sending_push_to_user_messages-ja %}
+* {% page_link ios-push_to_user_receiving_messages-ja %}
+* {% page_link ios-settings_topic_acl-ja %}
 
