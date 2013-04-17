@@ -90,7 +90,7 @@ curl -v -X POST \
 
 Group Scope と User Scope を持つ Bucket には、新たな ACL を設定することができます。例えば、ある Bucket に対して Anonymous User がデータを作成できるようにするなどの制御が行えます。
 
-<p class="callout">データ単位に付与可能なアクセス制御に READ\_EXISTING\_OBJECT と WRITE\_EXISTING OBJECT が存在します。これらの詳細についてはセクション「Objct Storage - Object のスコープとACL設定」と「File Storage - File のスコープとACL設定」を参照してください。</p>
+<p class="callout">データ単位に付与可能なアクセス制御に READ\_EXISTING\_OBJECT と WRITE\_EXISTING OBJECT が存在します。これらの詳細についてはセクション「{% page_link rest-scoping_objects-ja %}」と「{% page_link rest-scoping_files-ja %}」を参照してください。</p>
 
 Bucket に対して付与可能なアクセス制御には、以下の2種類があります。
 
