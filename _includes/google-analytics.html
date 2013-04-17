@@ -1,0 +1,27 @@
+<script type="text/javascript">
+var customVar = (function() {
+  function zp(n) {
+    return n > 10 ? n : "0" + n
+  }
+  var now = new Date;
+  return now.getFullYear() + "-" + zp(now.getMonth() + 1) + "-"
+      + (Math.floor(now.getDate()/10) + 1);
+})();
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-38019495-1']);
+_gaq.push(['_setCustomVar', 1, 'cohort', customVar, 1]);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_setAccount', 'UA-38763092-1']);
+_gaq.push(['_setDomainName', 'kii.com']);
+_gaq.push(['_setCustomVar', 1, 'cohort', customVar, 1]);
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script');
+  ga.type = 'text/javascript';
+  ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(ga, s);
+})();
+</script>
