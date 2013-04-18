@@ -153,7 +153,7 @@ Note that you need to know the password.
 
 ## Tips
 
-T.B.D.
+* For generating REST documents from WADL files, use the WADL parsing and representation library provided at <https://github.com/c0ze/kii-ruby-wadl>.
 
 ## Others
 
