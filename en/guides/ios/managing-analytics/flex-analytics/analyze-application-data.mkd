@@ -163,3 +163,56 @@ Follow the steps below to view the metrics on the dev portal.
 
         ![](14.png)
 
+
+## Fetch Analytics Results using iOS SDK
+
+We can extract the analytics results via Android SDK.  To do so, we need to specify the following information:
+
+* Dimension/Grouping Key (which field?).  If omitted, the default view will be used.
+* Filters (if any).  When multiple filters are defined, they will be concatenated by "AND".
+* Date range.
+
+We also need to specify the corresponding Aggregation Rule ID that will be shown on the dev portal when we define the metrics.  Please check the following sample snippet.
+
+```obj-c
+// Create analytics result filter
+KAFilter *filter = [[[KAFilter alloc] init] autorelease];
+[filter addFilter:@"AppVersion"
+        withValue:@"9"];
+
+// Set date range
+NSDate *start = [NSDate dateWithTimeIntervalSinceNow:-1*60*60*24*7]; // One week ago
+NSDate *end = [NSDate date]; // Now
+KADateRange *range = [KADateRange rangeWithStart:start 
+                                          andEnd:end];
+
+// Create query
+KAResultQuery *query = [[[KAResultQuery alloc] init] autorelease];
+// Set grouping key to query
+[query setGroupingKey:@"UserLevel"];
+// Set filter to query
+[query setFilter:filter];
+// Set date range to query
+[query setDateRange:range];
+
+// AggregationID
+NSString *aggregationID = @"22";
+
+// Retrieve result
+[KiiAnalytics getResultWithID:aggregationID 
+                     andQuery:query 
+                     andBlock:^(KAGroupedResult *results, NSError *error) {
+  if(error != nil){
+    NSLog(@"Error getting results");
+  }
+}];
+```
+
+The analytics results will be a list of GroupedSnapShots.  Each GroupedSnapShot has the following properties:
+
+* Name : Name of the key specified on group-by.
+* Data : JSON Array that contains data array grouped-by.
+* PointStart : Started time of aggregation procedure.
+* PointInterval : Interval of aggregation procedure.
+
+Please check our [Appledoc]({% page_url references-en %}) for more details on how to interpret GroupSnapShot.
