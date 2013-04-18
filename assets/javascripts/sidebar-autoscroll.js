@@ -12,7 +12,7 @@ $(function() {
       var scrollTop = $(window).scrollTop();
       var offset = 0;
       var max = parent.height() - target.height();
-      if (scrollTop > targetTop) {
+      if ($(window).height() > target.height() && scrollTop > targetTop) {
         offset = scrollTop - targetTop;
         if (offset > max) {
           offset = max;
