@@ -57,9 +57,11 @@ Then open http://127.0.0.1:4000/ by using your favorite WEB browser.
 
 ## Editing work flow.
 
-See directories and files under `en/` and `ja/`, feel it.
+Please check files and directories and files under `en/` and `ja/` directories.
 
-### YAML header.
+Here are some explanations to help you understand how to edit pages.
+
+### YAML header
 
 YAML header should be includes:
 
@@ -74,13 +76,14 @@ use `en-doc` for English, use `ja-doc` for Japanese.
 
 #### sort-priority
 
-To sort pages in a same directory, add this header with integer value.  Smaller
-value are put to front of list in left side navigator.
+The number used as a referece for sorting pages in the same directory.  The pages will be aligned in the left side navigator in an ascending order based on this sort-priority number.
 
 #### page-id
 
-Make page references abstract, we use `page-id` in YAML header of most of
-pages.  `page-id` consists two or three parts:
+Make page references abstract, we use `page-id` in YAML header for the most of
+pages.  
+
+`page-id` consists two or three parts:
 
     {platform}-{title}-{language}
 
@@ -88,8 +91,9 @@ pages.  `page-id` consists two or three parts:
 
     {title}-{language}
 
-Each parts should not contain `-` characters.  For example `en/guides.mkd` has
-two parts `page-id`:
+Each part should not contain `-` characters.  
+
+An example of two parts `page-id` (from `en/guides.mkd`):
 
 ```yaml
 ---
@@ -100,7 +104,7 @@ sort-priority: 20
 ---
 ```
 
-Example of three parts `page-id`, see `en/starts/android.mkd`:
+An example of three parts `page-id` (from `en/starts/android.mkd`):
 
 ```yaml
 ---
@@ -114,39 +118,38 @@ page-id: android-quickstart-en
 
 ### Contents
 
-#### page\_link/page\_url
+Write the contents using regular Markdown syntax.
 
-Usage: `{% page_link {page-id} %}` or `{% page_url {page-id} %}`
+#### Referring to other pages
+
+Use `{% page_link {page-id} %}` or `{% page_url {page-id} %}`.
 
 `page_link` is expanded to:
 
 ```html
-<a href="{linked page's URL}">{linked page's title}</a>
+<a href="{URL of the target page}">{title of the target page}</a>
 ```
 
-See `en/samples.mkd` for an example of `page_link`.page_url
+See `en/samples.mkd` for an example of how to use `page_link`.
 
 `page_url` is expanded to:
 
 ```
-{linked page's URL}
+{URL of the target page}
 ```
 
 See `en.html` for an example of `page_url`.page_url
 
 
-## Process
+## Deploying the pages to documentation.kii.com
 
-T.B.D.
+Simply upload everything inside `_site`.  You can use the helper script for this.
 
-### How to deploy to staging server.
+    $ jekyll
+    $ sh scripts/sync.sh
 
-T.B.D.
 
-### How to deploy to production server.
-
-T.B.D.
-
+Note that you need to know the password.
 
 ## Tips
 
