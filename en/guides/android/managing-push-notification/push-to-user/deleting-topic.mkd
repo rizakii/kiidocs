@@ -1,0 +1,18 @@
+---
+layout: en-doc
+title: Delete a Topic
+sort-priority: 15
+---
+Deleting a topic is simple.  Just invoke `delete` method like the following snippet:
+
+```java
+// Assume that "topic" is already instantiated.
+
+try {
+    topic.delete();
+} catch (IOExecption ioe) {
+    // check failure reason.
+} catch (AppException e) {
+    // check failure reason.
+}
+```

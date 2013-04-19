@@ -1,0 +1,18 @@
+---
+layout: ja-doc
+title: トピックを削除する
+sort-priority: 15
+---
+トピックを削除するには `delete` メソッドを実行します。
+
+```java
+// Assume that "topic" is already instantiated.
+
+try {
+    topic.delete();
+} catch (IOExecption ioe) {
+    // check failure reason.
+} catch (AppException e) {
+    // check failure reason.
+}
+```
