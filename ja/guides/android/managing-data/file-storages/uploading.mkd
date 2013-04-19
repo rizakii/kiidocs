@@ -3,25 +3,179 @@ layout: ja-doc
 title: File のアップロード
 sort-priority: 10
 ---
-ファイルをアップロードするには、まず対応する KiiFile のインスタンスを作成します。
-このインスタンスは、KiiFileBucket クラスのインスタンスメソッドを呼び出すことで作成可能です。この際に KiiFile へ自動的にメタデータのセットが行われますが、必要に応じて一部メタデータの更新をすることでもできます。  
-最後に KiiFile インスタンスの `save` メソッドを呼び出し、ファイル本体とメタデータを KiiCloud へアップロードします。
+Kii Cloud SDK は、以下の2種類のファイルアップロード方法を提供しています。
 
-ファイルのアップロードを行うサンプルを以下に示します。
+* **中断/再開可能なファイルアップロード:** ファイルアップロード途中における中断および再開をサポートした方式です。例えば、何らかの理由（e.g., ネットワーク断やユーザ操作）によりファイルアップロードが中断した場合、このアップロードを中断箇所から再開することができます。特に、サイズの大きなファイルを不安定なネットワーク環境下でアップロードする際になどに適しています。
+* **シンプルなファイルアップロード:** ファイルアップロード途中における中断および再開をサポートしない方式です。何らかの理由によりファイルアップロードが中断した場合、再度最初からファイルのアップロードをやり直す必要があります。
+
+
+## 中断/再開可能なファイルアップロード
+
+中断/再開可能なファイルのアップロードを実施する例を以下にあげます。
+
+```java
+// Create a reference to the existing local file.
+File localFile = new File(Environment.getExternalStorageDirectory(), 
+        "sample.mp4");
+
+// Create a KiiUploader
+KiiFile kfile = Kii.fileBucket("MyBucket").file();
+KiiUploader uploader = kfile.uploader(getApplicationContext(), 
+         localFile);
+
+try {
+  // Start uploading the file.
+  uploader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Upload already in progress.
+  // You can cancel the call and wait for the upload to complete.
+} catch (SuspendedException e) {
+  // Upload suspended due to a network error or user interruption.
+  // You can resume the upload.
+} catch (TerminatedException e) {
+  // Upload terminated due to an error (e.g., the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+ここでは以下の処理を実施しています。
+
+* アップロード対象ファイル ("sample.mp4") のリファレンスを作成。
+* `file` メソッドを実行して、`KiiFile` インスタンスを作成。
+* アップロード対象ファイルのリファレンスを指定の上 `uploader` メソッドを実行して `KiiUploader` インスタンスを作成。
+* `transfer` メソッドを実行して、アップロードを開始。
+
+`tranfer` メソッドの実行により、Kii Cloud へのファイルアップロードが開始されます。何らかの理由によりアップロードが中断した場合 SuspendedException が発生します。この場合、次のセクションに示すようにアップロードの再開を行うことができます。
+
+### 中断したアップロードの再開
+
+ファイルアップロードは、自動的（e.g., ネットワーク断により）または主動的（e.g., ユーザ操作により）に中断されることがあります。中断されたアップロードは、後ほど再開することにより、中断したポイントからファイルのアップロードをリスタートすることができます。
+
+以下に、中断したファイルアップロードを再開する例をあげます。
+
+```java
+KiiFileBucket fbucket = Kii.fileBucket("MyBucket");
+KiiRTransferManager manager = fbucket.getTransferManager();
+List<KiiUploader> suspended = null;
+try {
+  suspended = manager.listUploadEntries(getApplicationContext());
+} catch (StateStoreAccessException e1){
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+
+// Choose the suspended upload to be resumed.
+// (e.g., show a list of suspended uploads to a user and let her select)
+
+// In this snippet, we will resume the first one.
+KiiUploader uploader = suspended.get(0);
+try {
+  // Resume file upload.
+  uploader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Upload already in progress.
+  // You can cancel the call and wait for the upload to complete.
+} catch (SuspendedException e) {
+  // Upload suspended due to a network error or user interruption.
+  // You can resume the upload.
+} catch (TerminatedException e) {
+  // Upload terminated due to an error (e.g., the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+ここでは以下の処理を実施しています。
+
+* ファイルアップロード先の `File Bucket` のインスタンスを作成。
+* `getTransferManager` メソッドを実行して、`KiiRTransferManager` インスタンスを作成。
+* `listUploadEntries` メソッドを実行して、中断中の `KiiUploader` インスタンス一覧を取得。
+* 再開する `KiiUploader` インスタンスの `transfer` メソッドを実行して、アップロードを再開。
+
+
+### ファイルアップロードを手動で中断
+
+現在進行中のファイルアップロードは、手動で中断することができます。以下にファイルアップロードを中断する例をあげます。
+
+```java
+KiiUploader mUploader; // This is the ongoing file upload.
+
+// Assume this method is called when the suspend event is triggered.
+// (e.g., a user pushed "suspend" button)
+public void onSuspendButtonClicked() {
+  try {
+    // Suspend the file upload.
+    this.mUploader.suspend();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the upload has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+アップロードを中断するには `suspend` メソッドを実行します。なお、既にファイルアップロードが完了している場合は中断に失敗します。
+
+
+### ファイルアップロードを手動で終了
+
+現在進行中および中断中のファイルアップロードは、手動で終了することができます。一旦終了したアップロードは再開することができなくなります。
+
+以下にファイルアップロードを終了する例をあげます。
+
+```java
+KiiUploader mUploader; // This is the file upload to be terminated
+
+// Assume this method is called when the termination event is triggered.
+// (e.g., a user pushed "cancel" button)
+public void onCancelButtonClicked() {
+  try {
+    // Terminate the file upload.
+    this.mUploader.terminate();
+  } catch (NoEntryException e) {
+    // Entry not found. Mostly the upload has already be done. 
+  } catch (StateStoreAccessException e) { 
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry. 
+  } 
+}
+```
+
+アップロードを終了するには `terminate` メソッドを実行します。なお、既にファイルアップロードが完了している場合は終了に失敗します。
+
+
+## シンプルなファイルアップロード
+
+中断/再開を伴わないファイルアップロードを利用することも可能です（ただし、特にサイズの大きなファイルを Kii Cloud にアップロードするケースなどにおいては中断/再開可能なアップロードを利用することを推奨します）
+
+シンプルなファイルアップロードを行う例を以下にあげます。
 
 ```java
 // Create a reference to the existing local file
-File localFile = new File(Environment.getExternalStorageDirectory(), "test.txt");
+File localFile = new File(Environment.getExternalStorageDirectory(), 
+  "sample.txt");
 
 // Create a KiiFile instance and save it
 try {
-  KiiFile kiiFile = Kii.user().fileBucket("my_private").file(localFile);
+  KiiFile kiiFile = Kii.fileBucket("MyBucket").file(localFile);
   kiiFile.save();
 } catch (IOException e) {
   // File Uploading failed for some reasons
   // Please check IOException to see what went wrong...
 } catch (AppException e) {
   // File Uploading failed for some reasons
-  // Please check CloudExecutionException to see what went wrong...
+  // Please check AppException to see what went wrong...
 }
 ```
+
+ここでは以下の処理を実施しています。
+
+* アップロード対象ファイル ("sample.txt") のリファレンスを作成。
+* `file` メソッドを実行して、`KiiFile` インスタンスを作成。
+* `save` メソッドを実行して、ファイルのアップロードを開始。

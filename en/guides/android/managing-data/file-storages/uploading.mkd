@@ -3,23 +3,180 @@ layout: en-doc
 title: Uploading Files
 sort-priority: 10
 ---
-To upload a file, create a `KiiFile` instance by invoking the `file` method of your user's `KiiFileBucket` instance. This will automatically create the corresponding metadata within `KiiFile`. Before uploading, you can optionally update some of the metadata -- but must invoke the `save` method to upload the file to the cloud. 
+Kii Cloud SDK offers the following two types of file uploading.
 
-Here is an example:
+* **Uploading with resumable transfer:** This allows you to suspend/resume file uploading.  For example, you will be able to resume a file upload when it is interrupted in the middle due to some reasons (e.g., network down or manual interruption).  The mechanism is especially useful when you are to upload a big file under poor network condition.  You will not have to restart the whole uploading again if it is interrupted in the middle; you can simply resume the upload from where you were left off.
+
+* **Uploading without resumable transfer:** This is all-or-nothing file uploading without any suspend/resume feature.  If the upload is interrupted in the middle, you will need to restart the upload from the start.
+
+
+## Uploading a File with Resumable Transfer
+
+Check the following snippet to see how you can upload a file with the resumable feature.
+
+```java
+// Create a reference to the existing local file.
+File localFile = new File(Environment.getExternalStorageDirectory(), 
+        "sample.mp4");
+
+// Create a KiiUploader
+KiiFile kfile = Kii.fileBucket("MyBucket").file();
+KiiUploader uploader = kfile.uploader(getApplicationContext(), 
+         localFile);
+
+try {
+  // Start uploading the file.
+  uploader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Upload already in progress.
+  // You can cancel the call and wait for the upload to complete.
+} catch (SuspendedException e) {
+  // Upload suspended due to a network error or user interruption.
+  // You can resume the upload.
+} catch (TerminatedException e) {
+  // Upload terminated due to an error (e.g., the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+Here is what is taking place in the snippet:
+
+* Create a reference to the target file ("sample.mp4").
+* Create a `KiiFile` instance by invoking `file` method.
+* Create a `KiiUploader` instance by invoking `uploader` method while specifying the target file reference.
+* Start uploading by invoking `transfer` method.
+
+Invoking `tranfer` method starts the file upload.  If everything go well, the file will be uploaded to Kii Cloud.  If the upload is interrupted for some reasons, it will be suspended and SuspendedException will be thrown.  In this case, you can resume the upload (check the next section).
+
+
+### Resuming a Suspended Upload
+
+File uploading could be suspended either automatically (e.g., by network failure) or manually (e.g., by user interruption).  The suspended file upload can later be resumed so as to continue the upload from the point where it was interrupted.
+
+Check the following snippet to see how to resume the suspended file upload.
+
+```java
+KiiFileBucket fbucket = Kii.fileBucket("MyBucket");
+KiiRTransferManager manager = fbucket.getTransferManager();
+List<KiiUploader> suspended = null;
+try {
+  suspended = manager.listUploadEntries(getApplicationContext());
+} catch (StateStoreAccessException e1){
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+
+// Choose the suspended upload to be resumed.
+// (e.g., show a list of suspended uploads to a user and let her select)
+
+// In this snippet, we will resume the first one.
+KiiUploader uploader = suspended.get(0);
+try {
+  // Resume file upload.
+  uploader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Upload already in progress.
+  // You can cancel the call and wait for the upload to complete.
+} catch (SuspendedException e) {
+  // Upload suspended due to a network error or user interruption.
+  // You can resume the upload.
+} catch (TerminatedException e) {
+  // Upload terminated due to an error (e.g., the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+Here is what is taking place in the snippet:
+
+* Create a `KiiFileBucket` instance of the file bucket to which the file is being uploaded.
+* Create a `KiiRTransferManager` instance by invoking `getTransferManager` method.
+* Get a list of suspended `KiiUploader` instances by invoking `listUploadEntries` method.
+* Select the `KiiUploader` instance to resume, and then invoke `transfer` method to resume.
+
+### Manually Suspending a File Upload
+
+The ongoing file upload can be manually suspended.  Check the following snippet to see how you can suspend the file upload.
+
+```java
+KiiUploader mUploader; // This is the ongoing file upload.
+
+// Assume this method is called when the suspend event is triggered.
+// (e.g., a user pushed "suspend" button)
+public void onSuspendButtonClicked() {
+  try {
+    // Suspend the file upload.
+    this.mUploader.suspend();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the upload has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+Just invoke `suspend` method.  This will suspend the target file upload unless the upload is already finished.
+
+### Manually Terminating a File Upload
+
+The ongoing or suspended file upload can be manually terminated.  Once terminated, you will not be able to resume the file upload; you will need to start uploading the file from the beginning.
+
+Check the following snippet to see how you can terminate the file upload.
+
+```java
+KiiUploader mUploader; // This is the file upload to be terminated
+
+// Assume this method is called when the termination event is triggered.
+// (e.g., a user pushed "cancel" button)
+public void onCancelButtonClicked() {
+  try {
+    // Terminate the file upload.
+    this.mUploader.terminate();
+  } catch (NoEntryException e) {
+    // Entry not found. Mostly the upload has already be done. 
+  } catch (StateStoreAccessException e) { 
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry. 
+  } 
+}
+```
+
+Just invoke `terminate` method.  This will terminate the target file upload unless the upload is already finished.
+
+
+
+## Uploading a File without resumable transfer
+
+You can upload a file without resumable feature.  (We recommend to use the upload with resumable feature, especially when you are uploading a big file to Kii Cloud).
+
+Check the following snippet to see how you can do this.
 
 ```java
 // Create a reference to the existing local file
-File localFile = new File(Environment.getExternalStorageDirectory(), "test.txt");
+File localFile = new File(Environment.getExternalStorageDirectory(), 
+  "sample.txt");
 
 // Create a KiiFile instance and save it
 try {
-  KiiFile kiiFile = Kii.user().fileBucket("my_private").file(localFile);
+  KiiFile kiiFile = Kii.fileBucket("MyBucket").file(localFile);
   kiiFile.save();
 } catch (IOException e) {
   // File Uploading failed for some reasons
   // Please check IOException to see what went wrong...
 } catch (AppException e) {
   // File Uploading failed for some reasons
-  // Please check CloudExecutionException to see what went wrong...
+  // Please check AppException to see what went wrong...
 }
 ```
+
+Here is what is taking place in the snippet:
+
+* Create a reference to the target file ("sample.txt").
+* Create a `KiiFile` instance by invoking `file` method.
+* Invoke `save` method to upload the file to Kii Cloud.
