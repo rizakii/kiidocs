@@ -19,48 +19,63 @@ Only an app developer can send a push message to an app-scope topic.  This can b
 
 3. Set the content of your push notification by specifying the following information.
 
-   **Push message destination**
+    **Push message destination**
 
-   First, define to where the push notification is to be sent.
+    First, define to where the push notification is to be sent.
 
-   ![](02.png)
+    ![](02.png)
 
- * Select "Topic" in "Send To" section.
- * Put the target topic name in "Topic Name" form.
- * Select the appropriate environments (Developer, Production or Both).
+    <UL>
+        <LI>Select "Topic" in "Send To" section.</LI>
+        <LI>Put the target topic name in "Topic Name" form.</LI>
+        <LI>Select the appropriate environments (Developer, Production or Both).</LI>
+    </UL>
  
-   **Push message cotent**
+    **Push message cotent**
 
-   Next, define what is to be sent.
+    Next, define what is to be sent.
 
-   ![](03.png)
+    ![](03.png)
 
- * Toggle on/off the predefined fields in "Include" section.<BR />The following values will be set in the push message when the fields are enabled.
-  * App ID: Application ID (AppID) 
-  * Sender: Client ID
-  * When: Timestamp when the push message is sent.
-  * Origin: The value "EXPLICIT" indicating that the message is "Push To Users" notification.
-  * Object Scope: The value "APP" indicating that the message is pushed via an app-scope topic.
-  * Topic ID: Topic ID of the target topic.
- * Set arbitrary key-value fields.
-  * You can add more key-value pair field(s) by clicking the "+" button
-  * By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.
+    <UL>
+        <LI>Toggle on/off the predefined fields in "Include" section.<BR />The following values will be set in the push message when the fields are enabled.</LI>
+        <UL>
+            <LI>App ID: Application ID (AppID) </LI>
+            <LI>Sender: Client ID</LI>
+            <LI>When: Timestamp when the push message is sent.</LI>
+            <LI>Origin: The value "EXPLICIT" indicating that the message is "Push To Users" notification.</LI>
+            <LI>Object Scope: The value "APP" indicating that the message is pushed via an app-scope topic.</LI>
+            <LI>Topic ID: Topic ID of the target topic.</LI>
+        </UL>
+        <LI>Set arbitrary key-value fields.</LI>
+        <UL>
+            <LI>You can add more key-value pair field(s) by clicking the "+" button</LI>
+            <LI>By toggling the "Droid" and "Apple" icons, you can specify each key-value pair to be sent only to Android devices or iOS devices.</LI>
+        </UL>
 
-   **APNS/GCM specific settings**
+    </UL>
 
-   Finally (and optionally), specify any APNS/GCM specific settings.
+    **APNS/GCM specific settings**
 
-   ![](04.png)
+    Finally (and optionally), specify any APNS/GCM specific settings.
 
- * Toggle on/off GCM/APNS specific settings.
-  * For the details on GCM settings, please refer the documentation by Google.
-  * For the details on APNS settings, please refer the documentation by Apple.<BR />Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.
+    ![](04.png)
+
+    <UL>
+        <LI>Toggle on/off GCM/APNS specific settings.</LI>
+        <UL>
+            <LI>For the details on GCM settings, please refer the documentation by Google.</LI>
+            <LI>For the details on APNS settings, please refer the documentation by Apple.<BR />Note that you need to set Alert-related fields in order to deliver the push message to an iOS app that is in the background.</LI>
+        </UL>
+    </UL>
 
 4. Click "Send..." when done.  The corresponding message will be sent to the target topic.
 
-## Scenario #2: "Group messaging"
+## Scenario #2: "Group messaging" <BR />Scenario #3: "Pushing my TODO items to all devices"
 
-Any group members can can send a push message to a group-scope topic.  Let us explore how to do this in the following sample snippet:
+Any group members can can send a push message to a group-scope topic (Scenario #2).
+
+Let us explore how to do this in the following sample snippet:
 
 ```java
 try {
@@ -89,15 +104,9 @@ try {
 }
 ```
 
-Here is a brief description of what is happening in the snippet.
+For a user-scope topic, only a user who owns the topic can send a push message to this topic (Scenario #3).
 
-* Create a push message by invoking `buildWith` method while specifying key-value pairs to be included in the message.
-* Send the message by invoking `sendMessage` method.
-
-
-## Scenario #3: "Pushing my TODO items to all devices"
-
-Only a user who owns the topic can send a push message to this topic.  Let us explore how to do this in the following sample snippet.
+The following is a sample snippet.
 
 ```java
 try{
@@ -121,7 +130,72 @@ try{
 }
 ```
 
-Here is a brief description of what is happening in the snippet:
+For both examples, here is a brief description of what is happening in the snippets:
 
 * Create a push message by invoking `buildWith` method while specifying key-value pairs to be included in the message.
 * Send the message by invoking `sendMessage` method.
+
+
+### Setting GCM and APNS specific fields
+
+Sometimes you want to include GCM-specific and/or APNS-specific field values in your push messages.
+
+The following snippet shows how to do this.
+
+```java
+// Assume group/user scope topic is created.
+Data data = new Data();
+data.put("your_keys", "your_values");
+
+// Put GCM specific values.
+GCMMessage gcm = GCMMessage.builder()
+        .withCollapseKey("CollapseKey")
+        .withRestrictedPackageName("your.package.name")
+        .withTimeToLive(10)
+        .build();
+
+// Put APNS specific values.
+APNSMessage apns = APNSMessage.builder()
+        .withBadge(10)
+        .withSound("sound-file")
+        .withAlertBody("alert message text")
+        .withAlertLocKey("locKey")
+        .withAlertActionLocKey("actionLocKey")
+        .withAlertLocArgs(new String[] { "loc-args" })
+        .withAlertLaunchImage("LaunchImage")
+        .build();
+
+// Send push message
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withGCMMessage(gcm)
+        .withAPNSMessage(apns)
+        .build();
+try {        
+    topic.sendMessage(message);
+} catch (IOException goe) {
+    // check fail cause
+} catch (AppException e) {
+    // check fail cause
+}
+```
+
+* For putting GCM-specific fields, create a `GCMMessage` instance by invoking `build` method.
+* For puting APNS-specific fields, create an `APNSMessage` instance by invoking `build` method.
+* When constructing a `KiiPushMessage` instance, include the `GCMMessage` and/or `APNSMessage` instances.
+
+By default, the push message will be sent to both Android and iOS devices.  You can control the message delivery by setting a flag upon constructing a `KiiPushMessage` instance like the following example:
+
+```java
+// Deliver the push message to Android devices only
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withGCMMessage(gcm)
+        .enableAPNS(false)
+        .build();
+
+// Deliver the push message to iOS devices only
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withAPNSMessage(apns)
+        .enableGCM(false)
+        .build();
+
+```

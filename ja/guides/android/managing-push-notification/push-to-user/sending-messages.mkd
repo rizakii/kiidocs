@@ -29,6 +29,7 @@ Application scope トピックへのメッセージ送信は、アプリ開発�
         * 適当な環境（Developer, Production, Both）を選択。
 
     2.  メッセージの内容に関する情報
+
         次に、メッセージの内容を指定します。
 
         ![](03.png)
@@ -71,10 +72,10 @@ Application scope トピックへのメッセージ送信は、アプリ開発�
    送信されます。
 
 
-## シナリオ#2: グループメッセージング
+## シナリオ#2: グループメッセージング<BR />シナリオ#3: TODO リストを全てのデバイスにプッシュ
 
 Group scope トピックには、任意のグループメンバーがメッセージを送ることができま
-す。
+す（シナリオ#2）。
 
 以下に、メッセージ送信を行うコード例をあげます。
 
@@ -95,16 +96,7 @@ try {
 }
 ```
 
-ここでは以下の処理が行われています。
-
-* メッセージに含める key-value ペアを定義した後 `buildWith` メソッドを実行し、
-  プッシュメッセージを作成。
-* `sendMessage` メソッドを実行し、メッセージを送信。
-
-
-## シナリオ#3: TODO リストを全てのデバイスにプッシュ
-
-User scope トピックには、このトピックの owner のみがメッセージを送信できます。
+User scope トピックの場合は、このトピックの owner のみがメッセージを送信できます（シナリオ#3）。
 
 以下に、メッセージ送信を行うコード例をあげます。
 
@@ -130,8 +122,71 @@ try{
 }
 ```
 
-ここでは以下の処理をしています。
+いずれの例についても、以下の処理をしています。
 
 * メッセージに含める key-value ペアを定義した後、 `buildWith` メソッドを実行し
   プッシュメッセージを作成。
 * `sendMessage` メソッドを実行し、メッセージを送信。
+
+
+### APNS/GCM に特有のフィールドを設定する
+
+APNS および GCM に特有のフィールド値をプッシュメッセージに設定する方法を以下に示します。
+
+```java
+// Assume group/user scope topic is created.
+Data data = new Data();
+data.put("your_keys", "your_values");
+
+// Put GCM specific values.
+GCMMessage gcm = GCMMessage.builder()
+        .withCollapseKey("CollapseKey")
+        .withRestrictedPackageName("your.package.name")
+        .withTimeToLive(10)
+        .build();
+
+// Put APNS specific values.
+APNSMessage apns = APNSMessage.builder()
+        .withBadge(10)
+        .withSound("sound-file")
+        .withAlertBody("alert message text")
+        .withAlertLocKey("locKey")
+        .withAlertActionLocKey("actionLocKey")
+        .withAlertLocArgs(new String[] { "loc-args" })
+        .withAlertLaunchImage("LaunchImage")
+        .build();
+
+// Send push message
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withGCMMessage(gcm)
+        .withAPNSMessage(apns)
+        .build();
+try {        
+    topic.sendMessage(message);
+} catch (IOException goe) {
+    // check fail cause
+} catch (AppException e) {
+    // check fail cause
+}
+```
+
+* `GCMMessage` インスタンスを生成して GCM 特有のフィールドをセットします。
+* `APNSMessage` インスタンスを生成して APNS 特有のフィールドをセットします。
+* `KiiPushMessage` インスタンス生成時に、用意した `GCMMessage` と `APNSMessage` インスタンスを指定します。
+
+プッシュメッセージはデフォルトで全てのデバイス（Android と iOS の双方）に送信されます。次の例に示すように、`KiiPushMessage` インスタンス生成時にフラグを設定することによりプッシュメッセージの送信先を制御することができます。
+
+```java
+// Deliver the push message to Android devices only
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withGCMMessage(gcm)
+        .enableAPNS(false)
+        .build();
+
+// Deliver the push message to iOS devices only
+KiiPushMessage message = KiiPushMessage.buildWith(data)
+        .withAPNSMessage(apns)
+        .enableGCM(false)
+        .build();
+
+```
