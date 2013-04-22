@@ -5,12 +5,12 @@ sort-priority: 10
 ---
 Kii Cloud SDK offers the following two types of file uploading.
 
-* **Uploading with resumable transfer: (coming soon)** This allows you to suspend/resume file uploading.  For example, you will be able to resume a file upload when it is interrupted in the middle due to some reasons (e.g., network down or manual interruption).  The mechanism is especially useful when you are to upload a big file under poor network condition.  You will not have to restart the whole uploading again if it is interrupted in the middle; you can simply resume the upload from where you were left off.
+* **Uploading with resumable transfer:** This allows you to suspend/resume file uploading.  For example, you will be able to resume a file upload when it is interrupted in the middle due to some reasons (e.g., network down or manual interruption).  The mechanism is especially useful when you are to upload a big file under poor network condition.  You will not have to restart the whole uploading again if it is interrupted in the middle; you can simply resume the upload from where you were left off.
 
 * **Uploading without resumable transfer:** This is all-or-nothing file uploading without any suspend/resume feature.  If the upload is interrupted in the middle, you will need to restart the upload from the start.
 
 
-## Uploading a File with Resumable Transfer (coming soon)
+## Uploading a File with Resumable Transfer
 
 Check the following snippet to see how you can upload a file with the resumable feature.
 
