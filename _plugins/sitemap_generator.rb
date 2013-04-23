@@ -123,8 +123,9 @@ module Jekyll
       sitemap.add_element(urlset)
 
       # File I/O: create sitemap.xml file and write out pretty-printed XML
-      file = File.new(File.join(site.dest, SITEMAP_FILE_NAME), "w")
-      formatter = REXML::Formatters::Pretty.new(4)
+      FileUtils.mkdir_p(site.dest);
+      file = File.new(File.join(site.dest, SITEMAP_FILE_NAME), "wb")
+      formatter = REXML::Formatters::Pretty.new(2)
       formatter.compact = true
       formatter.write(sitemap, file)
       file.close
