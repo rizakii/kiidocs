@@ -164,7 +164,7 @@ Follow the steps below to view the metrics on the dev portal.
         ![](14.png)
 
 
-## Fetch Analytics Results using iOS SDK
+## 3. Fetch Analytics Results using iOS SDK
 
 We can extract the analytics results via Android SDK.  To do so, we need to specify the following information:
 
