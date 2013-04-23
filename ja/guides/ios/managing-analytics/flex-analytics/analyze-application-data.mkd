@@ -142,3 +142,54 @@ summary: <p>アプリデータ（App Data）の解析を行う基本的なステ
 
     ![](14.png)
 
+
+## 3. iOS SDK を用いて解析結果を取得する
+
+iOS SDK は、解析結果詳細を取得するための API を提供しています。
+
+解析結果取得の際には、以下の情報を指定します。
+
+* ディメンション（グルーピングキー）：どのディメンションで分割した結果を取得するか？指定を省略した場合は、デフォルトビュー（分割なし）の結果を取得します。
+* フィルター： 適用するフィルターを指定します。複数のフィルターが指定可能です。複数指定した場合は、指定内容を AND 結合したフィルタが適用されます。
+* 取得対象データのレンジ。
+
+さらに、開発者ポータルに表示されている Aggregation Rule ID を指定します。
+
+以下に、iOS Analytics SDK 経由で解析結果を取得するサンプル snippet をあげます。
+
+```obj-c
+// Create analytics result filter
+KAFilter *filter = [[[KAFilter alloc] init] autorelease];
+[filter addFilter:@"AppVersion"
+        withValue:@"9"];
+
+// Set date range
+NSDate *start = [NSDate dateWithTimeIntervalSinceNow:-1*60*60*24*7]; // One week ago
+NSDate *end = [NSDate date]; // Now
+KADateRange *range = [KADateRange rangeWithStart:start 
+                                          andEnd:end];
+
+// Create query
+KAResultQuery *query = [[[KAResultQuery alloc] init] autorelease];
+// Set grouping key to query
+[query setGroupingKey:@"UserLevel"];
+// Set filter to query
+[query setFilter:filter];
+// Set date range to query
+[query setDateRange:range];
+
+// AggregationID
+NSString *aggregationID = @"22";
+
+// Retrieve result
+[KiiAnalytics getResultWithID:aggregationID 
+                     andQuery:query 
+                     andBlock:^(KAGroupedResult *results, NSError *error) {
+  if(error != nil){
+    NSLog(@"Error getting results");
+  }
+}];
+```
+
+解析結果は GroupedSnapShot として返されます。各 GroupedSnapShot は、以下のプロパティにより構成されています。GroupSnapShot の解釈方法については [Appledoc]({% page_url references-ja %})を参照してください。
+
