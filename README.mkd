@@ -61,6 +61,10 @@ Please check files and directories and files under `en/` and `ja/` directories.
 
 Here are some explanations to help you understand how to edit pages.
 
+<font color="red">
+Importatnt: Be sure that all files are saved with LF line ending.
+</font>
+
 ### YAML header
 
 YAML header should be includes:
