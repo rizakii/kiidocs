@@ -3,6 +3,7 @@ layout: en-doc
 title: Managing Analytics
 sort-priority: 40
 page-id: android-managing_analytics-en
+old-url: /en/managing-analytics
 ---
 Kii Cloud provides two types of application analytics:
 

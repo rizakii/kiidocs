@@ -3,6 +3,7 @@ layout: en-doc
 title: Updating Files
 sort-priority: 30
 summary: 'Kii SDK supports the following two methods for updating files:'
+old-url: /en/updating-files--3
 ---
 * **Update metadata only**: This will only update the file metadata. Use this
   method when the content of the file has not changed.

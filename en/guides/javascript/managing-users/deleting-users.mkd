@@ -3,6 +3,7 @@ layout: en-doc
 title: Deleting Users
 sort-priority: 60
 summary: Sometimes when a user wishes to remove themselves from your application, you will want to permanently delete his/her user account.
+old-url: /en/deleting-users--2
 ---
 The following sample shows how you can delete a user:
 

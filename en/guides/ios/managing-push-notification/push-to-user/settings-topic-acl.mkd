@@ -3,6 +3,7 @@ layout: en-doc
 title: Change a Topic's ACL
 sort-priority: 50
 page-id: ios-settings_topic_acl-en
+old-url: /en/change-a-topic-s-acl--2
 ---
 Sometimes we want to change the default rules applied onto a topic.
 

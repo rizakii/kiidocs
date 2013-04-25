@@ -2,6 +2,7 @@
 layout: en-doc
 title: Analyze Event Data
 sort-priority: 20
+old-url: /en/analyze-event-data--4
 ---
 Here are four steps for analyzing Event Data.
 

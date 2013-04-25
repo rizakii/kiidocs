@@ -3,6 +3,7 @@ layout: en-doc
 title: Setting a Topic's ACL
 page-id: android-push_to_user_setting_acl-en
 sort-priority: 50
+old-url: /en/change-a-topic-s-acl
 ---
 Sometimes we want to modify the default rules applied onto a topic.  
 

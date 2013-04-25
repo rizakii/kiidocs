@@ -2,6 +2,7 @@
 layout: en-doc
 title: Changing a Group Name
 sort-priority: 20
+old-url: /en/change-a-group-name
 ---
 A group owner can change a name of the existing group with the
 `changeGroupName` method:

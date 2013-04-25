@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: 'Tutorial #4: Create new income/expense entries'
-summary: 'Kii Balance allows users to create new income/expense entries by pressing "Add" button.  Those entries are to be uploaded and stored to Kii Cloud.'
+summary: 'Kii Balance allows users to create new income/expense entries by pressing "Add" button.  Those entries are to be uploaded and stored to Kii Cloud.'
 sort-priority: 50
 page-id: tutorial_4_create_new_income_expense_entries-en
+old-url: /en/tutorial-4-create-new-income-expense-entries
 ---
 Kii Balance uses an Object with the following fields to save each income/expense entry (ref.Field.java):
 

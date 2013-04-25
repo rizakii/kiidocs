@@ -2,6 +2,7 @@
 layout: en-doc
 title: Changing a Group Owner
 sort-priority: 30
+old-url: /en/changing-a-group-owner
 ---
 A group owner can delegate the ownership to another user as shown:
 

@@ -4,6 +4,7 @@ title: Download the application and code
 summary: 
 sort-priority: 10
 page-id: download_the_application_and_code-en
+old-url: /en/download-the-application-and-code
 ---
 You can get the application (apk file) and code here:
 

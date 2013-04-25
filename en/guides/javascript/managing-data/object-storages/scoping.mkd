@@ -4,6 +4,7 @@ title: Scoping Objects
 sort-priority: 60
 summary: All objects have a "scope".  This scope determines the default access control applied to the object upon its creation. For example, an object created in an "Application Scope" bucket will have "Application Scope".
 page-id: javascript-scoping_objects-en
+old-url: /en/scoping-objects
 ---
 ## Object Scopes and Default Access Control
 

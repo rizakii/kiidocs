@@ -4,6 +4,7 @@ title: '"Direct Push" 通知'
 summary: '"Direct Push" 通知は、特定のユーザに直接メッセージを送る仕組みを提供します。この機能は、アプリ開発者のみが利用可能です。"Direct Push" メッセージは、開発者ポータルにおいて対象ユーザを選択し、送信内容を入力することで送信されます。'
 sort-priority: 20
 page-id: ios-direct_push-ja
+old-url: /jp/direct-push--2
 ---
 ## ユーザにメッセージを送信する
 

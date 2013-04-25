@@ -4,4 +4,5 @@ title: Managing Users
 sort-priority: 10
 summary: User management is fundamental to the success of your application. &nbsp;Kii Cloud provides various features to let your application onboard, manage and leverage your application's users. &nbsp;All of the tasks required for standard applications are simplified by our APIs, making it easy to get your application up and running.
 page-id: rest-managing_users-en
+old-url: /en/managing-users--5
 ---

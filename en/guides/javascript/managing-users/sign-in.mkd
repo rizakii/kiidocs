@@ -3,6 +3,7 @@ layout: en-doc
 title: Sign in
 sort-priority: 20
 summary: Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
+old-url: /en/sign-in--2
 ---
 
 ## Sign-in with a password

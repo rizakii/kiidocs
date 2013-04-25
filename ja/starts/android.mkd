@@ -3,6 +3,7 @@ layout: ja-doc
 title: Android クイックスタート
 sort-priority: 10
 page-id: android-quickstart-ja
+old-url: /jp/android-quick-start--2
 ---
 ## アプリケーションを開発者ポータルに登録する
 

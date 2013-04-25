@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: 'KTLoginViewController - iOS'
-summary: <p>This is a full tutorial, including a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTLoginViewController.</p><p class="note center">Dont know what KiiToolkit is? Check out the link <a href="http://blog.kii.com/?p=190">here</a></p>
+summary: <p>This is a full tutorial, including a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTLoginViewController.</p><p class="note center">Dont know what KiiToolkit is? Check out the link?<a href="http://blog.kii.com/?p=190">here</a></p>
 sort-priority: 20
 page-id: ios-tutorial_login_view_controller-en
+old-url: /en/ktloginviewcontroller-ios
 ---
 ## What is KTLoginViewController?
 KTLoginViewController is an iOS view controller designed specifically for Kii

@@ -2,6 +2,7 @@
 layout: en-doc
 title: Retrieving other user's data
 sort-priority: 70
+old-url: /en/retrieving-other-user-s-data--2
 ---
 You can access other user's data by specifying his/her username, email address or phone number.
 

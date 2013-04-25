@@ -3,6 +3,7 @@ layout: en-doc
 title: Scoping Files
 sort-priority: 70
 page-id: android-scoping_files-en
+old-url: /en/scoping-files--2
 ---
 ## File Scope and Default Access Control
 
