@@ -4,7 +4,7 @@ title: REST スタートガイド
 sort-priority: 40
 page-id: rest-guides-ja
 summary: Kii Platform は、アプリケーション開発を支援するツールを REST API として公開しています。我々の API を利用することで、サーバ側の設定やコーディングなどを一切気にせずにアプリケーション開発を進めることができます。
-old-url:/jp/rest-guides--2
+old-url: /jp/rest-guides--2
 ---
 本ガイドは Kii Platform が提供する REST API の主要な機能をご紹介するものです。REST API が提供する機能の利用方法を、サンプル等と共にご紹介します。REST API が提供する各機能の詳細については[こちら]({% page_url references-ja %})の ドキュメントを参照してください。
 
