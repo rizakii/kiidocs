@@ -1,41 +1,18 @@
----
-layout: en
-title: Kii cloud documents.
-permalink: /
----
-<div class="descr"><div class="platforms">
-  <div class="platform ios">
-    <p class="title">iOS</p>
-    <ul>
-      <li><a href="{% page_url ios-quickstart-en %}">Quick Start Guides</a></li>
-      <li><a href="{% page_url ios-guides-en %}">Guides</a></li>
-      <li><a href="{% page_url references-en %}">References</a></li>
-      <li><a href="{% page_url samples-en %}">Snippets and Samples</a></li>
-    </ul>
-  </div>
-  <div class="platform android">
-    <p class="title">Android</p>
-    <ul>
-      <li><a href="{% page_url android-quickstart-en %}">Quick Start Guides</a></li>
-      <li><a href="{% page_url android-guides-en %}">Guides</a></li>
-      <li><a href="{% page_url references-en %}">References</a></li>
-      <li><a href="{% page_url samples-en %}">Snippets and Samples</a></li>
-    </ul>
-  </div>
-  <div class="platform js">
-    <p class="title">JavaScript</p>
-    <ul>
-      <li><a href="{% page_url js-quickstart-en %}">Quick Start Guides</a></li>
-      <li><a href="{% page_url js-guides-en %}">Guides</a></li>
-      <li><a href="{% page_url references-en %}">References</a></li>
-      <li><a href="{% page_url samples-en %}">Snippets and Samples</a></li>
-    </ul>
-  </div>
-  <div class="platform rest">
-    <p class="title">REST</p>
-    <ul>
-      <li><a href="{% page_url rest-guides-en %}">Guides</a></li>
-      <li><a href="{% page_url references-rest-en %}">References</a></li>
-    </ul>
-  </div>
-</div></div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Kii Documentation</title>
+<script type="text/javascript">
+  var lang = (navigator.language || navigator.browserLanguage
+      || navigator.userLanguage || navigator.systemLanguage);
+  if (lang.indexOf('ja') >= 0) {
+    location.href = '/ja/';
+  } else {
+    location.href = '/en/';
+  }
+</script>
+</head>
+<body>
+</body>
+</html>
