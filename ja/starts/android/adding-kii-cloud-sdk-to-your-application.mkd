@@ -3,6 +3,7 @@ layout: ja-doc
 title: Kii Cloud SDK の導入手順
 sort-priority: 10
 page-id: android-adding_kii_cloud_to_your_application-ja
+old-url: /jp/adding-kii-cloud-sdk-to-your-application--3
 ---
 ## プロジェクトの設定
 
