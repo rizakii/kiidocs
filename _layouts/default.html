@@ -20,7 +20,7 @@
 
 {{ content }}
 
-{% include footer.html %}
+{% if page.footer == 'ja' %}{% include footer-ja.html %}{% else %}{% include footer.html %}{% endif %}
 
 </div>
 </div>
