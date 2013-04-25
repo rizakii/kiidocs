@@ -20,11 +20,12 @@
 
 {{ content }}
 
-{% include footer.html %}
+{% if page.footer == 'ja' %}{% include footer-ja.html %}{% else %}{% include footer.html %}{% endif %}
 
 </div>
 </div>
 
 {% if site.flags.google-analytics %}{% include google-analytics.html %}{% endif %}
+{% if site.flags.hubspot-analytics %}{% include hubspot-analytics.html %}{% endif %}
 </body>
 </html>

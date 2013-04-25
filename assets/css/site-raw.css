@@ -382,3 +382,13 @@ pre .xml .css,
 pre .xml .cdata {
   opacity: 0.5;
 }
+
+body#preview footer .copyright .legal {
+  display: inline-block;
+  padding: 0px 20px;
+}
+body#preview footer .copyright .legal a {
+  display: inline-block;
+  padding: 0px 10px;
+  color: #ffa300;
+}

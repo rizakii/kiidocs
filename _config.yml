@@ -16,5 +16,6 @@ flags:
   sidebar-autoscroll: true
   robots-disallow-all: false
   google-analytics: true
+  hubspot-analytics: true
 
 # vim:set ts=8 sts=2 sw=2 tw=0 et:
