@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: Kii Balance - Android
-summary: Kii Balance is a simple housekeeping book application powered by Kii Cloud.  You can easily add your daily income/expenses and save them on Kii Cloud.  The saved information will be accessible over multiple devices.  You can, for example, record your expenses with your mobile phone and later review them on your tablet at home.
+summary: Kii Balance is a simple housekeeping book application powered by Kii Cloud. ?You can easily add your daily income/expenses and save them on Kii Cloud. ?The saved information will be accessible over multiple devices. ?You can, for example, record your expenses with your mobile phone and later review them on your tablet at home.
 sort-priority: 10
 page-id: android-sample_balance-en
+old-url: /en/kii-balance-for-android
 ---
 <p><img src="01.png" style="border:0" /> <img src="02.png" style="border:0" /></p>
 

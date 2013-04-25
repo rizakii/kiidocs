@@ -3,6 +3,7 @@ layout: en-doc
 title: Social Network Integration
 page-id: android-social_network_integration-en
 sort-priority: 30
+old-url: /en/social-network
 ---
 By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
 

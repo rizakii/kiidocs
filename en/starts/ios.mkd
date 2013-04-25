@@ -3,6 +3,7 @@ layout: en-doc
 title: iOS Quick Start
 sort-priority: 20
 page-id: ios-quickstart-en
+old-url: /en/ios-quick-start
 ---
 ## Registering your App on the Kii Developer Portal
 
