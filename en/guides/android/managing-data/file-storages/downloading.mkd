@@ -4,9 +4,164 @@ title: Downloading Files
 sort-priority: 20
 old-url: /en/downloading-files
 ---
-If you know the URI of the file you wish to download, you can directly retrieve the file from Kii Cloud.
+Kii Cloud SDK offers the following two types of file downloading.
 
-The following sample code illustrates how to retrieve an object via its URI:
+* **Downloading with resumable transfer:** This allows you to suspend/resume file downloading. For example, you will be able to resume a file download when it is interrupted in the middle due to some reasons (e.g., network down or manual interruption). The mechanism is especially useful when you are to download a big file under poor network condition. You will not have to restart the whole downloading again if it is interrupted in the middle; you can simply resume the download from where you were left off.
+* **Downloading without resumable transfer:** This is all-or-nothing file downloading without any suspend/resume feature. If the download is interrupted in the middle, you will need to restart the download from the start.
+
+
+## Downloading a File with Resumable Transfer
+
+Check the following snippet to see how you can download a file with the resumable feature.
+
+```java
+// Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Refresh the instance to get the metadata (if necessary)
+try {
+  kFile.refresh();
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error.
+}
+
+// Create a KiiDownloader
+KiiDownloader downloader = kiiFile.downloader(getApplicationContext(),
+    new File(Environment.getExternalStorageDirectory(), "sample.mp4"));
+
+// Start downloading the file body
+try {
+  downloader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Download already in progress.
+  // You can cancel the call and wait for the download to complete.
+} catch (SuspendedException e) {
+  // Download suspended due to a network error or user interruption.
+  // You can resume the download.
+} catch (TerminatedException e) {
+  // Download terminated due to an error (e.g. the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+Here is what is taking place in the snippet:
+
+* Create a `KiiFile` instance by invoking createByUri method.
+* Get the file metadata from Kii Cloud by invoking `refresh` method if necessary.
+* Create a KiiDownloader instance by invoking `downloader` method while specifying the destination information like filepath and filename.
+* Start downloading by invoking `transfer` method.
+
+Invoking tranfer method starts the file download. If everything go well, the file will be download to Kii Cloud. If the download is interrupted for some reasons, it will be suspended and SuspendedException will be thrown. In this case, you can resume the download (check the next section).
+
+
+### Resuming a Suspended Download
+
+File downloading could be suspended either automatically (e.g., by network failure) or manually (e.g., by user interruption). The suspended file download can later be resumed so as to continue the download from the point where it was interrupted.
+
+Check the following snippet to see how to resume the suspended file download.
+
+```java
+KiiFileBucket fbucket = Kii.fileBucket("MyBucket");
+KiiRTransferManager manager = fbucket.getTransferManager();
+List<KiiDownloader> suspended = null;
+try {
+  suspended = manager.listDownloadEntries(getApplicationContext());
+} catch (StateStoreAccessException e1) {
+  // IFailed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+
+// Choose the suspended download to be resumed.
+// (e.g., show a list of suspended downloads to a user and let her select)
+
+// In this snippet, we will resume the first one.
+KiiDownloader downloader = suspended.get(0);
+try {
+  downloader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Download already in progress.
+  // You can cancel the call and wait for the download to complete.
+} catch (SuspendedException e) {
+  // Download suspended due to a network error or user interruption.
+  // You can resume the download.
+} catch (TerminatedException e) {
+  // Download terminated due to an error (e.g. the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+```
+
+Here is what is taking place in the snippet:
+
+* Create a `KiiFileBucket` instance of the file bucket to which the file is being downloaded.
+* Create a `KiiRTransferManager` instance by invoking `getTransferManager` method.
+* Get a list of suspended KiiDownloader instances by invoking `listDownloadEntries` method.
+* Select the KiiDownloader instance to resume, and then invoke `transfer` method to resume.
+
+
+### Manually Suspending a File Download
+
+The ongoing file download can be manually suspended. Check the following snippet to see how you can suspend the file download.
+
+```java
+KiiDownloader mDownloader; // This is the ongoing file download.
+
+// Assume this method is called when the suspend event is triggered.
+// (e.g., a user pushed "suspend" button)
+public void onSuspendButtonClicked() {
+  try {
+    // Suspend the file download.
+    this.mDownloader.suspend();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the download has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+Just invoke `suspend` method. This will suspend the target file download unless the download is already finished.
+
+### Manually Terminating a File Download
+
+The ongoing or suspended file download can be manually terminated. Once terminated, you will not be able to resume the file download; you will need to start downloading the file from the beginning.
+
+Check the following snippet to see how you can terminate the file download.
+
+```java
+KiiDownloader mDownloader; // This is the ongoing file download.
+
+// Assume this method is called when the termination event is triggered.
+// (e.g., a user pushed "cancel" button)
+public void onCancelButtonClicked() {
+  try {
+    // Terminate the file download.
+    this.mDownloader.terminate();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the download has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+Just invoke `terminate` method. This will terminate the target file download unless the download is already finished.
+
+
+## Downloading a File without resumable transfer
+
+You can download a file without resumable feature. (We recommend to use the download with resumable feature, especially when you are downloading a big file to Kii Cloud).
+
+Check the following snippet to see how you can do this.
 
 ```java
 // Create a KiiFile instance
@@ -14,9 +169,8 @@ Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 String destFilePath = "destination file path";
 
-// Refresh the instance to get the metadata
 try {
-  // Retrieve metadata
+  // Refresh the instance to get the metadata (if necessary)
   kFile.refresh();
   // Download File body
   kFile.downloadFileBody(destFilePath);
@@ -27,8 +181,8 @@ try {
 }
 ```
 
-The basic steps are as follows:
+Here is what is happening in the snippet:
 
-1. Create a `KiiFile` instance with the `createByUri` method, specifying the file's URI.
-2. Invoke the `refresh` method to retrieve the file's metadata.
-3. Invoke the `downloadFileBody` method to download the file body (actual file content) while specifying the destination file path.
+* Create a `KiiFile` instance by invoking createByUri method.
+* Get the file metadata from Kii Cloud by invoking `refresh` method if necessary.
+* Start downloading by invoking `downloadFileBody` method while specifying the destination file path.
