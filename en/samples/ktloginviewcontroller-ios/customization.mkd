@@ -4,6 +4,7 @@ title: Customization
 summary: Aside from being totally open-source, you can access all UI elements via properties of the view controller classes for easy manipulation. Let's change the graphics and the colors to make these views look more like our app.
 sort-priority: 30
 page-id: ios-tutorial_login_view_controller_customization-en
+old-url: /en/customization
 ---
 Go back into our showLoginView method and get your code to look like this:
 

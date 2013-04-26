@@ -4,6 +4,7 @@ title: Adding Kii Analytics SDK to Your Application
 summary: 
 sort-priority: 40
 page-id: ios-adding_kii_analytics_to_your_application-en
+old-url: /en/adding-kii-analytics-sdk-to-your-application--2
 ---
 ## Configuring your project
 

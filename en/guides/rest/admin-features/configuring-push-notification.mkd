@@ -3,6 +3,7 @@ layout: en-doc
 title: Configuring Push Notification
 summary: To leverage KIi Cloud push notification mechanism, you need to configure your application accordingly; for example, you need to set the proper GCM Key in order to enable Kii push notification for Android.
 sort-priority: 20
+old-url: /en/configuring-push-notification
 ---
 ## Set your GCM Key to your application
 

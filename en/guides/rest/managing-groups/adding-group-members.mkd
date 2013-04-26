@@ -2,6 +2,8 @@
 layout: en-doc
 title: Adding/Removing Group Members
 sort-priority: 40
+old-url: /en/adding-group-members--2
+# old-url: /en/removing-group-members
 ---
 ## Adding Group Members
 

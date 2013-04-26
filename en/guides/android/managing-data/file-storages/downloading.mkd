@@ -2,6 +2,7 @@
 layout: en-doc
 title: Downloading Files
 sort-priority: 20
+old-url: /en/downloading-files
 ---
 If you know the URI of the file you wish to download, you can directly retrieve the file from Kii Cloud.
 

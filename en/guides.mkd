@@ -3,6 +3,7 @@ layout: en-doc
 title: Guides
 page-id: guides-en
 sort-priority: 20
+old-url: /en/guides-and-references
 ---
 This guide will walk you through some basic features you can leverage with the
 Kii SDK.  Currently, the following platforms are supported:

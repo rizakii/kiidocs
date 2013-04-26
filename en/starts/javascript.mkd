@@ -4,6 +4,7 @@ title: JavaScript Quick Start
 summary: 
 sort-priority: 30
 page-id: js-quickstart-en
+old-url: /en/javascript-quick-start
 ---
 ## Registering your App on the Kii Developer Portal
 

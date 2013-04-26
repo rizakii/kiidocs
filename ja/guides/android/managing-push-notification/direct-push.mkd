@@ -4,6 +4,7 @@ title: '"Direct Push" 通知'
 summary: '"Direct Push" 通知は、特定のユーザに直接メッセージを送る仕組みを提供します。この機能は、アプリ開発者のみが利用可能です。メッセージ送信は、開発者ポータルにおいて対象ユーザを選択し、送信内容を入力して行います。'
 page-id: android-direct_push-ja
 sort-priority: 20
+old-url: /jp/direct-push
 ---
 
 ## ユーザにメッセージを送信する

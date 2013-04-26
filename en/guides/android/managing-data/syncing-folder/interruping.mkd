@@ -2,6 +2,7 @@
 layout: en-doc
 title: Interrupting Folder Sync
 sort-priority: 20
+old-url: /en/interrupting-sync
 ---
 In order to interrupt an ongoing sync session, simply interrupt the thread running the session as follows:
 

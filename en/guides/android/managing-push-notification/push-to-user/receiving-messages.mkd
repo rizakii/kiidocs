@@ -3,6 +3,7 @@ layout: en-doc
 title: Receive Messages
 page-id: android-push_to_user_receiving_messages-en
 sort-priority: 40
+old-url: /en/receive-messages
 ---
 To receive push notifications, you need to implement onMessage() of GCMIntentService.  Kii Cloud SDK provides a helper API to support your application to parse push messages.
 

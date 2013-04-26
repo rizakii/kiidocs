@@ -3,6 +3,7 @@ layout: en-doc
 title: Displaying Ads in Your Application
 summary: Displaying Ads in Your Application
 sort-priority: 10
+old-url: /en/displayiing-ads-in-your-application
 ---
 Here is how to display ads in your application.
 

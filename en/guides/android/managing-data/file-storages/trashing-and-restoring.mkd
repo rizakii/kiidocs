@@ -2,6 +2,7 @@
 layout: en-doc
 title: Trashing and Restoring Files
 sort-priority: 40
+old-url: /en/trashing-and-restoring-files
 ---
 Kii Cloud provides a mechanism called Kii Cloud Trashcan for files that have been deleted temporarily.
 

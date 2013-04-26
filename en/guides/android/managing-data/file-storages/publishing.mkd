@@ -3,6 +3,7 @@ layout: en-doc
 title: Publishing Files
 summary: 'Kii Platform has the ability to publish your file to an accessible URL, which can be utilized by your application in order to share content outside of the application.'
 sort-priority: 60
+old-url: /en/publishing-files
 ---
 When publishing a file, you can optionally specify the expiration time in UNIX time (msec) when the URL will expire and the content will no longer be available. If you do not specify the expiration time, the URL will be valid forever.
 

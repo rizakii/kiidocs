@@ -4,6 +4,7 @@ title: Admin Features
 sort-priority: 50
 page-id: rest-admin_features-en
 summary: REST API supports features that can be only leveraged by application developers. Those features are mainly for maintaining and configuring your application and thus should be accessible only to the developers.
+old-url: /en/admin-features
 ---
 ## Getting app admin token
 

@@ -4,6 +4,7 @@ title: Send Messages
 summary: When a topic is ready, we are ready to send a message to the topic. The message sent to the topic will be pushed to the topic subscribers.
 sort-priority: 40
 page-id: ios-sending_push_to_user_messages-en
+old-url: /en/send-messages
 ---
 Let us see how we can send a push message on each of our sample scenarios.
 

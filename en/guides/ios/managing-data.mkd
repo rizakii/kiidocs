@@ -4,6 +4,7 @@ title: Managing Data
 summary: Kii Cloud Storage SDK provides two types of storage for managing application data. Based on your application's requirements, you may wish to utilize one or both of these.
 sort-priority: 30
 page-id: ios-managing_data-en
+old-url: /en/managing-data
 ---
 * **Object Storage**: For storing arbitrary key/value pairs as JSON-style
   objects. You can freely define your objects by adding any key-value pairs

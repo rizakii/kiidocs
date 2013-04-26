@@ -2,6 +2,7 @@
 layout: en-doc
 title: Deleting Objects
 sort-priority: 40
+old-url: /en/deleting-objects--2
 ---
 You can delete an object by invoking the `delete` method:
 

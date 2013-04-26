@@ -4,6 +4,7 @@ title: iOS Guide
 summary: Kii Platform provides developers with a set of tools to support iOS application development. Our iOS SDK gives you the opportunity to develop applications without ever needing your own servers.
 sort-priority: 20
 page-id: ios-guides-en
+old-url: /en/ios-guides
 ---
 This guide will navigate you through the SDK's basic features. You can
 review what is possible with the Kii SDK, and even get a head start with some

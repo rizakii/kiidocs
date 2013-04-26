@@ -4,6 +4,7 @@ title: Scoping Files
 summary: Since all file buckets are User Scope, when files are created they default to being only accessible to that user.
 sort-priority: 70
 page-id: rest-scoping_files-en
+old-url: /en/scoping-files--3
 ---
 ## File Scope and Default Access Control
 

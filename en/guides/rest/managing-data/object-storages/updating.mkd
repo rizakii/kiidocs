@@ -2,6 +2,7 @@
 layout: en-doc
 title: Updating Objects
 sort-priority: 30
+old-url: /en/updating-objects--3
 ---
 Kii SDK supports the following two object update methods:
 

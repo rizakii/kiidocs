@@ -3,6 +3,7 @@ layout: en-doc
 title: Uploading Files
 summary: Upload local files to Kii Cloud
 sort-priority: 10
+old-url: /en/upload-files--3
 ---
 To upload a file, create a `KiiFile` instance by invoking the
 `fileWithLocalPath` method of your user's `KiiFileBucket` instance. This will
