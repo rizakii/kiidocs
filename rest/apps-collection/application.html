@@ -22,7 +22,9 @@ tags: rest-api
 		</span></div></div><strong class="paramstitle">URL Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">appID</span><span class="req">Yes</span><span class="type"></span><span class="doc">AppID of the application being accessed</span></div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-200"><div class="status"><strong>200</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.AppRetrievalResponse+json</span></p><p class="doc">Successfully retrieved the application properties</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">The ID of the application</td></tr><tr><td class="name">description</td><td class="type ">string</td><td class="doc">A description of the application</td></tr><tr><td class="name">emailAddress</td><td class="type ">string</td><td class="doc">
 						The e-mail address that will be used for
 						any outgoing
-						e-mail coming from this application
+						e-mail coming from this application.
+						Email address length must be
+						less than 200 characters.
 					</td></tr><tr><td class="name">emailAddressVerificationRequired</td><td class="type ">boolean</td><td class="doc">
 						Indicates if the users of the application
 						have to
@@ -96,7 +98,10 @@ tags: rest-api
 						behavior.
 					</span></div><div><span class="name">emailAddress</span><span class="req"></span><span class="type">string</span><span class="doc">Email address of the application, which will be used
 						as the From: address in the outgoing e-mails (notifications,
-						password resets…)</span></div></div><div class="example"><strong class="examplestitle">Sample Request</strong><div class="code javascript json">{
+						password resets…)
+						Email address length must be less than 200
+						characters
+					</span></div></div><div class="example"><strong class="examplestitle">Sample Request</strong><div class="code javascript json">{
   &quot;emailAddressVerificationRequired&quot;: &quot;[boolean]&quot;,
   &quot;phoneNumberVerificationRequired&quot;: &quot;[boolean]&quot;,
   &quot;smsFrom&quot;: &quot;[string]&quot;,
