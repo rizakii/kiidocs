@@ -3,6 +3,7 @@ layout: en-doc
 title: '"Push to User" Notification'
 page-id: android-push_to_user-en
 sort-priority: 10
+old-url: /en/push-to-user-notification
 ---
 "Push to User" notification provides a means to push messages with a publisher-subscriber model.  The feature will let you and your app users quickly send messages to other users while providing a way to scope to whom the messages are sent.
 

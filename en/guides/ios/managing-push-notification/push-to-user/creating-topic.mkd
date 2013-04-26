@@ -4,6 +4,7 @@ title: Create a Topic
 summary: 'The topic is a channel for sending push messages. Without a channel, we have no way to deliver the messages. Creating a topic, therefore, is a first step to leverage "Push to User" notification feature.'
 sort-priority: 10
 page-id: ios-creating_topic-en
+old-url: /en/create-a-topic--2
 ---
 Let us see how we can create a topic for each of our sample scenarios.
 

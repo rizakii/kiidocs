@@ -3,6 +3,7 @@ layout: ja-doc
 title: File Storage
 sort-priority: 30
 summary: File Storage は、任意のファイル（File）をそのメタデータとともに管理する機能を提供します。ファイルのアップロードやダウンロード、ゴミ箱への移動と復元、さらには URL による公開など、多くの機能を容易に利用可能です。
+old-url: /jp/file-storages--6
 ---
 Kii Plaftorm は File のメタデータ管理のために以下のフィールドを利用します。
 

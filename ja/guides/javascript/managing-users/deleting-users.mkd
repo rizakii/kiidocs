@@ -3,6 +3,7 @@ layout: ja-doc
 title: ユーザ削除
 sort-priority: 60
 summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Cloud SDK はユーザ削除機能を提供しています。
+old-url: /jp/deleting-users--4
 ---
 次の例は、ユーザーを削除する例です。
 

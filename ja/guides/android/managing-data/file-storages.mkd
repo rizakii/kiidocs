@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File Storage
 sort-priority: 30
+old-url: /jp/file-storages--5
 ---
 File Storage は、任意のファイル（File）をメタデータとともに管理する機能を提供します。ファイルのアップロードやダウンロード、ゴミ箱への移動と復元、さらには URL による公開など、多くの機能を容易に利用することができます。
 

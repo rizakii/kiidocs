@@ -3,6 +3,7 @@ layout: ja-doc
 title: リファレンスガイド
 page-id: guides-ja
 sort-priority: 20
+old-url: /jp/guides-and-references--2
 ---
 本リファレンスガイドは、Kii Client SDK の主要な機能をご紹介するドキュメントです。より詳細なドキュメントは、セクション「{% page_link references-ja %}」より入手可能です。
 

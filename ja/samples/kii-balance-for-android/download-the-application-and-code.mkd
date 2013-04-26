@@ -3,6 +3,7 @@ layout: ja-doc
 sort-priority: 10
 page-id: download_the_application_and_code-ja
 title: アプリとコードのダウンロード
+old-url: /jp/--295
 ---
 アプリ（apk ファイル）とソースコードはこちらです。
 

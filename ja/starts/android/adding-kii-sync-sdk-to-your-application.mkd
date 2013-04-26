@@ -3,6 +3,7 @@ layout: ja-doc
 title: Kii Sync SDK の導入手順
 sort-priority: 20
 page-id: android-adding_kii_sync_to_your_application-ja
+old-url: /jp/adding-kii-sync-sdk-to-your-application
 ---
 
 ## プロジェクトの設定

@@ -3,6 +3,7 @@ layout: ja-doc
 title: トピックの ACL を変更する
 sort-priority: 50
 page-id: android-settings_topic_acl-ja
+old-url: /jp/acl
 ---
 アプリケーションの用途によっては、トピックのスコープ毎に定まる規定のルールを変
 更したい時があります。例えば、以下の様なシナリオが考えられます。

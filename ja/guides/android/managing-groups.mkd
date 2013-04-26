@@ -3,6 +3,7 @@ layout: ja-doc
 title: グループ管理機能
 sort-priority: 20
 page-id: android-managing_groups-ja
+old-url: /jp/managing-groups--7
 ---
 Kii Cloud SDK はユーザグループを管理する機能を提供します。グループを作成すると、例えばこのグループに属するメンバーのみが閲覧可能なデータを作成する等といった、グループ単位のスコープ指定を行うことができるようになります。
 

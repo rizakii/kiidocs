@@ -4,6 +4,7 @@ sort-priority: 30
 page-id: tutorial_2_register_and_log_in-ja
 title: 'チュートリアル#2: ユーザ登録とログイン'
 summary: Kii Balance の利用者は、Kii Cloud へのユーザ登録とログインを行います。ここで、ログイン時に毎回ユーザ名とパスワードを入力させるのは手間なので、これらの入力を省略しつつログイン処理を進める方法を見ていきましょう。
+old-url: /jp/2
 ---
 ## 1. ユーザ登録
 

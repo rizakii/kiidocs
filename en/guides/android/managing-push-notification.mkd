@@ -3,6 +3,7 @@ layout: en-doc
 title: Managing Push Notifications
 sort-priority: 50
 page-id: android-managing_push-en
+old-url: /en/managing-push-notification
 ---
 Kii Cloud supports the following three types of push notifications.
 

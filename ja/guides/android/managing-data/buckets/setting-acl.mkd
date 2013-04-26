@@ -3,6 +3,7 @@ layout: ja-doc
 title: Bucket の ACL 設定
 sort-priority: 20
 page-id: android-buckets_setting_acl-ja
+old-url: /jp/bucket-acl
 ---
 ### Bucket に新たな ACL を設定する
 

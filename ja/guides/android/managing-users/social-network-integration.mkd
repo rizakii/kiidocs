@@ -3,6 +3,7 @@ layout: ja-doc
 title: 外部サービス（Facebook）連携
 page-id: android-social_network_integration-ja
 sort-priority: 30
+old-url: /jp/social-network-integration--5
 ---
 外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
 

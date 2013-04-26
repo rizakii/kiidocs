@@ -3,6 +3,7 @@ layout: ja-doc
 title: iOS スタートガイド
 sort-priority: 20
 page-id: ios-guides-ja
+old-url: /jp/ios-guide
 ---
 Kii Platform は、iOS アプリケーション開発を支援するツールとして Kii iOS SDK を提供しています。Kii iOS SDK を利用することで、サーバ側の設定やコーディングなどを一切気にせずに iOS アプリケーション開発を進めることができます。
 

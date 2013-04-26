@@ -4,6 +4,7 @@ title: Subscribe&#47;Unsubscribe a Topic
 summary: Subscribing to a topic is necessary to receive "Push to User" notification. Once a user subscribes to a topic, all push messages sent to this topic will be delivered to the user.
 sort-priority: 20
 page-id: ios-subscribing_topic-en
+old-url: /en/subscribe-unsubscribe-a-topic--2
 ---
 When a user no longer want to receive push messages, the user can stop receiving the messages simply by unsubscribing the topic.
 

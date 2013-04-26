@@ -3,6 +3,7 @@ layout: ja-doc
 title: File と Folder のダウンロード
 sort-priority: 20
 summary: ファイルのダウンロードは、以下の2つのステップにより行われます。
+old-url: /jp/downloading-files-and-folders
 ---
 
 1. ファイルのメタデータをダウンロード

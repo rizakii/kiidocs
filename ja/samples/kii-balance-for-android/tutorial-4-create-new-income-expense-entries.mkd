@@ -4,6 +4,7 @@ sort-priority: 50
 page-id: tutorial_4_create_new_income_expense_entries-ja
 title: 'チュートリアル#4： エントリーの作成'
 summary: ユーザは "Add" ボタンを押して新しい収支エントリを作成します。Kii Balance は、作成されたエントリを Kii Cloud にアップロードして保存します。
+old-url: /jp/4
 ---
 Kii Balance は、以下のフィールドを持つ Object に収支エントリを保存します（ref. Field.java）。
 

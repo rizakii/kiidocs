@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Folder 同期の起動
 sort-priority: 10
+old-url: /jp/launching-folder-sync
 ---
 ## フォルダ同期の起動方法
 

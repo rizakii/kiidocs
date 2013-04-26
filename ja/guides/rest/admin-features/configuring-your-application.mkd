@@ -4,6 +4,7 @@ title: アプリを設定する
 sort-priority: 10
 page-id: rest-configuring_your_application-ja
 summary: 開発者ポータル上で新規アプリを作成後、このアプリの設定を変更することができます。設定可能なパラメータは以下の通りです。
+old-url: /jp/--273
 ---
 
 * ユーザのメールアドレス認証のオン/オフ

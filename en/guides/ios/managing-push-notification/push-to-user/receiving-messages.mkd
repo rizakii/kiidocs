@@ -4,6 +4,7 @@ title: Receive Messages
 summary: Once a user subscribes to a topic, a push message will be sent to the user whenever someone sends it to the topic.
 sort-priority: 40
 page-id: ios-push_to_user_receiving_messages-en
+old-url: /en/receive-messages--2
 ---
 We can get push messages through didReceiveRemoteNotification in AppDelegate.
 

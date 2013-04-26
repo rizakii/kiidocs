@@ -3,6 +3,7 @@ layout: ja-doc
 title: アプリデータの解析
 summary: アプリデータ（App Data）の解析を行う基本的なステップは以下の通りです。
 sort-priority: 10
+old-url: /jp/--285
 ---
 1.  メトリクスを定義する
 1.  開発者ポータルで解析結果を確認する

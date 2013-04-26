@@ -3,6 +3,7 @@ layout: ja-doc
 title: Push 通知を設定する
 sort-priority: 20
 summary: KIi Cloud の Push 通知を利用するには、正しくアプリ設定を行う必要があります。例えば Android で Push 通知を利用する場合、正しい GCM Key を予めセットしておく必要があります。
+old-url: /jp/push
 ---
 ## アプリに GCM Key を設定する
 
