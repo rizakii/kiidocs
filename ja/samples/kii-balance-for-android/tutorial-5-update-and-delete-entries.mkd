@@ -3,6 +3,7 @@ layout: ja-doc
 sort-priority: 60
 page-id: tutorial_5_update_and_delete_entries-ja
 title: 'チュートリアル#5: エントリーの更新と削除'
+old-url: /jp/5
 summary: Kii Balance では、表示中の収支エントリを長押しすることで、エントリの更新や削除ができます。これらの変更は Kii Cloud に適宜通知されます。
 ---
 ## Object の更新

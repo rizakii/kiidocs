@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object の作成
 summary: ある Bucket インスタンスの <code class="proper-code">object</code> メソッドを実行することで、この Bucket 内に Object のインスタンスが生成されます。生成された Object の <code class="proper-code">set</code> メソッドを用いて、任意の Key-Value ペアを Object 内にセットできます。セットした Key-Value ペアは、<code class="proper-code">save</code> メソッドを実行することで Kii Cloud に反映されます。
 sort-priority: 10
+old-url: /jp/creating-objects--5
 ---
 Object 作成方法の例として、"mydata"と名付けられたApplication scope の Bucket 内に Object を生成するサンプルコードを以下に示します。
 

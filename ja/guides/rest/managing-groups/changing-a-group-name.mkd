@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループ名の変更
 sort-priority: 20
+old-url: /jp/changing-a-group-name--6
 ---
 グループオーナーは、グループ名を次のように変更することができます。
 

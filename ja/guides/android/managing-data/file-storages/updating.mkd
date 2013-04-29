@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File のアップデート
 sort-priority: 30
+old-ur: /jp/updating-files--4
 ---
 Kii Cloud SDK は、2種類の File 更新手段を提供しています。
 

@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object の更新
 sort-priority: 30
 page-id: android-object_storages_updating-ja
+old-url: /jp/updating-objects--5
 ---
 Kii Cloud SDK は、二種類の Object 更新手段を提供しています。
 

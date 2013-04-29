@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の作成
 sort-priority: 10
+old-url: /jp/creating-objects--6
 ---
 Application Scope を持つ "mydata" Bucket 内に Object を作成する例を以下に示します。
 

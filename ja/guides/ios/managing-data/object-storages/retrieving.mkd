@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の取得
 sort-priority: 20
+old-url: /jp/retrieving-objects-with-uri
 summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 ---
 以下、Object を URI を指定して取得するサンプルコードです。

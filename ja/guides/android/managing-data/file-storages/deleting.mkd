@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File の完全削除
 sort-priority: 50
+old-url: /jp/deleting-files--4
 ---
 ファイルを完全に削除するには `delete` メソッドを呼びます。ファイルは完全に削除され、復元することができなくなります。
 

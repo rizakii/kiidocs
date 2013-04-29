@@ -4,4 +4,5 @@ title: ユーザ管理機能
 summary: ユーザ管理は、アプリケーションの機能のうちで最も重要なパーツの一つです。Kii Cloud SDK は、サインアップ/サインイン機能やパスワード管理機能などに代表される、アプリケーションのユーザ管理に必要な機能一式を API として提供しています。
 sort-priority: 10
 page-id: android-managing_users-ja
+old-url: /jp/managing-users--7
 ---

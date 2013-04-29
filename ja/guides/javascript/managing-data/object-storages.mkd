@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object Storage
 sort-priority: 20
+old-url: /jp/object-storages--4
 summary: Object Storage は、任意 Key-Value ペアにより構成されるJSON型オブジェクト（Object）を、サーバ側のカスタマイズを行うことなく管理する仕組みを提供します。
 ---
 ## 所定の Key-Value ペア

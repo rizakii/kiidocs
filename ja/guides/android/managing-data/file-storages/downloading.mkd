@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File のダウンロード
 sort-priority: 20
+old-url: /jp/downloading-files--3
 ---
 Kii Cloud SDK は、以下の2種類のファイルダウンロード方法を提供しています。
 

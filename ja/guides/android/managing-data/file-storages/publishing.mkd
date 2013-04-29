@@ -3,6 +3,7 @@ layout: ja-doc
 title: File の公開
 summary: Kii Platform は、ファイルの公開機能を提供しています。公開されたファイルには URL が割り振られ、全てのユーザがこの URL を使ってファイルをダウンロード可能になります。
 sort-priority: 60
+old-url: /jp/publishing-files--3
 ---
 ファイルを公開する際には有効期限を UNIX時間（ミリ秒）で設定することもできます。
 設定した有効期限が過ぎると、URLは無効となりファイルをダウンロードすることができなくなります。

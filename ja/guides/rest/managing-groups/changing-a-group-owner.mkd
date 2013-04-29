@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループオーナーの変更
 sort-priority: 25
+old-url: /jp/g
 ---
 グループオーナーは、他のユーザを新たなグループオーナーにすることができます。
 

@@ -2,6 +2,7 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
+old-url: /jp/user-attributes--7
 summary: Kii Cloud SDK は、以下の所定の Key-Value を用いてユーザ属性を管理します。
 ---
 * userID

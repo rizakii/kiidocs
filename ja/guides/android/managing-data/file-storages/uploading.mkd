@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File のアップロード
 sort-priority: 10
+old-url: /jp/uploading-files--3
 ---
 Kii Cloud SDK は、以下の2種類のファイルアップロード方法を提供しています。
 

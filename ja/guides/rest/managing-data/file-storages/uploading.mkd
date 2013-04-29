@@ -3,6 +3,7 @@ layout: ja-doc
 title: File と Folder のアップロード
 sort-priority: 10
 summary: ファイルのアップロードは、以下の2つのステップにより行われます。
+old-url: /jp/uploading-files-and-folders
 ---
 1. ファイルのメタデータをアップロード
 1. ファイル本体をアップロード

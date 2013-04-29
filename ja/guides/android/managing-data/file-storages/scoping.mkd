@@ -4,6 +4,7 @@ title: File のスコープと ACL 設定
 summary: File は常に User Scope を持ちます。
 sort-priority: 70
 page-id: android-scoping_files-ja
+old-url: /jp/scoping-files--4
 ---
 ## 規定のアクセス制御
 

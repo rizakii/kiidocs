@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Bucket の作成
 sort-priority: 10
+old-url: /jp/bucket
 ---
 ## Object Bucket の作成
 
