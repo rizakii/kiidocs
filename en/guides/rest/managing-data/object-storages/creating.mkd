@@ -4,7 +4,7 @@ title: Creating Objects
 sort-priority: 10
 old-url: /en/creating-objects--3
 ---
-In the following example, an object is created in "mydata" bucket with an Application scope:
+In the following example, an object is created in "mydata" bucket with a User Scope:
 
 ```sh
 curl -v -X POST \
