@@ -19,7 +19,103 @@ tags: rest-api
 					on the ACL of the application, user or group, where the query of
 					the bucket
 					belongs.
-				</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.QueryRequest+json</span></p></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">bucketQuery</span><span class="req"></span><span class="type">ufe:BucketQuery</span><span class="doc"></span></div><div><span class="name">paginationKey</span><span class="req"></span><span class="type">string</span><span class="doc">The pagination key obtained in the previous request
+				</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.QueryRequest+json</span></p></div><p class="doc">
+						The query.
+							
+						For build a correct query, you need to known about some keys:
+						<ul>
+							<li>bucketQuery</li>
+							<li>PaginationKey. This is for pagination the next page </li>
+							<li>BestEffortLimit. To limit result in a specific amount </li>
+							<li>Type ("type") Define type of query, you can use this to set a propper clause of your query. Values of clauses: </li>
+								<ul>
+									<li>Equal ("eq") Equality clause for numbers, strings and any other value.</li>
+										<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Value ("value")</li>
+										</ul>
+									<li>Prefix ("prefix") Only works for strings. Checks that a given string starts with a value.</li>
+										<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Prefix ("prefix")</li>
+										</ul>
+									<li>And ("and") Boolean clause that concatenates a list of clauses with an "AND" connector.</li>
+										<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Prefix ("prefix") / Value ("value")</li>
+										</ul>
+									<li>Or ("or") Boolean clause that concatenates a list of clauses with an "OR" connector.</li>
+										<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Prefix ("prefix") / Value ("value")</li>
+										</ul>
+								    <li>All ("all") This clause returns all entities in bucket. You can't use this with other clause.</li>
+								    <li>Range ("range") "upperIncluded" and "lowerIncluded" is optional. If omitted, they are regarded as true. You can also omit one of "upperLimit" or "lowerLimit". </li>
+								    	<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Upper limit ("upperLimit")</li>
+											<li>Upper included ("upperIncluded")</li>
+											<li>Lower limit ("lowerLimit")</li>
+											<li>Lower included ("lowerIncluded")</li>
+										</ul>
+								    <li>In ("in") This clause allows to match one field to a list of values.</li>
+								    	<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Values ("values"): List of values, <i>i.e. [ "Garcia", "Smith", "Lopez", "Simpson" ]</i></li>
+										</ul>
+								    <li>Not ("not") Returns all entities which don't match with the given value.</li>
+								    	<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Value ("value")</li>
+										</ul>
+								    <li>Has field ("hasField") This clause returns all entities that have a specified field. The type of the content of the field must be provided.</li>
+								    	<ul>
+											<strong>- Fields:</strong>
+											<li>Field name ("field")</li>
+											<li>Field type ("fieldType"): Possible values are "STRING", "INTEGER", "DECIMAL" and "BOOLEAN".</li>
+										</ul>
+								</ul>
+						</ul>
+						<strong>GeoQueries</strong>
+						<br/>New data type in objects: "point"<br/>
+						<ul>
+							<li>There will be a new type called 'point', which developers can use in their objects.</li>
+							<li>This type will be geo-indexed and geo queries will be performed using any field of this type.</li>
+							<li>An object can have 0..n fields of type point, but only at document top-level. Nesting is not allowed for these new data types.</li>
+							<li>Points should not equal or exceed the extreme ends of the ranges.</li>
+						</ul>
+						Available geo query clauses
+						<ul>
+							<li>GeoDistance ("geodistance") Allows to search objects in a given rectangle defined by the northeast and southwest points, only.
+								<br/>Trying to create an object w/ a subdocument having a field called '_type' will result in the system trying to parse this subdocument.
+								<br/>If the value passed for the _type filed is different from 'point' a ValidationException will be returned.
+								<br/><br/>
+								In case 'point' type  is present it must follow the following definition or a ValidationException will be returned.</li>
+							<ul>
+								<strong>- Fields:</strong>
+								<li>Latitude ("lat"): Decimal in range ]-90, +90[</li>
+								<li>Longitude ("lon"): Decimal in range ]-180, +180[</li>
+							</ul>
+							<li>Within a box ("geobox") Allows to search objects in a given point defined by latitude and longitude.
+								<br/>Allows to search objects in a given rectangle defined by the northeast and southwest points, only.
+								<br/>Validation will be performed to ensure the rectangle is well-formed ("ne" field is actually at north-east of "sw" point).
+								<br/><br/>If any error is found in the query definition a QueryNotSupportedException will be returned. 
+							</li>
+							<ul>
+								<strong>- Fields:</strong>
+								<li>Northeast ("ne"): Contains "lat" and "lon"</li>
+								<li>Southwest ("sw"): Contains "lat" and "lon"</li>
+							</ul>
+						</ul>
+							
+						</p><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">bucketQuery</span><span class="req"></span><span class="type">ufe:BucketQuery</span><span class="doc"></span></div><div><span class="name">paginationKey</span><span class="req"></span><span class="type">string</span><span class="doc">The pagination key obtained in the previous request
 						to get the next page of results
 					</span></div><div><span class="name">bestEffortLimit</span><span class="req"></span><span class="type">string</span><span class="doc">The amount of results desired to obtain. This
 						parameters is used in a best effort way.
