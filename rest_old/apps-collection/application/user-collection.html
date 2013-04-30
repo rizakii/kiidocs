@@ -1,0 +1,78 @@
+---
+layout: rest-api
+title: 'User Collection'
+tags: rest-api
+---
+<div class="summary">
+All the users of the current application.
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id="usersResourceType"><div class="path"><strong>Location</strong><span>/apps/{appID}/users</span></div><div class="method-links"><ul><li class="method-link-POST"><a href="#method-usersResourceType-POST">POST</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>No</span></span></div></div></div></div><div class="methods"><div class="method POST" id="method-usersResourceType-POST"><h4>POST</h4><p class="uri">/apps/{appID}/users</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+				Create a new user in the current application. In Kii
+				Platform users the
+				login is unique key, there can not be two users in
+				the
+				same application with the same login. Phone number and email are
+				also
+				unique keys only if they are verified. These two fields are
+				verified
+				if the values for &quot;emailAddressVerificationRequired&quot; and
+				&quot;phoneNumberVerificationRequired&quot; in the application are set to
+				false when the user is created, otherwise the user can verify them
+				afterwards.
+			</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.RegistrationRequest+json or application/json</span></p><p class="doc">All the data to create a new user.</p></div><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">loginName</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The login name of the user. Length must be between 5
+						and 50
+					</span></div><div><span class="name">displayName</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The name that will be displayed for the user.
+						Length
+						must be between 4 and 50
+					</span></div><div><span class="name">country</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The country of the user. Length must be 2
+					</span></div><div><span class="name">locale</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The locale of the user
+					</span></div><div><span class="name">emailAddress</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The e-mail address of the user.
+						Maximum length is 200
+					</span></div><div><span class="name">phoneNumber</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The phone number of the user
+					</span></div><div><span class="name">phoneNumberVerified</span><span class="req"></span><span class="type">boolean</span><span class="doc">
+						Indicates whether the phone number is already
+						verified
+					</span></div><div><span class="name">password</span><span class="req"></span><span class="type">string</span><span class="doc">
+						The password of the user.
+						Length must be 6 characters
+						at least
+					</span></div><div><span class="name"></span><span class="req"></span><span class="type"></span><span class="doc">Arbitrary fields
+						All fields are stored as a JSON,
+						supporting JSON Arrays and JSON
+						Nested.
+						Arbitrary fields must be:
+						-
+						Not null values
+						- When this arbitrary values are not null, stored
+						as JSON is only
+						permited if that length value (in bytes) is not
+						greater than
+						63*1024
+					</span></div></div><div class="example"><strong class="examplestitle">Sample Request</strong><div class="code javascript json">{
+  &quot;loginName&quot;: &quot;[string]&quot;,
+  &quot;displayName&quot;: &quot;[string]&quot;,
+  &quot;country&quot;: &quot;[string]&quot;,
+  &quot;locale&quot;: &quot;[string]&quot;,
+  &quot;emailAddress&quot;: &quot;[string]&quot;,
+  &quot;phoneNumber&quot;: &quot;[string]&quot;,
+  &quot;phoneNumberVerified&quot;: &quot;[boolean]&quot;,
+  &quot;password&quot;: &quot;[string]&quot;,
+  &quot;&quot;: &quot;[]&quot;
+}</div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-201"><div class="status"><strong>201</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.RegistrationResponse+json</span></p><p class="doc">The user has been created successfully.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">Location</td><td class="type ">xsi:string</td><td class="doc">URI to the created user</td></tr></table></div><div class="response status-400"><div class="status"><strong>400</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.PasswordTooShortException+json</span></p><p class="doc">The password is too short.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code PASSWORD_TOO_SHORT</td></tr><tr><td class="name">minimumLength</td><td class="type ">int</td><td class="doc">The minimum length accepted</td></tr></table></div><div class="response status-409"><div class="status"><strong>409</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserAlreadyExistsException+json</span></p><p class="doc">Already exists a user with the same login, phone number or
+					email address (if phone or email verification is not needed).
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code USER_ALREADY_EXISTS</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">field</td><td class="type ">string</td><td class="doc">
+						The field used to check the user already exists, can
+						be &quot;loginName&quot;, &quot;emailAddress&quot; or &quot;phoneNumber&quot;
+					</td></tr><tr><td class="name">value</td><td class="type ">string</td><td class="doc">
+						The value of the field
+					</td></tr></table></div></div></div></div></article></section>
+</div>

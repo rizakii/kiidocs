@@ -1,0 +1,131 @@
+---
+layout: rest-api
+title: 'ACL'
+tags: rest-api
+---
+<div class="summary">
+
+			 
+			<p>This is the Access Control List of the parent resource.
+			An ACL entry is composed by resource + verb + subject, indicates a
+			permission (verb) that can be granted or revoked to a subject over a
+			resource.</p>
+			<p>The resources that have ACLs in Kii Platform are
+			applications, users, groups,
+			buckets, objects and topics, for each of
+			them applies different
+			verbs. A subject can be either a user or a
+			group.</p>
+
+			Verbs on applications, users and groups:
+			<ul>
+			<li><b>CREATE_NEW_BUCKET</b>:
+			Create a new bucket in the application, user or
+			group.</li>
+			<li><b>CREATE_NEW_TOPIC</b>: Create a new topic in the application, user or
+			group.</li>
+			</ul>
+			
+			Verbs on buckets:
+			<ul>
+			<li><b>QUERY_OBJECTS_IN_BUCKET</b>: Perform a query in
+			the bucket.</li>
+			<li><b>CREATE_OBJECTS_IN_BUCKET</b>: Create an object in the
+			bucket.</li>
+			<li><b>DROP_BUCKET_WITH_ALL_CONTENT</b>: Delete the bucket with all the
+			contained objects.</li>
+			</ul>
+			
+			Verbs on objects:
+			<ul>
+			<li><b>READ_EXISTING_OBJECT</b>: Read the
+			content of the object (JSON data and
+			body)</li>
+			<li><b>WRITE_EXISTING_OBJECT</b>:
+			Modify the content of the object or delete
+			it.</li>
+			</ul>
+
+			Verbs on topics:
+			<ul>
+			<li><b>SUBSCRIBE_TO_TOPIC</b>: Subscribe oneself to the topic to receive the
+			messages sended to it.</li>
+			<li><b>SEND_MESSAGE_TO_TOPIC</b>: Send a message to the
+			topic.</li>
+			</ul>
+			
+			<p>ACLs in Kii Platform consist on while lists, so, permissions
+			are rejected
+			by default, to perform the action is needed
+			to have the verb granted.</p>
+			
+		
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id="aclResourceType"><div class="path"><strong>Location</strong><span>/apps/{appID}/buckets/{bucketType}:{bucketID}/objects/{objectID}/acl</span></div><div class="method-links"><ul><li class="method-link-GET"><a href="#method-aclResourceType-GET">GET</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div></div></div><div class="methods"><div class="method GET" id="method-aclResourceType-GET"><h4>GET</h4><p class="uri">/apps/{appID}/buckets/{bucketType}:{bucketID}/objects/{objectID}/acl</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+				Retrieve the complete ACL of the resource.
+			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
+				 
+				The administrator always can perform this action and
+				depending on the resource can also do it:
+				
+				&lt;ul&gt;
+				&lt;li&gt;User: the user.&lt;/li&gt;
+				&lt;li&gt;Group: the group owner.&lt;/li&gt;
+				&lt;li&gt;Bucket: the scope-owner and the bucket creator.&lt;/li&gt;
+				&lt;li&gt;Object: the scope-owner and the object owner.&lt;/li&gt;
+				&lt;li&gt;Topic: the scope-owner and the topic creator.&lt;/li&gt;
+				&lt;/ul&gt;
+				
+			</p></div></header><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-200"><div class="status"><strong>200</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ACLRetrievalResponse+json</span></p><p class="doc">The response consists on a JSON object that represents a map in
+					which the key is a verb and the value is a JSON array of subjects.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">CREATE_NEW_BUCKET</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">CREATE_NEW_TOPIC</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">QUERY_OBJECTS_IN_BUCKET</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">CREATE_OBJECTS_IN_BUCKET</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">DROP_BUCKET_WITH_ALL_CONTENT</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">READ_EXISTING_OBJECT</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">WRITE_EXISTING_OBJECT</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">SUBSCRIBE_TO_TOPIC</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr><tr><td class="name">SEND_MESSAGE_TO_TOPIC</td><td class="type details">ufe:ACLSubject</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3"></td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserNotFoundException+json</span></p><p class="doc">Happens when accessing the ACL of a user-scope resource and
+					the
+					user of the scope is not found.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code USER_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">field</td><td class="type ">string</td><td class="doc">
+						The field used to search for the user,
+						can be the
+						userID field or an address field
+					</td></tr><tr><td class="name">value</td><td class="type ">string</td><td class="doc">
+						The value of the field used to look for the user
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the user belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.GroupNotFoundException+json</span></p><p class="doc">Happens when accessing the ACL of a group-scope resource and
+					the group of the scope is not found.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code GROUP_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">groupID</td><td class="type ">string</td><td class="doc">
+						The groupID of the group that was not found
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the group belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.BucketNotFoundException+json</span></p><p class="doc">Happens when accessing the ACL of a bucket and the bucket is
+					not found.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code BUCKET_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the bucket
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that was not found
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectNotFoundException+json</span></p><p class="doc">Happens when accessing the ACL of an object and the object is
+					not found.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that contains the object
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object that was not found
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.TopicNotFoundException+json</span></p><p class="doc">Happens when accessing the ACL of a topic and the topic is
+					not
+					found.
+				</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">ErrorCode</td><td class="type ">string</td><td class="doc">
+						Error code TOPIC_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">topicID</td><td class="type ">string</td><td class="doc">
+						The ID of the topic that is not found
+					</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the topic
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr></table></div><div class="response status-401"><div class="status"><strong>401</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UnauthorizedAccessException+json</span></p><p class="doc">Not authorized to read the ACL of the resource.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code UNAUTHORIZED</td></tr><tr><td class="name">authenticatedAppID</td><td class="type ">string</td><td class="doc">The authenticated application ID</td></tr><tr><td class="name">authenticatedUserID</td><td class="type ">string</td><td class="doc">The authenticated user ID</td></tr></table></div></div></div></div></article></section>
+</div>

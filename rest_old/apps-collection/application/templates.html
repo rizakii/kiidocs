@@ -1,0 +1,33 @@
+---
+layout: rest-api
+title: 'Templates'
+tags: rest-api
+---
+<div class="summary">
+
+		 
+			<p>Resource to manage custom templates. This is used to
+			define custom messages to send message to all users when they use
+			your application, per example in a verification email case.</p>
+			
+			You can use a place holders in the content message:
+			<ul>
+				<li><b>${url}</b> : It's replaced by the URL in some templates that need the user to click in a link	(eg:email verification templates).</li>
+				<li><b>${app.appID}</b> : AppID of the application</li>
+				<li><b>${user.displayName}</b> : Display name of the user involved</li>
+				<li><b>${user.userID}</b> : UserID of the user involved</li>
+				<li><b>${user.emailAddress}</b> : Verified email address of the user involved. Empty if the email address is not set or is not verified yet.	</li>
+				<li><b>${user.phoneNumber}</b> :	Verified phone number of the user involved. Empty if the phone number is not set or is not verified yet. </li>
+				<li><b>${user.unverifiedEmailAddress}</b> : Unverified email address of the user involved. Empty if the email address is not set or is already verified.</li>
+				<li><b>${user.unverifiedPhoneNumber}</b> : Unverified phone number of the user involved. Empty if the phone number is not set or is already verified.</li>
+				<li><b>${user.loginName}</b> : Login name of the user involved, if it has.</li>
+				<li><b>${user.phoneVerificationCode}</b> : Verification code of the phone number, if there is an unverified phone number in the user.</li>
+				<li><b>${user.emailVerificationCode}</b> : Verification code of the email address, if there is an unverified email address in the user.	</li>
+				<li><b>${password}</b> : In some templates which involve password handling, it's	replaced by the	password handled (eg: Password reset).</li>
+			</ul>
+			
+		
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id="templatesResourceType"><div class="path"><strong>Location</strong><span>/apps/{appID}/templates</span></div><div class="method-links"><ul></ul></div><div class="methods"></div></article></section>
+</div>

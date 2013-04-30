@@ -1,0 +1,137 @@
+---
+layout: rest-api
+title: 'Description'
+tags: rest-api
+---
+<div class="summary">
+
+							Resource to manage the configuration of the
+							subscription.
+						
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id=""><div class="path"><strong>Location</strong><span>/apps/{appID}/users/id:{internalID}/buckets/{bucketID}/filters/{filterID}/push/subscriptions/users/{userID}/configuration</span></div><div class="method-links"><ul><li class="method-link-PUT"><a href="#method--PUT">PUT</a></li><li class="method-link-GET"><a href="#method--GET">GET</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div></div></div><div class="methods"><div class="method PUT" id="method--PUT"><h4>PUT</h4><p class="uri">/apps/{appID}/users/id:{internalID}/buckets/{bucketID}/filters/{filterID}/push/subscriptions/users/{userID}/configuration</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+								Update the push configuration of the subscription
+								of
+								the accessed user.
+							</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
+								Can be performed by the administrator and the
+								subscribed user itself.
+							</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.PushSubscriptionConfigurationModificationRequest+json</span></p><p class="doc">
+									The new configuration data to update in the subscription.
+								</p></div><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">gcm</span><span class="req"></span><span class="type">ufe:GCMConfigurationType</span><span class="doc"></span></div><div><span class="name">apns</span><span class="req"></span><span class="type">ufe:APNConfigurationType</span><span class="doc"></span></div><div><span class="name">sendAppID</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;AppID&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendSender</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;Sender&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendWhen</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;When&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendObjectScope</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;ObjectScope&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendTopicID</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;TopicID&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendOrigin</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;Origin&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendBucketID</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;BucketID&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendBucketType</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;BucketType&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendObjectID</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;ObjectID&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendModifiedAt</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;ModifiedAt&quot; field in
+						notifications.
+					</span></div><div><span class="name">sendMessageType</span><span class="req"></span><span class="type">boolean</span><span class="doc">Set true or false to send &quot;MessageType&quot; field in
+						notifications.
+					</span></div></div><div class="example"><strong class="examplestitle">Sample Request</strong><div class="code javascript json">{
+  &quot;gcm&quot;: &quot;[ufe:GCMConfigurationType]&quot;,
+  &quot;apns&quot;: &quot;[ufe:APNConfigurationType]&quot;,
+  &quot;sendAppID&quot;: &quot;[boolean]&quot;,
+  &quot;sendSender&quot;: &quot;[boolean]&quot;,
+  &quot;sendWhen&quot;: &quot;[boolean]&quot;,
+  &quot;sendObjectScope&quot;: &quot;[boolean]&quot;,
+  &quot;sendTopicID&quot;: &quot;[boolean]&quot;,
+  &quot;sendOrigin&quot;: &quot;[boolean]&quot;,
+  &quot;sendBucketID&quot;: &quot;[boolean]&quot;,
+  &quot;sendBucketType&quot;: &quot;[boolean]&quot;,
+  &quot;sendObjectID&quot;: &quot;[boolean]&quot;,
+  &quot;sendModifiedAt&quot;: &quot;[boolean]&quot;,
+  &quot;sendMessageType&quot;: &quot;[boolean]&quot;
+}</div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-204"><div class="status"><strong>204</strong></div><p class="mediaType"><strong>Content-Type </strong><span></span></p><p class="doc">The push configuration has been updated successfully.</p></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserNotFoundException+json</span></p><p class="doc">
+									Happens when accessing a filter of a bucket in user-scope
+									and the user of the scope is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code USER_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">field</td><td class="type ">string</td><td class="doc">
+						The field used to search for the user,
+						can be the
+						userID field or an address field
+					</td></tr><tr><td class="name">value</td><td class="type ">string</td><td class="doc">
+						The value of the field used to look for the user
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the user belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.GroupNotFoundException+json</span></p><p class="doc">
+									Happens when accessing a filter of a bucket in group-scope
+									and the group of the scope is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code GROUP_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">groupID</td><td class="type ">string</td><td class="doc">
+						The groupID of the group that was not found
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the group belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.FilterNotFoundException+json</span></p><p class="doc">The filter to where the subscription belongs is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">ErrorCode</td><td class="type ">string</td><td class="doc">
+						Error code FILTER_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.PushSubscriptionNotFoundException+json</span></p><p class="doc">The user is not subscribed to the filter.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">ErrorCode</td><td class="type ">string</td><td class="doc">
+						Error code PUSH_SUBSCRIPTION_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">topicID</td><td class="type ">string</td><td class="doc">
+						The ID of the topic where the subscription is not
+						found
+					</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the topic
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">subject</td><td class="type ">string</td><td class="doc">
+						The subject that is not subscribed to the
+						topic/filter
+					</td></tr></table></div><div class="response status-401"><div class="status"><strong>401</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UnauthorizedAccessException+json</span></p><p class="doc">Not authorized to access this method.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code UNAUTHORIZED</td></tr><tr><td class="name">authenticatedAppID</td><td class="type ">string</td><td class="doc">The authenticated application ID</td></tr><tr><td class="name">authenticatedUserID</td><td class="type ">string</td><td class="doc">The authenticated user ID</td></tr></table></div></div></div><div class="method GET" id="method--GET"><h4>GET</h4><p class="uri">/apps/{appID}/users/id:{internalID}/buckets/{bucketID}/filters/{filterID}/push/subscriptions/users/{userID}/configuration</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+								Get the push configuration of the subscription of
+								the
+								accessed user.
+							</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
+								Can be performed by the administrator and the
+								subscribed user itself.
+							</p></div></header><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-200"><div class="status"><strong>200</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.PushSubscriptionConfigurationRetrievalResponse+json</span></p><p class="doc">The push configuration has been retrieved successfully.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">gcm</td><td class="type details">ufe:GCMConfigurationType</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3">GCM-specific fields.</td></tr><tr><td class="name">apns</td><td class="type details">ufe:APNConfigurationType</td><td class="doc"></td></tr><tr class="details documentation"><td class="doc" colspan="3">iOS-APNS specific fields.</td></tr><tr><td class="name">sendAppID</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendSender</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendWhen</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendObjectScope</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendTopicID</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendOrigin</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendBucketID</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendBucketType</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendObjectID</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendModifiedAt</td><td class="type ">boolean</td><td class="doc"></td></tr><tr><td class="name">sendMessageType</td><td class="type ">boolean</td><td class="doc"></td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserNotFoundException+json</span></p><p class="doc">
+									Happens when accessing a filter of a bucket in user-scope
+									and the user of the scope is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code USER_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">field</td><td class="type ">string</td><td class="doc">
+						The field used to search for the user,
+						can be the
+						userID field or an address field
+					</td></tr><tr><td class="name">value</td><td class="type ">string</td><td class="doc">
+						The value of the field used to look for the user
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the user belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.GroupNotFoundException+json</span></p><p class="doc">
+									Happens when accessing a filter of a bucket in group-scope
+									and the group of the scope is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code GROUP_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">groupID</td><td class="type ">string</td><td class="doc">
+						The groupID of the group that was not found
+					</td></tr><tr><td class="name">appID</td><td class="type ">string</td><td class="doc">
+						The appID of the application where the group belongs
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.FilterNotFoundException+json</span></p><p class="doc">The filter to where the subscription belongs is not found.
+								</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">ErrorCode</td><td class="type ">string</td><td class="doc">
+						Error code FILTER_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.PushSubscriptionNotFoundException+json</span></p><p class="doc">The user is not subscribed to the filter.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">ErrorCode</td><td class="type ">string</td><td class="doc">
+						Error code PUSH_SUBSCRIPTION_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">topicID</td><td class="type ">string</td><td class="doc">
+						The ID of the topic where the subscription is not
+						found
+					</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the topic
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">subject</td><td class="type ">string</td><td class="doc">
+						The subject that is not subscribed to the
+						topic/filter
+					</td></tr></table></div><div class="response status-401"><div class="status"><strong>401</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UnauthorizedAccessException+json</span></p><p class="doc">Not authorized to access this method.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code UNAUTHORIZED</td></tr><tr><td class="name">authenticatedAppID</td><td class="type ">string</td><td class="doc">The authenticated application ID</td></tr><tr><td class="name">authenticatedUserID</td><td class="type ">string</td><td class="doc">The authenticated user ID</td></tr></table></div></div></div></div></article></section>
+</div>
