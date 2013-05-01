@@ -136,6 +136,50 @@ A QueryClause object is defined using one or more of the following clauses:
     }
     ```
 
+* **GeoBoxClause**: A geo query to check if a given geo point value fits within a GeoBox (a rectangular area).
+
+    A GeoBox is defined by two points (northeast and southwest points), like the following example.
+
+
+    ```javascript
+    {
+      "type": "geobox",
+      "field": "mylocation",
+      "box": {
+        "ne": {
+          "_type": "point",
+          "lat": 11.0,
+          "lon": 1.0
+        },
+          "sw": {
+          "_type": "point",
+          "lat": 1.0,
+          "lon": 17.0
+        }
+      }
+    }
+    ```
+
+* **GeoDistanceClause**: A geo query to check if a given geo point value fits within a GeoDistance (a circlular area).
+
+    A GeoDistance is defined by a center point and a radius (in meters), like the following example.
+
+    ```javascript
+    {
+      "type": "geodistance",
+      "field": "mylocation",
+      "center": {
+          "_type": "point",
+          "lat": 11.0,
+          "lon": 1.0
+      }
+      "radius": 1023
+      "resultField": "distance_to_mylocation"
+    }
+    ````
+
+
+
 ## Pagination
 
 When the "bestEffortLimit" key is specified and the number of objects in the result set is larger than the limit, Kii Platform will only return objects up to the defined limit.  When this happens, the response will include a "nextPaginationKey" as shown:
