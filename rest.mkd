@@ -1,0 +1,44 @@
+---
+layout: rest-api
+title: Kii Cloud REST API overview
+tags: rest-api
+page-id: references-rest-en
+---
+## Application
+
+Application represents an application on Kii Cloud.
+
+See also: {% page_link rest-guides-en %} ([日本語]({% page_url rest-guides-ja %}))
+
+Resource      |Method |Description
+--------------|-------|-----------
+/apps/{appID} |Get    |Retrieve the properties of the application being accessed
+/apps/{appID} |Post   |Modify the properties application being accessed
+
+## ACL
+
+This is the Access Control List of the parent resource. An ACL entry is composed by resource + verb + subject, indicates a permission (verb) that can be granted or revoked to a subject over a resource. The resources that have ACLs in Kii Platform are applications, users, groups, buckets, objects and topics, for each of them applies different verbs. A subject can be either a user or a group.
+
+See also: {% page_link rest-managing_buckets-en %} ([日本語]({% page_url rest-managing_buckets-ja %}))
+
+Resource                                             |Method   |Description
+-----------------------------------------------------|---------|-----------
+/apps/{appID}/acl                                    |Get      |Retrieve the complete ACL of the resource
+/apps/{appID}/acl/{ACLVerb}                          |Get      |Retrieve the ACL entries for the current verb (permission)
+/apps/{appID}/acl/{ACLVerb}/GroupID:{subjectGroupID} |Get      |Check if this group has granted the verb for the accessed resource
+/apps/{appID}/acl/{ACLVerb}/GroupID:{subjectGroupID} |Put      |Grant to this group the verb on the accessed resource
+/apps/{appID}/acl/{ACLVerb}/GroupID:{subjectGroupID} |Delete   |Revoke the user the accessed verb on the resource
+/apps/{appID}/acl/{ACLVerb}/UserID:{subjectUserID}   |Get      |Check if this user has granted the verb for the accessed resource
+/apps/{appID}/acl/{ACLVerb}/UserID:{subjectUserID}   |Put      |Grant to this user the verb on the accessed resource
+/apps/{appID}/acl/{ACLVerb}/UserID:{subjectUserID}   |Delete   |Revoke the user the accessed verb on the resource
+
+## Analytics
+
+Analytics resource allow you to get analytics results
+
+See also: {% page_link rest-managing_analytics-en %} ([日本語]({% page_url rest-managing_analytics-ja %}))
+
+Resource                              |Method |Description
+--------------------------------------|-------|-----------
+/apps/{appID}/analytics/{ruleID}/data |Get    |Retrieve analytics result in grouped format. This format is used when media type is unspecified, */* or application/json
+/apps/{appID}/analytics/{ruleID}/data |Get    |Retrieve analytics result in tabular format
