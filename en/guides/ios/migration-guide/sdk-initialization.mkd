@@ -1,0 +1,48 @@
+---
+layout: en-doc
+title: SDK initialization
+sort-priority: 10
+page-id: ios-migration_sdk_initialization-en
+---
+Initialization is very similar. First of all both SDKs will require the following frameworks to be linked to your project:
+
+```
+MobileCoreServices.framework
+```
+
+In both cases you'll have to insert your application's credentials (i.e., APPID and APPKEY) in the specified parameters in the method:
+
+###Parse Initialization
+```objc
+#import <Parse/Parse.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+{
+
+	... 
+	
+	[Parse setApplicationId:@"APPID"
+                  clientKey:@"APPKEY"];
+
+	...
+}
+```
+###Kii Cloud Initialization
+```objc
+#import <KiiSDK/Kii.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+{
+
+	... 
+	
+	[Kii beginWithID:@"APPID" 
+              andKey:@"APPKEY" 
+             andSite:kiiSiteUS];
+	...
+}
+```
+
+In addition, Kii Cloud will also allow you to define the Country (kiiSiteUS or kiiSiteJP) as specified on the developer's portal.
+
+For more information about Kii Cloud SDK initialization see {% page_link ios-adding_kii_cloud_to_your_application-en %}.
