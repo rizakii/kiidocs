@@ -1,0 +1,29 @@
+---
+layout: ja-doc
+title: Object の作成
+sort-priority: 20
+page-id: ios-migration_creating_objects-ja
+---
+Parse では `PFObject` を使って Object を作成します。
+
+###Parse における Object 作成の例
+```objc
+PFObject *testObject = [PFObject objectWithClassName:@"Customer"];
+[testObject setObject:@"Christof" forKey:@"name"];
+[testObject save];
+```
+
+Kii Cloud では `KiiObject` を保存する `bucket` という概念が存在します。
+
+###Kii Cloud における Object 作成の例
+```objc
+KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
+[testObject setObject:@"Christof" forKey:@"name"];
+[testObject saveWithBlock:^(KiiObject *object, NSError *error) {
+  // do something when finished
+}];
+```
+
+Kii Cloud は、Object に関する処理を行う API として、ブロッキング API とノンブロッキング API の双方を提供しています。
+
+詳細については「{% page_link ios-managing_data-object_storages-creating-ja %}」を参照してください。

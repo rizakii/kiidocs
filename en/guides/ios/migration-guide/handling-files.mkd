@@ -1,0 +1,32 @@
+---
+layout: en-doc
+title: Handling Files
+sort-priority: 50
+page-id: ios-migration_handling_files-en
+---
+Parse handles file storage using `PFFile` as you can see below:
+
+###Parse File Upload
+```objc
+NSData *data = [NSData dataWithContentsOfFile:filePath];
+PFFile *file = [PFFile fileWithName:@"license.txt" data:data];
+[file saveInBackground];
+```
+
+Kii Platform file storage allows your application to manage virtually any file and its associated metadata and to organize them in buckets. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code. 
+
+Here's the equivalent to the Parse file upload example above but using `KiiFile` with asynchronous block callbacks:
+
+###Kii File Upload
+```objc
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"GameData"];
+KiiFile *f = [bucket fileWithLocalPath:filePath];
+
+[f saveFileWithProgressBlock:^(KiiFile *file, double progress) {
+  NSLog(@"Upload progress: %lf %@", progress, file);
+} andCompletionBlock:^(KiiFile *file, NSError *error) {
+  NSLog(@"Upload complete: %@ withError: %@", file, error);
+}];
+```
+
+For more information on file handling see {% page_link ios-file_storages-en %}.

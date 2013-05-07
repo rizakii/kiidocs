@@ -4,6 +4,7 @@ title: File Storage
 sort-priority: 30
 summary: File Storage は、任意のファイル（File）をそのメタデータとともに管理する機能を提供します。ファイルのアップロードやダウンロード、ゴミ箱への移動と復元、さらには URL による公開など、多くの機能を容易に利用可能です。
 old-url: /jp/file-storages--7
+page-id: ios-file_storages-ja
 ---
 File のインスタンスを生成すると、Kii Cloud SDK は自動的に以下の共有メタデータを生成・保存します。これらメタデータの値は、Kii Cloud SDK が提供する getter メソッドを用いて容易に参照可能です。
 

@@ -1,0 +1,50 @@
+---
+layout: en-doc
+title: Querying Objects
+sort-priority: 30
+page-id: ios-migration_querying_objects-en
+---
+Parse relies on the `PFQuery` class to query for objects. Here's a non-blocking version that passes the results in a callback:
+
+###Parse Query
+```java
+PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
+[query whereKey:@"name" equalTo:@"Christof"];
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+  if (!error) {
+    // found some object(s)
+    NSLog(@"Successfully retrieved %d results", objects.count);
+  } else {
+    // unable to get object(s)
+    NSLog(@"Error: %@ %@", error, [error userInfo]);
+  }
+}];
+```
+
+Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constrained to matching result sets using `KiiClause` objects. This is also a non-blocking version:
+
+###Kii Query
+```java
+KiiBucket *bucket = [Kii bucketWithName:@"Customer"];
+KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name"
+                                                    value:@"Christof"]];
+[bucket executeQuery:q
+           withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results,
+                       KiiQuery *nextQuery, NSError *error)
+           {
+
+             // got a result
+             if(error == nil) {
+               NSLog(@"Successfully retrieved %d results: %@", results.count,
+                     results);
+             }
+
+             // unable to get result(s)
+             else {
+               NSLog(@"Error: %@", error);
+             }
+
+           }];
+```
+
+For more information on queries see {% page_link ios-object_storages_querying-en %}.
