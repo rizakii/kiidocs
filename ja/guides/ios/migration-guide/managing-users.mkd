@@ -1,0 +1,51 @@
+---
+# TODO: translate into Japanese
+layout: ja-doc
+title: Managing Users
+sort-priority: 40
+page-id: ios-migration_managing_users-ja
+---
+Users are created via a `ParseUser` in Parse:
+
+###Parse User Creation
+```java
+PFUser *user = [PFUser user];
+user.username = @"testname";
+user.password = @"testpass";
+user.email = @"test@test.com";
+
+// other fields can be set just like with PFObject
+[user setObject:@"+1650-000-0000" forKey:@"phone"];
+
+[user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+  if (!error) {
+    // The user was registered
+  } else {
+    // the user was not registered...
+  }
+}];
+```
+
+With Kii Cloud you leverage a variety of static methods to build your user with all the necessary data. Once the user object is build, you can register users with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses:
+
+###Kii User Creation
+```objc
+KiiUser *user = [KiiUser userWithUsername:@"testname"
+                          andEmailAddress:@"test@test.com"
+                           andPhoneNumber:@"+1650-000-0000"
+                              andPassword:@"testpass"];
+
+[user performRegistrationWithBlock:^(KiiUser *user, NSError *error) {
+  if(error == nil) {
+    // user registered successfully!
+  } else {
+    // user not registered
+  }
+}];
+```
+
+If you want more information on how you can verify phone numbers and e-mails for your users see {% page_link ios-sign_up-ja %}.
+
+Note that Kii Cloud also allows you to signup/login using Facebook (see {% page_link ios-social_network_integration-ja %}).
+
+For more information on user management see {% page_link ios-managing_users-ja %}.

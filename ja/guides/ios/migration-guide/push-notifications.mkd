@@ -1,0 +1,51 @@
+---
+# TODO: translate into Japanese
+layout: ja-doc
+title: Push Notifications
+sort-priority: 60
+page-id: ios-migration_push_notifications-ja
+---
+In Parse this is an example of sending a push notification:
+
+###Parse Push Notification
+
+```objc
+PFPush *push = [[PFPush alloc] init];
+[push setChannel:@"AppNews"];
+[push setMessage:@"Check out our new in-app purchase!"];
+[push sendPushInBackground];
+```
+
+With Kii Cloud you have granular control over push notification management with the ability to send application wide, user to user and direct push notifications. Here's an example of sending a push notification to a specific group of users:
+
+###Kii Push Notification
+
+```objc
+NSError *error;
+
+// Instantiating a group and its group-scope topic.
+KiiGroup *group = [KiiGroup gropuWithName:@"ActiveUsers"];
+KiiTopic *topic = [group topicWithName:@"AppNews"];
+
+// Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Check out our new in-app purchase!"];
+
+// Build a push message.
+// GCM fields is set nil, so the message will not send to Android devices.
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"MyApp" forKey:@"From"];
+[dictionary setObject:@"Check out our new in-app purchase!" forKey:@"MsgBody"];
+[apnsFields setSpecificData:dictionary];
+
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+
+// Send the message.
+[topic sendMessageSynchronous:message withError:&error;];
+
+if (error != nil) {
+  // There was a problem.
+}
+```
+
+This is just a taste of what you can do with push notifications on the Kii Platform. For more information see {% page_link ios-managing_push-ja %}.

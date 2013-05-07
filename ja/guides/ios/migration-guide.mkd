@@ -1,0 +1,8 @@
+---
+# TODO: translate into Japanese
+layout: ja-doc
+title: Migration Guide
+sort-priority: 70
+page-id: ios-migration_guide-ja
+---
+A step-by-step guide for developers looking to switch from Parse. It provides a quick comparison of features from their SDK to those found in the Kii Cloud SDK.
