@@ -1,13 +1,12 @@
 ---
-# TODO: translate into Japanese
 layout: ja-doc
-title: Querying Objects
+title: Object の検索
 sort-priority: 30
 page-id: ios-migration_querying_objects-ja
 ---
-Parse relies on the `PFQuery` class to query for objects. Here's a non-blocking version that passes the results in a callback:
+Parse では `PFQuery` を用いて Object の検索を行います。例えばコールバックに検索結果を返すノンブロッキング呼び出しは次のようになります。
 
-###Parse Query
+###Parse における Object 検索の例
 ```java
 PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
 [query whereKey:@"name" equalTo:@"Christof"];
@@ -22,9 +21,12 @@ PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
 }];
 ```
 
-Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constrained to matching result sets using `KiiClause` objects. This is also a non-blocking version:
+Kii Cloud では同様に `KiiQuery` を用いて Object の検索を行います。この際 `KiiClause` を使って検索条件を指定します。
 
-###Kii Query
+以下に、Object の検索をノンブロッキング API で行う例をあげます。
+
+
+###Kii Cloud における Object 検索の例
 ```java
 KiiBucket *bucket = [Kii bucketWithName:@"Customer"];
 KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name"
@@ -48,4 +50,4 @@ KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name"
            }];
 ```
 
-For more information on queries see {% page_link ios-object_storages_querying-ja %}.
+Object 検索に関する詳細は「{% page_link ios-object_storages_querying-ja %}」を参照してください。

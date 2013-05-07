@@ -13,7 +13,9 @@ PFFile *file = [PFFile fileWithName:@"license.txt" data:data];
 [file saveInBackground];
 ```
 
-Kii Platform file storage allows your application to manage virtually any file and its associated metadata and to organize them in buckets. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code. Here's the equivalent to the Parse file upload example above but using `KiiFile` with asynchronous block callbacks:
+Kii Platform file storage allows your application to manage virtually any file and its associated metadata and to organize them in buckets. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code. 
+
+Here's the equivalent to the Parse file upload example above but using `KiiFile` with asynchronous block callbacks:
 
 ###Kii File Upload
 ```objc

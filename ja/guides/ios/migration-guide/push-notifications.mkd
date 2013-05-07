@@ -1,13 +1,12 @@
 ---
-# TODO: translate into Japanese
 layout: ja-doc
-title: Push Notifications
+title: プッシュ通知
 sort-priority: 60
 page-id: ios-migration_push_notifications-ja
 ---
-In Parse this is an example of sending a push notification:
+Parse においてプッシュ通知を送信する例を以下にあげます。
 
-###Parse Push Notification
+###Parse におけるプッシュ通知の例
 
 ```objc
 PFPush *push = [[PFPush alloc] init];
@@ -16,9 +15,11 @@ PFPush *push = [[PFPush alloc] init];
 [push sendPushInBackground];
 ```
 
-With Kii Cloud you have granular control over push notification management with the ability to send application wide, user to user and direct push notifications. Here's an example of sending a push notification to a specific group of users:
+Kii Cloud では、より細かくプッシュ通知を制御することができます。具体的には、アプリケーション全体へのプッシュ通知以外に、ユーザ間におけるプッシュ通知やアプリ開発者から特定ユーザへのピンポイント通知をサポートしています。
 
-###Kii Push Notification
+以下に、ある特定のユーザグループに対してのみプッシュ通知を行う例をあげます。
+
+###Kii Cloud におけるプッシュ通知の例
 
 ```objc
 NSError *error;
@@ -48,4 +49,4 @@ if (error != nil) {
 }
 ```
 
-This is just a taste of what you can do with push notifications on the Kii Platform. For more information see {% page_link ios-managing_push-ja %}.
+もちろんこれはあくまで一例です。Kii Cloud がサポートするプッシュ通知の詳細については「{% page_link ios-managing_push-ja %}」を参照してください。

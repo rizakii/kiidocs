@@ -1,13 +1,12 @@
 ---
-# TODO: translate into Japanese
 layout: ja-doc
-title: Managing Users
+title: User の管理
 sort-priority: 40
 page-id: ios-migration_managing_users-ja
 ---
-Users are created via a `ParseUser` in Parse:
+Parse では `ParseUser` を使ってユーザを作成します。
 
-###Parse User Creation
+###Parse における User 作成の例
 ```java
 PFUser *user = [PFUser user];
 user.username = @"testname";
@@ -26,9 +25,10 @@ user.email = @"test@test.com";
 }];
 ```
 
-With Kii Cloud you leverage a variety of static methods to build your user with all the necessary data. Once the user object is build, you can register users with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses:
+Kii Cloud では、ユーザに関する必要情報を元にユーザを作成するスタティックメソッドがいくつか用意されています。ユーザ作成後は、ユーザ名・パスワードと共にユーザ登録を行います。この際、電話番号やメールアドレスを合わせて設定することができます。
 
-###Kii User Creation
+
+###Kii Cloud における User 作成の例
 ```objc
 KiiUser *user = [KiiUser userWithUsername:@"testname"
                           andEmailAddress:@"test@test.com"
@@ -44,8 +44,8 @@ KiiUser *user = [KiiUser userWithUsername:@"testname"
 }];
 ```
 
-If you want more information on how you can verify phone numbers and e-mails for your users see {% page_link ios-sign_up-ja %}.
+電話番号やメールアドレスを設定した場合、これらを用いたユーザ認証を行うことができます。詳細については「{% page_link ios-sign_up-ja %}」を参照してください。
 
-Note that Kii Cloud also allows you to signup/login using Facebook (see {% page_link ios-social_network_integration-ja %}).
+さらに Facebook アカウントを用いたサインアップ・ログインを行うこともできます。詳細については「{% page_link ios-social_network_integration-ja %}」を参照してください。
 
-For more information on user management see {% page_link ios-managing_users-ja %}.
+ユーザ管理機能の全体に関する詳細は「{% page_link ios-managing_users-ja %}」を参照してください。
