@@ -1,6 +1,10 @@
 encoding:       utf-8
 markdown:       redcarpet
-exclude:        scripts tmp templates README.mkd
+exclude:
+  - 'scripts'
+  - 'tmp'
+  - 'templates'
+  - 'README.mkd'
 permalink:      pretty
 
 redcarpet:
