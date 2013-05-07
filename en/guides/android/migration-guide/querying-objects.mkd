@@ -1,0 +1,35 @@
+---
+layout: en-doc
+title: Querying Objects
+sort-priority: 30
+page-id: android-migration_querying_objects-en
+old-url: /en/migration-guide/querying-objects
+---
+Parse relies on the `ParseQuery` class to query for objects. Here's a non-blocking version that passes the results in a callback:
+
+###Parse Query
+```java
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+ParseQuery query = new ParseQuery("Customer");
+query.whereEqualTo("name", "Christof");
+query.findInBackground(callback);
+```
+
+Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constrained to matching result sets using `KiiClause` objects. This is also a non blocking version:
+
+###Kii Query
+```java
+import com.kii.cloud.storage.KiiBucket;
+import com.kii.cloud.storage.KiiQuery;
+
+KiiBucket bucket = Kii.bucket("Customer");
+KiiQuery query = new KiiQuery(KiiClause.equals("name", "Christof"));
+bucket.query(callback, query);
+```
+
+Note that Kii Cloud also allows you to retrieve objects by URI (see {% page_link android-object_storages_retrieving-en %}).
+
+For more information on queries see {% page_link android-object_storages_querying-en %}.

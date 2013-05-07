@@ -1,0 +1,8 @@
+---
+layout: ja-doc
+title: 移行ガイド
+sort-priority: 70
+page-id: android-migration_guide-ja
+old-url: /ja/migration-guide
+---
+Parse などの他サービスより Kii Cloud に移行するための step-by-step ガイドです。Kii Cloud SDK が提供する機能を、他サービスが提供する機能と比較しています。

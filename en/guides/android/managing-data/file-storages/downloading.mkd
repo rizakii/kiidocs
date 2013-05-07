@@ -3,6 +3,7 @@ layout: en-doc
 title: Downloading Files
 sort-priority: 20
 old-url: /en/downloading-files
+page-id: android-downloading_files-en
 ---
 Kii Cloud SDK offers the following two types of file downloading.
 

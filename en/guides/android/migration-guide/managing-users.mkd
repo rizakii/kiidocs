@@ -1,0 +1,44 @@
+---
+layout: en-doc
+title: Managing Users
+sort-priority: 40
+page-id: android-migration_managing_users-en
+old-url: /en/migration-guide/managing-users
+---
+Users are created via a `ParseUser` in Parse:
+
+###Parse User Creation
+```java
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
+ParseUser user = new ParseUser();
+
+user.setUsername("testname");
+user.setPassword("testpass");
+user.setEmail("test@test.com");
+user.put("phone", "+1650-000-0000");
+
+user.signUpInBackground(callback);
+```
+
+With Kii Cloud you leverage a `KiiUser.Builder` to build your user with all the necessary data and then, via `KiiUser`, you can register users with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses:
+
+###Kii User Creation
+```java
+import com.kii.cloud.storage.KiiUser;
+
+KiiUser.Builder builder = KiiUser.builderWithName("testname");
+
+builder.withEmail("test@test.com");
+builder.withPhone("+1650-000-0000");
+KiiUser user = builder.build();
+
+user.register(callback, "testpass");
+```
+
+If you want more information on how you can verify phone numbers and e-mails for your users see {% page_link android-sign_up-en %}.
+
+Note that Kii Cloud also allows you to signup/login using Facebook (see {% page_link android-social_network_integration-en %}).
+
+For more information on user management see {% page_link android-managing_users-en %}.

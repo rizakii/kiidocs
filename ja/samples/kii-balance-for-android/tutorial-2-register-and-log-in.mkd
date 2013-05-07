@@ -121,5 +121,5 @@ public void onCreate(Bundle saveInstanceState) {
 
 #### より詳しく学びたい方へ
 
-ユーザ登録時に、メールアドレスや電話番号の認証処理を走らせる方法などについては「{% page_link android-sing_up-ja %}」を参照してください。
+ユーザ登録時に、メールアドレスや電話番号の認証処理を走らせる方法などについては「{% page_link android-sign_up-ja %}」を参照してください。
 Facebook アカウントによるユーザ登録をする方法については「{% page_link android-social_network_integration-ja %}」を参照してください。

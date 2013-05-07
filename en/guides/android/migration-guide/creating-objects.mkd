@@ -1,0 +1,34 @@
+---
+layout: en-doc
+title: Creating Objects
+sort-priority: 20
+page-id: android-migration_creating_objects-en
+old-url: /en/migration-guide/creating-objects
+---
+Objects in Parse are created via `ParseObject`:
+
+###Parse Object Creation
+```java
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
+ParseObject testObject = new ParseObject("Customer");
+testObject.put("name", "Christof");
+testObject.saveInBackground(callback);
+```
+
+Kii Cloud uses the concept of `bucket` that can store a `KiiObject`:
+
+###Kii Object Creation
+```java
+import com.kii.cloud.storage.KiiBucket;
+import com.kii.cloud.storage.KiiObject;
+
+KiiObject testObject = Kii.bucket("Customer").object();
+testObject.set("name", "Christof");
+testObject.save(callback);
+```
+
+Kii Cloud offers both blocking and non blocking API calls when working with objects.
+
+For more information see {% page_link android-object_storages_creating-en %}.

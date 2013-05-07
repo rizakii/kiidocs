@@ -1,0 +1,35 @@
+---
+layout: ja-doc
+title: SDK の初期化
+sort-priority: 10
+page-id: android-migration_sdk_initialization-ja
+old-url: /ja/migration-guide/sdk-initialization
+---
+Parse と Kii Cloud における SDK の初期化方法は非常に似ています。まず、いずれについても以下のパーミッションを AndroidManifest.xml に追加する必要があります。
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+さらに、次のようにアプリケーションの秘密情報（APPID と APPKEY）を指定する必要があります。
+
+###Parse における初期化
+```java
+import com.parse.Parse;
+
+public void onCreate() {
+    Parse.initialize(this, "___APPID___", "___APPKEY___");
+}
+```
+###Kii Cloud における初期化
+```java
+import com.kii.cloud.storage;
+
+public void onCreate() {
+    Kii.initialize("___APPID___", "___APPKEY___", Site.US);
+}
+```
+
+Kii Cloud では、さらに開発者ポータルで指定した国情報（Site.US または Site.JP）を指定します。
+
+Kii Cloud SDK の初期化方法に関する詳細は「{% page_link android-adding_kii_cloud_to_your_application-ja %}」を参照してください。

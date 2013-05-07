@@ -1,0 +1,37 @@
+---
+layout: ja-doc
+title: Object の検索
+sort-priority: 30
+page-id: android-migration_querying_objects-ja
+old-url: /ja/migration-guide/querying-objects
+---
+Parse では `ParseQuery` を用いて Object の検索を行います。例えばコールバックに検索結果を返すノンブロッキング呼び出しは次のようになります。
+
+###Parse における Object 検索の例
+```java
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+ParseQuery query = new ParseQuery("Customer");
+query.whereEqualTo("name", "Christof");
+query.findInBackground(callback);
+```
+
+Kii Cloud では同様に `KiiQuery` を用いて Object の検索を行います。この際 `KiiClause` を使って検索条件を指定します。
+
+以下に、Object の検索をノンブロッキング API で行う例をあげます。
+
+###Kii Cloud における Object 検索の例
+```java
+import com.kii.cloud.storage.KiiBucket;
+import com.kii.cloud.storage.KiiQuery;
+
+KiiBucket bucket = Kii.bucket("Customer");
+KiiQuery query = new KiiQuery(KiiClause.equals("name", "Christof"));
+bucket.query(callback, query);
+```
+
+Kii Cloud では、検索による取得以外に URI 指定による Object の直接取得をサポートしています。詳細は「{% page_link android-object_storages_retrieving-ja %}」を参照してください。
+
+Object 検索に関する詳細は「{% page_link android-object_storages_querying-ja %}」を参照してください。

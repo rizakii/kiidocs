@@ -51,6 +51,18 @@ conn.logIn(activity, null, new KiiSocialCallBack(){
 2. ソーシャル・ネットワークコネクターのインスタンスを `socialConnect` メソッドで生成します。この際、ターゲットとなるソーシャル・ネットワークを引数で指定します（今回の例では `SocialNetwork.Facebook` を指定）。
 3. `logIn` メソッドを実行してサインインを開始します。このメソッドは非同期で実行され、コールバックで結果が通知されます。
 
+**注意**: さらに、以下の例のように Facebook 認証を完了するためのコードを `onActivityResult` にアクティビティに追加する必要があります。
+
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    Kii.socialConnect(SocialNetwork.FACEBOOK).respondAuthOnActivityResult(
+	    requestCode,
+	    resultCode,
+	    data);
+}
+```
+
 ##既存 Kii アカウントを外部アカウントとリンク
 
 すでに存在する Kii Cloud のユーザと外部アカウントをリンクさせることもできます。リンクさせることにより、ユーザは外部アカウントの認証を行うことによって Kii Cloud にサインインできるようになります。

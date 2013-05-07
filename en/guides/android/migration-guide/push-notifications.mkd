@@ -1,0 +1,37 @@
+---
+layout: en-doc
+title: Push Notifications
+sort-priority: 60
+page-id: android-migration_push_notifications-en
+old-url: /en/migration-guide/push-notifications
+---
+In Parse this is an example of sending a push notification:
+
+###Parse Push Notification
+```java
+import com.parse.ParsePush;
+
+ParsePush push = new ParsePush();
+push.setChannel("AppNews");
+push.setMessage("Check out our new in-app purchase!");
+push.sendInBackground(callback);
+```
+
+With Kii Cloud you have granular control over push notification management with the ability to send application wide, user to user and direct push notifications. Here's an example of sending a push notification to a specific group of users:
+
+###Kii Push Notification
+```java
+import com.kii.cloud.storage.KiiGroup;
+import com.kii.cloud.storage.KiiTopic;
+import com.kii.cloud.storage.KiiPushMessage;
+
+KiiGroup group = Kii.group("ActiveUsers");
+KiiTopic topic = group.topic("AppNews");
+KiiPushMessage.Data data = new Data();
+data.put("From", "MyApp");
+data.put("MsgBody", "Check out our new in-app purchase!");
+KiiPushMessage message = KiiPushMessage.buildWith(data).build();
+topic.sendMessage(message, callback);
+```
+
+This is just a taste of what you can do with push notifications on the Kii Platform. For more information see {% page_link android-managing_push-en %}.
