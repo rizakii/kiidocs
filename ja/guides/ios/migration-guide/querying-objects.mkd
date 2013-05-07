@@ -6,7 +6,7 @@ page-id: ios-migration_querying_objects-ja
 ---
 Parse では `PFQuery` を用いて Object の検索を行います。例えばコールバックに検索結果を返すノンブロッキング呼び出しは次のようになります。
 
-###Parse における Object 検索の例
+### Parse における Object 検索の例
 ```java
 PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
 [query whereKey:@"name" equalTo:@"Christof"];
@@ -26,28 +26,29 @@ Kii Cloud では同様に `KiiQuery` を用いて Object の検索を行いま�
 以下に、Object の検索をノンブロッキング API で行う例をあげます。
 
 
-###Kii Cloud における Object 検索の例
+### Kii Cloud における Object 検索の例
+
 ```java
 KiiBucket *bucket = [Kii bucketWithName:@"Customer"];
 KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name"
                                                     value:@"Christof"]];
-[bucket executeQuery:q
-           withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results,
-                       KiiQuery *nextQuery, NSError *error)
-           {
+[bucket
+  executeQuery:q
+     withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results,
+                 KiiQuery *nextQuery, NSError *error)
+     {
+       // got a result
+       if(error == nil) {
+         NSLog(@"Successfully retrieved %d results: %@", results.count,
+             results);
+       }
 
-             // got a result
-             if(error == nil) {
-               NSLog(@"Successfully retrieved %d results: %@", results.count,
-                     results);
-             }
+       // unable to get result(s)
+       else {
+         NSLog(@"Error: %@", error);
+       }
 
-             // unable to get result(s)
-             else {
-               NSLog(@"Error: %@", error);
-             }
-
-           }];
+     }];
 ```
 
 Object 検索に関する詳細は「{% page_link ios-object_storages_querying-ja %}」を参照してください。
