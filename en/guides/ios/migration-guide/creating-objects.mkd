@@ -20,7 +20,7 @@ Kii Cloud uses the concept of `bucket` that can store a `KiiObject`:
 KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
 [testObject setObject:@"Christof" forKey:@"name"];
 [testObject saveWithBlock:^(KiiObject *object, NSError *error) {
-    // do something when finished
+  // do something when finished
 }];
 ```
 

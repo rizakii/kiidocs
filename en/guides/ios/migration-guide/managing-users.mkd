@@ -12,16 +12,16 @@ PFUser *user = [PFUser user];
 user.username = @"testname";
 user.password = @"testpass";
 user.email = @"test@test.com";
- 
+
 // other fields can be set just like with PFObject
 [user setObject:@"+1650-000-0000" forKey:@"phone"];
- 
+
 [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-	if (!error) {
-		// The user was registered
-	} else {
-		// the user was not registered...
-	}
+  if (!error) {
+    // The user was registered
+  } else {
+    // the user was not registered...
+  }
 }];
 ```
 
@@ -30,16 +30,16 @@ With Kii Cloud you leverage a variety of static methods to build your user with 
 ###Kii User Creation
 ```objc
 KiiUser *user = [KiiUser userWithUsername:@"testname"
-              			  andEmailAddress:@"test@test.com"
-              			   andPhoneNumber:@"+1650-000-0000"
-              			      andPassword:@"testpass"];
-    
+                          andEmailAddress:@"test@test.com"
+                           andPhoneNumber:@"+1650-000-0000"
+                              andPassword:@"testpass"];
+
 [user performRegistrationWithBlock:^(KiiUser *user, NSError *error) {
-	if(error == nil) {
-		// user registered successfully!
-	} else {
-		// user not registered
-	}
+  if(error == nil) {
+    // user registered successfully!
+  } else {
+    // user not registered
+  }
 }];
 ```
 

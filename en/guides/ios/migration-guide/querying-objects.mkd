@@ -26,21 +26,25 @@ Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constraine
 ###Kii Query
 ```java
 KiiBucket *bucket = [Kii bucketWithName:@"Customer"];
-KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name" value:@"Christof"]];
+KiiQuery *q = [KiiQuery queryWithClause:[KiiClause equals:@"name"
+                                                    value:@"Christof"]];
 [bucket executeQuery:q
-		   withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results, KiiQuery *nextQuery, NSError *error) {
-		   
-		       // got a result
-		       if(error == nil) {
-		       	   NSLog(@"Successfully retrieved %d results: %@", results.count, results);
-		       } 
-		       
-		       // unable to get result(s)
-		       else {
-		       	   NSLog(@"Error: %@", error);
-		       }
+           withBlock:^(KiiQuery *query, KiiBucket *bucket, NSArray *results,
+                       KiiQuery *nextQuery, NSError *error)
+           {
 
-		   }];
+             // got a result
+             if(error == nil) {
+               NSLog(@"Successfully retrieved %d results: %@", results.count,
+                     results);
+             }
+
+             // unable to get result(s)
+             else {
+               NSLog(@"Error: %@", error);
+             }
+
+           }];
 ```
 
 For more information on queries see {% page_link ios-object_storages_querying-en %}.

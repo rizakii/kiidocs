@@ -19,11 +19,11 @@ Kii Platform file storage allows your application to manage virtually any file a
 ```objc
 KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"GameData"];
 KiiFile *f = [bucket fileWithLocalPath:filePath];
-    
+
 [f saveFileWithProgressBlock:^(KiiFile *file, double progress) {
-    NSLog(@"Upload progress: %lf %@", progress, file);
+  NSLog(@"Upload progress: %lf %@", progress, file);
 } andCompletionBlock:^(KiiFile *file, NSError *error) {
-    NSLog(@"Upload complete: %@ withError: %@", file, error);
+  NSLog(@"Upload complete: %@ withError: %@", file, error);
 }];
 ```
 

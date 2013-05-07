@@ -16,30 +16,29 @@ In both cases you'll have to insert your application's credentials (i.e., APPID 
 ```objc
 #import <Parse/Parse.h>
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-	... 
-	
-	[Parse setApplicationId:@"APPID"
-                  clientKey:@"APPKEY"];
+  ...
 
-	...
+  [Parse setApplicationId:@"APPID"
+                clientKey:@"APPKEY"];
+
+  ...
 }
 ```
 ###Kii Cloud Initialization
 ```objc
 #import <KiiSDK/Kii.h>
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  ...
 
-	... 
-	
-	[Kii beginWithID:@"APPID" 
-              andKey:@"APPKEY" 
-             andSite:kiiSiteUS];
-	...
+  [Kii beginWithID:@"APPID"
+            andKey:@"APPKEY"
+           andSite:kiiSiteUS];
+  ...
 }
 ```
 
