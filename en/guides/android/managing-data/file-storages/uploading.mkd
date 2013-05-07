@@ -2,6 +2,7 @@
 layout: en-doc
 title: Uploading Files
 sort-priority: 10
+page-id: android-uploading_files-en
 old-url: /en/uploading-files
 ---
 Kii Cloud SDK offers the following two types of file uploading.

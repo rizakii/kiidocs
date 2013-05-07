@@ -23,7 +23,7 @@ Follow the steps below to enable Kii Ads in your application.
 
     ```xml
     <application>
-      <service android:name="com.kii.colud.analytics.EventUploadService" />
+      <service android:name="com.kii.cloud.analytics.EventUploadService" />
     </application>
     ```
 
