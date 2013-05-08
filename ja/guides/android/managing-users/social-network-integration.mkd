@@ -33,6 +33,7 @@ Facebook アカウントを利用してサインインする例を以下に示�
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.logIn(activity, null, new KiiSocialCallBack(){
   @Override
   public void onLoginCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -49,7 +50,8 @@ conn.logIn(activity, null, new KiiSocialCallBack(){
 
 1. 外部ソーシャル・ネットワークを利用したサインインを制御する Activity を作成します。
 2. ソーシャル・ネットワークコネクターのインスタンスを `socialConnect` メソッドで生成します。この際、ターゲットとなるソーシャル・ネットワークを引数で指定します（今回の例では `SocialNetwork.Facebook` を指定）。
-3. `logIn` メソッドを実行してサインインを開始します。このメソッドは非同期で実行され、コールバックで結果が通知されます。
+3. `initialize` メソッドを実行してソーシャル・ネットワークコネクターを初期化します。この際、アプリの Facebook App ID を指定します。
+4. `logIn` メソッドを実行してサインインを開始します。このメソッドは非同期で実行され、コールバックで結果が通知されます。
 
 **注意**: さらに、以下の例のように Facebook 認証を完了するためのコードを `onActivityResult` にアクティビティに追加する必要があります。
 
@@ -70,6 +72,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.link(activity, null, new KiiSocialCallBack(){
   @Override
   public void onLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -86,7 +89,8 @@ conn.link(activity, null, new KiiSocialCallBack(){
 
 1. 外部ソーシャル・ネットワークを利用したサインインを制御する Activity を作成します。
 2. ソーシャル・ネットワークコネクターのインスタンスを `socialConnect` メソッドで生成します。この際、ターゲットとなるソーシャル・ネットワークを引数で指定します（今回の例では `SocialNetwork.Facebook` を指定）。
-3. `link` メソッドを実行して、現在サインイン中のユーザと外部アカウントをリンクします。このメソッドは非同期で実行され、コールバックで結果が通知されます。
+3. `initialize` メソッドを実行してソーシャル・ネットワークコネクターを初期化します。この際、アプリの Facebook App ID を指定します。
+4. `link` メソッドを実行して、現在サインイン中のユーザと外部アカウントをリンクします。このメソッドは非同期で実行され、コールバックで結果が通知されます。
 
 
 ##既存 Kii アカウントと外部アカウントのリンク解除
@@ -96,6 +100,7 @@ Kii Cloud のユーザアカウントと外部アカウントのリンクを解�
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.unlink(activity, null, new KiiSocialCallBack(){
   @Override
   public void onUnLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -110,4 +115,5 @@ conn.unlink(activity, null, new KiiSocialCallBack(){
 
 1. 外部ソーシャル・ネットワークを利用したサインインを制御する Activity を作成します。
 2. ソーシャル・ネットワークコネクターのインスタンスを `socialConnect` メソッドで生成します。この際、ターゲットとなるソーシャル・ネットワークを引数で指定します（今回の例では `SocialNetwork.Facebook` を指定）。
-3. `unlink` メソッドを実行して、現在サインイン中のユーザと外部アカウントとのリンクを解除します。このメソッドは非同期で実行され、コールバックで結果が通知されます。
+3. `initialize` メソッドを実行してソーシャル・ネットワークコネクターを初期化します。この際、アプリの Facebook App ID を指定します。
+4. `unlink` メソッドを実行して、現在サインイン中のユーザと外部アカウントとのリンクを解除します。このメソッドは非同期で実行され、コールバックで結果が通知されます。

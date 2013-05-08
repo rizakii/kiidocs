@@ -34,6 +34,7 @@ Here is a sample code snippet for letting a new application user register via th
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.logIn(activity, null, new KiiSocialCallBack(){
   @Override
   public void onLoginCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -50,7 +51,8 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Start the sign-up process with `logIn` method.  This method is non-blocking, so use a callback to get the results.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
+4. Start the sign-up process with `logIn` method.  This method is non-blocking, so use a callback to get the results.
 
 **Please Note**: The activity must also implement the `onActivityResult` method that should include code to finalize the Facebook authentication:
 
@@ -71,6 +73,7 @@ By linking existing applications with their social accounts, they will have an a
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.link(activity, null, new KiiSocialCallBack(){
   @Override
   public void onLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -87,7 +90,8 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Link the current user with `link` method.  This method is non-blocking, so use a callback to get the results.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
+4. Link the current user with `link` method.  This method is non-blocking, so use a callback to get the results.
 
 ##Unlink the existing users with Facebook account
 
@@ -96,6 +100,7 @@ You can unlink the existing users with their external accounts in the following 
 ```java
 Activity activity = this.getActivity();
 KiiSocialConnect conn = Kii.socialConnect(SocialNetwork.FACEBOOK);
+conn.initialize("__FB_APP_ID__", null, null);
 conn.unlink(activity, null, new KiiSocialCallBack(){
   @Override
   public void onUnLinkCompleted(SocialNetwork network, KiiUser user, Exception exception) {
@@ -112,4 +117,5 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Unlink the current user with `unlink` method.  This method is non-blocking, so use a callback to get the results.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
+4. Unlink the current user with `unlink` method.  This method is non-blocking, so use a callback to get the results.
