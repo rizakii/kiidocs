@@ -51,7 +51,7 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Initialize the social network connecter with `initialize` method while specifying the Facebook App ID.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
 4. Start the sign-up process with `logIn` method.  This method is non-blocking, so use a callback to get the results.
 
 **Please Note**: The activity must also implement the `onActivityResult` method that should include code to finalize the Facebook authentication:
@@ -90,7 +90,7 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Initialize the social network connecter with `initialize` method while specifying the Facebook App ID.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
 4. Link the current user with `link` method.  This method is non-blocking, so use a callback to get the results.
 
 ##Unlink the existing users with Facebook account
@@ -117,5 +117,5 @@ Here is what is happening in the snippet:
 
 1. Create an activity for handling sign-up with Facebook.
 2. Create a social network connector instance with `socialConnect` method while specifying the target social network service name (in this example, it is `SocialNetwork.FACEBOOK`).
-3. Initialize the social network connecter with `initialize` method while specifying the Facebook App ID.
+3. Initialize the social network connector with `initialize` method while specifying the Facebook App ID.
 4. Unlink the current user with `unlink` method.  This method is non-blocking, so use a callback to get the results.
