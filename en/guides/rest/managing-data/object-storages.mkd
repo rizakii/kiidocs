@@ -9,9 +9,13 @@ old-url: /en/object-storages--3
 
 Some key/value pairs will be automatically created and updated by the server when an object is saved on Kii Cloud.  The predefined attributes on the server are listed below:
 
-* **\_id** ... The object's internal identifier assigned by Kii Cloud
+* **\_id** ... The object's internal identifier assigned by Kii Cloud or explicitly by you.
+* **\_version** ... The version of the object.
+* **\_dataType** ... The data type of the object.
+* **\_owner** ... The user ID of the object owner.
 * **\_created** ... The object's created date in UNIX time (msec)
 * **\_modified** ... The object's last updated date in UNIX time (msec)
+
 
 ## Arbitrary Keys
 
@@ -48,8 +52,8 @@ Values associated with keys can be any of the following JSON-encodable types.  H
 There is a special data type **geo point** for storing location information.  An object can have 0 to N geo point fields at the top-level (i.e., nesting is not allowed).  The geo point field should have the following fields:
 
 * Field name "_type" with a value "point".
-* Field name "lat" with a decimal value ranging from -90 to 90 that represents a latitude.
-* Field name "lon" with a decimal value ranging from -180 to 180 that represents a longitude.
+* Field name "lat" with a decimal value ranging from -90 to 90 (exclusive) that represents a latitude.
+* Field name "lon" with a decimal value ranging from -180 to 180 (exclusive) that represents a longitude.
 
 Here is an example.
 

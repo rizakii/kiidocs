@@ -178,7 +178,29 @@ A QueryClause object is defined using one or more of the following clauses:
     }
     ````
 
+    The field "resultField" specifies the name of the field that Kii Cloud will use to store the distance from the "center" point in the query response.  For example, the above GeoDistance query will return the reponse like this:
 
+    ```javascript
+    ...
+    {
+      "mylocation": {
+        "_type": "point",
+        "lat": 11.0,
+        "lon": 1.0
+      },
+      "_id": "0512ca53-4d86-4ee3-b2d0-53de7559c6cc",
+      "_modified": 1366965367393,
+      "_created": 1366965367393,  
+      "_owner": "SYS_ADMIN",
+      "_version": "1",
+      "_calculated": {
+        "distance_to_mylocation": 15605.156575746192
+      }
+    }
+    ...
+    ```
+    
+    Note that the field "distance\_to\_mylocation" is stored inside "_calculated" field.  The number represents a distance from the center point (in meter).  This field is availabe for sorting in the query, but in ascending order only.
 
 ## Pagination
 
