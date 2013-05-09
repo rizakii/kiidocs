@@ -51,6 +51,8 @@ This resource represents a bucket collection. The buckets can be created in diff
     APP
     USERS
     GROUPS
+    
+See also: {% page_link rest-managing_buckets-en %} ([日本語]({% page_url rest-managing_buckets-ja %}))
 
 Bucket of default type
 Access a bucket of the default backend type. This is the same than default:{bucketID} 
@@ -154,7 +156,7 @@ Resource                                                        |Method |Descrip
 
 This resource is used to configure special settings in the application. 
 
-See also:
+See also: {% page_link rest-admin_features-en %} ([日本語]({% page_url rest-admin_features-ja %}))
 
 Resource                                                                                         |Method |Description
 -------------------------------------------------------------------------------------------------|-------|-----------
@@ -182,7 +184,7 @@ Resource                                                                        
 
 Resource for Flex Analytics event raw data. 
 
-See also:
+See also: {% page_link rest-managing_analytics-en %} ([日本語]({% page_url rest-managing_analytics-ja %}))
 
 Resource                                                                                         |Method |Description
 -------------------------------------------------------------------------------------------------|-------|-----------
@@ -193,7 +195,7 @@ Resource                                                                        
 
 The collection of groups that belongs to the accessed application. 
 
-See also:
+See also: {% page_link rest-managing_groups-en %} ([日本語]({% page_url rest-managing_groups-ja %}))
 
 Resource                                                                                         |Method |Description
 -------------------------------------------------------------------------------------------------|-------|-----------
@@ -311,7 +313,7 @@ Resource                                                                        
 
 This resource is the point of integration with third parties social networks for user authentication 
 
-See also:
+See also: {% page_link rest-socal_network_integration-en %} ([日本語]({% page_url rest-socal_network_integration-ja %}))
 
 Resource                             |Method |Description
 -------------------------------------|-------|-----------
@@ -322,7 +324,7 @@ Resource                             |Method |Description
 
 Resource to manage custom templates. This is used to define custom messages to send message to all users when they use your application, per example in a verification email case.
 
-See also:
+See also: {% page_link rest-admin_features-en %} ([日本語]({% page_url rest-admin_features-ja %}))
 
 Resource                                                  |Method |Description
 ----------------------------------------------------------|-------|-----------
@@ -335,7 +337,7 @@ Resource                                                  |Method |Description
 
 This resource represent a list of all topics created in an application, user or group. Topics are channels created to send messages. A user has to be subscribed to a topic to receive a message from it. 
 
-See also:
+See also: {% page_link rest-admin_features-en %} ([日本語]({% page_url rest-admin_features-ja %}))
 
 Resource |Method |Description
 ---------|-------|------------
@@ -358,7 +360,7 @@ Resource |Method |Description
 
 All the users of the current application. 
 
-See also:
+See also: {% page_link rest-managing_users-en %} ([日本語]({% page_url rest-managing_users-ja %}))
 
 Resource |Method |Description
 ---------|-------|------------
@@ -897,7 +899,7 @@ Resource |Method |Description
 
 This resource acts as the Oauth 2 endpoint for the platform, in the context of the application indicated by "X-Kii-AppID" 
 
-See also:
+See also: {% page_link rest-admin_features-en %} ([日本語]({% page_url rest-admin_features-ja %}))
 
 Resource                                               |Method |Description
 -------------------------------------------------------|-------|-----------
