@@ -313,7 +313,7 @@ Resource                                                                        
 
 This resource is the point of integration with third parties social networks for user authentication 
 
-See also: {% page_link rest-socal_network_integration-en %} ([日本語]({% page_url rest-socal_network_integration-ja %}))
+See also: {% page_link rest-socal_network_integration-en %} ([日本語]({% page_url rest-social_network_integration-ja %}))
 
 Resource                             |Method |Description
 -------------------------------------|-------|-----------
