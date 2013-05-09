@@ -14,7 +14,7 @@ module KiidocTags
       end
       out = []
       page['parents'].each { |p|
-        out.push "<a href=\"#{p.data['url']}\">#{p.data['title']}</a><span> &gt; </span>"
+        out.push "<a href=\"#{p.data['cached_url']}\">#{p.data['title']}</a><span> &gt; </span>"
       }
       return out.join("\n")
     end
