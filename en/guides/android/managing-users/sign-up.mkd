@@ -78,7 +78,10 @@ When the email verification is enabled and an account is registered with an emai
 
 ###Phone verification:
 
-When the email verification is enabled and an account is registered with an email address, Kii Cloud will send an email to that user with a verification link.  Signing in with the specified email address will be allowed only when the user verifies themselves by clicking this link.
+When the phone verification is enabled and an account is registered with a phone number, Kii Cloud will send an SMS message with a verification code. Your application should then ask the user to type in the verification code to complete verification. Signing-in with the specified phone number will be allowed only when your user verifies themselves by submitting the correct code.
+
+**Please Note:** You must specify a valid mobile phone number in an international phone number format (starting with + and your country code) in order to properly begin the SMS verification process.
+
 
 After receiving the SMS verification code from the user, your application should invoke `verifyPhone` method to complete the verification process.
 
