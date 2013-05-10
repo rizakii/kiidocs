@@ -15,7 +15,7 @@ tags: rest-api
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
 				Anonymous access is not allowed. This can be performed
 				by the administrator, the user itself and, if the property
-				&quot;exposeFullUserDataToOthers&quot; of the application is set to &quot;true&quot;,
+				"exposeFullUserDataToOthers" of the application is set to "true",
 				any
 				user of the application can access also.
 			</p></div></header><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
@@ -40,8 +40,8 @@ tags: rest-api
 				Update the e-mail address of the user
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
 				This method can be performed by the administrator and
-				by the user itself, but the parameter &quot;verified&quot; can only be set to
-				&quot;true&quot; with administrator credentials.
+				by the user itself, but the parameter "verified" can only be set to
+				"true" with administrator credentials.
 			</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.EmailAddressModificationRequest+json</span></p><p class="doc">The required data to update the e-mail address.</p></div><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
 			supported for now.
 		</span></div></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">emailAddress</span><span class="req"></span><span class="type">string</span><span class="doc">The new e-mail address to set</span></div><div><span class="name">verified</span><span class="req"></span><span class="type">boolean</span><span class="doc">Indicates whether the new e-mail address is already

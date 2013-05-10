@@ -21,12 +21,12 @@ tags: rest-api
 				credentials
 				of another user of the same application it depends on the
 				property
-				&quot;exposeFullUserDataToOthers&quot; of the application, if it is
+				"exposeFullUserDataToOthers" of the application, if it is
 				set to
-				&quot;true&quot; the access will recover all the user's data, if it is
+				"true" the access will recover all the user's data, if it is
 				set to
-				&quot;false&quot; or &quot;null&quot; only will be recovered the fields &quot;userID&quot;,
-				&quot;loginName&quot; and &quot;displayName&quot;.
+				"false" or "null" only will be recovered the fields "userID",
+				"loginName" and "displayName".
 			</p></div></header><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
 			supported for now.
 		</span></div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-200"><div class="status"><strong>200</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.UserDataRetrievalResponse+json</span></p><p class="doc">The user's data has been retrieved successfully.</p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">userID</td><td class="type ">string</td><td class="doc">The user ID</td></tr><tr><td class="name">internalUserID</td><td class="type ">long</td><td class="doc">The user internal ID</td></tr><tr><td class="name">loginName</td><td class="type ">string</td><td class="doc">The login name</td></tr><tr><td class="name">displayName</td><td class="type ">string</td><td class="doc">The name to display for the user</td></tr><tr><td class="name">country</td><td class="type ">string</td><td class="doc">The country of the user</td></tr><tr><td class="name">locale</td><td class="type ">string</td><td class="doc">The locale of the user</td></tr><tr><td class="name">emailAddress</td><td class="type ">string</td><td class="doc">The e-mail address of the user</td></tr><tr><td class="name">emailAddressVerified</td><td class="type ">boolean</td><td class="doc">Indicates whether the e-mail address is verified or

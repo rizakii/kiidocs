@@ -5,7 +5,7 @@ summary: Getting users registered with your application is the first step for us
 sort-priority: 10
 old-url: /en/sign-up--3
 ---
-<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link rest-socal_network_integration-en %} section for more details</p>
+<p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link rest-social_network_integration-en %} section for more details</p>
 
 Kii Platform allows users to register with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses.
 

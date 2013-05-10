@@ -59,7 +59,12 @@ body#preview .summary > section > article .response .status,body#preview > secti
 body#preview .summary > section > article .response .status strong,body#preview > section > article .response .status strong{font-weight:normal}
 body#preview .summary > section > article .response.status-200 .status,body#preview > section > article .response.status-200 .status,body#preview .summary > section > article .response.status-201 .status,body#preview > section > article .response.status-201 .status,body#preview .summary > section > article .response.status-204 .status,body#preview > section > article .response.status-204 .status{color:#008000}
 
-body#preview section.content .summary,body#preview section.content .description{line-height:150%;font-size:15px;}
+body#preview section.content .summary,
+body#preview section.content .description {
+  line-height:150%;
+  font-size:15px;
+}
+
 body#preview section.content .summary h2,body#preview section.content h2 {
   font-size:28px; font-weight:normal;
   line-height:30px;font-family:Georgia;color:#111
@@ -78,4 +83,13 @@ body#preview section.content .summary .shadow,body#preview section.content .shad
 
 section.content img {
   border:solid 1px #000;
+}
+
+/* for rest.mkd */
+
+section#rest-overview .description table > thead > tr > th:first-child {
+  width: 33%;
+}
+section#rest-overview .description table > tbody > tr > td:first-child {
+  word-break: break-all;
 }

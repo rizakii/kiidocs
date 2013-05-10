@@ -4,6 +4,7 @@ title: Bucket
 sort-priority: 10
 summary: Kii Platform におけるデータ管理を理解するためには、Bucket という概念を理解する必要があります。Cloud 上に浮かんでいる仮想的なバケツを想像してみてください。Cloud 上にデータを保存するためには、このデータの「入れ物」が必要です。Bucket は、いわばこのデータのための「入れ物」に相当します。
 old-url: /jp/buckets--7
+page-id: rest-managing_buckets-ja
 ---
 ## Bucket のスコープ
 

@@ -16,30 +16,30 @@ tags: rest-api
 				error with code INVALID_INPUT_DATA will be returned in the following
 				scenarios:
 				
-				&lt;ul&gt;
-				&lt;li&gt;&quot;gcm&quot; or &quot;apns&quot; fields are not provided in the request.&lt;/li&gt;
-				&lt;li&gt;&quot;gcm.enabled&quot; or &quot;apns.enabled&quot; fields are not provided in the request.&lt;/li&gt;
-				&lt;li&gt;&quot;gcm.dryRun&quot; and &quot;apns.enabled&quot; are both set to true.&lt;/li&gt;
-				&lt;li&gt;&quot;data&quot; contains nested JSONs or arrays.&lt;/li&gt;
-				&lt;li&gt;&quot;gcm.data&quot; contains values different from String.&lt;/li&gt;
-				&lt;li&gt;&quot;apns.enabled&quot; is true and &quot;apns.data&quot; contains nested JSONs or arrays.&lt;/li&gt;
-				&lt;li&gt;&quot;gcm.enabled&quot; is set to true and
-				&quot;data&quot; or &quot;gcm.data&quot; contain a key
+				<ul>
+				<li>"gcm" or "apns" fields are not provided in the request.</li>
+				<li>"gcm.enabled" or "apns.enabled" fields are not provided in the request.</li>
+				<li>"gcm.dryRun" and "apns.enabled" are both set to true.</li>
+				<li>"data" contains nested JSONs or arrays.</li>
+				<li>"gcm.data" contains values different from String.</li>
+				<li>"apns.enabled" is true and "apns.data" contains nested JSONs or arrays.</li>
+				<li>"gcm.enabled" is set to true and
+				"data" or "gcm.data" contain a key
 				that starts with the prefix
-				&quot;google.&quot; or is one of these values:
-					&lt;ul&gt;
-					&lt;li&gt;from&lt;/li&gt;
-					&lt;li&gt;registration_ids&lt;/li&gt;
-					&lt;li&gt;collapse_key&lt;/li&gt;
-					&lt;li&gt;data&lt;/li&gt;
-					&lt;li&gt;delay_while_idle&lt;/li&gt;
-					&lt;li&gt;time_to_live&lt;/li&gt;
-					&lt;li&gt;restricted_package_name&lt;/li&gt;
-					&lt;li&gt;dry_run&lt;/li&gt;
-					&lt;/ul&gt;&lt;/li&gt;
-				&lt;li&gt;&quot;gcm.enabled&quot; is true and the payload for Android-GCM exceeds 4096 bytes.&lt;/li&gt;
-				&lt;li&gt;&quot;apns.enabled&quot; is true and the payload for iOS-APNS exceeds 256 bytes.&lt;/li&gt;
-				&lt;/ul&gt;
+				"google." or is one of these values:
+					<ul>
+					<li>from</li>
+					<li>registration_ids</li>
+					<li>collapse_key</li>
+					<li>data</li>
+					<li>delay_while_idle</li>
+					<li>time_to_live</li>
+					<li>restricted_package_name</li>
+					<li>dry_run</li>
+					</ul></li>
+				<li>"gcm.enabled" is true and the payload for Android-GCM exceeds 4096 bytes.</li>
+				<li>"apns.enabled" is true and the payload for iOS-APNS exceeds 256 bytes.</li>
+				</ul>
 				
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>
 				This action can be performed with administrator

@@ -22,14 +22,14 @@ tags: rest-api
 <section class="resource"><article class="resource" id="objectResourceType"><div class="path"><strong>Location</strong><span>/apps/{appID}/users/{userID}/buckets/{bucketID}/objects/{objectID}</span></div><div class="method-links"><ul><li class="method-link-DELETE"><a href="#method-objectResourceType-DELETE">DELETE</a></li><li class="method-link-GET"><a href="#method-objectResourceType-GET">GET</a></li><li class="method-link-HEAD"><a href="#method-objectResourceType-HEAD">HEAD</a></li><li class="method-link-PUT"><a href="#method-objectResourceType-PUT">PUT</a></li><li class="method-link-PATCH"><a href="#method-objectResourceType-PATCH">PATCH</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>No</span></span></div></div></div></div><div class="methods"><div class="method DELETE" id="method-objectResourceType-DELETE"><h4>DELETE</h4><p class="uri">/apps/{appID}/users/{userID}/buckets/{bucketID}/objects/{objectID}</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
 				Delete the accessed object. Delete is conditional
 				if
-				&quot;If-Match&quot; header is provided, in that case
+				"If-Match" header is provided, in that case
 				the object will be
 				deleted if the version is not stale.
-				If &quot;If-None-Match&quot; header is
+				If "If-None-Match" header is
 				provided the delete operation
 				will be unconditional, the same if none
 				of those headers
-				are in the request. &quot;If-Match&quot; and &quot;If-None-Match&quot;
+				are in the request. "If-Match" and "If-None-Match"
 				headers can not be provided at the same time
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>This action can be performed with administrator
 				credentials, if not, the permission to perform this action depends
@@ -155,18 +155,18 @@ tags: rest-api
 					</td></tr></table></div></div></div><div class="method PUT" id="method-objectResourceType-PUT"><h4>PUT</h4><p class="uri">/apps/{appID}/users/{userID}/buckets/{bucketID}/objects/{objectID}</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
 				Replace or create an object with the specified ID by
 				template.
-				If &quot;If-Match&quot; header is provided the operation is
+				If "If-Match" header is provided the operation is
 				an update
 				conditional, the object will be replaced if
 				the version is not stale.
-				If &quot;If-None-Match&quot; header is
+				If "If-None-Match" header is
 				provided the replace operation will be
 				unconditional.
 				If none of those headers are in the request the
 				operation
 				will be an unconditional replace if the object exists or
-				the object will be created if not exists. &quot;If-Match&quot; and
-				&quot;If-None-Match&quot; headers can not be provided at the same time
+				the object will be created if not exists. "If-Match" and
+				"If-None-Match" headers can not be provided at the same time
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>This action can be performed with administrator
 				credentials, if not, the permission to perform this action depends
 				on the ACL of the application, user or group, where the object of
@@ -222,15 +222,15 @@ tags: rest-api
 				Update partially the accessed object,
 				fields can be
 				added or updated, but not deleted.
-				If &quot;If-Match&quot; header is provided
+				If "If-Match" header is provided
 				the operation is
 				an update conditional, the object will be updated if
-				the version is not stale. If &quot;If-None-Match&quot; header is
+				the version is not stale. If "If-None-Match" header is
 				provided the
 				update operation will be unconditional,
 				the same if none of those
 				headers are in the request.
-				&quot;If-Match&quot; and &quot;If-None-Match&quot; headers
+				"If-Match" and "If-None-Match" headers
 				can not be
 				provided at the same time
 			</p></div><div class="security-doc"><strong class="security"><span>Security</span></strong><p>This action can be performed with administrator

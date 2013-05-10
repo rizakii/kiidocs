@@ -1,0 +1,56 @@
+---
+layout: rest-api
+title: 'Data'
+tags: rest-api
+---
+<div class="summary">
+
+				This resource represents object data to upload
+			
+</div>
+<div class="description">
+<section class="resource"><article class="resource" id=""><div class="path"><strong>Location</strong><span>/apps/{appID}/users/id:{internalID}/buckets/{bucketID}/objects/{objectID}/body/upload/{uploadID}/data</span></div><div class="method-links"><ul><li class="method-link-PUT"><a href="#method--PUT">PUT</a></li></ul></div><div class="params"><h4>Request Headers (Applies to all methods)</h4><div class="list"><div class="param"><div><strong class="name">X-Kii-AppID</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">X-Kii-AppKey</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Authorization</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div><div class="param"><div><strong class="name">Content-Type</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>No</span></span></div></div><div class="param"><div><strong class="name">Content-Range</strong></div><div><span class="style">header</span></div><div><span class="cardinality"><span>Required: </span><span>Yes</span></span></div></div></div></div><div class="methods"><div class="method PUT" id="method--PUT"><h4>PUT</h4><p class="uri">/apps/{appID}/users/id:{internalID}/buckets/{bucketID}/objects/{objectID}/body/upload/{uploadID}/data</p><header class="docs"><div class="description-doc"><strong class="description"><span>Description</span></strong><p>
+					Uploads given object data
+				</p></div></header><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
+			supported for now.
+		</span></div><div><span class="name">Content-Type</span><span class="req">Yes</span><span class="type">xsi:string</span><span class="doc">The object type if available or application/json</span></div><div><span class="name">Content-Range</span><span class="req">Yes</span><span class="type">xsi:string</span><span class="doc">
+					The object body chunk range size.
+					It must follow the pattern:
+					^bytes=(\\d+)-(\\d+)/(d+)$
+				</span></div></div><div class="responses"><strong class="resp_title">Response</strong><div class="response status-204"><div class="status"><strong>204</strong></div><p class="mediaType"><strong>Content-Type </strong><span></span></p><p class="doc">The object data has been uploaded successfully.</p></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that contains the object
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object that was not found
+					</td></tr></table></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.BucketNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code BUCKET_NOT_FOUND</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the bucket
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that was not found
+					</td></tr></table></div><div class="response status-416"><div class="status"><strong>416</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectBodyRangeNotSatisfiableException+json</span></p><p class="doc"></p></div><div class="response status-404"><div class="status"><strong>404</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectBodyUploadNotFoundException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_BODY_UPLOAD_NOT_FOUND
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket that contains the object
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object which the upload is
+						associated
+					</td></tr><tr><td class="name">uploadID</td><td class="type ">string</td><td class="doc">
+						The uploadID which has not been found
+					</td></tr></table></div><div class="response status-412"><div class="status"><strong>412</strong></div><p class="mediaType"><strong>Content-Type </strong><span>application/vnd.kii.ObjectBodyIntegrityNotAssuredException+json</span></p><p class="doc"></p><strong class="paramstitle">Content</strong><table class="content-body"><tr><th class="name">Name</th><th class="type">Type </th><th class="doc">Description </th></tr><tr><td class="name">errorCode</td><td class="type ">string</td><td class="doc">Error code OBJECT_BODY_INTEGRITY_NOT_ASSURED
+					</td></tr><tr><td class="name">message</td><td class="type ">string</td><td class="doc">The error message</td></tr><tr><td class="name">objectScope</td><td class="type details">ufe:ObjectScope</td><td class="doc">
+						The scope of the object
+					</td></tr><tr class="details documentation"><td class="doc" colspan="3">
+						The scope of the bucket
+					</td></tr><tr><td class="name">bucketID</td><td class="type ">string</td><td class="doc">
+						The bucketID of the bucket
+					</td></tr><tr><td class="name">objectID</td><td class="type ">string</td><td class="doc">
+						The objectID of the object
+					</td></tr></table></div></div></div></div></article></section>
+</div>
