@@ -173,9 +173,9 @@ try {
 
 The analytics results will be a list of GroupedSnapShots.  Each GroupedSnapShot has the following properties:
 
-* Name : Name of the key specified on group-by.
-* Data : JSON Array that contains data array grouped-by.
-* PointStart : Started time of aggregation procedure.
-* PointInterval : Interval of aggregation procedure.
+* Name : The name of the dimension/grouping key.
+* Data : The JSON Array that contains the data retrieved by the query.
+* PointStart : The date (in milliseconds since UNIX epoch) which the data starts.
+* PointInterval : Interval (in milliseconds since UNIX epoch) between data points.
 
 Please check our [Javadoc](http://static.kii.com/devportal/docs/analytics/com/kii/cloud/analytics/aggregationresult/GroupedSnapShot.html) for more details on how to interpret GroupSnapShot.
