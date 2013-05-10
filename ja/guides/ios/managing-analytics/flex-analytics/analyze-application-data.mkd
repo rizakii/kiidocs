@@ -192,5 +192,11 @@ NSString *aggregationID = @"22";
 }];
 ```
 
-解析結果は GroupedSnapShot として返されます。各 GroupedSnapShot は、以下のプロパティにより構成されています。GroupSnapShot の解釈方法については [Appledoc]({% page_url references-ja %})を参照してください。
+解析結果は GroupedSnapShot として返されます。各 GroupedSnapShot は、以下のプロパティにより構成されています。
 
+* Name : ディメンション（グルーピングキー）の名前
+* Data : 取得した解析結果を保持する JSON Array
+* PointStart : データ開始日 (UNIX時間、ミリ秒)
+* PointInterval : データポイントの間隔 (UNIX時間、ミリ秒)
+
+GroupSnapShot の解釈方法については [Appledoc](http://static.kii.com/devportal/docs/ios_analytics/Classes/KAGroupedSnapShot.html) を参照してください。
