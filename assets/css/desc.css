@@ -84,3 +84,12 @@ body#preview section.content .summary .shadow,body#preview section.content .shad
 section.content img {
   border:solid 1px #000;
 }
+
+/* for rest.mkd */
+
+section#rest-overview .description table > thead > tr > th:first-child {
+  width: 33%;
+}
+section#rest-overview .description table > tbody > tr > td:first-child {
+  word-break: break-all;
+}

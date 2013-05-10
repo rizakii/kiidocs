@@ -6,7 +6,7 @@ no-translate: true
 <div class="content-container">
 <div class="wrapper">
 
-<section class="content">
+<section{% if page.page-section-id %} id="{{ page.page-section-id }}"{% endif %} class="content">
 <div class="wrapper">
 
 <div class="breadcrumbs">
