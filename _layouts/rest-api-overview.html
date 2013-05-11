@@ -1,0 +1,50 @@
+---
+# vim:set ts=2 sts=2 sw=2 et:
+# derived from: rest-api
+layout: en
+no-translate: true
+---
+<div class="content-container">
+<div class="wrapper">
+
+<section{% if page.page-section-id %} id="{{ page.page-section-id }}"{% endif %} class="content">
+<div class="wrapper">
+
+<div class="breadcrumbs">
+{% kiidoc_parents %}
+<span>{{ page.title }}</span>
+</div>
+
+<h1>{{ page.title }}</h1>
+
+<div class="summary"></div>
+
+<div class="description">
+{{ content }}
+</div>
+
+</div>
+
+{% include disqus.html %}
+
+</section>
+
+<aside class="sidebar"><nav>
+<ul>
+<li><div><a href="#application">Application</a></div></li>
+<li><div><a href="#acl">ACL</a></div></li>
+<li><div><a href="#analytics">Analytics</a></div></li>
+<li><div><a href="#bucket-collection">Bucket Collection</a></div></li>
+<li><div><a href="#configuration">Configuration</a></div></li>
+<li><div><a href="#events">Events</a></div></li>
+<li><div><a href="#group-collection">Group Collection</a></div></li>
+<li><div><a href="#social-integration">Social Integration</a></div></li>
+<li><div><a href="#templates">Templates</a></div></li>
+<li><div><a href="#topics">Topics</a></div></li>
+<li><div><a href="#user-collection">User Collection</a></div></li>
+<li><div><a href="#oauth2">OAuth2</a></div></li>
+</ul>
+</nav></aside>
+
+</div>
+</div>

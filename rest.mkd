@@ -1,11 +1,11 @@
 ---
-layout: rest-api
+layout: rest-api-overview
 title: Kii Cloud REST API overview
 tags: rest-api
 page-id: references-rest-en
 page-section-id: rest-overview
 ---
-## Application
+## <a name="application"></a>Application
 
 Application represents an application on Kii Cloud.
 
@@ -16,7 +16,7 @@ Resource                                                 |Method |Description
 [/apps/{appID}](/rest/apps-collection/application/#Get)  |Get    |Retrieve the properties of the application being accessed
 [/apps/{appID}](/rest/apps-collection/application/#Post) |Post   |Modify the properties application being accessed
 
-## ACL
+## <a name="acl"></a>ACL
 
 This is the Access Control List of the parent resource. An ACL entry is composed by resource + verb + subject, indicates a permission (verb) that can be granted or revoked to a subject over a resource. The resources that have ACLs in Kii Platform are applications, users, groups, buckets, objects and topics, for each of them applies different verbs. A subject can be either a user or a group.
 
@@ -33,7 +33,7 @@ Resource                                                                        
 [/apps/{appID}/acl/{ACLVerb}/UserID:{subjectUserID}](/rest/apps-collection/application/acl/acl-verb/user-id/#method--PUT)    |Put    |Grant to this user the verb on the accessed resource
 [/apps/{appID}/acl/{ACLVerb}/UserID:{subjectUserID}](/rest/apps-collection/application/acl/acl-verb/user-id/#method--DELETE)    |Delete |Revoke the user the accessed verb on the resource
 
-## Analytics
+## <a name="analytics"></a>Analytics
 
 Analytics resource allow you to get analytics results
 
@@ -45,7 +45,7 @@ Resource                                                                        
 [/apps/{appID}/analytics/{ruleID}/data](/rest/apps-collection/application/analytics/-ruleid--data/#method--GET) |Get    |Retrieve analytics result in tabular format
 
 
-## Bucket Collection
+## <a name="bucket-collection"></a>Bucket Collection
 
 This resource represents a bucket collection. The buckets can be created in different scopes:
 
@@ -153,7 +153,7 @@ Resource                                                        |Method |Descrip
 [/apps/{appID}/buckets/{bucketType}:{bucketID}/objects/{objectID}/body/upload/{uploadID}/status/committed](/rest/apps-collection/application/bucket-collection/bucket-of-specified-type/object-collection/object/body/uploads/upload/status/commit/#method--POST) |Post |Sets object body upload status to committed 
 [/apps/{appID}/buckets/{bucketType}:{bucketID}/query](/rest/apps-collection/application/bucket-collection/bucket-of-specified-type/query/#method--POST) |Post |Obtain an array of objects contained in the bucket that match a query conditions 
 
-## Configuration
+## <a name="configuration"></a>Configuration
 
 This resource is used to configure special settings in the application. 
 
@@ -181,7 +181,7 @@ Resource                                                                        
 [/apps/{appID}/configuration/gcm](/rest/apps-collection/application/configuration/gcm/#method-gcmResourceType-DELETE) |Delete |Remove the GCM key of the application. 
 
 
-## Events
+## <a name="events"></a>Events
 
 Resource for Flex Analytics event raw data. 
 
@@ -192,7 +192,7 @@ Resource                                                                        
 [/apps/{appID}/events](/rest/apps-collection/application/events/#method-eventsResourceType-POST) |Post   |Post event data
 
 
-## Group Collection
+## <a name="group-collection"></a>Group Collection
 
 The collection of groups that belongs to the accessed application. 
 
@@ -310,7 +310,7 @@ Resource                                                                        
 [/apps/{appID}/groups/{groupID}/topics/{topicID}/push/subscriptions/users/{userID}/configuration](/rest/apps-collection/application/group-collection/group/topics/topic/push/subscriptions/subscribers/subscribed-user/description/#method--GET) |Get |Get the push configuration of the subscription of the accessed user. 
 
 
-## Social Integration
+## <a name="social-integration"></a>Social Integration
 
 This resource is the point of integration with third parties social networks for user authentication 
 
@@ -321,7 +321,7 @@ Resource                             |Method |Description
 [/apps/{appID}/integration/facebook](/rest/apps-collection/application/social-integration/facebook/#method--POST) |Post   |Request a new token
 
 
-## Templates
+## <a name="templates"></a>Templates
 
 Resource to manage custom templates. This is used to define custom messages to send message to all users when they use your application, per example in a verification email case.
 
@@ -334,7 +334,7 @@ Resource                                                  |Method |Description
 [/apps/{appID}/templates/{templateName}/locales/{locale}](/rest/apps-collection/application/templates/template-name/locale.html#method--DELETE) |Delete |Delete the template of the application.
 
 
-## Topics
+## <a name="topics"></a>Topics
 
 This resource represent a list of all topics created in an application, user or group. Topics are channels created to send messages. A user has to be subscribed to a topic to receive a message from it. 
 
@@ -357,7 +357,7 @@ Resource |Method |Description
 [/apps/{appID}/topics/{topicID}/push/subscriptions/users/{userID}/configuration](/rest/apps-collection/application/topics/topic/push/subscriptions/subscribers/subscribed-user/description/#method--GET) |Get |Get the push configuration of the subscription of the accessed user. 
 
 
-## User Collection
+## <a name="user-collection"></a>User Collection
 
 All the users of the current application. 
 
@@ -896,7 +896,7 @@ Resource |Method |Description
 [/apps/{appID}/users/me/topics/{topicID}/push/subscriptions/users/{userID}/configuration](/rest/apps-collection/application/user-collection/user-logged-in/topics/topic/push/subscriptions/subscribers/subscribed-user/description/#method--GET) |Get |Get the push configuration of the subscription of the accessed user. 
 
 
-## OAuth2
+## <a name="oauth2"></a>OAuth2
 
 This resource acts as the Oauth 2 endpoint for the platform, in the context of the application indicated by "X-Kii-AppID" 
 

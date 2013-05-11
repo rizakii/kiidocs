@@ -8,7 +8,7 @@ exclude:
 permalink:      pretty
 
 redcarpet:
-  extensions: [ 'autolink', 'tables' ]
+  extensions: [ 'autolink', 'tables', 'strikethrough' ]
 
 base-url: http://documentation.kii.com/
 
