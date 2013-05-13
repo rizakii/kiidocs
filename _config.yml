@@ -10,7 +10,7 @@ permalink:      pretty
 redcarpet:
   extensions: [ 'autolink', 'tables', 'strikethrough' ]
 
-base-url: http://documentation.kii.com/
+base-url: http://documentation.kii.com
 
 external-keys:
   google:       '011947291164067706467:czagiboexqa'
@@ -21,5 +21,14 @@ flags:
   robots-disallow-all: false
   google-analytics: true
   hubspot-analytics: true
+
+sitemap:
+  excludes:
+    - '/assets/css/desc.css'
+    - '/assets/css/site-raw.css'
+    - '/assets/css/site.css'
+    - '/assets/javascripts/redirect-table.js'
+    - '/sitemap2.xml'
+    - '/sitemap.csv'
 
 # vim:set ts=8 sts=2 sw=2 tw=0 et:

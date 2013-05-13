@@ -1,0 +1,5 @@
+---
+---
+{% for p in site.pages %}{% unless site.sitemap.excludes contains p.url %}"{{ site.base-url | append: p.url | xml_escape }}","{{ p.title | replace: '"', '""' }}"
+{% endunless %}{% endfor %}{% for p in site.posts %}{% unless site.sitemap.excludes contains p.url %}"{{ site.base-url | append: p.url | xml_escape }}","{{ p.title | replace: '"', '""' }}"
+{% endunless %}{% endfor %}

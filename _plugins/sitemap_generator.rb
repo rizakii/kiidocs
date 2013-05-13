@@ -47,7 +47,7 @@ module Jekyll
 
   # Any files to exclude from being included in the sitemap.xml
   EXCLUDED_FILES = [ 'atom.xml', 'desc.css', 'site-raw.css', 'site.css',
-    'redirect-table.js'
+    'redirect-table.js', 'sitemap2.xml', 'sitemap.csv'
   ]
 
   # Any files that include posts, so that when a new post is added, the last
