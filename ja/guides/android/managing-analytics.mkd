@@ -3,6 +3,7 @@ layout: ja-doc
 title: アプリ解析機能
 sort-priority: 40
 page-id: android-managing_analytics-ja
+old-url: /jp/--283
 ---
 Kii Cloud は2種類のアプリ解析機能を提供します。
 

@@ -3,6 +3,7 @@ layout: en-doc
 title: Android Quick Start
 sort-priority: 10
 page-id: android-quickstart-en
+old-url: /en/android-quick-start
 ---
 ## Registering your App on the Kii Developer Portal
 

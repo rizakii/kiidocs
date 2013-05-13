@@ -3,6 +3,7 @@ layout: en-doc
 title: Updating Objects
 sort-priority: 30
 page-id: android-object_storages_updating-en
+old-url: /en/updating-objects
 ---
 Kii SDK supports the following two object update methods:
 

@@ -3,6 +3,7 @@ layout: ja-doc
 title: ユーザ削除
 sort-priority: 60
 summary: アプリケーションの利用を止めたユーザへの対応等のために、Kii Platform はユーザ削除機能を提供しています。
+old-url: /jp/deleting-users--6
 ---
 以下に、ユーザ削除の例をあげます。
 

@@ -2,6 +2,8 @@
 layout: en-doc
 title: File Storage
 sort-priority: 30
+page-id: android-file_storages-en
+old-url: /en/file-storages--3
 ---
 File storage allows your application to manage virtually any file and its associated metadata. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code.
 

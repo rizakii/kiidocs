@@ -3,6 +3,7 @@ layout: ja-doc
 title: メッセージを受信する
 page-id: android-push_to_user_receiving_messages-ja
 sort-priority: 40
+old-url: /jp/--297
 ---
 
 プッシュ通知を受け取るには、GCMIntentService の onMessage() を実装します。この際、ヘルパー API を利用することができます。

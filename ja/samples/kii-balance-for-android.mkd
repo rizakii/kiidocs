@@ -4,6 +4,7 @@ title: Kii Balance for Android
 page-id: android-sample_balance-ja
 summary: Kii Balance はシンプルなおこづかい帳アプリです。簡単な操作で日々の収支を記録し、Kii Cloud に保存することができます。保存された情報は、複数端末間でシェアされます。例えば Android 携帯で記録した情報を、後ほど Android タブレットで確認することができます。
 sort-priority: 10
+old-url: /jp/kii-balance-for-android
 ---
    
 <p><img src="01.png" style="border:0" /> <img src="02.png" style="border:0" /></p>

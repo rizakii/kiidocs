@@ -3,6 +3,7 @@ layout: en-doc
 title: Samples and Tutorials
 page-id: samples-en
 sort-priority: 40
+old-url: /en/snippets-and-samples
 ---
 ## Sample Apps
 

@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: 'Tutorial #3: Retrieve income&#47;expense entries'
-summary: 'Right after a user logs in, Kii Balance will show a list of his/her existing income/expense entries.  This is done by retrieving the entries from Kii Cloud.'
+summary: 'Right after a user logs in, Kii Balance will show a list of his/her existing income/expense entries. ?This is done by retrieving the entries from Kii Cloud.'
 sort-priority: 40
 page-id: tutorial_3_retrieve_income_expense_entry-en
+old-url: /en/tutorial-3-retrieve-income-expense-entry
 ---
 Kii Cloud stores Objects in a bucket.  Kii Balance stores all income/expense entries in a bucket that belongs to the user (called "user-scope" bucket).  This will restrict the entries to be fetched by other users; all Objects (entries) stored in a user-scope bucket are only accessible by the owner of the bucket by default.
 

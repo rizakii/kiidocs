@@ -2,6 +2,7 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
+old-url: /jp/user-attributes--5
 ---
 Kii Cloud SDK は、所定の属性を参照・設定をするためのメソッドを提供します。
 

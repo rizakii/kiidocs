@@ -2,6 +2,7 @@
 layout: en-doc
 title: Listing Group Members
 sort-priority: 50
+old-url: /en/listing-group-members
 ---
 A group owner can get a list of members who are in the group with `listMembers` method.  This method will return a list of KiiUser instances representing group members. 
 

@@ -3,6 +3,7 @@ layout: en-doc
 title: Buckets
 summary: In order to fully leverage the power of Kii Platform, it is important to understand the concept of "buckets". The best way to understand a bucket in this sense is to imagine a virtual bucket floating in Kii Cloud. There can be any number of buckets belonging to the application, a user or a group. They are defined by the developer, and hold all data objects and files. A great way to understand is to try it yourself! So read on for some examples...
 sort-priority: 10
+old-url: /en/buckets--4
 ---
 ## Bucket Scopes
 

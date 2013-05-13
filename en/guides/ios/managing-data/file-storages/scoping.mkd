@@ -4,6 +4,7 @@ title: Scoping Files
 sort-priority: 70
 summary: Since all file buckets are User Scope, when files are created they default to being only accessible to that user.
 page-id: ios-scoping_files-en
+old-url: /en/scoping-files
 ---
 ## File Scope and Default Access Control
 

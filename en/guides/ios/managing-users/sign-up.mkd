@@ -2,7 +2,9 @@
 layout: en-doc
 title: Sign Up
 sort-priority: 10
-summary: Getting users registered with your application is the first step for user management
+summary: Getting users registered with your application is the first step for user management.
+page-id: ios-sign_up-en
+old-url: /en/creating-new-users
 ---
 Kii Platform allows users to register with a username/password combination.
 Optionally, registration can occur with phone numbers and/or email addresses.

@@ -2,6 +2,7 @@
 layout: en-doc
 title: Basic Analytics
 sort-priority: 10
+old-url: /en/basic-analytics
 ---
 Basic Analytics provides "out-of-the-box" analysis on your application. You can fetch the predefined analytics results with no configuration. All results will be automatically aggregated and will be ready to be presented for you.
 

@@ -3,6 +3,7 @@ layout: en-doc
 title: Disabling Users
 summary: You can disable users via REST API. Disabled users will not be able to log in, reset his/her password, or verify his/her account. All tokens issued to this user will be also invalidated.
 sort-priority: 50
+old-url: /en/disabling-users
 ---
 Use the property "disabled" to toggle a user; setting the property value "true" will disable the user.  Setting the value to "false" will enable the user again.
 

@@ -4,6 +4,7 @@ title: Create a Topic
 summary: 'The topic is a channel for sending push messages.  Without a channel, we have no way to deliver the messages.  Creating a topic, therefore, is a first step to leverage "Push to User" notification feature.<BR />Let us see how we can create a topic for each of our sample scenarios.'
 page-id: android-push_to_user_creating_topic-en
 sort-priority: 10
+old-url: /en/create-a-topic
 ---
 
 ## Scenario #1: "Broadcasting to all users"

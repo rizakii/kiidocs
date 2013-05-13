@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: 'Tutorial #5: Update and delete income&#47;expense entries'
-summary: 'Kii Balance allows users to update/delete an entry by long-pressing the entry.  The changes made to the entry should be applied to Kii Cloud.'
+summary: 'Kii Balance allows users to update/delete an entry by long-pressing the entry. ?The changes made to the entry should be applied to Kii Cloud.'
 sort-priority: 60
 page-id: tutorial_5_update_and_delete_entries-en
+old-url: /en/tutorial-5-update-and-delete-entries
 ---
 ## Updating an Object
 

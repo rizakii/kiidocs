@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループ一覧の取得
 sort-priority: 30
+old-url: /jp/--282
 ---
 ユーザは、自分が属するグループの一覧を`memberOfGroups`メソッドで取得できます。 このメソッドはグループの一覧を KiiGroup の List として返却します。
 

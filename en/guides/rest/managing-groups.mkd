@@ -4,6 +4,7 @@ title: Managing Groups
 sort-priority: 20
 summary: Kii Platform provides a way to manage groups of users; whether it's for sharing pictures or for group chatting, you can leverage this functionality to easily create fun, social applications.
 page-id: rest-managing_groups-en
+old-url: /en/managing-groups--5
 ---
 
 Once a group is defined, you can use this as a unit of access control (e.g., allowing only a group member to read a file).

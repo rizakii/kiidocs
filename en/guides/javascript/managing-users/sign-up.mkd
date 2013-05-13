@@ -2,6 +2,7 @@
 layout: en-doc
 title: Sign Up
 sort-priority: 10
+old-url: /en/sign-up--2
 ---
 <p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link javascript-social_network_integration-en %} section for more details.</p>
 

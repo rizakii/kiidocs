@@ -1,0 +1,45 @@
+---
+layout: ja-doc
+title: SDK の初期化
+sort-priority: 10
+page-id: ios-migration_sdk_initialization-ja
+---
+Parse と Kii Cloud における SDK の初期化方法は非常に似ています。まず、いずれにおいても以下のフレームワークをプロジェクトに追加する必要があります。
+
+```
+MobileCoreServices.framework
+```
+
+さらに、次のようにアプリケーションの秘密情報（APPID と APPKEY）を指定する必要があります。
+
+###Parse における初期化
+```objc
+#import <Parse/Parse.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  ...
+
+  [Parse setApplicationId:@"APPID"
+                clientKey:@"APPKEY"];
+  ...
+}
+```
+###Kii Cloud における初期化
+```objc
+#import <KiiSDK/Kii.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  ...
+
+  [Kii beginWithID:@"APPID"
+            andKey:@"APPKEY"
+           andSite:kiiSiteUS];
+  ...
+}
+```
+
+Kii Cloud では、さらに開発者ポータルで指定した国情報（kiiSiteUS または kiiSiteJP）を指定します。
+
+Kii Cloud SDK の初期化方法に関する詳細は「{% page_link ios-adding_kii_cloud_to_your_application-ja %}」を参照してください。

@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループメンバーの追加と削除
 sort-priority: 30
+old-url: /jp/adding-group-members--4
 ---
 ##グループメンバーの追加
 

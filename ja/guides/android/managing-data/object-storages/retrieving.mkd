@@ -3,6 +3,8 @@ layout: ja-doc
 title: Object の取得
 summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 sort-priority: 20
+page-id: android-object_storages_retrieving-ja
+old-url: /jp/retrieving-objects--5
 ---
 以下、Object を URI から取得するサンプルコードです。
 
@@ -27,5 +29,3 @@ try {
 2. `refresh` メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
 
 `refresh` メソッドをコールするのを忘れないでください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。
-
-

@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object の更新
 sort-priority: 30
 summary: Kii Platform は、２種類の Object 更新手段を提供しています。
+old-url: /jp/updating-objects--6
 ---
 * **フルアップデート**： Object を完全に上書きします。<br />今まで Object に保存されていた Key-Value が全て破棄された後に、新たに指定された Key-Value が Object に保存されます。
 * **部分アップデート**： Object を部分的にアップデートします。<br />Object が保存する Key-Value のうち、新たに指定した Key-Value のみが更新されます。それ以外の Key-Value はそのまま保持されます。

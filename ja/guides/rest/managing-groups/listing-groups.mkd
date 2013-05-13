@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループ一覧の取得
 sort-priority: 30
+old-url: /jp/--279
 ---
 ユーザは、次のように自分が属しているグループの一覧を取得できます。
 

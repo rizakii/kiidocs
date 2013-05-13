@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の削除
 sort-priority: 50
+old-url: /jp/deleting-objects--6
 ---
 以下に、Object の削除を行う例をあげます。
 

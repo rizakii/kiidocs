@@ -1,0 +1,44 @@
+---
+layout: ja-doc
+title: User の管理
+sort-priority: 40
+page-id: android-migration_managing_users-ja
+old-url: /ja/migration-guide/managing-users
+---
+Parse では `ParseUser` を使ってユーザを作成します。
+
+###Parse における User 作成の例
+```java
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
+ParseUser user = new ParseUser();
+
+user.setUsername("testname");
+user.setPassword("testpass");
+user.setEmail("test@test.com");
+user.put("phone", "+1650-000-0000");
+
+user.signUpInBackground(callback);
+```
+
+Kii Cloud では、`KiiUser.Builder` を使ってユーザに関する必要情報を設定した後、`KiiUser` を使ってユーザ名・パスワードと共にユーザ登録を行います。この際、電話番号やメールアドレスを合わせて設定することができます。
+
+###Kii Cloud における User 作成の例
+```java
+import com.kii.cloud.storage.KiiUser;
+
+KiiUser.Builder builder = KiiUser.builderWithName("testname");
+
+builder.withEmail("test@test.com");
+builder.withPhone("+1650-000-0000");
+KiiUser user = builder.build();
+
+user.register(callback, "testpass");
+```
+
+電話番号やメールアドレスを設定した場合、これらを用いたユーザ認証を行うことができます。詳細については「{% page_link android-sign_up-ja %}」を参照してください。
+
+さらに Facebook アカウントを用いたサインアップ・ログインを行うこともできます。詳細については「{% page_link android-social_network_integration-ja %}」を参照してください。
+
+ユーザ管理機能の全体に関する詳細は「{% page_link android-managing_users-ja %}」を参照してください。

@@ -2,6 +2,7 @@
 layout: ja-doc
 title: File の完全削除
 sort-priority: 50
+old-url: /jp/deleting-files--5
 ---
 ファイルを完全に削除するには、`shredFile`メソッドを呼びます。
 

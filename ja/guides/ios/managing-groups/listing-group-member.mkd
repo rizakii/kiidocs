@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
+old-url: /jp/listing-group-members--7
 ---
 グループのオーナーは、グループメンバーの一覧を `getMemberList` メソッドにより取得できます。
 

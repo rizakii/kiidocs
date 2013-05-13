@@ -2,7 +2,7 @@
 layout: en-doc
 title: Analyze Application Data
 sort-priority: 10
-summary: 
+old-url: /en/analyze-application-data--2
 ---
 Here are three steps for analyzing application data (App Data).
 

@@ -3,6 +3,7 @@ layout: ja-doc
 title: イベントデータの解析
 sort-priority: 20
 summary: イベントデータ（Event Data）の解析を行う基本的なステップは以下の通りです。
+old-url: /jp/--293
 ---
 1. メトリクスを定義する。
 1. アプリよりイベントデータを送信する。

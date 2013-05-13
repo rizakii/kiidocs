@@ -4,6 +4,7 @@ title: Getting Started
 summary: In this tutorial, we'll show how you can add this module to your application and customize it to make it your own. In order to follow along, we recommend a few small preparations below.
 sort-priority: 10
 page-id: ios-tutorial_image_view_getting_started-en
+old-url: /en/getting-started--3
 ---
 ## Register For Kii Cloud
 

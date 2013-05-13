@@ -3,6 +3,7 @@ layout: en-doc
 title: Downloading Files
 summary: If you know the URI of the file you wish to download, you can directly retrieve the file from Kii Cloud
 sort-priority: 20
+old-url: /en/download-files--3
 ---
 The following sample code illustrates how to retrieve an object via its URI:
 

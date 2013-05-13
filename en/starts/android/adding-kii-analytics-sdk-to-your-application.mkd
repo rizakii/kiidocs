@@ -4,6 +4,7 @@ title: Adding Kii Analytics SDK to Your Application
 summary: Kii Analytics SDK lets you upload events to be analyzed as a part of Flex Analysis.  It also let you get the analytics results.
 sort-priority: 40
 page-id: android-adding_kii_analytics_to_your_application-en
+old-url: /en/adding-kii-analytics-sdk-to-your-application
 ---
 ## Configuring your project
 
@@ -22,7 +23,7 @@ Follow the steps below to enable Kii Ads in your application.
 
     ```xml
     <application>
-      <service android:name="com.kii.colud.analytics.EventUploadService" />
+      <service android:name="com.kii.cloud.analytics.EventUploadService" />
     </application>
     ```
 

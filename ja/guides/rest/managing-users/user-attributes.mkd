@@ -2,7 +2,8 @@
 layout: ja-doc
 title: ユーザ属性
 sort-priority: 50
-summary: Kii Platform&nbsp;は、以下の所定の Key-Value を用いてユーザ属性を管理します。
+summary: Kii Platform は、以下の所定の Key-Value を用いてユーザ属性を管理します。
+old-url: /jp/user-attributes--6
 ---
 * userID
 * internalUserID

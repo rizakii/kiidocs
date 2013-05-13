@@ -4,6 +4,7 @@ title: '"Push to User" Notification'
 summary: '"Push to User" notification provides a means to push messages with a publisher-subscriber model. The feature will let you and your app users to quickly send messages to other users while providing a way to scope to whom the messages are sent.'
 sort-priority: 10
 page-id: ios-push_to_user-en
+old-url: /en/push-to-user-notification--2
 ---
 ## How "Push to User" notification works
 

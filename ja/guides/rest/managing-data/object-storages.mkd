@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object Storage
 sort-priority: 20
 summary: Object Storage は、サーバ側のカスタマイズを行うことなく、任意のJSONオブジェクト（Object）を管理する機能を提供します。
+old-url: /jp/object-storages--6
 ---
 ## 所定 Key
 

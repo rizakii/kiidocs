@@ -2,8 +2,166 @@
 layout: ja-doc
 title: File のダウンロード
 sort-priority: 20
+page-id: android-downloading_files-ja
+old-url: /jp/downloading-files--3
 ---
-File にアサインされた URI を元に、File を Kii Cloud より取得することができます。以下に File のダウンロードを実施している例をあげます。
+Kii Cloud SDK は、以下の2種類のファイルダウンロード方法を提供しています。
+
+* **中断/再開可能なファイルダウンロード:** ファイルダウンロード途中における中断および再開をサポートした方式です。例えば、何らかの理由（e.g., ネットワーク断やユーザ操作）によりファイルダウンロードが中断した場合、このダウンロードを中断箇所から再開することができます。特に、サイズの大きなファイルを不安定なネットワーク環境下でダウンロードする際になどに適しています。
+* **シンプルなファイルダウンロード:** ファイルダウンロード途中における中断および再開をサポートしない方式です。何らかの理由によりファイルダウンロードが中断した場合、再度最初からファイルのダウンロードをやり直す必要があります。
+
+## 中断/再開可能なファイルダウンロード
+中断/再開可能なファイルのダウンロードを実施する例を以下にあげます。
+
+
+```java
+// Create a KiiFile instance
+Uri uri = Uri.parse("some existing file uri on cloud");
+KiiFile kFile = KiiFile.createByUri(uri);
+
+// Refresh the instance to get the metadata (if necessary)
+try {
+  kFile.refresh();
+} catch (IOException e) {
+  // handle error
+} catch (AppException e) {
+  // handle error.
+}
+
+// Create a KiiDownloader
+KiiDownloader downloader = kiiFile.downloader(getApplicationContext(),
+    new File(Environment.getExternalStorageDirectory(), "sample.mp4"));
+
+// Start downloading the file body
+try {
+  downloader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Download already in progress.
+  // You can cancel the call and wait for the download to complete.
+} catch (SuspendedException e) {
+  // Download suspended due to a network error or user interruption.
+  // You can resume the download.
+} catch (TerminatedException e) {
+  // Download terminated due to an error (e.g. the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+```
+
+ここでは以下の処理を実施しています。
+
+* `createdByUri` メソッドを実行して、`KiiFile` インスタンスを作成。
+* 必要に応じて `refresh` メソッドを実行してファイルのメタデータを取得。
+* ダウンロード対象ファイルのリファレンスを指定の上 `downloader` メソッドを実行して `KiiDownloader` インスタンスを作成。
+* `transfer` メソッドを実行して、ダウンロードを開始。
+
+`tranfer` メソッドの実行により、Kii Cloud からのファイルダウンロードが開始されます。何らかの理由によりダウンロードが中断した場合 SuspendedException が発生します。この場合、次のセクションに示すようにダウンロードの再開を行うことができます。
+
+
+### 中断しダウンロードの再開
+ファイルダウンロードは、自動的（e.g., ネットワーク断により）または主動的（e.g., ユーザ操作により）に中断されることがあります。中断されたダウンロードは、後ほど再開することにより、中断したポイントからファイルのダウンロードをリスタートすることができます。
+
+以下に、中断したファイルダウンロードを再開する例をあげます。
+
+```java
+KiiFileBucket fbucket = Kii.fileBucket("MyBucket");
+KiiRTransferManager manager = fbucket.getTransferManager();
+List<KiiDownloader> suspended = null;
+try {
+  suspended = manager.listDownloadEntries(getApplicationContext());
+} catch (StateStoreAccessException e1) {
+  // IFailed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+}
+
+// Choose the suspended download to be resumed.
+// (e.g., show a list of suspended downloads to a user and let her select)
+
+// In this snippet, we will resume the first one.
+KiiDownloader downloader = suspended.get(0);
+try {
+  downloader.transfer(null);
+} catch (AlreadyStartedException e) {
+  // Download already in progress.
+  // You can cancel the call and wait for the download to complete.
+} catch (SuspendedException e) {
+  // Download suspended due to a network error or user interruption.
+  // You can resume the download.
+} catch (TerminatedException e) {
+  // Download terminated due to an error (e.g. the target file not found)
+  // or user interruption.
+} catch (StateStoreAccessException e) {
+  // Failed to access the local storage.
+  // This is a rare error; you should be able to safely retry.
+```
+
+ここでは以下の処理を実施しています。
+
+* ファイルダウンロード先の `KiiFileBucket` インスタンスを作成。
+* `getTransferManager` メソッドを実行して、`KiiRTransferManager` インスタンスを作成。
+* `listDownloadEntries` メソッドを実行して、中断中の `KiiDownloader` インスタンス一覧を取得。
+* 再開する `KiiDownloader` インスタンスの transfer メソッドを実行して、ダウンロードを再開。
+
+
+### ファイルダウンロードを手動で中断
+
+現在進行中のファイルダウンロードは、手動で中断することができます。以下にファイルダウンロードを中断する例をあげます。
+
+```java
+KiiDownloader mDownloader; // This is the ongoing file download.
+
+// Assume this method is called when the suspend event is triggered.
+// (e.g., a user pushed "suspend" button)
+public void onSuspendButtonClicked() {
+  try {
+    // Suspend the file download.
+    this.mDownloader.suspend();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the download has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+ダウンロードを中断するには `suspend` メソッドを実行します。なお、既にファイルダウンロードが完了している場合は中断に失敗します。
+
+
+### ファイルダウンロードを手動で終了
+
+現在進行中および中断中のファイルダウンロードは、手動で終了することができます。一旦終了したダウンロードは再開することができなくなります。
+
+以下にファイルダウンロードを終了する例をあげます。
+
+```java
+KiiDownloader mDownloader; // This is the ongoing file download.
+
+// Assume this method is called when the termination event is triggered.
+// (e.g., a user pushed "cancel" button)
+public void onCancelButtonClicked() {
+  try {
+    // Terminate the file download.
+    this.mDownloader.terminate();
+  } catch (NoEntryException e) {
+    // Entry not found. Most likely the download has already be done.
+  } catch (StateStoreAccessException e) {
+    // Failed to access the local storage.
+    // This is a rare error; you should be able to safely retry.
+  }
+}
+```
+
+ダウンロードを終了するには `terminate` メソッドを実行します。なお、既にファイルダウンロードが完了している場合は終了に失敗します。
+
+
+## シンプルなファイルダウンロード
+
+中断/再開を伴わないファイルダウンロードを利用することも可能です（ただし、特にサイズの大きなファイルを Kii Cloud よりダウンロードするケースなどにおいては中断/再開可能なダウンロードを利用することを推奨します）
+
+シンプルなファイルダウンロードを行う例を以下にあげます。
 
 ```java
 // Create a KiiFile instance
@@ -11,9 +169,8 @@ Uri uri = Uri.parse("some existing file uri on cloud");
 KiiFile kFile = KiiFile.createByUri(uri);
 String destFilePath = "destination file path";
 
-// Refresh the instance to get the metadata
 try {
-  // Retrieve metadata
+  // Refresh the instance to get the metadata (if necessary)
   kFile.refresh();
   // Download File body
   kFile.downloadFileBody(destFilePath);
@@ -24,10 +181,8 @@ try {
 }
 ```
 
-基本的な手順は下記の通りです：
+ここでは以下の処理を実施しています。
 
-1. `createByUri` メソッドでファイルのURIを指定し、KiiFile のインスタンスを作成します。
-2. `refresh` メソッドを呼び出し、ファイルのメタデータを取得します。
-3. `downloadFileBody` メソッドを呼び出し、ファイルのBody（実際にはファイルの中身）をダウンロードします。この際、ダウンロードしたファイルの保存先ファイルパスを指定します。
-
-
+* `createdByUri` メソッドを実行して、`KiiFile` インスタンスを作成。
+* 必要に応じて `refresh` メソッドを実行してファイルのメタデータを取得。
+* 保存先を指定の上 `downloadFileBody` メソッドを実行して、ダウンロードを開始。

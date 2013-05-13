@@ -4,6 +4,7 @@ title: Check for Subscription Status
 summary: Sometimes, you will want to check if the current user is already subscribing to a topic. &nbsp;For example, your application may want to show a "SUBSCRIBE" button for users who have not yet subscribed to a topic but want to show a "UNSUBSCRIBE" button instead for those users who have already subscribed to the topic.
 sort-priority: 30
 page-id: ios-check_subscription-en
+old-url: /en/check-for-subscription-status
 ---
 Here is a sample snippet for checking the subscription status.  Note that this snippet is for our sample Scenario #1.  (Basic steps are the same for other Scenarios).
 

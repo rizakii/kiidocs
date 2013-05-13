@@ -3,6 +3,7 @@ layout: ja-doc
 title: '"Push to App" 通知を受け取る'
 sort-priority: 60
 page-id: android-object_storages_push-ja
+old-url: /jp/push--3
 ---
 "Push to App" 通知を使うと、ある Bucket 内の Object に変更があった際に、この事実をアプリが通知として受け取る事ができます。この機能を使うと、サーバ上で発生した変更を、即座にアプリ側に反映させることができます。
 

@@ -4,6 +4,7 @@ sort-priority: 40
 page-id: tutorial_3_retrieve_income_expense_entry-ja
 title: 'チュートリアル#3: エントリーの取得'
 summary: ログインが完了すると、Kii Balance はこのユーザの既存の収支エントリを Kii Cloud より取得して一覧表示します。
+old-url: /jp/3
 ---
 
 

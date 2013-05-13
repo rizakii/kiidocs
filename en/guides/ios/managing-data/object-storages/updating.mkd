@@ -3,6 +3,7 @@ layout: en-doc
 title: Updating Objects
 sort-priority: 30
 summary: "Kii SDK supports the following two object update methods:"
+old-url: /en/update-an-object
 ---
 * **Full update**: Completely overwrite an object. All previous key-values
   stored in the object will be discarded. The local key-value pairs will be

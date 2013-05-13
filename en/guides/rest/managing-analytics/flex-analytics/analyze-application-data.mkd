@@ -3,6 +3,7 @@ layout: en-doc
 title: Analyze Application Data
 sort-priority: 10
 #page-id: foo-bar-baz
+old-url: /en/analyze-application-data--4
 ---
 Here are three steps for analyzing application data (App Data).
 

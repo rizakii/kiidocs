@@ -3,6 +3,7 @@ layout: en-doc
 title: Displaying Ads in Your Application
 sort-priority: 10
 page-id: android-ads_displaying_ads_in_your_application-en
+old-url: /en/configuring-your-project--2
 ---
 In order to display ads in your application, create a com.kii.ad.KiiAdNetLayout. You must ensure that this code is called in the main thread
 

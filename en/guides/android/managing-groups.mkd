@@ -3,6 +3,7 @@ layout: en-doc
 title: Managing Groups
 page-id: android-managing_groups-en
 sort-priority: 20
+old-url: /en/managing-groups--2
 ---
 Kii SDK provides a way to manage groups of users; whether it's for sharing pictures or for group chatting, you can leverage this functionality to easily create fun, social applications.  
 

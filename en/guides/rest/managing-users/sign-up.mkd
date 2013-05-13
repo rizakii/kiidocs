@@ -3,6 +3,7 @@ layout: en-doc
 title: Sign Up
 summary: Getting users registered with your application is the first step for user management.
 sort-priority: 10
+old-url: /en/sign-up--3
 ---
 <p class="callout">Alternatively, you can let your users sign-in via external social network services like Facebook.  Please check {% page_link rest-socal_network_integration-en %} section for more details</p>
 

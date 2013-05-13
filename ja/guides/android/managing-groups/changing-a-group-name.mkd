@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループ名の変更
 sort-priority: 20
+old-url: /jp/changing-a-group-name--5
 ---
 グループのオーナーはKii Cloud上のグループの名前を `changeName` メソッドを使用して変更することができます。
 

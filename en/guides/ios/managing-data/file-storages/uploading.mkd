@@ -2,6 +2,7 @@
 layout: en-doc
 title: Uploading Files
 sort-priority: 10
+old-url: /en/upload-files--3
 ---
 Kii Cloud SDK offers the following two types of file uploading.
 
@@ -13,26 +14,19 @@ Kii Cloud SDK offers the following two types of file uploading.
 
 Check the following snippet to see how you can upload a file with the resumable feature.
 
-```obj-c
-// Prepare file and file bucket
+```objc
+// Create a reference to the existing local file
 KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
 NSString *fileName = @"sample.mp4";
-NSString *path = [_mainPath stringByAppendingPathComponent:fileName];
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
 KiiFile *file = [bucket fileWithLocalPath:path];
-[file saveMetaDataSynchronous:&error];
 
-// Get transfer manager
-KiiRTransferManager *transferManager = [bucket transferManager];
-
-// Get uploader
-KiiUploader *uploader = [file uploader];
+// Create a KiiUploader
+KiiUploader *uploader = [file uploader:path];
 
 // Create a progress block
 KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
-  if (retError != nil) {
-    // There is something wrong
-    NSLog(@"Transfer error happens");
-  }
+  KiiRTransferInfo *info = [transferObject info];
   NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
 };
 
@@ -44,75 +38,127 @@ KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retE
   }
 };
 
-// Start uploading
+// Do upload
 [uploader transferWithProgressBlock:progress
                  andCompletionBlock:completion];
 ```
 
 Here is what is taking place in the snippet:
 
-1. Create a reference to the target file ("sample.mp4").
-2. Create 
-3. Create 
-4. Start 
+* Create a reference to the target file ("sample.mp4").
+* Create a KiiFile instance by invoking `fileWithLocalPath` method.
+* Create a `KiiUploader` instance by invoking `uploader` method while specifying the target file reference.
+* Define a progress block and completion blocks.
+* Start uploading by invoking `transfer` method.
 
-Invoking `tranfer` method starts the file upload.  If everything go well, the file will be uploaded to Kii Cloud.  If the upload is interrupted for some reasons, it will be suspended and SuspendedException will be thrown.  In this case, you can resume the upload (check the next section).
+Invoking tranfer method starts the file upload. If everything go well, the file will be uploaded to Kii Cloud. If the upload is interrupted for some reasons, the completion block will be called with the corresponding NSError value.  In this case, you can resume the upload (check the next section).
 
 ### Resuming a Suspended Upload
-
-File uploading could be suspended either automatically (e.g., by network failure) or manually (e.g., by user interruption).  The suspended file upload can later be resumed so as to continue the upload from the point where it was interrupted.
+File uploading could be suspended either automatically (e.g., by network failure) or manually (e.g., by user interruption). The suspended file upload can later be resumed so as to continue the upload from the point where it was interrupted.
 
 Check the following snippet to see how to resume the suspended file upload.
 
-```obj-c
-// to be updated...
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
+
+// Parse through the upload entries
+for (KiiUploader *uploader in uploadEntries) {
+
+  // If upload is in suspended satus, try to resume the transfer
+  if ([[uploader info] status] == SUSPENDED) {
+    // Create a progress block
+    KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      KiiRTransferInfo *info = [transferObject info];
+      NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+    };
+    // Create a completion block
+    KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      if (retError != nil) {
+        // There is something wrong
+        NSLog(@"Transfer error happens");
+      }
+    };
+    [uploader transferWithProgressBlock:progress andCompletionBlock:completion];
+  }
+
+}
 ```
 
 Here is what is taking place in the snippet:
 
-1. Create 
+* Create a `KiiFileBucket` instance of the file bucket to which the file is being uploaded.
+* Create a `KiiRTransferManager` instance by invoking `transferManager` method.
+* Get a list of KiiUploader instances by invoking `getUploadEntries` method.
+* For the KiiUploader instance you want to resume, invoke `transfer` method.
 
+###Manually Suspending a File Upload
+The ongoing file upload can be manually suspended. Check the following snippet to see how you can suspend the file upload.  In this example, we are suspending the upload for the file "sample2.mp4".
 
-### Manually Suspending a File Upload
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
 
-The ongoing file upload can be manually suspended.  Check the following snippet to see how you can suspend the file upload.
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
 
+// Specify file that you want to terminate
+NSString *fileName = @"sample2.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
 
-```obj-c
-// Get uploader
-KiiUploader *uploader = [file uploader];
-// Suspend uploading
-NSError *error = nil
-[uploader suspend:&error];
+for (KiiUploader *uploader in uploadEntries) {
+  if ([[uploader localPath] isEqualToString:path] {
+    // Suspend uploading
+    NSError *suspendError = nil
+    [uploader suspend:&suspendError];
+  }
+}
 ```
 
-Just invoke `suspend` method.  This will suspend the target file upload unless the upload is already finished.
+Basically, just invoke `suspend` method. This will suspend the target file upload unless the upload is already finished.
 
+###Manually Terminating a File Upload
+The ongoing or suspended file upload can be manually terminated. Once terminated, you will not be able to resume the file upload; you will need to start uploading the file from the beginning.
 
-### Manually Terminating a File Upload
+Check the following snippet to see how you can terminate the file upload.  In this example, we are terminating the upload for the file "sample3.mp4".
 
-The ongoing or suspended file upload can be manually terminated.  Once terminated, you will not be able to resume the file upload; you will need to start uploading the file from the beginning.
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
 
-Check the following snippet to see how you can terminate the file upload.
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
 
-```obj-c
-// Get uploader
-KiiUploader *uploader = [file uploader];
-// Terminate uploading
-NSError *error = nil
-[uploader terminate:&error];
+// Specify file that you want to terminate
+NSString *fileName = @"sample3.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiUploader *uploader in uploadEntries) {
+  if ([[uploader localPath] isEqualToString:path] {
+    // Terminate uploading
+    NSError *terminateError = nil
+    [uploader terminate:&terminateError];
+  }
+}
 ```
 
-Just invoke `terminate` method.  This will terminate the target file upload unless the upload is already finished.
+Basically, just invoke `terminate` method. This will terminate the target file upload unless the upload is already finished.
 
-
-## Uploading a File without resumable transfer
-
-You can upload a file without resumable feature.  (We recommend to use the upload with resumable feature, especially when you are uploading a big file to Kii Cloud).
+##Uploading a File without resumable transfer
+You can upload a file without resumable feature. (We recommend to use the upload with resumable feature, especially when you are uploading a big file to Kii Cloud).
 
 Check the following snippet to see how you can do this.
 
-```obj-c
+```objc
 NSError *error;
 
 // Create bucket
@@ -136,6 +182,6 @@ if (error != nil) {
 
 Here is what is taking place in the snippet:
 
-1. Create a reference to the target file ("sample.txt").
-2. Create a `KiiFile` instance by invoking `fileWithLocalPath` method.
-3. Invoke `saveFile` method to upload the file to Kii Cloud.
+* Create a reference to the target file ("sample_upload.png").
+* Create a `KiiFile` instance by invoking `fileWithLocalPath` method.
+* Invoke `saveFile` method to upload the file to Kii Cloud.

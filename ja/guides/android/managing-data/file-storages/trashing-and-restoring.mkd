@@ -3,6 +3,7 @@ layout: ja-doc
 title: File の Trashcan への移動と復元
 summary: Kii Cloud は、Kii Cloud Trashcan という機能を提供しています。これは、クライアントで削除された File を一時的に保存しておく「ゴミ箱」に相当します。
 sort-priority: 40
+old-url: /jp/trashing-and-restoring-files--3
 ---
 Kii Cloud Trashcan は、Microsoft Windows や MacOS のゴミ箱と同様の働きをします。ファイルがゴミ箱に移動すると、このファイルは一旦隠されます。
 例えばユーザがファイルの検索を行った場合、ゴミ箱内のファイルは検索の対象から外れます。（ファイルがゴミ箱より復元されると再度検索の対象になります）

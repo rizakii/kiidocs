@@ -1,9 +1,10 @@
 ---
 layout: en-doc
 title: 'Tutorial #2: Register and Log-in'
-summary: '<p>Kii Balance of course has to support user registration and user login. &nbsp;Many users do not like typing their username and password again and again, so allowing them to login without any username and password would be great.</p><p>Let us explore how easy we can realize these with Kii Cloud.</p>'
+summary: 'Kii Balance of course has to support user registration and user login. &nbsp;Many users do not like typing their username and password again and again, so allowing them to login without any username and password would be great.  Let us explore how easy we can realize these with Kii Cloud.'
 sort-priority: 30
 page-id: tutorial_2_register_and_log_in-en
+old-url: /en/tutorial-2-register-and-log-in
 ---
 ## User registration
 

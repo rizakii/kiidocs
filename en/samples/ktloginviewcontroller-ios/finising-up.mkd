@@ -3,6 +3,7 @@ layout: en-doc
 title: Finishing Up
 sort-priority: 40
 page-id: ios-tutorial_login_view_controller_finshing_up-en
+old-url: /en/finishing-up
 ---
 ## Resources
 

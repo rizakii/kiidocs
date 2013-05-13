@@ -3,6 +3,7 @@ layout: en-doc
 title: Configuring Your Application
 sort-priority: 10
 page-id: rest-configuring_your_application-en
+old-url: /en/configuring-your-application
 ---
 Once you've created your application on the dev portal, you can tweak your application. &nbsp;In particular, you can configure the following parameters:
 

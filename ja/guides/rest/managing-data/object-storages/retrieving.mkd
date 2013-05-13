@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の取得
 sort-priority: 20
+old-url: /jp/retrieving-objects--6
 ---
 以下に、Object ID を元に Kii Cloud から Object を取得する方法を示します。
 

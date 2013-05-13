@@ -4,6 +4,7 @@ title: 'Tutorial #1: Initialize Kii Client SDK'
 summary: 'Before anything else, we need to initialize Kii Client SDK to make it ready to use.  The initialization is super-simple - just one line of code!'
 sort-priority: 20
 page-id: tutorial_1_initialize_kii_client_sdk-en
+old-url: /en/tutorial-1-initialize-kii-client-sdk
 ---
 In the initialization, we tell the following application-related information to the SDK:
 
@@ -24,7 +25,7 @@ public void onCreate(Bundle saveInstanceState) {
   initKiiSDK();
 }
 
-public void initiKiiSDK() {
+public void initKiiSDK() {
   Kii.initialize(
     Constants.APP_ID,  // Put your App ID
     Constants.APP_KEY, // Put your App Key

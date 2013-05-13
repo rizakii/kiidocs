@@ -3,6 +3,7 @@ layout: en-doc
 title: Querying for Objects
 sort-priority: 50
 summary: 'Kii SDK makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The SDK allows you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...'
+old-url: /en/querying-for-objects--2
 ---
 
 ## Defining query condition with Kii Clause

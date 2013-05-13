@@ -3,6 +3,7 @@ layout: en-doc
 title: Syncing Folder
 summary: 'Kii Sync SDK provides a super-simple method for syncing a folder. By leveraging our sync SDK, you will be able to sync a folder among multiple devices, making all files and subfolders accessible from all devices - even if they are offline.'
 sort-priority: 40
+old-url: /en/folder-sync
 ---
 ## Sample scenario
 

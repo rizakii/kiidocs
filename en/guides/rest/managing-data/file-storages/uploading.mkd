@@ -3,6 +3,7 @@ layout: en-doc
 title: Uploading Files and Folders
 sort-priority: 10
 #page-id: foo-bar-baz
+old-url: /en/uploading-files--2
 ---
 Uploading a file is handled by performing the following steps:
 

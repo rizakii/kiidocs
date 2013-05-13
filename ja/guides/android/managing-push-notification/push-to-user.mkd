@@ -4,6 +4,7 @@ title: '"Push to User" 通知'
 summary: '"Push to User" 通知は、「出版-購読型モデル」のメッセージング機能を提供します。この機能を使うと、アプリ開発者やアプリユーザから他のユーザに対して素早くメッセージをプッシュ送信することができます。'
 sort-priority: 10
 page-id: android-push_to_user-ja
+old-url: /jp/push-to-user
 ---
 ## "Push to User" 通知の仕組み
 

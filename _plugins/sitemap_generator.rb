@@ -46,7 +46,9 @@ module Jekyll
   SITEMAP_FILE_NAME = "sitemap.xml"
 
   # Any files to exclude from being included in the sitemap.xml
-  EXCLUDED_FILES = [ 'atom.xml', 'desc.css', 'site-raw.css', 'site.css' ]
+  EXCLUDED_FILES = [ 'atom.xml', 'desc.css', 'site-raw.css', 'site.css',
+    'redirect-table.js'
+  ]
 
   # Any files that include posts, so that when a new post is added, the last
   # modified date of these pages should take that into account
@@ -231,15 +233,15 @@ module Jekyll
 
       if @last_modified_post_date == nil
         # This is a post
-        lastmod.text = latest_date.iso8601
+        lastmod.text = latest_date.getutc.iso8601
       else
         # This is a page
         if posts_included?(page_or_post.name)
           # We want to take into account the last post date
           final_date = greater_date(latest_date, @last_modified_post_date)
-          lastmod.text = final_date.iso8601
+          lastmod.text = final_date.getutc.iso8601
         else
-          lastmod.text = latest_date.iso8601
+          lastmod.text = latest_date.getutc.iso8601
         end
       end
       lastmod

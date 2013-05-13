@@ -4,6 +4,7 @@ title: Adding Kii Sync SDK to Your Application
 summary: 'Kii Sync SDK provides you a super-simple method for syncing a folder. By leveraging our sync SDK, you will be able to sync a folder among multiple devices, making all files and subfolders accessible from all devices even if they are offline.'
 sort-priority: 20
 page-id: android-adding_kii_sync_to_your_application-en
+old-url: /en/adding-kii-sync-sdk
 ---
 ## Configuring Your Project
 

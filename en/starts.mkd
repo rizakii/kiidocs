@@ -4,6 +4,7 @@ title: Getting Started
 summary: This section will introduce you to integrating your mobile application with the Kii SDK!
 sort-priority: 10
 page-id: quickstart-en
+old-url: /en/getting-started
 ---
 We provide Kii SDKs for the following platforms:
 

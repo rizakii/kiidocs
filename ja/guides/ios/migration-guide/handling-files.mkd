@@ -1,0 +1,33 @@
+---
+layout: ja-doc
+title: File の操作
+sort-priority: 50
+page-id: ios-migration_handling_files-ja
+---
+Parse では、以下のように `PFFile` を使ってファイル操作を行います。
+
+###Parse における File アップロードの例
+```objc
+NSData *data = [NSData dataWithContentsOfFile:filePath];
+PFFile *file = [PFFile fileWithName:@"license.txt" data:data];
+[file saveInBackground];
+```
+
+Kii Platform では、任意のファイルをメタデータと関連付けした形で bucket に保存することができます。ファイルのアップロードやダウンロードだけではなく、ファイルのゴミ箱への移動・完全削除や URL によるファイルの公開などといった一連のファイル操作を、数行のクライアントコードを書くだけで実現することができます。
+
+Parse におけるファイルのアップロードを `KiiFile` を用いて実現する例を以下にあげます。
+
+
+###Kii Cloud における File アップロードの例
+```objc
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"GameData"];
+KiiFile *f = [bucket fileWithLocalPath:filePath];
+
+[f saveFileWithProgressBlock:^(KiiFile *file, double progress) {
+  NSLog(@"Upload progress: %lf %@", progress, file);
+} andCompletionBlock:^(KiiFile *file, NSError *error) {
+  NSLog(@"Upload complete: %@ withError: %@", file, error);
+}];
+```
+
+ファイル操作全体に関するの詳細は「{% page_link ios-file_storages-ja %}」を参照してください。

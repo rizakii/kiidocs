@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の削除
 sort-priority: 40
+old-url: /jp/deleting-objects--4
 ---
 `delete`メソッドで指定したObjectを削除することができます。
 

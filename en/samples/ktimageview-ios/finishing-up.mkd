@@ -3,6 +3,7 @@ layout: en-doc
 title: Finishing Up
 sort-priority: 30
 page-id: ios-tutorial_image_view_finishing_up-en
+old-url: /en/finishing-up--2
 ---
 ## Customization
 

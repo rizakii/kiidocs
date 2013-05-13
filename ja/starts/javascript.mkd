@@ -3,6 +3,7 @@ layout: ja-doc
 title: JavaScript クイックスタート
 sort-priority: 30
 page-id: js-quickstart-ja
+old-url: /jp/javascript-guides--2
 ---
 ## アプリケーションを開発者ポータルに登録する
 

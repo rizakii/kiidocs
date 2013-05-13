@@ -4,6 +4,7 @@ title: '"Direct Push" Notification'
 summary: '"Direct Push" notification provides a means to push messages directly to a certain user.  The feature is intended to be used by an app developer only.  An app developer can select any application user and directly push a message to this user by manipulating the developer portal.'
 page-id: android-direct_push-en
 sort-priority: 20
+old-url: /en/direct-push-notification
 ---
 
 ## Push a Message to a User

@@ -4,6 +4,7 @@ title: Sign In
 summary: Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
 sort-priority: 20
 page-id: rest-sign_in-en
+old-url: /en/sign-in--3
 ---
 Signing in with the REST API is equivalent to requesting a user token by providing the user's username and password. &nbsp;Once the user token is retrieved, it can be used throughout the REST API calls that require authentication.
 

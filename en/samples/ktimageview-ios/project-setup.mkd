@@ -4,6 +4,7 @@ title: Project Setup
 summary: In this tutorial, we will create a very simple application that does the following.
 sort-priority: 20
 page-id: ios-tutorial_image_view_project_setup-en
+old-url: /en/basic-implementation--2
 ---
 1. Allow users to register and authenticate with the app
 2. Generate random images on the fly and upload them to Kii Cloud

@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の削除
 sort-priority: 50
+old-url: /jp/deleting-objects--7
 ---
 Object を削除するには、次の例のように `delete` メソッドをコールします。
 

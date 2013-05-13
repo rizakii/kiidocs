@@ -48,9 +48,13 @@ in `_site/` to public server.
 
 To see your changes on local machine try this.
 
-```
-$ jekyll --auto --server
-```
+for jekyll 1.0 or above
+
+    $ jekyll server --watch
+
+for jekyll 0.12
+
+    $ jekyll --auto --server
 
 Then open http://127.0.0.1:4000/ by using your favorite WEB browser.
 
@@ -61,9 +65,8 @@ Please check files and directories and files under `en/` and `ja/` directories.
 
 Here are some explanations to help you understand how to edit pages.
 
-<font color="red">
-Importatnt: Be sure that all files are saved with LF line ending.
-</font>
+**Importatnt: Be sure that all files are saved with LF line ending (UNIX style).**
+
 
 ### YAML header
 
@@ -149,6 +152,13 @@ See `en.html` for an example of `page_url`.page_url
 
 Simply upload everything inside `_site`.  You can use the helper script for this.
 
+for jekyll 1.0 or above
+
+    $ jekyll build
+    $ sh scripts/sync.sh
+
+for jekyll 0.12
+
     $ jekyll
     $ sh scripts/sync.sh
 
@@ -174,7 +184,9 @@ Note that you need to know the password.
 
 #### Generated Pages Uploader
 
-    $ jekyll
+for jekyll 1.0 or above
+
+    $ jekyll build
     $ sh scripts/sync.sh
 
 #### Symmetrical Files Checker

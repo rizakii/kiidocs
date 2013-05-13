@@ -3,6 +3,7 @@ layout: en-doc
 title: Managing Push Notifications
 sort-priority: 50
 page-id: android-managing_push-en
+old-url: /en/managing-push-notification
 ---
 Kii Cloud supports the following three types of push notifications.
 
@@ -15,7 +16,7 @@ Please refer ['"Push to User" Notification']({% page_url android-push_to_user-en
  * **"Direct Push"** notification: This mechanism will let you reach directly to your application users; for example, you will be able to directly send an alert message to a certain user.
 Please refer ['"Direct Push" Notification']({% page_url android-direct_push-en %}) section for more details.
 
-### Preparation for Leveraging Push Notifications
+## Preparation for Leveraging Push Notifications
 
 ### Configuring Your Application
 

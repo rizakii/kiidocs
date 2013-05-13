@@ -3,6 +3,7 @@ layout: ja-doc
 title: Kii Analytics SDK の導入手順
 sort-priority: 40
 page-id: android-adding_kii_analytics_to_your_application-ja
+old-url: /jp/kii-analytics-sdk
 ---
 ## プロジェクトの設定
 

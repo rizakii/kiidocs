@@ -1,0 +1,34 @@
+---
+layout: en-doc
+title: SDK initialization
+sort-priority: 10
+page-id: android-migration_sdk_initialization-en
+old-url: /en/migration-guide/sdk-initialization
+---
+Initialization is very similar. First of all both SDKs will require the following permission on AndroidManifest.xml:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+In either case you'll have to insert your application's credentials (i.e., APPID and APPKEY) in the specified parameters in the method:
+
+###Parse Initialization
+```java
+import com.parse.Parse;
+
+public void onCreate() {
+    Parse.initialize(this, "___APPID___", "___APPKEY___");
+}
+```
+###Kii Cloud Initialization
+```java
+import com.kii.cloud.storage;
+
+public void onCreate() {
+    Kii.initialize("___APPID___", "___APPKEY___", Site.US);
+}
+```
+
+In addition, Kii Cloud will also allow you to define the Country (Site.US or Site.JP) as specified on the developer's portal.
+
+For more information about Kii Cloud SDK initialization see {% page_link android-adding_kii_cloud_to_your_application-en %}.

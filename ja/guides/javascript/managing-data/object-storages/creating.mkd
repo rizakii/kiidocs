@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Object の作成
 sort-priority: 10
+old-url: /jp/object
 summary: ある Bucket インスタンスの createObject メソッドを実行すると、この Bucket 内に Object が生成されます。生成された Object の setObject メソッドを用いて、任意の Key-Value を Object 内にセットできます。セットした Key-Value は、save メソッドを実行することで Kii Cloud に反映されます。
 ---
 Object 作成のサンプルコードを以下にあげます。以下の例では、Application Scope を持つ「app_bucket」という名の Bucket の下に Object を作成しています。

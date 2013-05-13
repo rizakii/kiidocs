@@ -1,0 +1,52 @@
+---
+layout: ja-doc
+title: プッシュ通知
+sort-priority: 60
+page-id: ios-migration_push_notifications-ja
+---
+Parse においてプッシュ通知を送信する例を以下にあげます。
+
+###Parse におけるプッシュ通知の例
+
+```objc
+PFPush *push = [[PFPush alloc] init];
+[push setChannel:@"AppNews"];
+[push setMessage:@"Check out our new in-app purchase!"];
+[push sendPushInBackground];
+```
+
+Kii Cloud では、より細かくプッシュ通知を制御することができます。具体的には、アプリケーション全体へのプッシュ通知以外に、ユーザ間におけるプッシュ通知やアプリ開発者から特定ユーザへのピンポイント通知をサポートしています。
+
+以下に、ある特定のユーザグループに対してのみプッシュ通知を行う例をあげます。
+
+###Kii Cloud におけるプッシュ通知の例
+
+```objc
+NSError *error;
+
+// Instantiating a group and its group-scope topic.
+KiiGroup *group = [KiiGroup gropuWithName:@"ActiveUsers"];
+KiiTopic *topic = [group topicWithName:@"AppNews"];
+
+// Create APNs message fields
+KiiAPNSFields *apnsFields = [KiiAPNSFields createFields];
+[apnsFields setAlertBody:@"Check out our new in-app purchase!"];
+
+// Build a push message.
+// GCM fields is set nil, so the message will not send to Android devices.
+NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+[dictionary setObject:@"MyApp" forKey:@"From"];
+[dictionary setObject:@"Check out our new in-app purchase!" forKey:@"MsgBody"];
+[apnsFields setSpecificData:dictionary];
+
+KiiPushMessage *message = [KiiPushMessage composeMessageWithAPNSFields:apnsFields andGCMFields:nil];
+
+// Send the message.
+[topic sendMessageSynchronous:message withError:&error;];
+
+if (error != nil) {
+  // There was a problem.
+}
+```
+
+もちろんこれはあくまで一例です。Kii Cloud がサポートするプッシュ通知の詳細については「{% page_link ios-managing_push-ja %}」を参照してください。

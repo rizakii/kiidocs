@@ -3,6 +3,7 @@ layout: en-doc
 title: Retrieving Objects
 sort-priority: 20
 summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
+old-url: /en/retrieving-objects--2
 ---
 The following sample code illustrates how to retrieve an object with its URI:
 

@@ -4,4 +4,5 @@ title: Managing Data
 sort-priority: 30
 summary: Kii Cloud Storage SDK for Javascript provides object storage for managing application data. This allows your application to store arbitrary key/value pairs as JSON-style objects.  You can freely define your objects by adding any key-value pairs without setting any schemas or doing any extra customization.
 page-id: javascript-managing_data-en
+old-url: /en/managing-data--4
 ---

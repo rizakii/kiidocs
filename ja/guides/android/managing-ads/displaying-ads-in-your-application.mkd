@@ -3,6 +3,7 @@ layout: ja-doc
 title: アプリ上で広告を表示する
 sort-priority: 10
 page-id: android-ads_displaying_ads_in_your_application-jp
+old-url: /jp/displaying-ads-in-your-application--2
 ---
 アプリ上で広告を表示するにはcom.kii.ad.KiiAdNetLayout を生成します。
 このコードは必ずメインスレッドで呼んでください。

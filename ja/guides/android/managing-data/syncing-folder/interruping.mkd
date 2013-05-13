@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Folder Sync の中断と再開
 sort-priority: 20
+old-url: /jp/interrupting-folder-sync
 ---
 処理中のフォルダ同期を停止するには、動作中のスレッドを中断してください。
 

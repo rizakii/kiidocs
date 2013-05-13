@@ -2,6 +2,8 @@
 layout: ja-doc
 title: File Storage
 sort-priority: 30
+page-id: android-file_storages-ja
+old-url: /jp/file-storages--5
 ---
 File Storage は、任意のファイル（File）をメタデータとともに管理する機能を提供します。ファイルのアップロードやダウンロード、ゴミ箱への移動と復元、さらには URL による公開など、多くの機能を容易に利用することができます。
 
@@ -22,4 +24,3 @@ File のインスタンスを生成すると、Kii Cloud SDK は自動的に以�
  * MimeType
  * Thumbnail
  * Custom Field ... アプリケーションが任意の値を追加可能な拡張フィールド。UTF-8 エンコードされた 512バイトまでの値が格納可能
-

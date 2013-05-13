@@ -2,6 +2,7 @@
 layout: en-doc
 title: Deleting Files
 sort-priority: 50
+old-url: /en/deleting-files
 ---
 You can permanently delete a file by invoking the `shredFile`
 method.  The file will be permanently deleted; you cannot restore the file.

@@ -4,6 +4,7 @@ title: KTImageView - iOS
 summary: <p>This is a full tutorial which includes a walkthrough, some examples and full code downloads for a component in KiiToolkit called KTImageView.</p><p class="note center">Don't know what KiiToolkit is? Check out the link <a href="http://blog.kii.com/?p=190">here</a></p>
 sort-priority: 30
 page-id: ios-tutorial_image_view-en
+old-url: /en/ktimageview-ios
 ---
 ## What is KTImageView?
 

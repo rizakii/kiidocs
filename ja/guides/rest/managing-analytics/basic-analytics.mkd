@@ -2,6 +2,7 @@
 layout: ja-doc
 title: Basic Analytics
 sort-priority: 10
+old-url: /jp/basic-analytics--4
 summary: Basic Analytics 機能を使うと、一切の設定を行うことなくアプリ解析を即座に行うことができます。全ての解析結果は自動的に集計され、開発者ポータル上にて確認することができます。
 ---
 ## 開発者ポータルで Basic Analytics を確認する

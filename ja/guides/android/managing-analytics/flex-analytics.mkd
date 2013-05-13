@@ -3,6 +3,7 @@ layout: ja-doc
 title: Flex Analytics
 summary: Flex Analytics 機能を使うと、カスタムな指標でアプリ解析を行うことができます。 アプリが生成したデータに対して、任意のディメンションやファクトの定義が可能です。
 sort-priority: 20
+old-url: /jp/flex-analytics
 ---
 解析元データとして、Kii Cloud は次の２種類のデータをサポートしています。
 

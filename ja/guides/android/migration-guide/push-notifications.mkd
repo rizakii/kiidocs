@@ -1,0 +1,39 @@
+---
+layout: ja-doc
+title: プッシュ通知
+sort-priority: 60
+page-id: android-migration_push_notifications-ja
+old-url: /ja/migration-guide/push-notifications
+---
+Parse においてプッシュ通知を送信する例を以下にあげます。
+
+###Parse におけるプッシュ通知の例
+```java
+import com.parse.ParsePush;
+
+ParsePush push = new ParsePush();
+push.setChannel("AppNews");
+push.setMessage("Check out our new in-app purchase!");
+push.sendInBackground(callback);
+```
+
+Kii Cloud では、より細かくプッシュ通知を制御することができます。具体的には、アプリケーション全体へのプッシュ通知以外に、ユーザ間におけるプッシュ通知やアプリ開発者から特定ユーザへのピンポイント通知をサポートしています。
+
+以下に、ある特定のユーザグループに対してのみプッシュ通知を行う例をあげます。
+
+###Kii Cloud におけるプッシュ通知の例
+```java
+import com.kii.cloud.storage.KiiGroup;
+import com.kii.cloud.storage.KiiTopic;
+import com.kii.cloud.storage.KiiPushMessage;
+
+KiiGroup group = Kii.group("ActiveUsers");
+KiiTopic topic = group.topic("AppNews");
+KiiPushMessage.Data data = new Data();
+data.put("From", "MyApp");
+data.put("MsgBody", "Check out our new in-app purchase!");
+KiiPushMessage message = KiiPushMessage.buildWith(data).build();
+topic.sendMessage(message, callback);
+```
+
+もちろんこれはあくまで一例です。Kii Cloud がサポートするプッシュ通知の詳細については「{% page_link android-managing_push-ja %}」を参照してください。

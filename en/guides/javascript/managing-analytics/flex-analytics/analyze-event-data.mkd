@@ -2,6 +2,7 @@
 layout: en-doc
 title: Analyze Event Data
 sort-priority: 20
+old-url: /en/analyze-event-data--3
 ---
 Here are four steps to start analyzing your AppData.
 

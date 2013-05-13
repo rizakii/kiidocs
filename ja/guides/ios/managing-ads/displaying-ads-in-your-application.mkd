@@ -2,6 +2,7 @@
 layout: ja-doc
 title: アプリ上で広告を表示する
 sort-priority: 10
+old-url: /jp/displaying-ads-in-your-application--3
 ---
 アプリに広告を表示させる例です。
 

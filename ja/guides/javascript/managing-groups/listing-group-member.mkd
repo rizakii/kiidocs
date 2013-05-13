@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループメンバー一覧の取得
 sort-priority: 40
+old-url: /jp/listing-group-members--4
 ---
 グループオーナーは、グループメンバーの一覧を次の例のように取得することができます。
 

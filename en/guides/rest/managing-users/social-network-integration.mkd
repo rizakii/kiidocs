@@ -4,6 +4,7 @@ title: Social Network Integration
 summary: By enabling social network integration, your users will be able to register using a social network - or link their existing application account to the network.
 sort-priority: 30
 page-id: rest-socal_network_integration-en
+old-url: /en/social-network-integration--3
 ---
 Currently, Kii Platform supports the following social networks:
 

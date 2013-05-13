@@ -2,7 +2,8 @@
 layout: ja-doc
 title: File や Folder の完全削除
 sort-priority: 50
-summary: ファイルやフォルダは、以下のいずれかの方法により完全削除することができます
+summary: ファイルやフォルダは、以下のいずれかの方法により完全削除することができます。
+old-url: /jp/deleting-files-and-folders
 ---
 * Trashcan に移動済のファイルやフォルダに対して DELETE リクエストを送信する (i.e., メタデータの "trashed" フィールドが true のファイルやフォルダに対して DELETE リクエストを送信する)
 * ファイルやフォルダに対して、ファイルパス指定で DELETE リクエストを送信する

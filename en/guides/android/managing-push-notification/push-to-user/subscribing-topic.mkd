@@ -3,6 +3,7 @@ layout: en-doc
 title: 'Subscribe/Unsubscribe a Topic'
 page-id: android-push_to_user_subscribing_topic-en
 sort-priority: 20
+old-url: /en/subscribe-unsubscribe-a-topic
 ---
 Subscribing to a topic is necessary to receive "Push to User" notification.  Once a user subscribes to a topic, all push messages sent to this topic will be delivered to the user.
 

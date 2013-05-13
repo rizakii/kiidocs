@@ -3,6 +3,7 @@ layout: ja-doc
 title: Object の更新
 sort-priority: 30
 summary: Kii Cloud SDK は、２種類の Object 更新手段を提供しています。
+old-url: /jp/updating-objects--7
 ---
 * **フルアップデート**： Object を完全に上書きします。
 

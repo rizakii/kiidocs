@@ -3,6 +3,7 @@ layout: en-doc
 title: Trashing and Restoring Files
 summary: Kii Cloud provides a mechanism called Kii Cloud Trashcan for files that have been deleted temporarily.
 sort-priority: 40
+old-url: /en/trashing-and-restoring-files--2
 ---
 This Trashcan is similar to&nbsp;the features supported on your favorite OS. When a user moves a file into the trash the file becomes invisible to file queries, as if it has been removed from the system. However, the user can later restore their files from the trash and they will become visible again.
 

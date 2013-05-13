@@ -4,6 +4,7 @@ title: トピックを作成する
 summary: ここでは、サンプルシナリオのそれぞれを例に取り、トピックの作成方法を説明してきます。
 sort-priority: 10
 page-id: ios-creating_topic-ja
+old-url: /jp/--305
 ---
 ## シナリオ#1: 全アプリユーザへの一斉通知
 

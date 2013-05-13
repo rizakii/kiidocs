@@ -4,6 +4,7 @@ title: Basic Implementation
 summary: <p>In this tutorial, our sample application requires that a user has a registered account in order to use the app. Therefore, we want to show the login screen when the main view controller appears and there is <em>not</em> a user logged in. By displaying the KTLoginViewController, the user will be able to log into their account or register with your application.</p>
 sort-priority: 20
 page-id: ios-tutorial_login_view_controller_basic_impl-en
+old-url: /en/basic-implementation
 ---
 We can achieve this in ViewController.m in the `viewDidAppear:` method as
 shown:

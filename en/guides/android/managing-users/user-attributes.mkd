@@ -2,6 +2,7 @@
 layout: en-doc
 title: User Attributes
 sort-priority: 50
+old-url: /en/user-attributes
 ---
 Kii SDK allows you to manage custom user profiles by allowing arbitrary key-value pairs for any KiiUser. Also, by default, KiiUser has the following predefined keys:
 

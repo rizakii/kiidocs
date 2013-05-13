@@ -3,6 +3,8 @@ layout: en-doc
 title: Creating Objects
 summary: Your application can create an object by invoking the corresponding method of the KiiBucket class instance. Once an object is created, you can set various key/value pairs within the object. When you are finished with setting the key-value pairs, invoke the save method to store it on Kii Cloud.
 sort-priority: 10
+old-url: /en/create-objects
+page-id: ios-managing_data-object_storages-creating-en
 ---
 In the following example, an object is created in the "mydata" bucket, which
 has Application Scope.

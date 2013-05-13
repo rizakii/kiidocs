@@ -3,6 +3,7 @@ layout: en-doc
 title: Object Storage
 summary: Object storage allows your application to manage and store JSON-style objects with arbitrary key/value pairs. You can freely define your objects by adding any JSON-encodable data without ever having to do any server-side customization.
 sort-priority: 20
+old-url: /en/object-storages--3
 ---
 ## Predefined Keys
 

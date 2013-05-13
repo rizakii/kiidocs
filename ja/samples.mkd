@@ -3,6 +3,7 @@ layout: ja-doc
 title: サンプルコード集
 page-id: samples-ja
 sort-priority: 40
+old-url: /jp/snippets-and-samples--2
 ---
 ## サンプルアプリ
 

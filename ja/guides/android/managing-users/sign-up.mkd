@@ -2,7 +2,8 @@
 layout: ja-doc
 title: サインアップ
 sort-priority: 10
-page-id: android-sing_up-ja
+page-id: android-sign_up-ja
+old-url: /jp/sign-up--5
 ---
 アプリケーションのユーザ管理の第一歩は、ユーザ登録です。
 

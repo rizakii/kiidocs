@@ -37,7 +37,8 @@ tags: rest-api
 				Create a new group. The owner will be added also as
 				member by default.
 			</p></div><div class="-doc"><strong><span></span></strong><p>
-				Anonymous access is not allowed for this method.
+				Anonymous access is not allowed for this method. If accessing
+				with administrator credentials owner is not required for the group.
 			</p></div></header><div class="request"><p class="mediaType"><strong>Content-Type</strong><span>application/vnd.kii.GroupCreationRequest+json</span></p><p class="doc">All the required data to crerate the group.</p></div><strong class="paramstitle">Headers</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">X-Kii-AppID</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppID assigned by Kii for the current app</span></div><div><span class="name">X-Kii-AppKey</span><span class="req">Yes</span><span class="type">xml:string</span><span class="doc">The AppKey assigned by Kii for the current app</span></div><div><span class="name">Authorization</span><span class="req">Yes</span><span class="type"></span><span class="doc">Description : Authorization header. Only Oauth2 Bearer token
 			supported for now.
 		</span></div></div><strong class="paramstitle">Params</strong><div class="params"><div class="th"><span class="name">Name </span><span class="req">Required? </span><span class="type">type </span><span class="doc">Description </span></div><div><span class="name">name</span><span class="req"></span><span class="type">string</span><span class="doc">The name of the group</span></div><div><span class="name">owner</span><span class="req"></span><span class="type">string</span><span class="doc">

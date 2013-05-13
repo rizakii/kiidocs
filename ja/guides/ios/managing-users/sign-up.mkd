@@ -3,6 +3,8 @@ layout: ja-doc
 title: サインアップ
 sort-priority: 10
 summary: アプリケーションのユーザ管理の第一歩は、ユーザ登録です。
+page-id: ios-sign_up-ja
+old-url: /jp/sign-up--7
 ---
 <p class="callout">ユーザ名とパスワードによるサインアップの代わりに、Facebook などの外部サービス経由でサインアップを行うことも可能です。詳細は「{% page_link ios-social_network_integration-ja %}」を参照してください。</p>
 

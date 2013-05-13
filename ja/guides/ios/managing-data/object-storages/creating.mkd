@@ -2,6 +2,8 @@
 layout: ja-doc
 title: Object の作成
 sort-priority: 10
+old-url: /jp/creating-objects--7
+page-id: ios-managing_data-object_storages-creating-ja
 ---
 ある Bucket インスタンスの `createObject` メソッドを実行すると、この Bucket 内に Object が生成されます。生成された Object の `setObject` メソッドを用いて、任意の Key-Value ペアを Object 内にセットできます。セットした Key-Value ペアは、`save` メソッドを実行することで Kii Cloud に反映されます。
 

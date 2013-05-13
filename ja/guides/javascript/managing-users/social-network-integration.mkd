@@ -4,6 +4,7 @@ title: 外部サービス（Facebook）連携
 sort-priority: 30
 summary: 外部サービス連携を利用すると、外部サービス経由で Kii Cloud にサインアップ・サインインすることができます。例えば既に Facebook のアカウントを持つユーザに対して、このアカウント経由でサインアップやサインインを提供する事が可能になります。
 page-id: javascript-social_network_integration-ja
+old-url: /jp/social-network-integration--4
 ---
 現時点において、Kii Platform は Facebook との連携をサポートしています。また、以下の2つの外部サービスの連携も近日中にサポートを予定しています。
 

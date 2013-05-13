@@ -3,6 +3,7 @@ layout: en-doc
 title: Managing Analytics
 sort-priority: 40
 page-id: ios-managing_analytics-en
+old-url: /en/managing-analytics--2
 ---
 Kii Cloud provides two types of analytics:
 

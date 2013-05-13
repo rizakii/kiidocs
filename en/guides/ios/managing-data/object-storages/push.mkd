@@ -4,6 +4,7 @@ title: 'Receiving "Push to App" notification'
 sort-priority: 60
 page-id: ios-object_storages_push-en
 summary: 'A "Push to App" notification mechanism will let your application know that there were some changes on object(s) in a bucket.  By leveraging this notification feature, your application can quickly fetch the changes that occur on the server-side.'
+old-url: /en/receiving-push-to-app-notification
 ---
 The changes that can be notified by this push notification include:
 

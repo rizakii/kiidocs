@@ -2,6 +2,7 @@
 layout: en-doc
 title: Downloading Files and Folders
 sort-priority: 20
+old-url: /en/downloading-files--2
 ---
 Downloading a file is handled by performing the following steps:
 

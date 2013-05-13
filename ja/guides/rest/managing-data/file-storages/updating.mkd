@@ -3,6 +3,7 @@ layout: ja-doc
 title: File と Folder のアップデート
 sort-priority: 30
 summary: Kii Platform は、２種類の File 更新手段を提供しています。
+old-url: /jp/updating-files-and-folders
 ---
 * **メタデータのみアップデート**: File のメタデータのみアップデートします。実ファイルは更新されないため、短い時間で更新が完了します
 * **実ファイルを含むアップデート**: File のメタデータと実ファイルの双方をアップデートします

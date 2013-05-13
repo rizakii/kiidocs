@@ -4,6 +4,7 @@ title: Scoping Objects
 summary: 'All objects have a "scope". &nbsp;This scope determines the default access control applied to the object upon its creation.&nbsp;For example, an object created in an "Application Scope" bucket will have "Application Scope".'
 sort-priority: 60
 page-id: rest-scoping_objects-en
+old-url: /en/scoping-objects--2
 ---
 ## Object Scopes and Default Access Control
 

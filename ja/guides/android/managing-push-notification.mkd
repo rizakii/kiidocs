@@ -3,6 +3,7 @@ layout: ja-doc
 title: プッシュ通知機能
 sort-priority: 50
 page-id: android-managing_push-ja
+old-url: /jp/--296
 ---
 Kii Cloud では、以下の３つの プッシュ通知機能を利用できます。
 

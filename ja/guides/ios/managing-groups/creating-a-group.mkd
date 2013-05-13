@@ -2,6 +2,7 @@
 layout: ja-doc
 title: グループの作成
 sort-priority: 10
+old-url: /jp/creating-a-group--7
 ---
 サインイン済みユーザであれば誰でも新しいグループを作成できます。グループを作成したユーザはそのグループのオーナーになります。
 
