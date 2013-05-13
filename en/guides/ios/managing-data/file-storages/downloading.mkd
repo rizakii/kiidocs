@@ -5,7 +5,167 @@ summary: If you know the URI of the file you wish to download, you can directly 
 sort-priority: 20
 old-url: /en/download-files--3
 ---
-The following sample code illustrates how to retrieve an object via its URI:
+Kii Cloud SDK offers the following two types of file downloading.
+
+* **Downloading with resumable transfer:** This allows you to suspend/resume file downloading. For example, you will be able to resume a file download when it is interrupted in the middle due to some reasons (e.g., network down or manual interruption). The mechanism is especially useful when you are to download a big file under poor network condition. You will not have to restart the whole downloading again if it is interrupted in the middle; you can simply resume the download from where you were left off.
+* **Downloading without resumable transfer:** This is all-or-nothing file downloading without any suspend/resume feature. If the download is interrupted in the middle, you will need to restart the download from the start.
+
+
+##Downloading a File with Resumable Transfer
+
+Check the following snippet to see how you can download a file with the resumable feature.
+
+```objc
+/ Create KiiFile using target URI
+KiiFile *file = [KiiFile fileWithURI:fileURI];
+
+// Download destination
+NSString downloadFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.mp4"];
+
+// Create a KiiDownloader
+KiiDownloader *downloader = [file downloader:downloadFilePath];
+
+// Create a progress block
+KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  KiiRTransferInfo *info = [transferObject info];
+  NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+};
+
+// Create a completion block
+KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  if (retError != nil) {
+    // There is something wrong
+    NSLog(@"Transfer error happens");
+  }
+};
+
+// Do download
+[downloader transferWithProgressBlock:progress
+                   andCompletionBlock:completion];
+```
+
+Here is what is taking place in the snippet:
+
+* Create a KiiFile instance by invoking `fileWithURI` method.
+* Create a `KiiDownloader` instance by invoking `downloader` method while specifying the destination file reference.
+* Define a progress block and completion blocks.
+* Start downloading by invoking `transfer` method.
+
+Invoking tranfer method starts the file download. If everything go well, the file will be downloaded to Kii Cloud. If the download is interrupted for some reasons, the completion block will be called with the corresponding NSError value.  In this case, you can resume the download (check the next section).
+
+
+###Resuming a Suspended Download
+
+File downloading could be suspended either automatically (e.g., by network failure) or manually (e.g., by user interruption). The suspended file download can later be resumed so as to continue the download from the point where it was interrupted.
+
+Check the following snippet to see how to resume the suspended file download.
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+for (KiiDownloader *downloader in downloadEntries) {
+
+  // If download status is suspend, try to resume transfer
+  if ([[downloader info] status] == SUSPENDED) {
+    // Create progress block
+    KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      KiiRTransferInfo *info = [transferObject info];
+      NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+    };
+    // Create completion block
+    KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      if (retError != nil) {
+        // There is something wrong
+        NSLog(@"Transfer error happens");
+      }
+    };
+
+    // Resume a suspended download
+    [downloader transferWithProgressBlock:progress
+                       andCompletionBlock:completion];
+  }
+}
+```
+
+Here is what is taking place in the snippet:
+
+* Create a `KiiFileBucket` instance of the file bucket to which the file is being downloaded.
+* Create a `KiiRTransferManager` instance by invoking `transferManager` method.
+* Get a list of suspended `KiiDownloader` instances by invoking `getDownloadEntries` method.
+* For the `KiiDownloader` instance you want to resume, invoke `transfer` method.
+
+###Manually Suspending a File Download
+
+The ongoing file download can be manually suspended. Check the following snippet to see how you can suspend the file download.  In this example, we are suspending the download for the file "sample2.mp4".
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample2.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiDownloader *downloader in downloadEntries) {
+  if ([[downloader localPath] isEqualToString:path] {
+    // Suspend downloading
+    NSError *suspendError = nil
+    [downloader suspend:&suspendError];
+  }
+}
+```
+
+Basically, just invoke `suspend` method. This will suspend the target file download unless the download is already finished.
+
+
+###Manually Terminating a File Download
+
+The ongoing or suspended file download can be manually terminated. Once terminated, you will not be able to resume the file download; you will need to start downloading the file from the beginning.
+
+Check the following snippet to see how you can terminate the file download.  In this example, we are terminating the download for the file "sample3.mp4".
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample3.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiDownloader *downloader in downloadEntries) {
+  if ([[downloader localPath] isEqualToString:path] {
+    // Terminate downloading
+    NSError *terminateError = nil
+    [downloader terminate:&terminateError];
+  }
+}
+```
+
+Basically, just invoke `terminate` method. This will terminate the target file download unless the download is already finished.
+
+
+
+##Downloading a File without resumable transfer
+
+You can download a file without resumable feature. (We recommend to use the download with resumable feature, especially when you are downloading a big file to Kii Cloud).
+
+Check the following snippet to see how you can do this.
 
 ```objc
 NSError *error;

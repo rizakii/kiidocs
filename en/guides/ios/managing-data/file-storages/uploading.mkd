@@ -84,7 +84,8 @@ for (KiiUploader *uploader in uploadEntries) {
         NSLog(@"Transfer error happens");
       }
     };
-    [uploader transferWithProgressBlock:progress andCompletionBlock:completion];
+    [uploader transferWithProgressBlock:progress
+                     andCompletionBlock:completion];
   }
 
 }
@@ -182,6 +183,6 @@ if (error != nil) {
 
 Here is what is taking place in the snippet:
 
-* Create a reference to the target file ("sample_upload.png").
+* Create a reference to the target file ("sample.txt").
 * Create a `KiiFile` instance by invoking `fileWithLocalPath` method.
 * Invoke `saveFile` method to upload the file to Kii Cloud.
