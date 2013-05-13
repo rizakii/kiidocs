@@ -47,7 +47,7 @@ module Jekyll
 
   # Any files to exclude from being included in the sitemap.xml
   EXCLUDED_FILES = [ 'atom.xml', 'desc.css', 'site-raw.css', 'site.css',
-    'redirect-table.js', 'sitemap2.xml', 'sitemap.csv'
+    'redirect-table.js', 'sitemap.csv'
   ]
 
   # Any files that include posts, so that when a new post is added, the last
@@ -66,10 +66,6 @@ module Jekyll
     def full_path_to_source
       File.join(@base, @name)
     end
-
-    def location_on_server
-      "#{MY_URL}#{url}"
-    end
   end
 
   class Page
@@ -77,11 +73,6 @@ module Jekyll
 
     def full_path_to_source
       File.join(@base, @dir, @name)
-    end
-
-    def location_on_server
-      location = "#{MY_URL}#{url}"
-      location.gsub(/index.html$/, "")
     end
   end
 
@@ -211,12 +202,19 @@ module Jekyll
       url
     end
 
+    def get_path(p)
+      if not p.data.has_key?('cached_url')
+        p.data['cached_url'] = p.to_liquid['url']
+      end
+      return p.data['cached_url']
+    end
+
     # Get URL location of page or post 
     #
     # Returns the location of the page or post
     def fill_location(page_or_post)
       loc = REXML::Element.new "loc"
-      loc.text = page_or_post.location_on_server
+      loc.text = MY_URL + get_path(page_or_post)
 
       loc
     end
