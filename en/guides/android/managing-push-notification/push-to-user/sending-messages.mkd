@@ -32,7 +32,7 @@ Only an app developer can send a push message to an app-scope topic.  This can b
         <LI>Select the appropriate environments (Developer, Production or Both).</LI>
     </UL>
  
-    **Push message cotent**
+    **Push message content**
 
     Next, define what is to be sent.
 
@@ -181,7 +181,7 @@ try {
 ```
 
 * For putting GCM-specific fields, create a `GCMMessage` instance by invoking `build` method.
-* For puting APNS-specific fields, create an `APNSMessage` instance by invoking `build` method.
+* For putting APNS-specific fields, create an `APNSMessage` instance by invoking `build` method.
 * When constructing a `KiiPushMessage` instance, include the `GCMMessage` and/or `APNSMessage` instances.
 
 By default, the push message will be sent to both Android and iOS devices.  You can control the message delivery by setting a flag upon constructing a `KiiPushMessage` instance like the following example:

@@ -15,7 +15,7 @@ Now, fetching Objects from a bucket is done by one of the following ways:
 
 In our case, we use the latter because we do not know the IDs of the Objects at
 the time when we are to list the entries.  We want to list all entries while
-sorting the entries in ascending order based on the entrie's creation dates
+sorting the entries in ascending order based on their creation dates
 (i.e., the newest entry comes in the bottom of the list).  An Object in Kii
 Cloud has a predefined field named `_created`.  This field stores the creation
 date of the object in UNIX time (msec).  We will use this field for sorting the

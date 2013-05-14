@@ -110,7 +110,7 @@ try{
 } catch (IOException ioe) {
   // Changing topic ACL failed.
 } catch (GroupOperationException ge) {
-  // Chaging topic ACL (group operation) failed.
+  // Changing topic ACL (group operation) failed.
 } catch (AppException e) {
   // Changing topic ACL failed.
 } 

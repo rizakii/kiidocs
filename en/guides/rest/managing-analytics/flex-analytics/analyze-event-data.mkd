@@ -79,7 +79,7 @@ When uploading Event RawData directly via REST API, you need to define the follo
 
 * **\_type**  ... String value defining the event type.  You can specify any string like "installed" or "level up".
 * **\_deviceID**  ... String value uniquely identifying the source device.
-* **\_triggeredAt**  ... Long value specifying the time when the event has occured (UNIX time in ms).
+* **\_triggeredAt**  ... Long value specifying the time when the event has occurred (UNIX time in ms).
 * **\_uploadedAt**  ... Long value specifying the time when the event was uploaded (UNIX time in ms).
 
 Your Event RawData key-value pairs can be anything, provided that they follow these rules:

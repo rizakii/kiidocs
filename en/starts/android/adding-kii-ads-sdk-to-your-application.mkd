@@ -143,8 +143,8 @@ Follow the steps below to enable Kii Ads in your application.
 
 #### Leadbolt
 
-* No specific configuration needed. &nbsp;Kii Platform wil start distributing ads as soon as your application is validated.
+* No specific configuration needed. &nbsp;Kii Platform will start distributing ads as soon as your application is validated.
 
 #### AMoAd
 
-* No specific configuration needed. &nbsp;Kii Platform wil start distributing ads as soon as your application is validated.
+* No specific configuration needed. &nbsp;Kii Platform will start distributing ads as soon as your application is validated.

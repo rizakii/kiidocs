@@ -10,7 +10,7 @@ Currently, Kii Platform supports the following social networks:
 
  * Facebook:  http://www.faceboo,com/
  * Twitter: http://www.twitter.com/ (coming soon)
- * RenRen: http://www.renren.com/ (coming sson)
+ * RenRen: http://www.renren.com/ (coming soon)
 
 ## Integrate Facebook with Kii Platform
 

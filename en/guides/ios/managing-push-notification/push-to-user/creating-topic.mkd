@@ -43,7 +43,7 @@ NSString *groupname = @"MyGroup";
 KiiGroup *group = [KiiGroup groupWithName:groupname];
 
 // Create instance of group scope topic.
-// (assume that the current suser is a member of the group)
+// (assume that the current user is a member of the group)
 NSString *topicname = @"GroupTopic";
 KiiTopic *topic = [group topicWithName:topicname];
 
