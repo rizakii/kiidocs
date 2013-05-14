@@ -4,9 +4,166 @@ title: File のアップロード
 sort-priority: 10
 old-url: /jp/uploading-files--4
 ---
-ファイルをアップロードするには、まず、対応する KiiFile インスタンスを作成します。これは KiiFileBucket  インスタンスのメソッドを呼ぶことでできます。この際に KiiFile へ自動的にメタデータのセットが行われますが、必要に応じて一部メタデータの更新をすることでもできます。最後に、KiiFile インスタンスの `save` メソッドを呼ぶことで、メタデータとファイル本体を Kii Cloud にアップロードできます。
+Kii Cloud SDK は、以下の2種類のファイルアップロード方法を提供しています。
 
-ファイルのアップロードを行うサンプルを以下に示します。
+* **中断/再開可能なファイルアップロード**: ファイルアップロード途中における中断および再開をサポートした方式です。例えば、何らかの理由（e.g., ネットワーク断やユーザ操作）によりファイルアップロードが中断した場合、このアップロードを中断箇所から再開することができます。特に、サイズの大きなファイルを不安定なネットワーク環境下でアップロードする際になどに適しています。
+* **シンプルなファイルアップロード**: ファイルアップロード途中における中断および再開をサポートしない方式です。何らかの理由によりファイルアップロードが中断した場合、再度最初からファイルのアップロードをやり直す必要があります。
+
+
+##中断/再開可能なファイルアップロード
+
+中断/再開可能なファイルのアップロードを実施する例を以下にあげます。
+
+```objc
+// Create a reference to the existing local file
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+NSString *fileName = @"sample.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+KiiFile *file = [bucket fileWithLocalPath:path];
+
+// Create a KiiUploader
+KiiUploader *uploader = [file uploader:path];
+
+// Create a progress block
+KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  KiiRTransferInfo *info = [transferObject info];
+  NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+};
+
+// Create a completion block
+KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  if (retError != nil) {
+    // There is something wrong
+    NSLog(@"Transfer error happens");
+  }
+};
+
+// Do upload
+[uploader transferWithProgressBlock:progress
+                 andCompletionBlock:completion];
+```
+
+ここでは以下の処理を実施しています。
+
+
+* アップロード対象ファイル ("sample.mp4") のリファレンスを作成。
+* `fileWithLocalPath` メソッドを実行し、`KiiFile` インスタンスを作成。
+* アップロード対象ファイルのリファレンスを指定の上 `uploader` メソッドを実行して `KiiUploader` インスタンスを作成。
+* progress block と completion blocks を定義。
+* `transfer` メソッドを実行して、アップロードを開始。
+
+`tranfer` メソッドの実行により、Kii Cloud へのファイルアップロードが開始されます。何らかの理由によりアップロードが中断した場合は、中断理由に該当するレファレンスが NSError として渡された上で completion block が呼び出されます。この場合、次のセクションに示すようにアップロードの再開を行うことができます。
+
+###中断したアップロードの再開
+
+ファイルアップロードは、自動的（e.g., ネットワーク断により）または主動的（e.g., ユーザ操作により）に中断されることがあります。中断されたアップロードは、後ほど再開することにより、中断したポイントからファイルのアップロードをリスタートすることができます。
+
+以下に、中断したファイルアップロードを再開する例をあげます。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
+
+// Parse through the upload entries
+for (KiiUploader *uploader in uploadEntries) {
+
+  // If upload is in suspended satus, try to resume the transfer
+  if ([[uploader info] status] == SUSPENDED) {
+    // Create a progress block
+    KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      KiiRTransferInfo *info = [transferObject info];
+      NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+    };
+    // Create a completion block
+    KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      if (retError != nil) {
+        // There is something wrong
+        NSLog(@"Transfer error happens");
+      }
+    };
+    [uploader transferWithProgressBlock:progress
+                     andCompletionBlock:completion];
+  }
+
+}
+```
+
+ここでは以下の処理を実施しています。
+
+* ファイルアップロード先の `KiiFileBucket` インスタンスを作成。
+* `transferManager` メソッドを実行して、`KiiRTransferManager` インスタンスを作成。
+* `getUploadEntries` メソッドを実行して、`KiiUploader` インスタンス一覧を取得。
+* 再開したい `KiiUploader` インスタンスの `transfer` メソッドを実行して、アップロードを再開。今回の例では、中断中の全ての `KiiUploader` インスタンスについて、アップロードを再開しています。
+
+###ファイルアップロードを手動で中断
+
+現在進行中のファイルアップロードは、手動で中断することができます。以下にファイルアップロードを中断する例をあげます（ここでは "sample2.mp4" ファイルのアップロードを中断しています）。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample2.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiUploader *uploader in uploadEntries) {
+  if ([[uploader localPath] isEqualToString:path] {
+    // Suspend uploading
+    NSError *suspendError = nil
+    [uploader suspend:&suspendError];
+  }
+}
+```
+
+アップロードを中断するには `suspend` メソッドを実行します。なお、既にファイルアップロードが完了している場合は中断に失敗します。
+
+###ファイルアップロードを手動で終了
+
+現在進行中および中断中のファイルアップロードは、手動で終了することができます。一旦終了したアップロードは再開することができなくなります。
+
+以下にファイルアップロードを終了する例をあげます（ここでは "sample3.mp4" ファイルのアップロードを終了しています）。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"MyBucket"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get upload entries from transfer manager
+NSError *error = nil;
+NSArray *uploadEntries = [manager getUploadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample3.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiUploader *uploader in uploadEntries) {
+  if ([[uploader localPath] isEqualToString:path] {
+    // Terminate uploading
+    NSError *terminateError = nil
+    [uploader terminate:&terminateError];
+  }
+}
+```
+
+アップロードを終了するには `terminate` メソッドを実行します。なお、既にファイルアップロードが完了している場合は終了に失敗します。
+
+
+##シンプルなファイルアップロード
+
+中断/再開を伴わないファイルアップロードを利用することも可能です（ただし、特にサイズの大きなファイルを Kii Cloud にアップロードするケースなどにおいては中断/再開可能なアップロードを利用することを推奨します）
+
+シンプルなファイルアップロードを行う例を以下にあげます。
 
 ```objc
 NSError *error;
@@ -16,7 +173,7 @@ KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"my_private"]
 
 // Get a local filepath to upload
 NSString *localPath = [[NSBundle mainBundle] resourcePath];
-localPath = [localPath stringByAppendingPathComponent:@"sample_upload.png"];
+localPath = [localPath stringByAppendingPathComponent:@"sample.txt"];
 
 // Create a KiiFile using the local filepath
 KiiFile *file = [bucket fileWithLocalPath:localPath];
@@ -25,7 +182,13 @@ KiiFile *file = [bucket fileWithLocalPath:localPath];
 [file saveFileSynchronous:&error];
 
 if (error != nil) {
-    // Saving file failed
-    // Please check error description/code to see what went wrong...
+  // Saving file failed
+  // Please check error description/code to see what went wrong...
 }
 ```
+
+ここでは以下の処理を実施しています。
+
+* アップロード対象ファイル ("sample.txt") のリファレンスを作成。
+* `fileWithLocalPath` メソッドを実行して、`KiiFile` インスタンスを作成。
+* `saveFile` メソッドを実行して、ファイルのアップロードを開始。

@@ -4,29 +4,184 @@ title: File のダウンロード
 sort-priority: 20
 old-url: /jp/downloading-files--4
 ---
-File にアサインされた URI を元に、File を Kii Cloud より取得することができます。以下に File のダウンロードを実施している例をあげます。
+Kii Cloud SDK は、以下の2種類のファイルダウンロード方法を提供しています。
+
+* **中断/再開可能なファイルダウンロード**: ファイルダウンロード途中における中断および再開をサポートした方式です。例えば、何らかの理由（e.g., ネットワーク断やユーザ操作）によりファイルダウンロードが中断した場合、このダウンロードを中断箇所から再開することができます。特に、サイズの大きなファイルを不安定なネットワーク環境下でダウンロードする際になどに適しています。
+* **シンプルなファイルダウンロード**: ファイルダウンロード途中における中断および再開をサポートしない方式です。何らかの理由によりファイルダウンロードが中断した場合、再度最初からファイルのダウンロードをやり直す必要があります。
+
+
+##中断/再開可能なファイルダウンロード
+
+中断/再開可能なファイルのダウンロードを実施する例を以下にあげます。
+
+```objc
+// Create KiiFile using target URI
+KiiFile *file = [KiiFile fileWithURI:fileURI];
+
+// Download destination
+NSString downloadFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.mp4"];
+
+// Create a KiiDownloader
+KiiDownloader *downloader = [file downloader:downloadFilePath];
+
+// Create a progress block
+KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  KiiRTransferInfo *info = [transferObject info];
+  NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+};
+
+// Create a completion block
+KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+  if (retError != nil) {
+    // There is something wrong
+    NSLog(@"Transfer error happens");
+  }
+};
+
+// Do download
+[downloader transferWithProgressBlock:progress
+                   andCompletionBlock:completion];
+```
+
+ここでは以下の処理を実施しています。
+
+* `fileWithURI` メソッドを実行して、`KiiFile` インスタンスを作成。
+* ダウンロード対象ファイルのリファレンスを指定の上 `downloader` メソッドを実行して `KiiDownloader` インスタンスを作成。
+* progress block と completion block を定義。
+* `transfer` メソッドを実行して、ダウンロードを開始。
+
+`tranfer` メソッドの実行により、Kii Cloud からのファイルダウンロードが開始されます。何らかの理由によりダウンロードが中断した場合は、中断理由に該当するレファレンスが NSError として渡された上で completion block が呼び出されます。この場合、次のセクションに示すようにダウンロードの再開を行うことができます。
+
+
+###中断しダウンロードの再開
+ファイルダウンロードは、自動的（e.g., ネットワーク断により）または主動的（e.g., ユーザ操作により）に中断されることがあります。中断されたダウンロードは、後ほど再開することにより、中断したポイントからファイルのダウンロードをリスタートすることができます。
+
+以下に、中断したファイルダウンロードを再開する例をあげます。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+for (KiiDownloader *downloader in downloadEntries) {
+
+  // If download status is suspend, try to resume transfer
+  if ([[downloader info] status] == SUSPENDED) {
+    // Create progress block
+    KiiRTransferBlock progress = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      KiiRTransferInfo *info = [transferObject info];
+      NSLog(@"Progress : %f", (float) [info completedSizeInBytes] / [info totalSizeInBytes]);
+    };
+    // Create completion block
+    KiiRTransferBlock completion = ^(id <KiiRTransfer> transferObject, NSError *retError) {
+      if (retError != nil) {
+        // There is something wrong
+        NSLog(@"Transfer error happens");
+      }
+    };
+
+    // Resume a suspended download
+    [downloader transferWithProgressBlock:progress
+                       andCompletionBlock:completion];
+  }
+}
+```
+
+ここでは以下の処理を実施しています。
+
+* ファイルダウンロード先の `KiiFileBucket` インスタンスを作成。
+* `transferManager` メソッドを実行して、`KiiRTransferManager` インスタンスを作成。
+* `getDownloadEntries` メソッドを実行して、`KiiDownloader` インスタンス一覧を取得。
+* 再開したい `KiiDownloader` インスタンスの `transfer` メソッドを実行して、ダウンロードを再開。
+
+###ファイルダウンロードを手動で中断
+現在進行中のファイルダウンロードは、手動で中断することができます。以下にファイルダウンロードを中断する例をあげます（ここでは "sample2.mp4" ファイルのダウンロードを中断しています）。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample2.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiDownloader *downloader in downloadEntries) {
+  if ([[downloader localPath] isEqualToString:path] {
+    // Suspend downloading
+    NSError *suspendError = nil
+    [downloader suspend:&suspendError];
+  }
+}
+```
+
+ダウンロードを中断するには `suspend` メソッドを実行します。なお、既にファイルダウンロードが完了している場合は中断に失敗します。
+
+
+###ファイルダウンロードを手動で終了
+現在進行中および中断中のファイルダウンロードは、手動で終了することができます。一旦終了したダウンロードは再開することができなくなります。
+
+以下にファイルダウンロードを終了する例をあげます（ここでは "sample3.mp4" ファイルのダウンロードを終了しています）。
+
+```objc
+// Create file bucket
+KiiFileBucket *bucket = [[KiiUser currentUser] fileBucketWithName:@"filebucket001"];
+KiiRTransferManager *manager = [bucket transferManager];
+
+// Get download entries from transfer manager
+NSError *error = nil;
+NSArray *downloadEntries = [manager getDownloadEntries:&error];
+
+// Specify file that you want to terminate
+NSString *fileName = @"sample3.mp4";
+NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+
+for (KiiDownloader *downloader in downloadEntries) {
+  if ([[downloader localPath] isEqualToString:path] {
+    // Terminate downloading
+    NSError *terminateError = nil
+    [downloader terminate:&terminateError];
+  }
+}
+```
+
+ダウンロードを終了するには `terminate` メソッドを実行します。なお、既にファイルダウンロードが完了している場合は終了に失敗します。
+
+
+##シンプルなファイルダウンロード
+中断/再開を伴わないファイルダウンロードを利用することも可能です（ただし、特にサイズの大きなファイルを Kii Cloud よりダウンロードするケースなどにおいては中断/再開可能なダウンロードを利用することを推奨します）
+
+シンプルなファイルダウンロードを行う例を以下にあげます。
 
 ```objc
 NSError *error;
 
 // Get the file based on an existing file URI
-KiiFile *file2 = [KiiFile fileWithURI:file.objectURI];
+KiiFile *file2 = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];
 [file2 getFileMetadataSynchronous:&error];
 
 // Getting the metadata was successful
 if(error == nil) {
-    // so get the file body as well - and save it to my/path/to/file
-    [file2 getFileBodySynchronous:@"my/path/to/file" withError:&error];
+  // so get the file body as well - and save it to my/path/to/file
+  [file2 getFileBodySynchronous:@"my/path/to/file" withError:&error];
 }
 
 if (error != nil) {
-    // Downloading file failed
-    // Please check error description/code to see what went wrong...
+  // Downloading file failed
+  // Please check error description/code to see what went wrong...
 }
 ```
 
 基本的な手順は下記の通りです
 
-1. `fileWithURI`メソッドでファイルの URI を指定し、KiiFile のインスタンスを作成します。
-1. `getFileMetadata`メソッドを呼び出し、ファイルのメタデータを取得します。
-1. `getFileBody`メソッドを呼び出し、ファイルのBody（実際にはファイルの中身）をダウンロードします。この際、ダウンロードしたファイルの保存先ファイルパスを指定します。
+1. ファイルの URI を指定の上 `fileWithURI` メソッドを実行して、`KiiFile` のインスタンスを作成。
+2. `getFileMetadata` メソッドを実行して、ファイルのメタデータを取得。
+3. ファイルの保存先ファイルパスを指定の上 `getFileBody` メソッドを実行して、ファイルの Body（実際にはファイルの中身）をダウンロード。
