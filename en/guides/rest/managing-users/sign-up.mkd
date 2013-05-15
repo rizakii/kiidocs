@@ -65,7 +65,7 @@ When you are specifying the phone number with a local phone format, be sure to s
 
 ## Enabling email and/or phone verification
 
-You can configure your application to verify the user's email address and/or phone number.   You can toggle the verification on and off either via the dev portal or via REST admin API (please refer [here]({% page_url references-en %})).
+You can configure your application to verify the user's email address and/or phone number.   You can toggle the verification on and off either via the dev portal or via REST admin API (please refer [here]({% page_url rest-configuring_your_application-en %})).
 
 Here are how you can toggle the verification features on the dev portal:
 
