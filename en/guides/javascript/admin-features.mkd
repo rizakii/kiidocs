@@ -1,0 +1,82 @@
+---
+layout: en-doc
+title: Admin Features
+sort-priority: 50
+page-id: javascript-admin_features-en
+---
+App admin として操作したいよねー
+
+このための機能がこちら。Devぽで提示された client_ID と client_secret を使ってアプリ管理者としてログインすることができる。
+
+Disclaimer
+
+* Should not be referred from a code accessible from a browser.
+(Your application ID and Appliction secret will be disclosed...)
+* Intended to be used by a server-side code like Node.js
+
+
+
+```javascript
+Kii.authenticateAsAppAdmin("your client id", "your client secret", {
+  success: function(adminContext) {
+    // adminContext : KiiAppAdminContext instance
+    // Operate entities with adminContext.
+  },
+  failure: function(error, statusCode) {
+    // Authentication failed.
+  }
+});
+```
+
+* {String} clientId: assigned to your application.
+* {String} clientSecret: assigned to your application.
+* {Method} callbacks.success: The callback method called when authentication succeeded.
+* {Method} callbacks.failure: The callback method called when authentication failed.
+
+あとは adminContext を使い回せー
+
+
+##Manipulate a KiiUser as an App Admin
+
+```javascript
+Kii.authenticateAsAppAdmin("client-id", "client-secret", {
+  success: function(adminContext) {
+    var user;
+    user = appAdmin.userWithID("userid");
+    // KiiUser operation by app admin is available now.
+  },
+  failure: function(errorString, errorCode) {
+    // auth failed.
+  }
+});
+```
+
+##Manipulate a KiiGroup as an App Admin
+
+```javascript
+Kii.authenticateAsAppAdmin("client-id", "client-secret", {
+  success: function(adminContext) {
+    var user;
+    user = appAdmin.userWithID("userid");
+    // KiiUser operation by app admin is available now.
+  },
+  failure: function(errorString, errorCode) {
+    // auth failed.
+  }
+});
+```
+
+##Manipulate a KiiBucket as an App Admin
+
+
+```javascript
+Kii.authenticateAsAppAdmin("client-id", "client-secret", {
+  success: function(adminContext) {
+    var bucket = adminContext.bucketWithName("myBucket");
+    // KiiBucket operation by app admin is available now.
+  },
+  failure: function(errorString, errorCode) {
+    // auth failed.
+  }
+});
+```
