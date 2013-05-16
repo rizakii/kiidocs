@@ -11,7 +11,8 @@ import com.kii.cloud.filesync.KiiFS;
 
 Context context; // android.content.Context
 Thread syncThread = new Thread() {
-    @public void run() {
+    @Override
+    public void run() {
         try {
             KiiFS.sync(
                     context,
