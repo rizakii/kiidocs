@@ -14,19 +14,21 @@ When a user no longer want to receive push messages, the user can stop receiving
 Here is a sample snippet for Scenario #1 (subscribing to an app-scope topic).
 
 ```java
-try{
-  // Instantiate the already-existing app-scope topic
-  String topicName = "SendingAlert";
-  KiiTopic topic = Kii.topic(topicName);
+try {
+    // Instantiate the already-existing app-scope topic
+    String topicName = "SendingAlert";
+    KiiTopic topic = Kii.topic(topicName);
 
-  // Subscribe the current user to the topic.
-  KiiUser user = KiiUser.getCurrentUser();
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscription(topic);
-} catch (IOException ioe){
-  // Subscription failed.
-} catch (AppException e){
-  // Subscription failed.
+    // Subscribe the current user to the topic.
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
+} catch (IOException ioe) {
+    // Subscription failed.
+} catch (ConflictException e) {
+    // Already subscribed.
+} catch (AppException e) {
+    // Subscription failed.
 }
 ```
 The next sample snippet is for Scenario #2 (subscribing to a group-scope topic).
