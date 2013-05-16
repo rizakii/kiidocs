@@ -14,61 +14,68 @@ When a user no longer want to receive push messages, the user can stop receiving
 Here is a sample snippet for Scenario #1 (subscribing to an app-scope topic).
 
 ```java
-try{
-  // Instantiate the already-existing app-scope topic
-  String topicName = "SendingAlert";
-  KiiTopic topic = Kii.topic(topicName);
+try {
+    // Instantiate the already-existing app-scope topic
+    String topicName = "SendingAlert";
+    KiiTopic topic = Kii.topic(topicName);
 
-  // Subscribe the current user to the topic.
-  KiiUser user = KiiUser.getCurrentUser();
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscription(topic);
-} catch (IOException ioe){
-  // Subscription failed.
-} catch (AppException e){
-  // Subscription failed.
+    // Subscribe the current user to the topic.
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
+} catch (IOException ioe) {
+    // Subscription failed.
+} catch (ConflictException e) {
+    // Already subscribed.
+} catch (AppException e) {
+    // Subscription failed.
 }
 ```
 The next sample snippet is for Scenario #2 (subscribing to a group-scope topic).
 
 ```java
 try {
-  // Instantiate the already-existing group and its group-scope topic.
-  String groupName = "MyGroup";
-  KiiGroup group = Kii.group(groupName);
-  String topicName = "GroupTopic";
-  KiiTopic topic = group.topic(topicName);
+    // Create a new group for example.
+    String groupName = "MyGroup";
+    KiiGroup group = Kii.group(groupName);
+    group.save();
 
-  // Subscribe the current user to the topic.
-  // (The current user must be a group member)
-  KiiUser user = KiiUser.getCurrentUser();
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscribe(topic);
+    // Instantiate the group-scope topic.
+    String topicName = "GroupTopic";
+    KiiTopic topic = group.topic(topicName);
+
+    // Subscribe the current user to the topic.
+    // (The current user must be a group member)
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
 } catch (IOException ioe) {
-  // Subscription failed.
+    // Subscription failed.
 } catch (GroupOperationException goe) {
-  // Subscription failed.
+    // Subscription failed.
 } catch (AppException e) {
-  // Subscription failed.
+    // Subscription failed.
 }
 ```
 
 The last sample snippet is for Scenario #3 (subscribing to a user-scope topic)
 
 ```java
-try{
-  // Instantiate the already-existing user-scope topic.
-  KiiUser user = KiiUser.getCurrentUser();
-  String topicName = "MyTODO";
-  KiiTopic topic = user.topic(topicName);
+try {
+    // Instantiate current user's user-scope topic.
+    String topicName = "MyTODO";
+    KiiTopic topic = KiiUser.topic(topicName);
 
-  // Subscribe the current user to the topic.
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscribe(topic);
-} catch (IOException ioe ) {
-  // failed.
-} catch (AppExceptioin e) {
-  // failed.
+    // Subscribe the current user to the topic.
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
+} catch (IOException ioe) {
+    // failed.
+} catch (ConflictException e) {
+    // Already subscribed.
+} catch (AppException e) {
+    // failed.
 }
 ```
 
