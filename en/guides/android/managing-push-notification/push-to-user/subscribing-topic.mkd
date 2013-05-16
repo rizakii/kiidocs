@@ -35,23 +35,26 @@ The next sample snippet is for Scenario #2 (subscribing to a group-scope topic).
 
 ```java
 try {
-  // Instantiate the already-existing group and its group-scope topic.
-  String groupName = "MyGroup";
-  KiiGroup group = Kii.group(groupName);
-  String topicName = "GroupTopic";
-  KiiTopic topic = group.topic(topicName);
+    // Create a new group for example.
+    String groupName = "MyGroup";
+    KiiGroup group = Kii.group(groupName);
+    group.save();
 
-  // Subscribe the current user to the topic.
-  // (The current user must be a group member)
-  KiiUser user = KiiUser.getCurrentUser();
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscribe(topic);
+    // Instantiate the group-scope topic.
+    String topicName = "GroupTopic";
+    KiiTopic topic = group.topic(topicName);
+
+    // Subscribe the current user to the topic.
+    // (The current user must be a group member)
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
 } catch (IOException ioe) {
-  // Subscription failed.
+    // Subscription failed.
 } catch (GroupOperationException goe) {
-  // Subscription failed.
+    // Subscription failed.
 } catch (AppException e) {
-  // Subscription failed.
+    // Subscription failed.
 }
 ```
 
