@@ -29,7 +29,17 @@ In order for Kii Cloud to deliver push messages to a user device, your applicati
 Here is a sample snippet for installing a device to Kii Cloud.  You need to specify the regId that you've received from GCM server.
 
 ```java
-KiiUser.pushInstallation().install(regId);
+try {
+    KiiUser.pushInstallation().install(
+            "registration ID obtained from GCM.");
+} catch (ConflictException e) {
+    // Already installed.
+} catch (AppException e) {
+    // Please check configuration on developer portal.
+} catch (IOException e) {
+    // Network error.
+}
 ```
 
 Once invoked, the regId will be saved on Kii Cloud.  If the regId is already registered on Kii Cloud, the registration will fail.
+
