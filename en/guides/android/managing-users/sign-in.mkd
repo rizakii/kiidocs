@@ -6,7 +6,7 @@ old-url: /en/sign-in
 ---
 Once a user is registered with your application (after completing the user verification process when required), the user can sign in with their username, phone number, or email address.
 
-When a user signs in, he/she can get an access token.  This token can later be used for signing in without providing a username and password.
+When a user signs in, he/she can get an access token.  This token can later be used for signing in without providing a username or password.
 
 
 ##Sign-in with a password

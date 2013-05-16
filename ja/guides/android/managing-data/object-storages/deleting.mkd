@@ -4,7 +4,7 @@ title: Object の削除
 sort-priority: 50
 old-url: /jp/deleting-objects--5
 ---
-Object を削除するには、次の例のように `delete` メソッドをコールします。
+Object を削除するには、次の例のように `delete` メソッドを実行します。
 
 ```java
 Uri objUri = Uri.parse("some existing object uri");
