@@ -61,19 +61,21 @@ try {
 The last sample snippet is for Scenario #3 (subscribing to a user-scope topic)
 
 ```java
-try{
-  // Instantiate the already-existing user-scope topic.
-  KiiUser user = KiiUser.getCurrentUser();
-  String topicName = "MyTODO";
-  KiiTopic topic = user.topic(topicName);
+try {
+    // Instantiate current user's user-scope topic.
+    String topicName = "MyTODO";
+    KiiTopic topic = KiiUser.topic(topicName);
 
-  // Subscribe the current user to the topic.
-  KiiPushSubscription sub = user.pushSubscription();
-  sub.subscribe(topic);
-} catch (IOException ioe ) {
-  // failed.
-} catch (AppExceptioin e) {
-  // failed.
+    // Subscribe the current user to the topic.
+    KiiUser user = KiiUser.getCurrentUser();
+    KiiPushSubscription sub = user.pushSubscription();
+    sub.subscribe(topic);
+} catch (IOException ioe) {
+    // failed.
+} catch (ConflictException e) {
+    // Already subscribed.
+} catch (AppException e) {
+    // failed.
 }
 ```
 
