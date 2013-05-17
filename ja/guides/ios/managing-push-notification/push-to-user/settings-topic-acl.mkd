@@ -109,7 +109,7 @@ if (error != nil) {
       可する ACL エントリが作成されます。
 
 1. `putACLEntry` メソッドを実行して、各 ACL エントリをローカル保存。
-1. `save` メソッドを実行して、ACL エントリを Kii Cloud に保存。
+1. `saveSynchronous` メソッドを実行して、ACL エントリを Kii Cloud に保存。
 
 次のサンプルコードでは、シナリオ#3a を実現するための ACL エントリを設定しています。
 

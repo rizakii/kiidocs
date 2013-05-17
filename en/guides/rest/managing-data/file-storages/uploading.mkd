@@ -100,7 +100,7 @@ curl -v -X PUT \
 
 * Specify application/vnd.kii.KiiFile+json for HTTP  "content-type" header field.
 * Make sure that the Bucket ID starts with "sync:".
-* Make sure that the encoded path end with "-" (representing "/").  This will tell Kii Cloud that this metadata is representing folder, not file.
+* Make sure that the encoded path ends with "-" (representing "/").  This will tell Kii Cloud that this metadata is representing folder, not file.
 * Send an empty JSON for the metadata (HTTP body).
 
 Kii Cloud will respond with the modified time in UNIX time (msec) as shown:
