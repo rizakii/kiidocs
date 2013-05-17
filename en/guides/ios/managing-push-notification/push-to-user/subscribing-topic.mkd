@@ -65,7 +65,7 @@ if (error != nil) {
 For all examples, here is a brief description of what is happening in the snippets:
 
 * Instantiate a target topic.
-* Invoke `subscribe` method while specifying the target topic.
+* Invoke `subscribeSynchronous` method while specifying the target topic.
 
 If the topic is a group-scoped, the current user of course has to be a group member.  Otherwise, the subscription will be rejected.
 
@@ -88,4 +88,4 @@ if (error != nil) {
 }
 ```
 
-Simply invoke `unsubscribe` method while specifying the target topic.
+Simply invoke `unsubscribeSynchronous` method while specifying the target topic.

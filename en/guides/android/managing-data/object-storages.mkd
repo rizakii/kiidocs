@@ -14,7 +14,7 @@ Some key/value pairs will be automatically created and updated by the server whe
  * \_created ... The object’s creation date in UNIX time (in msec).
  * \_modified ... The object’s last updated date in UNIX time (in msec).
 
-**Please Note**: These are internal values; in order to get the created time and last updated time, use `getCreatedTimeand` and `getModifiedTime` method, respectively.  To get the URI of the object, use `toUri` method.  (Raw "_id" is only used internally and you should not need to get this raw value).
+**Please Note**: These are internal values; in order to get the created time and last updated time, use `getCreatedTime` and `getModifiedTime` method, respectively.  To get the URI of the object, use `toUri` method.  (Raw "_id" is only used internally and you should not need to get this raw value).
 
 
 ## Arbitrary Keys

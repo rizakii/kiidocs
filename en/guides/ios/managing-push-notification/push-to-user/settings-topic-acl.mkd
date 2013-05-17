@@ -24,7 +24,7 @@ Sometimes we want to change the default rules applied onto a topic.
   (Extending Scenario #3)  
     The app user now wants to share her TODO list with her family members.  She
     already has a use group in which all family members are present, so she
-    want to allow all members in this group to subscribe to the topic.
+    wants to allow all members in this group to subscribe to the topic.
 
 These cases can be managed by setting a new ACL entry (white list entry) onto
 the target topic.
@@ -39,7 +39,7 @@ grant/revoke}
     This can be one of the followings:
     * A specific user
     * A specific user group
-    * Any authenticated users (i.e., all application users)
+    * Any authenticated user (i.e., all application users)
 
 * **Action**: What action we are going to grant/revoke.  
 
@@ -106,7 +106,7 @@ Here is a brief explanation of what is happening in the snippet.
       topic.
 
 1. Invoke `putACLEntry` method to locally save each ACL entry.
-1. Invoke `save` method to save the ACL entries to Kii Cloud.
+1. Invoke `saveSynchronous` method to save the ACL entries to Kii Cloud.
 
 The next snippet shows how you can set ACL entries for Scenario #3a.
 
