@@ -158,6 +158,7 @@ REST API を使うと、以下の２つのフォーマットで解析結果詳�
 以下に、Tabular Result を取得する例をあげます。ここでは、2012-12-01 から 2013-01-31 までの集計結果を取得しています。
 
 ```
+curl -v -X GET
   -H 'Authorization: {ACCESS_TOKEN}' \
   -H 'X-Kii-AppID: {APP_ID}' \
   -H 'X-Kii-AppKey: {APP_KEY}' \
