@@ -101,7 +101,7 @@ After receiving the SMS verification code from the user, your application should
       -d '{"username":"user_123456", "password":"123ABC"}'
     ```
 
-    Kii Cloud will return the user token ash shown:
+    Kii Cloud will return the user token as shown:
 
     ```
     < HTTP/1.1 200 OK

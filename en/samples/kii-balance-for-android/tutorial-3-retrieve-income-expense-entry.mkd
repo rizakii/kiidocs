@@ -55,7 +55,7 @@ Here is a step-by-step explanation of what we are doing in this snippet.
   * Set the sorting rule ("sorted in ascending order by `_create` field) by invoking `sortByAsc` method 
 3. Query the bucket by invoking `query` method while specifying the query instance.
 
-When invoking query method, we are using an asynchronous API by specifying a callback function (ref. *QueryCallback.java*) as a parameter.
+When invoking `query` method, we are using an asynchronous API by specifying a callback function (ref. [QueryCallback.java](https://github.com/KiiPlatform/KiiBalance-Android/blob/master/src/com/kii/sample/balance/list/QueryCallback.java)) as a parameter.
 
 ----
 
