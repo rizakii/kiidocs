@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Deleting Users
-summary: Sometimes when a user wishes to remove themselves from your application, you will want to permanently delete his/her user account.
+summary: Sometimes users wish to remove themselves from your application, you will want to permanently delete their accounts.
 sort-priority: 60
 old-url: /en/deleting-users
 ---
