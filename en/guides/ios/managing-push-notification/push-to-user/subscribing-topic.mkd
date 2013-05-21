@@ -67,8 +67,6 @@ For all examples, here is a brief description of what is happening in the snippe
 * Instantiate a target topic.
 * Invoke `subscribe` method while specifying the target topic.
 
-If the topic is a group-scoped, the current user of course has to be a group member.  Otherwise, the subscription will be rejected.
-
 ## Unsubscribing from a topic
 
 Please check the following snippet to see how you can unsubscribe from a topic.  (The basic procedure is the same for both an app-scope and group-scope topics, so we will provide one sample snippet only for the unsubscribing).

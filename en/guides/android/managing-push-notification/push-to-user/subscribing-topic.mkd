@@ -78,8 +78,6 @@ For all examples, here is a brief description of what is happening in the snippe
 * Create a KiiPushSubscription instance by invoking `pushSubscription` method.
 * Invoke `subscribe` method while specifying the target topic.
 
-If the topic is a group-scoped, the current user of course has to be a group member.  Otherwise, the subscription will be rejected.
-
 
 ## Unsubscribing from a topic
 
