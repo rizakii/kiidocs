@@ -1,0 +1,34 @@
+/* vim:set sts=2 sw=2 tw=0 et: */
+
+section.rest-section {
+  margin-top: 36px;
+}
+
+ul.rest-method {
+  display: block;
+  position: relative;
+  border-radius: 6px;
+  background-color: #eef;
+  margin-left: 20px !important;
+  padding: 6px !important;
+}
+
+ul.rest-method > li {
+  display: block;
+}
+
+ul.rest-method > li.rest-method-http_method {
+  display: inline;
+  float: left;
+  width: 64px;
+  text-align: center;
+  margin-top: -22px;
+}
+
+ul.rest-method > li.rest-method-path {
+  margin-left: 78px;
+}
+
+ul.rest-method > li.rest-method-desc {
+  margin-left: 78px;
+}
