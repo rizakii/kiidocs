@@ -2,10 +2,13 @@
 layout: en-doc
 title:  Retrieving Objects
 sort-priority: 20
-summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
 old-url: /en/retrieve-an-object-with-uri
 page-id: ios-object_storages_retrieving-en
 ---
+If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. 
+The URI is useful as a unique identifier of the object.
+(Please check {% page_link ios-object_storages_querying-en %} to see how you can get the Object URL with querying).
+
 The following sample code illustrates how to retrieve an object with its URI:
 
 ```objc
@@ -20,7 +23,9 @@ if(error != nil) {
 }
 ```
 
-**Please Note:** Do not forget to invoke the `refresh` method after
+
+
+**Please Note:** Do not forget to invoke `refreshSynchronous` method after
 instantiating the object, or your local object will not be updated to the
 latest key-values.
 

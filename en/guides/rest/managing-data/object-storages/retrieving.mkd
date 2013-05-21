@@ -5,6 +5,8 @@ sort-priority: 20
 old-url: /en/retrieving-objects--3
 ---
 The following sample code illustrates how to retrieve an object's contents using its object ID:
+(Please check {% page_link rest-object_storages_querying-en %} to see how you can get the object ID with querying).
+
 
 ```sh
 curl -v -X GET \

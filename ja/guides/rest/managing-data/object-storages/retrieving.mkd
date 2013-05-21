@@ -5,6 +5,7 @@ sort-priority: 20
 old-url: /jp/retrieving-objects--6
 ---
 以下に、Object ID を元に Kii Cloud から Object を取得する方法を示します。
+(Object ID を検索で取得する方法については {% page_link rest-object_storages_querying-ja %} を参照してください)
 
 ```sh
 curl -v -X GET \

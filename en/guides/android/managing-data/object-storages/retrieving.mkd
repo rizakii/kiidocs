@@ -1,11 +1,14 @@
 ---
 layout: en-doc
 title: Retrieving Objects
-summary: If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. The URI is useful as a unique identifier of the object.
 sort-priority: 20
 page-id: android-object_storages_retrieving-en
 old-url: /en/retrieving-objects
 ---
+If you know the URI of the object you wish to retrieve, you can directly retrieve the object from Kii Cloud. 
+The URI is useful as a unique identifier of the object.
+(Please check {% page_link android-object_storages_querying-en %} to see how you can get the Object URL with querying).
+
 The following sample code illustrates how to retrieve an object with its URI:
 
 ```java
@@ -28,5 +31,5 @@ The basic steps are as follows:
 1. Instantiate an object with the `createByUri` method while specifying the object's URI.
 2. Refresh the object with the `refresh` method
 
-**Please Note**: Do not forget to invoke the refresh method after instantiating the object, or your local object will not be updated to the latest key-values.
+**Please Note**: Do not forget to invoke the `refresh` method after instantiating the object, or your local object will not be updated to the latest key-values.
 
