@@ -1,12 +1,12 @@
 /*TODO*/ .highlight pre code .hll { background-color: #ffffcc }
-.highlight pre code .c { color: #909aa0; } /* Comment */
+.highlight pre code .c { color: #99a; } /* Comment */
 /*DISABLED .highlight pre code .err { border: 1px solid #FF0000 } Error*/
 .highlight pre code .k { color: #a3ccf7; } /* Keyword */
 .highlight pre code .o { color: #b1edec; } /* Operator */
-.highlight pre code .cm { color: #909aa0; } /* Comment.Multiline */
+.highlight pre code .cm { color: #99a; } /* Comment.Multiline */
 .highlight pre code .cp { font-style: italic; color: #6edddc; } /* Comment.Preproc */
-.highlight pre code .c1 { color: #909aa0; } /* Comment.Single */
-.highlight pre code .cs { color: #909aa0; } /* Comment.Special */
+.highlight pre code .c1 { color: #99a; } /* Comment.Single */
+.highlight pre code .cs { color: #99a; } /* Comment.Special */
 /*TODO*/ .highlight pre code .gd { color: #A00000 } /* Generic.Deleted */
 /*TODO*/ .highlight pre code .ge { font-style: italic } /* Generic.Emph */
 /*TODO*/ .highlight pre code .gr { color: #FF0000 } /* Generic.Error */
@@ -29,7 +29,7 @@
 .highlight pre code .nb { color: #e0e0e0; } /* Name.Builtin */
 .highlight pre code .nc { color: #ffb566; font-weight: bold } /* Name.Class */
 /*TODO*/ .highlight pre code .no { color: #880000 } /* Name.Constant */
-/*TODO*/ .highlight pre code .nd { color: #AA22FF } /* Name.Decorator */
+.highlight pre code .nd { color: #ee88ff } /* Name.Decorator */
 /*TODO*/ .highlight pre code .ni { color: #999999; font-weight: bold } /* Name.Entity */
 /*TODO*/ .highlight pre code .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
 .highlight pre code .nf { color: #e0e0e0; } /* Name.Function */
@@ -37,7 +37,7 @@
 .highlight pre code .nn { color: #e0e0e0; font-weight: bold } /* Name.Namespace */
 .highlight pre code .nt { color: #e0e0e0; font-weight: bold } /* Name.Tag */
 .highlight pre code .nv { color: #ffb566; } /* Name.Variable */
-/*TODO*/ .highlight pre code .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight pre code .ow { color: #ee88ff; font-weight: bold } /* Operator.Word */
 /*TODO*/ .highlight pre code .w { color: #bbbbbb } /* Text.Whitespace */
 /*TODO*/ .highlight pre code .mf { color: #cccccc } /* Literal.Number.Float */
 /*TODO*/ .highlight pre code .mh { color: #cccccc } /* Literal.Number.Hex */
