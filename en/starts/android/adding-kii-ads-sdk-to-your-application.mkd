@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Adding Kii Ads SDK to Your Application
-summary: Kii Advertising SDK gives you the ability to add multiple advertising networks with only a few lines of client code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
+summary: Kii Ads SDK gives you the ability to add multiple advertising networks with only a few lines of client code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
 sort-priority: 30
 page-id: android-adding_kii_ads_to_your_application-en
 old-url: /en/adding-kii-ads-sdk
