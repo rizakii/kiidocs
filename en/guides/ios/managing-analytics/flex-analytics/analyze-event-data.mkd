@@ -209,7 +209,8 @@ NSString *aggregationID = @"22";
 }];
 ```
 
-The analytics results will be a list of GroupedSnapShots.  Each GroupedSnapShot has the following properties:
+The analytics results will be returned as an object of `KAGroupedResult`, with a `snapshots` property containing NSArray of `KAGroupedSnapShot`.
+Each `KAGroupedSnapShot` contains the following properties:
 
 * Name : The name of the dimension/grouping key.
 * Data : The JSON Array that contains the data retrieved by the query.
