@@ -192,7 +192,8 @@ NSString *aggregationID = @"22";
 }];
 ```
 
-解析結果は GroupedSnapShot として返されます。各 GroupedSnapShot は、以下のプロパティにより構成されています。
+解析結果は `KAGroupedResult` のオブジェクトとして返されます。このオブジェクトの `snapshots` プロパティには `KAGroupedSnapShot` の NSArray が入っています。
+各 `KAGroupedSnapShot` は、以下のプロパティにより構成されています。
 
 * Name : ディメンション（グルーピングキー）の名前
 * Data : 取得した解析結果を保持する JSON Array
