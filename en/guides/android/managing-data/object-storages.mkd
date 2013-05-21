@@ -28,5 +28,6 @@ A key's associated value can be any of the following JSON-encodable types:
  * Int
  * Long
  * Double
+ * Byte Array
  * JSON
  * JSON Array
