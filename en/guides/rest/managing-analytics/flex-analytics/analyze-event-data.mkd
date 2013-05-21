@@ -152,7 +152,7 @@ We can extract the analytics results via REST API in two formats:
 
 Here is an example of fetching a tabular result.  Here, we are fetching the aggregates analyzed from 2012-12-1 to 2013-1-31.
 
-```
+```sh
 curl -v -X GET
   -H 'Authorization: {ACCESS_TOKEN}' \
   -H 'X-Kii-AppID: {APP_ID}' \
