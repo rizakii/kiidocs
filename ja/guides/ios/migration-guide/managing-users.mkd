@@ -4,9 +4,10 @@ title: User の管理
 sort-priority: 40
 page-id: ios-migration_managing_users-ja
 ---
+###Parse における User 作成の例
+
 Parse では `ParseUser` を使ってユーザを作成します。
 
-###Parse における User 作成の例
 ```java
 PFUser *user = [PFUser user];
 user.username = @"testname";
@@ -25,10 +26,11 @@ user.email = @"test@test.com";
 }];
 ```
 
+###Kii Cloud における User 作成の例
+
 Kii Cloud では、ユーザに関する必要情報を元にユーザを作成するスタティックメソッドがいくつか用意されています。ユーザ作成後は、ユーザ名・パスワードと共にユーザ登録を行います。この際、電話番号やメールアドレスを合わせて設定することができます。
 
 
-###Kii Cloud における User 作成の例
 ```objc
 KiiUser *user = [KiiUser userWithUsername:@"testname"
                           andEmailAddress:@"test@test.com"

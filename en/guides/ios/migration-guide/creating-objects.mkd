@@ -4,18 +4,20 @@ title: Creating Objects
 sort-priority: 20
 page-id: ios-migration_creating_objects-en
 ---
+###Parse Object Creation
+
 Objects in Parse are created via `PFObject`:
 
-###Parse Object Creation
 ```objc
 PFObject *testObject = [PFObject objectWithClassName:@"Customer"];
 [testObject setObject:@"Christof" forKey:@"name"];
 [testObject save];
 ```
 
+###Kii Object Creation
+
 Kii Cloud uses the concept of `bucket` that can store a `KiiObject`:
 
-###Kii Object Creation
 ```objc
 KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
 [testObject setObject:@"Christof" forKey:@"name"];

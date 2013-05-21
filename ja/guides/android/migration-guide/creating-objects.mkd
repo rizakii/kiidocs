@@ -5,9 +5,10 @@ sort-priority: 20
 page-id: android-migration_creating_objects-ja
 old-url: /ja/migration-guide/creating-objects
 ---
+###Parse における Object 作成の例
+
 Parse では `ParseObject` を使って Object を作成します。
 
-###Parse における Object 作成の例
 ```java
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -17,9 +18,10 @@ testObject.put("name", "Christof");
 testObject.saveInBackground(callback);
 ```
 
+###Kii Cloud における Object 作成の例
+
 Kii Cloud では `KiiObject` を保存する `bucket` という概念が存在します。
 
-###Kii Cloud における Object 作成の例
 ```java
 import com.kii.cloud.storage.KiiBucket;
 import com.kii.cloud.storage.KiiObject;

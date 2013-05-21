@@ -5,9 +5,10 @@ sort-priority: 40
 page-id: android-migration_managing_users-en
 old-url: /en/migration-guide/managing-users
 ---
+###Parse User Creation
+
 Users are created via a `ParseUser` in Parse:
 
-###Parse User Creation
 ```java
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -22,9 +23,10 @@ user.put("phone", "+1650-000-0000");
 user.signUpInBackground(callback);
 ```
 
+###Kii User Creation
+
 With Kii Cloud you leverage a `KiiUser.Builder` to build your user with all the necessary data and then, via `KiiUser`, you can register users with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses:
 
-###Kii User Creation
 ```java
 import com.kii.cloud.storage.KiiUser;
 

@@ -4,9 +4,10 @@ title: Managing Users
 sort-priority: 40
 page-id: ios-migration_managing_users-en
 ---
+###Parse User Creation
+
 Users are created via a `ParseUser` in Parse:
 
-###Parse User Creation
 ```java
 PFUser *user = [PFUser user];
 user.username = @"testname";
@@ -25,9 +26,10 @@ user.email = @"test@test.com";
 }];
 ```
 
+###Kii User Creation
+
 With Kii Cloud you leverage a variety of static methods to build your user with all the necessary data. Once the user object is build, you can register users with a username/password combination. Optionally, registration can occur with phone numbers and/or email addresses:
 
-###Kii User Creation
 ```objc
 KiiUser *user = [KiiUser userWithUsername:@"testname"
                           andEmailAddress:@"test@test.com"

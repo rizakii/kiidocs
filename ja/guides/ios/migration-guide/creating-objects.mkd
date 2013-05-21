@@ -4,18 +4,20 @@ title: Object の作成
 sort-priority: 20
 page-id: ios-migration_creating_objects-ja
 ---
+###Parse における Object 作成の例
+
 Parse では `PFObject` を使って Object を作成します。
 
-###Parse における Object 作成の例
 ```objc
 PFObject *testObject = [PFObject objectWithClassName:@"Customer"];
 [testObject setObject:@"Christof" forKey:@"name"];
 [testObject save];
 ```
 
+###Kii Cloud における Object 作成の例
+
 Kii Cloud では `KiiObject` を保存する `bucket` という概念が存在します。
 
-###Kii Cloud における Object 作成の例
 ```objc
 KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
 [testObject setObject:@"Christof" forKey:@"name"];

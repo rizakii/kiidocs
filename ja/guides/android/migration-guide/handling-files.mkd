@@ -5,9 +5,10 @@ sort-priority: 50
 page-id: android-migration_handling_files-ja
 old-url: /ja/migration-guide/handling-files
 ---
+###Parse における File アップロードの例
+
 Parse では、以下のように `ParseFile` を使ってファイル操作を行います。
 
-###Parse における File アップロードの例
 ```java
 import com.parse.ParseFile;
 
@@ -16,11 +17,12 @@ ParseFile file = new ParseFile("license.txt", data);
 file.saveInBackground(callback);
 ```
 
+###Kii Cloud における File アップロードの例
+
 Kii Platform では、任意のファイルをメタデータと関連付けした形で `bucket` に保存することができます。ファイルのアップロードやダウンロードだけではなく、ファイルのゴミ箱への移動・完全削除や URL によるファイルの公開などといった一連のファイル操作を、数行のクライアントコードを書くだけで実現することができます。
 
 Parse におけるファイルのアップロードを `KiiFile` を用いて実現する例を以下にあげます（なお、この例ではアップロードの中断・再開処理は利用していません）
 
-###Kii Cloud における File アップロードの例
 ```java
 import com.kii.cloud.storage.KiiFile;
 

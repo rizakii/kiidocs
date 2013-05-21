@@ -4,9 +4,10 @@ title: Querying Objects
 sort-priority: 30
 page-id: ios-migration_querying_objects-en
 ---
+### Parse Query
+
 Parse relies on the `PFQuery` class to query for objects. Here's a non-blocking version that passes the results in a callback:
 
-### Parse Query
 ```java
 PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
 [query whereKey:@"name" equalTo:@"Christof"];
@@ -21,9 +22,10 @@ PFQuery *query = [PFQuery queryWithClassName:@"Customer"];
 }];
 ```
 
+### Kii Query
+
 Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constrained to matching result sets using `KiiClause` objects. This is also a non-blocking version:
 
-### Kii Query
 
 ```java
 KiiBucket *bucket = [Kii bucketWithName:@"Customer"];

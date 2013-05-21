@@ -5,9 +5,10 @@ sort-priority: 20
 page-id: android-migration_creating_objects-en
 old-url: /en/migration-guide/creating-objects
 ---
+###Parse Object Creation
+
 Objects in Parse are created via `ParseObject`:
 
-###Parse Object Creation
 ```java
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -17,9 +18,10 @@ testObject.put("name", "Christof");
 testObject.saveInBackground(callback);
 ```
 
+###Kii Object Creation
+
 Kii Cloud uses the concept of `bucket` that can store a `KiiObject`:
 
-###Kii Object Creation
 ```java
 import com.kii.cloud.storage.KiiBucket;
 import com.kii.cloud.storage.KiiObject;
