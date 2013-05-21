@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Adding Kii Ads in Your Application
-summary: Kii Ads SDK gives you the ability to add multiple ads networks with only a few lines of client-side code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
+summary: Kii Ads SDK gives you the ability to add multiple ad networks with only a few lines of client-side code. Networks are managed in real-time from the developer portal, so changing ad networks or adding new ones no longer requires you to update your client application.
 sort-priority: 20
 page-id: ios-adding_kii_ads_to_your_application-en
 old-url: /en/adding-kii-ads-in-your-application
