@@ -79,9 +79,13 @@ old-url: /jp/--287
 
 イベントデータの送信方法は次の通りです。
 
-1. `event`メソッドを用いて KiiEvent インスタンスを生成します。この際、必要に応じてイベントタイプを指定します。イベントタイプには "installed" や "level up" など任意の文字列を利用できます。我々のサンプルシナリオでは"MyUser" を使います。
-1. `set`メソッドを用いて任意の key-value ペアをセットします。我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
-1. `push`メソッドでイベントデータをキャッシュします。Kii Analytics SDK は、キャッシュされたイベントデータを適切なタイミングで Kii Cloud にアップロードします。
+1. 任意の key-value ペアを用いてイベントデータを作成します。
+我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
+
+2. イベントデータとイベントタイプを指定の上 `trackEvent` メソッドを実行します。
+イベントタイプは "installed" や "level up" 等、任意の文字列を指定可能です（省略可）。
+メトリクス定義時に "Filter by type" を指定した場合は、このイベントタイプの値を元に解析対象イベントデータのフィルタリングが行われます。
+我々のサンプルシナリオでは"MyUser" を使います。
 
 イベントデータを送信するサンプルコードを以下にあげます。
 
@@ -100,7 +104,7 @@ NSMutableDictionary* extras = [NSMutableDictionary dictionary];
 [extras setObject:[NSNumber numberWithInt:2] forKey:@"children"];
 [extras setObject:[NSNumber numberWithInt:35] forKey:@"age"];
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 BOOL success = [KiiAnalytics trackEvent:eventType withExtras:extras];
 if (!success) {
   // There was something wrong with trackEvent.

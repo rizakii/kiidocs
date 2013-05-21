@@ -76,31 +76,46 @@ old-url: /jp/--293
 
 ## 2. アプリよりイベントデータを送信する
 
-イベントデータの送信方法は次の通りです。
+REST API 経由でイベントデータを上げる際には、イベントデータとともに以下のプロパティを送信します。
 
-1. `event`メソッドを用いて KiiEvent インスタンスを生成します。この際、必要に応じてイベントタイプを指定します。イベントタイプには "installed" や "level up" など任意の文字列を利用できます。我々のサンプルシナリオでは"MyUser" を使います。
-1. `set`メソッドを用いて任意の key-value ペアをセットします。我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
-1. `push`メソッドでイベントデータをキャッシュします。Kii Analytics SDK は、キャッシュされたイベントデータを適切なタイミングで Kii Cloud にアップロードします。
+* **\_type**  ... イベントタイプを示す文字列。イベントタイプは "installed" や "level up" 等、任意の文字列を指定可能です（省略可）。
+メトリクス定義時に "Filter by type" を指定した場合は、このイベントタイプの値を元に解析対象イベントデータのフィルタリングが行われます。
+我々のサンプルシナリオでは"MyUser" を使います。
+* **\_deviceID**  ... 送信元デバイスを特定するユニークなID。
+* **\_triggeredAt**  ... イベントが発生した時間 (UNIX 時間。ミリ秒)
+* **\_uploadedAt**  ... イベントがアップロードされた時間 (UNIX 時間。ミリ秒)
 
-イベントデータを送信するサンプルコードを以下にあげます。
+イベントデータ本体の key-value は、以下のルールに従っている限り任意に設定可能です。
 
-```java
- // Create a KiiEvent instance
-KiiEvent event = KiiAnalytics.event("MyUser");
+* Key の長さが 1-64 キャラクターであること (UTF-8)。
+* Value は JSON number, string, boolean, array のいずれかであること。
+    * Value は null や空であってはならない。
+    * Array の中身は、JSON number, string, boolean のいずれかであること。
+    * Number は 38桁以下であり、かつ 10^-128 から 10^126 の間であること。
+* Key-value ペア全体のサイズが 2KB を超えないこと (UTF-8)。
 
-// Set key-value pairs
-event.set("gender", "M");
-event.set("city", "San Francisco");
-event.set("location", "US");
-event.set("children", 2);
-event.set("age", 35);
+イベントデータのアップロードは、１つずつ行うことも、一度にまとめて行うこともできます。
 
-// Upload Event RawData to Kii Cloud
-try{
-    event.push();
-} catch (IOException e) {
-    // Please check IOException to see what went wrong
-}
+以下、イベントデータを１つアップロードする例をあげます。
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.EventRecord+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/events" \
+  -d '{"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764053", "_uploadedAt":"1350450764053", "gender":"M", "city":"San Francisco", "location":"USA", "children":2, "age":35}'
+```
+
+次に、複数のイベントデータを一度にアップロードする例をあげます。
+
+```sh
+curl -v -X POST \
+  -H "content-type:application/vnd.kii.EventRecord+json" \
+  -H "x-kii-appid:{APP_ID}" \
+  -H "x-kii-appkey:{APP_KEY}" \
+  "https://api.kii.com/api/apps/{APP_ID}/events" \
+  -d '[ {"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764053", "_uploadedAt":"1350450764099", "gender":"M", "city":"San Francisco", "location":"USA","children":2, "age":35}, {"_type":"MyUser", "_deviceID":"DEVICE_ID", "_triggerAt":"1350450764100", "_uploadedAt":"1350450764183", "gender":"F", "city":"San Francisco", "location":"USA", "children":0, "age":12} ]'
 ```
 
 ## 3. 開発者ポータルで解析結果を確認する

@@ -11,12 +11,12 @@ KTImageView は、デフォルトの状態では画像のローディング中�
 
 ## リソース
 
-サンプルプロジェクトの完全版は[こちら](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Complete.zip)よりダウンロード出来ます。
+KTImageView の完全版は[こちら](http://blog.kii.com/downloads/KTImageView/KTImageViewSample-Complete.zip)よりダウンロード出来ます。
 
 
 ## うまくいかないときは？
 
-コンソール出力を確認してみていださく。また、以下のように、AppDelegate.m ファイルに正しくアプリの認証情報が指定されていることを再度確認してください。
+コンソール出力を確認してみてください。また、以下のように、AppDelegate.m ファイルに正しくアプリの認証情報が指定されているか再確認してください。
 
 ```objc
 [Kii beginWithID:@"<INSERT YOUR APP ID HERE>" 

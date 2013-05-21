@@ -38,7 +38,7 @@ We define our metrics on the dev portal in the following steps.
     ![](02.png)
 
 1. Put a name of the metric in "Name" section.
-1. Toggle "External" at "Data" section so as to select Event RawData.
+1. Toggle "External" at "Data" section so as to select Event Data.
 1. Define the value to be aggregated in "Aggregated using" section by specifying the following info.
     * **Aggregation function** : how to aggregate the fact. The available functions are: **Count**, **Avg** (Average), **Sum**, **Min**, and **Max**.
     * **Field name** : which field is to be aggregated as a "fact". We can specify "*" for the aggregation function "Count".
@@ -73,25 +73,26 @@ We define our metrics on the dev portal in the following steps.
 
     Note that the aggregation rule ID is now shown.  We will use this ID when we later fetch the analytic results.
 
-## 2. Send Event RawData from your application
+## 2. Send Event Data from your application
 
-When uploading Event RawData directly via REST API, you need to define the following mandatory properties together with your Event RawData key-value pairs:
+When uploading Event Data directly via REST API, you need to define the following properties together with your Event Data key-value pairs:
 
-* **\_type**  ... String value defining the event type.  You can specify any string like "installed" or "level up".
+* **\_type**  ... String value defining the event type (optional).  You can specify any string like "installed" or "level up".
+When you specify "Filter by type" section during your Metric definition, this event type value will be used to filter the target data.
 * **\_deviceID**  ... String value uniquely identifying the source device.
 * **\_triggeredAt**  ... Long value specifying the time when the event has occurred (UNIX time in ms).
 * **\_uploadedAt**  ... Long value specifying the time when the event was uploaded (UNIX time in ms).
 
-Your Event RawData key-value pairs can be anything, provided that they follow these rules:
+Your Event Data key-value pairs can be anything, provided that they follow these rules:
 
 * Key name must be between 1 to 64 characters (UTF-8).
 * Value should be of JSON number, string, boolean, or array.
     * Value cannot be null or empty.
     * Array values must be of JSON number, string, or boolean.
-    * Number can have up to38 digit precision and can be between 10^-128 to 10^126.
+    * Number can have up to 38 digit precision and can be between 10^-128 to 10^126.
 * Cumulative size of key-value pairs should not exceed 2KB (UTF-8).
 
-When uploading Event RawData, you can either upload single event one at the time, or you can upload multiple event data at once.
+When uploading Event Data, you can either upload single event one at the time, or you can upload multiple event data at once.
 
 Here is an example of uploading single event:
 
@@ -107,7 +108,7 @@ curl -v -X POST \
 You can also send multiple events at once like the following example:
 
 ```sh
-curl -v -X POST\
+curl -v -X POST \
   -H "content-type:application/vnd.kii.EventRecord+json" \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \

@@ -85,7 +85,11 @@ old-url: /jp/--284
 
 イベントデータの送信方法は次の通りです。
 
-1. `event` メソッドを用いて KiiEvent インスタンスを生成します。この際、必要に応じてイベントタイプを指定します。イベントタイプには "installed" や "level up" など任意の文字列を利用できます。我々のサンプルシナリオでは"MyUser" を使います。
+1. `event` メソッドを用いて `KiiEvent` インスタンスを生成します。
+この際、必要に応じてイベントタイプを指定します。
+イベントタイプには "installed" や "level up" など任意の文字列を利用できます（省略可）。
+メトリクス定義時に "Filter by type" を指定した場合は、このイベントタイプの値を元に解析対象イベントデータのフィルタリングが行われます。
+我々のサンプルシナリオでは"MyUser" を使います。
 1. `set` メソッドを用いて任意の key-value ペアをセットします。我々のサンプルシナリオでは "gender", "city", "location", "children", "age" をキーとして用います。
 1. `push` メソッドでイベントデータをキャッシュします。Kii Analytics SDK は、キャッシュされたイベントデータを適切なタイミングで Kii Cloud にアップロードします。
 
@@ -102,7 +106,7 @@ event.set("location", "US");
 event.set("children", 2);
 event.set("age", 35);
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 try{
     event.push();
 } catch (IOException e) {
