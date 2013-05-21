@@ -17,5 +17,6 @@ old-url: /jp/--271
   * [Kii Analytics SDK](http://static.kii.com/devportal/docs/ios_analytics/)
 * **Javascript 向け詳細ドキュメント(JSDoc)**
   * [Kii Cloud SDK](http://static.kii.com/devportal/docs/js/)
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/js_analytics/)
 * **REST API 詳細ドキュメント**
   * [Kii Platform API Documentation]({% page_url references-rest-en %}/apps-collection/application/)

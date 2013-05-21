@@ -16,5 +16,6 @@ sort-priority: 30
   * [Kii Analytics SDK](http://static.kii.com/devportal/docs/ios_analytics/)
 * **JSDoc for Javascript SDK**
   * [Kii Cloud SDK](http://static.kii.com/devportal/docs/js/)
+  * [Kii Analytics SDK](http://static.kii.com/devportal/docs/js_analytics/)
 * **REST API**
   * [Kii Platform API Documentation]({% page_url references-rest-en %}/apps-collection/application/)
