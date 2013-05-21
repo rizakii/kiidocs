@@ -11,7 +11,7 @@ When a user signs in, he/she can get an access token.  This token can later be u
 
 ##Sign-in with a password
 
-Here is a sample code snippet for authenticating a user.  Simply invoke the `logIn` method with a username (or an international phone number or an email address) and a password combination.
+Here is a sample code snippet for authenticating a user.  Simply invoke the `logIn` method with a combination of a username (or a phone number or an email address) and a password.
 
 ```java
 String username = "user_123456";

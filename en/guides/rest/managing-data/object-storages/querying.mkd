@@ -4,6 +4,7 @@ title: Querying for Objects
 summary: 'Kii Platform makes it very easy to access objects stored in the cloud, despite the objects being arbitrary key/value pairs. The APIs allow you to make specific queries on any bucket - for example: retrieve up to 10 objects in a bucket having a key named "count" be greater than 8 in descending order. Read on for some examples...'
 sort-priority: 50
 old-url: /en/querying-for-objects--3
+page-id: rest-object_storages_querying-en
 ---
 To query for objects, you'll need to construct a QueryRequest object and send it as shown in the following example:
 

@@ -3,9 +3,11 @@ layout: ja-doc
 title: Object の取得
 sort-priority: 20
 old-url: /jp/retrieving-objects-with-uri
-summary: Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
 page-id: ios-object_storages_retrieving-ja
 ---
+Object にアサインされた URL を元に、Object を Kii Cloud より取得することができます。
+(Object の URL を検索で取得する方法については {% page_link ios-object_storages_querying-ja %} を参照してください)
+
 以下、Object を URI を指定して取得するサンプルコードです。
 
 ```objc
@@ -22,7 +24,7 @@ if(error != nil) {
 
 基本手順は以下の通りです。
 
-1. `objectWithURI`メソッドで Object の URI を指定して、Object のインスタンスを生成します。
-1. `refresh`メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
+1. `objectWithURI` メソッドで Object の URI を指定して、Object のインスタンスを生成します。
+1. `refreshSynchronous` メソッドをコールして、Kii Cloud より最新の Object の情報を取得します。
 
-インスタンス作成後、`refresh`メソッドを呼ぶのを忘れないようにしてください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。
+インスタンス作成後、`refreshSynchronous` メソッドを呼ぶのを忘れないようにしてください。Object のインスタンスを生成しただけでは、Object の中身は最新のものになりません。

@@ -8,7 +8,7 @@ old-url: /en/sign-in--2
 
 ## Sign-in with a password
 
-Here is a sample code snippet for authenticating a user.  Simpy invoke the `authenticate` method with a username (or a phone number or an email address) and a password combination.
+Here is a sample code snippet for authenticating a user.  Simply invoke the `authenticate` method with a combination of a username (or a phone number or an email address) and a password.
 
 
 ```javascript
