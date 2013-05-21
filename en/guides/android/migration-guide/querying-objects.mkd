@@ -5,9 +5,10 @@ sort-priority: 30
 page-id: android-migration_querying_objects-en
 old-url: /en/migration-guide/querying-objects
 ---
+###Parse Query
+
 Parse relies on the `ParseQuery` class to query for objects. Here's a non-blocking version that passes the results in a callback:
 
-###Parse Query
 ```java
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -18,9 +19,10 @@ query.whereEqualTo("name", "Christof");
 query.findInBackground(callback);
 ```
 
+###Kii Query
+
 Similarly Kii Cloud uses `KiiQuery` objects to query data that can be constrained to matching result sets using `KiiClause` objects. This is also a non blocking version:
 
-###Kii Query
 ```java
 import com.kii.cloud.storage.KiiBucket;
 import com.kii.cloud.storage.KiiQuery;

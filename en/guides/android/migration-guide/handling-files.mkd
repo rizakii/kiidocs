@@ -5,9 +5,10 @@ sort-priority: 50
 page-id: android-migration_handling_files-en
 old-url: /en/migration-guide/handling-files
 ---
+###Parse File Upload
+
 Parse handles file storage using `ParseFile` as you can see below:
 
-###Parse File Upload
 ```java
 import com.parse.ParseFile;
 
@@ -16,11 +17,12 @@ ParseFile file = new ParseFile("license.txt", data);
 file.saveInBackground(callback);
 ```
 
+###Kii File Upload
+
 Kii Platform file storage allows your application to manage virtually any file and its associated metadata and to organize them in buckets. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client-side code. 
 
 Here's the equivalent to the Parse file upload example above but using `KiiFile` without resumable transfer:
 
-###Kii File Upload
 ```java
 import com.kii.cloud.storage.KiiFile;
 

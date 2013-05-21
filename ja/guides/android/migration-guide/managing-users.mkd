@@ -5,9 +5,10 @@ sort-priority: 40
 page-id: android-migration_managing_users-ja
 old-url: /ja/migration-guide/managing-users
 ---
+###Parse における User 作成の例
+
 Parse では `ParseUser` を使ってユーザを作成します。
 
-###Parse における User 作成の例
 ```java
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -22,9 +23,10 @@ user.put("phone", "+1650-000-0000");
 user.signUpInBackground(callback);
 ```
 
+###Kii Cloud における User 作成の例
+
 Kii Cloud では、`KiiUser.Builder` を使ってユーザに関する必要情報を設定した後、`KiiUser` を使ってユーザ名・パスワードと共にユーザ登録を行います。この際、電話番号やメールアドレスを合わせて設定することができます。
 
-###Kii Cloud における User 作成の例
 ```java
 import com.kii.cloud.storage.KiiUser;
 

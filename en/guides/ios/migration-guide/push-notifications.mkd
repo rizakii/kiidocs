@@ -4,9 +4,10 @@ title: Push Notifications
 sort-priority: 60
 page-id: ios-migration_push_notifications-en
 ---
+###Parse Push Notification
+
 In Parse this is an example of sending a push notification:
 
-###Parse Push Notification
 
 ```objc
 PFPush *push = [[PFPush alloc] init];
@@ -15,9 +16,10 @@ PFPush *push = [[PFPush alloc] init];
 [push sendPushInBackground];
 ```
 
+###Kii Push Notification
+
 With Kii Cloud you have granular control over push notification management with the ability to send application wide, user to user and direct push notifications. Here's an example of sending a push notification to a specific group of users:
 
-###Kii Push Notification
 
 ```objc
 NSError *error;
