@@ -1,0 +1,1105 @@
+<section class="rest-overview-doc">
+
+<section class="rest-section rest-section-1">
+<h2><a name="user_management"></a>User Management</h2>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-create_a_new_user"></a>Create a new user</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>Create a new user in the current application.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-delete_the_user"></a>Delete the user</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>Delete the user from Kii Platform.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-user_data"></a>User Data</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-retrieve_the_user_s_data"></a>Retrieve the user&#39;s data</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-modify_the_user_s_data"></a>Modify the user&#39;s data</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-get_the_country"></a>Get the country</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/country</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/country</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/country</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-get_the_display_name"></a>Get the display name</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/display-name</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/display-name</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/display-name</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-get_the_locale"></a>Get the locale</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/locale</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/locale</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/locale</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-email_address"></a>Email address</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-email_address-get_the_email_address"></a>Get the email address</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-email_address-update_the_email_address"></a>Update the email address</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-email_address-remove_the_email_address"></a>Remove the email address</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_data-phone_number"></a>Phone number</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-phone_number-get_the_phone_number"></a>Get the phone number</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-phone_number-update_the_phone_number"></a>Update the phone number</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_data-phone_number-remove_the_phone_number"></a>Remove the phone number</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-user_verification"></a>User Verification</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_verification-email_address_verification"></a>Email Address Verification</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-email_address_verification-resend_the_verification_email"></a>Resend the verification email</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-email_address_verification-get_the_verificaiton_code"></a>Get the verificaiton code</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-email_address_verification-vefity_the_email_address"></a>Vefity the email address</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/email-address/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/email-address/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/email-address/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-user_verification-phone_number_verification"></a>Phone Number Verification</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-phone_number_verification-resend_the_sms_with_the_verification_code"></a>Resend the SMS with the verification code</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number/resend-verification</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-phone_number_verification-reset_the_verification_code"></a>Reset the verification code</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number/reset-verification-code</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number/reset-verification-code</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number/reset-verification-code</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-phone_number_verification-get_the_verification_code"></a>Get the verification code</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number/verification-code</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="user_management-user_verification-phone_number_verification-verify_the_phone_number"></a>Verify the phone number</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/phone-number/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/phone-number/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/phone-number/verify</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-oauth2"></a>OAuth2</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-oauth2-request_a_new_token"></a>Request a new token</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>Create a new user in the current application.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-password"></a>Password</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-password-change_the_password"></a>Change the password</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/password</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/password</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/password</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-password-send_an_email_for_resetting_the_password"></a>Send an email for resetting the password</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/password/reset</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/password/reset</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/password/reset</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-change_the_status_of_the_user"></a>Change the status of the user</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/status</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/status</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/status</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="user_management-social_integration"></a>Social Integration</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-social_integration-request_a_new_token"></a>Request a new token</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/integration/facebook</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>Request a new tokenCan access with all credentials, except anonymous</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-social_integration-link_with_facebook_account"></a>Link with Facebook account</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/facebook/link</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/facebook/link</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/facebook/link</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="user_management-social_integration-unlink_from_facebook_account"></a>Unlink from Facebook account</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/facebook/unlink</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/facebook/unlink</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/facebook/unlink</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-1">
+<h2><a name="group_management"></a>Group Management</h2>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-create_a_new_group"></a>Create a new group</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups</li>
+  <li class="rest-method-http_method">POST</li>
+  <li class="rest-method-desc"><p>Create a new group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-get_the_group_information"></a>Get the group information</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>Get the data of the current group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-delete_the_group"></a>Delete the group</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>Delete the current group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-get_a_list_of_groups_filtered_by_a_user"></a>Get a list of groups filtered by a user</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>Get a list of groups filtered by membership or ownership.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-update_the_group_name"></a>Update the group name</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/name</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>Update the name of the group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-update_the_group_owner"></a>Update the group owner</h3>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/owner</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>Change the owner of the group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="group_management-group_members"></a>Group Members</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="group_management-group_members-add_a_new_member"></a>Add a new member</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/members/{userID}</li>
+  <li class="rest-method-http_method">PUT</li>
+  <li class="rest-method-desc"><p>Add the current member to the group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="group_management-group_members-remove_a_member"></a>Remove a member</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/members/{userID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>Remove the current member from the group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="group_management-group_members-get_a_list_of_group_members"></a>Get a list of group members</h4>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/members</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>Get the collection of members of the group.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-1">
+<h2><a name="data_management"></a>Data Management</h2>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-2">
+<h3><a name="data_management-bucket"></a>Bucket</h3>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="data_management-bucket-application_scope"></a>Application Scope</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-application_scope-retrieve_a_bucket"></a>Retrieve a bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>Retrieve a bucketThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-application_scope-verify_the_bucket_existence"></a>Verify the bucket existence</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">HEAD</li>
+  <li class="rest-method-desc"><p>Verify a bucket existsThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-application_scope-delete_the_bucket"></a>Delete the bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>Delete a bucket with its contentThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="data_management-bucket-group_scope"></a>Group Scope</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-group_scope-retrieve_a_bucket"></a>Retrieve a bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>Retrieve a bucketThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-group_scope-verify_the_bucket_existence"></a>Verify the bucket existence</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">HEAD</li>
+  <li class="rest-method-desc"><p>Verify a bucket existsThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-group_scope-delete_the_bucket"></a>Delete the bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/groups/{groupID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>Delete a bucket with its contentThis action can be performed with administrator credentials, if not, the permission to perform this action depends on the ACL of the application, user or group, where the bucket belongs.</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-3">
+<h4><a name="data_management-bucket-user_scope"></a>User Scope</h4>
+<div>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-user_scope-retrieve_a_bucket"></a>Retrieve a bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">GET</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-user_scope-verify_the_bucket_existence"></a>Verify the bucket existence</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">HEAD</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">HEAD</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">HEAD</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-4">
+<h5><a name="data_management-bucket-user_scope-delete_the_bucket"></a>Delete the bucket</h5>
+<div>
+</div>
+<div class="rest-methods">
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{accountType}:{address}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By address</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/{userID}/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By ID</p>
+</li>
+  </ul>
+
+  <ul class="rest-method">
+  <li class="rest-method-path">/apps/{appID}/users/me/buckets/{bucketID}</li>
+  <li class="rest-method-http_method">DELETE</li>
+  <li class="rest-method-desc"><p>By &quot;me&quot; literal</p>
+</li>
+  </ul>
+</div>
+</section><!-- rest-section -->
+
+<section class="rest-section rest-section-1">
+<h2><a name="analytics"></a>Analytics</h2>
+<div>
+</div>
+</section><!-- rest-section -->
+
+</section><!-- rest-overview-doc -->
