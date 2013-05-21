@@ -82,9 +82,15 @@ We define our metrics on the dev portal in the following steps.
 
 Here is an example of how you can upload an Event Data.
 
-1. Create a KiiEvent instance by invoking `event` method while specifying an "event type".  This event type can be any string like "installed" or "level up" as the event type.<BR />In our example, we are using "MyUser".
-2. Set arbitrary key-value pairs in the instance with `set` method.  In our example, we will set key-values such as "gender", "city", "location", "children" and "age".
-3. Invoke `push` method to cache the event data.  It will be automatically uploaded to Kii Cloud in an optimal interval.
+1. Set an event data with arbitrary key-value pairs.  
+   In our example, we are setting key-values such as "gender", "city", "location", 
+   "children" and "age".
+
+2. Invoke `trackEventWithExtrasAndCallbacks` method while specifying an "event type" and the event data (optional).
+   The event type can be any string like "installed" or "level up".  When you specify
+   "Filter by type" section during your Metric definition, this event type value will
+   be used to filter the target data.
+   In our example, we are using "MyUesr".
 
 ```javascript
 // Initialize KiiAnalytics with AppID/AppKey

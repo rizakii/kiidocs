@@ -40,7 +40,7 @@ We define our metrics on the dev portal in the following steps.
 
     ![](02.png)
 1. Put a name of the metric in "Name" section.
-1. Toggle "External" at "Data" section so as to select Event Data.
+1. Toggle "Event Data" at "Data" section so as to select Event Data.
 1. Define the value to be aggregated in "Aggregated using" section by
    specifying the following info.
     * **Aggregation function**: how to aggregate the fact.  
@@ -100,14 +100,15 @@ We define our metrics on the dev portal in the following steps.
 
 Here is an example of how you can upload an Event Data.
 
-1. Create a KiiEvent instance by invoking `event` method while specifying an
-   "event type". This event type can be any string like "installed" or "level
-   up" as the event type.  In our example, we are using "MyUser".
-1. Set arbitrary key-value pairs in the instance with `set` method. In our
-   example, we will set key-values such as "gender", "city", "location",
+1. Set an event data with arbitrary key-value pairs.  
+   In our example, we are setting key-values such as "gender", "city", "location", 
    "children" and "age".
-1. Invoke `push` method to cache the event data. It will be automatically
-   uploaded to Kii Cloud in an optimal interval.
+
+2. Invoke `trackEvent` method while specifying an "event type" and the event data (optional).
+   The event type can be any string like "installed" or "level up".  When you specify
+   "Filter by type" section during your Metric definition, this event type value will
+   be used to filter the target data.
+   In our example, we are using "MyUesr".
 
 ```objc
  // Initialize KiiAnalytics with AppID/AppKey

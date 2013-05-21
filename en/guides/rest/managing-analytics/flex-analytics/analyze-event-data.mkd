@@ -75,9 +75,10 @@ We define our metrics on the dev portal in the following steps.
 
 ## 2. Send Event Data from your application
 
-When uploading Event Data directly via REST API, you need to define the following mandatory properties together with your Event Data key-value pairs:
+When uploading Event Data directly via REST API, you need to define the following properties together with your Event Data key-value pairs:
 
-* **\_type**  ... String value defining the event type.  You can specify any string like "installed" or "level up".
+* **\_type**  ... String value defining the event type (optional).  You can specify any string like "installed" or "level up".
+When you specify "Filter by type" section during your Metric definition, this event type value will be used to filter the target data.
 * **\_deviceID**  ... String value uniquely identifying the source device.
 * **\_triggeredAt**  ... Long value specifying the time when the event has occurred (UNIX time in ms).
 * **\_uploadedAt**  ... Long value specifying the time when the event was uploaded (UNIX time in ms).
@@ -88,7 +89,7 @@ Your Event Data key-value pairs can be anything, provided that they follow these
 * Value should be of JSON number, string, boolean, or array.
     * Value cannot be null or empty.
     * Array values must be of JSON number, string, or boolean.
-    * Number can have up to38 digit precision and can be between 10^-128 to 10^126.
+    * Number can have up to 38 digit precision and can be between 10^-128 to 10^126.
 * Cumulative size of key-value pairs should not exceed 2KB (UTF-8).
 
 When uploading Event Data, you can either upload single event one at the time, or you can upload multiple event data at once.
@@ -107,7 +108,7 @@ curl -v -X POST \
 You can also send multiple events at once like the following example:
 
 ```sh
-curl -v -X POST\
+curl -v -X POST \
   -H "content-type:application/vnd.kii.EventRecord+json" \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \
