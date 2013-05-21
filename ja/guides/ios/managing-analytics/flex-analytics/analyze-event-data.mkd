@@ -100,7 +100,7 @@ NSMutableDictionary* extras = [NSMutableDictionary dictionary];
 [extras setObject:[NSNumber numberWithInt:2] forKey:@"children"];
 [extras setObject:[NSNumber numberWithInt:35] forKey:@"age"];
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 BOOL success = [KiiAnalytics trackEvent:eventType withExtras:extras];
 if (!success) {
   // There was something wrong with trackEvent.

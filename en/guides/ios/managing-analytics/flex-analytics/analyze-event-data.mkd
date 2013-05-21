@@ -40,7 +40,7 @@ We define our metrics on the dev portal in the following steps.
 
     ![](02.png)
 1. Put a name of the metric in "Name" section.
-1. Toggle "External" at "Data" section so as to select Event RawData.
+1. Toggle "External" at "Data" section so as to select Event Data.
 1. Define the value to be aggregated in "Aggregated using" section by
    specifying the following info.
     * **Aggregation function**: how to aggregate the fact.  
@@ -96,9 +96,9 @@ We define our metrics on the dev portal in the following steps.
     later fetch the analytic results.
 
 
-## 2. Send Event RawData from your application
+## 2. Send Event Data from your application
 
-Here is an example of how you can upload an Event RawData.
+Here is an example of how you can upload an Event Data.
 
 1. Create a KiiEvent instance by invoking `event` method while specifying an
    "event type". This event type can be any string like "installed" or "level
@@ -124,7 +124,7 @@ NSMutableDictionary* extras = [NSMutableDictionary dictionary];
 [extras setObject:[NSNumber numberWithInt:2] forKey:@"children"];
 [extras setObject:[NSNumber numberWithInt:35] forKey:@"age"];
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 BOOL success = [KiiAnalytics trackEvent:eventType withExtras:extras];
 if (!success) {
   // There was something wrong with trackEvent.

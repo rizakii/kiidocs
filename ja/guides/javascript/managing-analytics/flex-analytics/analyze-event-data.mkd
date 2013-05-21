@@ -99,7 +99,7 @@ var extras = {
   "age": 35
 };
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 KiiAnalytics.trackEventWithExtrasAndCallbacks(eventType, extras, {
   success: function() {
     console.log("Did succeed");

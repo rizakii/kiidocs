@@ -26,7 +26,7 @@ Your metrics can be based on the following two data sources:
  * **Metric #2**: Total count of data (i.e., total score data uploaded), sliced by **"Score"**, **"Level"** and **"AppVersion"**.
 
 
-### Event RawData FlexAnalytics example
+### Event Data FlexAnalytics example
 
 * The application is to send an event data with the following fields upon the installation.<BR />This Event Data is named **"MyUser"**:
  * **"gender"** ... String (M or F)

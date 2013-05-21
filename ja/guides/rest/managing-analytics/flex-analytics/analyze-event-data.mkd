@@ -95,7 +95,7 @@ event.set("location", "US");
 event.set("children", 2);
 event.set("age", 35);
 
-// Upload Event RawData to Kii Cloud
+// Upload Event Data to Kii Cloud
 try{
     event.push();
 } catch (IOException e) {
