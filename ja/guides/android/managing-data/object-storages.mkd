@@ -25,6 +25,5 @@ old-url: /jp/object-storages--5
  * Int
  * Long
  * Double
- * Byte Array
  * JSON
  * JSON Array
