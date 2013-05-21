@@ -1,7 +1,7 @@
 ---
 layout: en-doc
 title: Adding Kii Cloud SDK to Your Application
-summary: Kii Cloud SDK gives you the ability to manage your application users and data with only a few lines of client code.
+summary: Kii Cloud SDK gives you the ability to manage your application users and data with only a few lines of client-side code.
 sort-priority: 10
 page-id: android-adding_kii_cloud_to_your_application-en
 old-url: /en/adding-kii-cloud-sdk

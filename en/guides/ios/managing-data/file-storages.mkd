@@ -5,7 +5,7 @@ sort-priority: 30
 old-url: /en/file-storages
 page-id: ios-file_storages-en
 ---
-File storage allows your application to manage virtually any file and its associated metadata. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client code.
+File storage allows your application to manage virtually any file and its associated metadata. The SDK allows you to upload/download files, put files in a trashcan or permanently delete files, and even publish them to a URL with just a few lines of client-side code.
 
 When a file instance is created, the SDK automatically stores the following common metadata:
 
