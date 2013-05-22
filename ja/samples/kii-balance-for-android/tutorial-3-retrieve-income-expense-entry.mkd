@@ -43,7 +43,7 @@ public void onActivityCreated(Bundle savedInstanceState) {
 
 }
 ```
-このコードにおいて行ってない内容を順に見ていきましょう。
+このコードにおいて行っている内容を順に見ていきましょう。
 
 1. Bucket 名を指定の上`bucket`メソッドを実行し、検索対象 Bucket のインスタンスを作成。
 2. 「すべての Object を、"\_created" フィールドをもとに昇順にソート」というクエリインスタンスを次のように生成。

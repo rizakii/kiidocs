@@ -32,4 +32,4 @@ KiiFile *f = [bucket fileWithLocalPath:filePath];
 }];
 ```
 
-ファイル操作全体に関するの詳細は「{% page_link ios-file_storages-ja %}」を参照してください。
+ファイル操作全体に関する詳細は「{% page_link ios-file_storages-ja %}」を参照してください。

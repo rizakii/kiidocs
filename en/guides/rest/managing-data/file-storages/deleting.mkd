@@ -20,7 +20,7 @@ curl -v -X DELETE
   -H "Authorization: Bearer {ACCESS_TOKEN}"  \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \
-  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-"
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}"
 ```
 
 The second step is to send another DELETE to the folder, which is now in the Trahscan, as follows.  Remember that we need to change the prefix of the bucket name:
@@ -30,7 +30,7 @@ curl -v -X DELETE
   -H "Authorization: Bearer {ACCESS_TOKEN}"  \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \
-  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/path.tmp-data-"
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/{OBJECT_ID}"
 ```
 
 Now the folder is removed from the Trashcan and it is completely deleted.

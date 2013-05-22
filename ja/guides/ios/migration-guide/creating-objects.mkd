@@ -26,6 +26,6 @@ KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
 }];
 ```
 
-Kii Cloud は、Object に関する処理を行う API として、ブロッキング API とノンブロッキング API の双方を提供しています。
+さらに、Kii Cloud は、Object に関する処理を行う API として、ブロッキング API とノンブロッキング API の双方を提供しています。
 
-詳細については「{% page_link ios-managing_data-object_storages-creating-ja %}」を参照してください。
+Object 作成に関する詳細は「{% page_link android-object_storages_creating-ja %}」を参照してください。

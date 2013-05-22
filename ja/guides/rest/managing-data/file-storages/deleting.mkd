@@ -20,7 +20,7 @@ curl -v -X DELETE
   -H "Authorization: Bearer {ACCESS_TOKEN}"  \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \
-  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/path.tmp-data-"
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}"
 ```
 
 次に、再度 DELETE リクエストを送信してこのフォルダを完全削除します。フォルダがゴミ箱に移動済のため、Bucket 名のプレフィックスが "sync.trash" に変わっている点に注意してください。
@@ -30,7 +30,7 @@ curl -v -X DELETE
   -H "Authorization: Bearer {ACCESS_TOKEN}"  \
   -H "x-kii-appid:{APP_ID}" \
   -H "x-kii-appkey:{APP_KEY}" \
-  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/path.tmp-data-"
+  "https://api.kii.com/api/apps/{APP_ID}/users/me/buckets/sync.trash:{BUCKET_NAME}/objects/{OBJECT_ID}"
 ```
 
 以上により、フォルダはゴミ箱より消滅し完全に削除されます。

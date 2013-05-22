@@ -33,4 +33,4 @@ testObject.save(callback);
 
 Kii Cloud offers both blocking and non blocking API calls when working with objects.
 
-For more information see {% page_link android-object_storages_creating-en %}.
+For more information on object creation see {% page_link android-object_storages_creating-en %}.
