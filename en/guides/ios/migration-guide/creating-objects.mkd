@@ -28,4 +28,4 @@ KiiObject *testObject = [[Kii bucketWithName:@"Customer"] createObject];
 
 Kii Cloud offers both blocking and non blocking API calls when working with objects.
 
-For more information see {% page_link ios-managing_data-object_storages-creating-en %}.
+For more information on object creation see {% page_link ios-managing_data-object_storages-creating-en %}.
