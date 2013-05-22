@@ -10,7 +10,7 @@ summary: イベントデータ（Event Data）の解析を行う基本的なス�
 
 以後、以下のサンプルシナリオを例に取り、実際に Event Data の解析を行う手順を解説していきます。
 
-* アプリのインストール時に、以下のイベントデータを送信している（このイベントデータには "MyUser" という名前をつける者とする）
+* アプリのインストール時に、以下のイベントデータを送信している（このイベントデータには "MyUser" という名前をつけるものとする）
     * **"gender"** ... ユーザ性別を示す文字列 (M or F)
     * **"city"** ... ユーザが居住する都市を示す文字列 (San Francisco, Dallas, New York, ...)
     * **"location"** ... ユーザが居住する国を示す文字列 (UK, EU, JP, ...)
@@ -71,7 +71,7 @@ summary: イベントデータ（Event Data）の解析を行う基本的なス�
 
     ![](07.png)
 
-    Aggregation Rule ID が表示されることを確認してください。後ほど解析結果の詳細を Android Analytics SDK 経由で取得する際にこの ID を利用します。
+    Aggregation Rule が有効になると、Aggregation Rule ID が表示されます。後ほど解析結果の詳細を取得する際にこの ID を利用します。
 
 ## 2. アプリよりイベントデータを送信する
 
@@ -118,8 +118,8 @@ KiiAnalytics.trackEventWithExtrasAndCallbacks(eventType, extras, {
 
 開発者ポータルにて、次の操作を行います。
 
-1. "Metrics" アイコンをクリック後、"Metrics" を選択肢ます。
-1. 対象メトリクスを選択肢ます。
+1. "Metrics" アイコンをクリック後、"Metrics" を選択します。
+1. 対象メトリクスを選択します。
 
     以下のデフォルトビューが表示されます。
 

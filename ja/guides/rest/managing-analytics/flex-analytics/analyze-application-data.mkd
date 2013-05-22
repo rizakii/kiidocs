@@ -103,7 +103,7 @@ summary: アプリデータ（App Data）の解析を行う基本的なステッ
 
     ![](10.png)
 
-これで設定した Aggregation Rule が有効になりました。Aggregation Rule ID が表示されていることを確認してください。この ID は、後ほど Android SDK 経由で解析結果の詳細を取得する際に利用します。
+    Aggregation Rule が有効になると、Aggregation Rule ID が表示されます。後ほど解析結果の詳細を取得する際にこの ID を利用します。
 
 ## 2. 開発者ポータルで解析結果を確認する
 
