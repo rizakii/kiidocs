@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dests="kiidocs@docs101us.internal.kii.com kiidocs@docs102us.internal.kii.com"
+dests="kiidocs@docs101us.internal.kii.com"
 
 for d in $dests ; do
   echo "Uploading to: $d"
