@@ -33,4 +33,4 @@ file.save(callback);
 
 Kii Cloud は、サイズの大きなファイルを不安定なネットワーク環境下でアップロード・ダウンロードする際に便利な「中断・再開可能なアップロード・ダウンロード機能」も提供しています。詳細については「{% page_link android-uploading_files-ja %}」および「{% page_link android-downloading_files-ja %}」を参照してください。
 
-ファイル操作全体に関するの詳細は「{% page_link android-file_storages-ja %}」を参照してください。
+ファイル操作全体に関する詳細は「{% page_link android-file_storages-ja %}」を参照してください。
