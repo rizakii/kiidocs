@@ -19,7 +19,7 @@ To toggle the option on the dev portal, please execute the following steps:
 
     ![](01.png)
 
-1. Click "Settings" to bring your application configuration menu.
+1. Click "Settings" to bring your application configuration menu, then select "User Management".
 1. Toggle "Expose Full User Data To Others" option.
 
     ![](02.png)

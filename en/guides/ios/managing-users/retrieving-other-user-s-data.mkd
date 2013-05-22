@@ -21,7 +21,7 @@ Please execute the following steps on the dev portal.
 1. Click "Edit" button at your application console on the dev portal.
 
     ![](01.png)
-1. Click "Settings" and select "User Management".
+1. Click "Settings" to bring your application configuration menu, then select "User Management".
 1. Toggle "Expose Full User Data To Others" option.
 
     ![](02.png)
