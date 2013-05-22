@@ -10,7 +10,7 @@ Let us see how we can create a topic for each of our sample scenarios.
 
 ## Scenario #1: "Broadcasting to all users"
 
-In this scenario, we are using an "app-scope" topic.  This type of topic can only be created by an app developer.  Any users can subscribe to the topic, but only a topic creator (i.e., an app developer) can send push messages to the topic.
+In this scenario, we are using an "app-scope" topic.  This type of topic can only be created by an app developer.  Any users can subscribe to the topic, but only a topic creator (i.e., an app developer) can send push messages to the topic by default.
 
 Creating an app-scope topic is only supported via Kii REST API.  Please execute the following steps:
 
@@ -31,7 +31,7 @@ Make sure to replace {APP\_ID} and {APP\_KEY} to your application's values.  Als
 
 ## Scenario #2: "Group messaging"
 
-In this scenario, we are using a "group-scope" topic.  This type of topic can be created by one of any group members.  All group members can subscribe to the topic, and all of them can send push messages to the topic.
+In this scenario, we are using a "group-scope" topic.  This type of topic can be created by one of any group members.  All group members can subscribe to the topic, and all of them can send push messages to the topic by default.
 
 Unlike an app-scope topic, a group-scope topic is usually created dynamically by an application.  Please check the following code snippet to see how you can do this:
 
@@ -61,9 +61,9 @@ Here is a brief description of what is happening in the snippet:
 
 ## Scenario #3: "Pushing my TODO items to all devices"
 
-In this scenario, we are using a "user-scope" topic.  Like a group-scope topic, a user-scope topic is usually created dynamically by an application.
+In this scenario, we are using a "user-scope" topic.  This type of topic can be created by any authenticated users.  Only this user can subscribe to the topic and can send push messages to the topic by default.
 
-Please check the following code snippet to see how we can create a user-scope topic.
+Like a group-scope topic, a user-scope topic is usually created dynamically by an application.  Please check the following code snippet to see how we can create a user-scope topic.
 
 ```objc
 NSError *error;
