@@ -60,12 +60,42 @@ body#preview .summary > section > article .methods .params div span,body#preview
 body#preview .summary > section > article .methods .body div.th span,body#preview .description > section > article .methods .body div.th span{background:none}
 body#preview .summary > section > article .methods .body div:nth-child(even),body#preview .description > section > article .methods .body div:nth-child(even){background:none}
 body#preview .summary > section > article .methods .body div span,body#preview .description > section > article .methods .body div span{border-bottom:1px solid #ededed;padding:0 10px 0 0;background:none}
-body#preview .summary > section > article .methods table.content-body,body#preview .description > section > article .methods table.content-body{font-size:13px;width:100%;}
-body#preview .summary > section > article .methods table.content-body th,body#preview .description > section > article .methods table.content-body th{text-align:left;color:#c0c5c9}
+
+body#preview .summary > section > article .methods table.content-body,
+body#preview .description > section > article .methods table.content-body {
+  font-size:13px;
+  width:100%;
+}
+body#preview .description > section > article .methods table.content-body {
+  margin-bottom: 14px;
+}
+
+body#preview .summary > section > article .methods table.content-body th,
+body#preview .description > section > article .methods table.content-body th {
+  text-align:left;
+  color: #666;
+}
+
 body#preview .summary > section > article .methods table.content-body tr,body#preview .description > section > article .methods table.content-body tr{border-bottom:1px solid #ededed;}
-body#preview .summary > section > article .methods table.content-body tr td,body#preview .description > section > article .methods table.content-body tr td{padding:2px 10px 2px 0}
+
+body#preview .summary > section > article .methods table.content-body tr td {
+  padding:2px 10px 2px 0
+}
+
+/*body#preview .description > section > article .methods table.content-body tr td { } */
+
 body#preview .summary > section > article .methods table.content-body tr td.type.details,body#preview .description > section > article .methods table.content-body tr td.type.details{background:#ededed}
-body#preview .summary > section > article .methods table.content-body tr.details td,body#preview .description > section > article .methods table.content-body tr.details td{background:#ededed}
+
+body#preview .summary > section > article .methods table.content-body tr.details td,
+body#preview .description > section > article .methods table.content-body tr.details td {
+  background: #ededed;
+  padding-left: 2em;
+}
+
+body#preview .description > section > article .methods table.content-body tr.details td:empty {
+  display: none;
+}
+
 body#preview .summary > section > article .method-links,body#preview .description > section > article .method-links{padding:20px 0;}
 body#preview .summary > section > article .method-links ul,body#preview .description > section > article .method-links ul{list-style:none;padding:0}
 body#preview .summary > section > article .method-links li,body#preview .description > section > article .method-links li{list-style:none;display:inline-block;margin:0 10px 0 0;}
