@@ -7,6 +7,9 @@ body section.content h2 {
 body section.content h2:first-child {
   margin:10px 0;
 }
+body section.content h3 {
+  margin: 1.4em 0 10px 0 !important;
+}
 
 body#preview section.content .description h4 {
   margin: 10px 0;
