@@ -22,7 +22,7 @@ For each scope, the following default access control is applied to objects:
 
 * **User Scope**
     * The user can read and write the object by default
-    * Other user cannot read or write the object by default
+    * Others cannot read or write the object by default
 
 ## Set a new ACL on an Object
 
