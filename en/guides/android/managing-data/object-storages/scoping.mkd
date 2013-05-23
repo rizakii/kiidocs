@@ -18,7 +18,7 @@ For each scope, the following default access control is applied to objects:
   * All non-group members cannot read and write the object by default.
  * **User Scope**
   * The user can read and write the object by default.
-  * Other user cannot read and write the object by default.
+  * Others cannot read and write the object by default.
 
 
 ## Set a new ACL on an Object
