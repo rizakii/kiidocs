@@ -8,7 +8,7 @@ old-url: /en/adding-kii-analytics-sdk-to-your-application
 ---
 ## Configuring your project
 
-Follow the steps below to enable Kii Ads in your application.
+Follow the steps below to enable Kii Analytics in your application.
 
 1. Add the following permission on AndroidManifest.xml:
 
