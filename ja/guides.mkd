@@ -11,7 +11,7 @@ old-url: /jp/guides-and-references--2
 
 * Android (Java)
 * iOS (Objective-C)
-* Javascript
+* JavaScript
 
 さらに、直接 Kii Platform のCloud API を操作する手段として REST API を公開しています。
 
