@@ -38,5 +38,5 @@ KiiObject object = KiiObject.createByUri(objUri);
 object.refresh();
 
 // Get a set of arbitrary keys
-HashSet<String> keyset = object.keySet();.
+HashSet<String> keyset = object.keySet();
 ```
