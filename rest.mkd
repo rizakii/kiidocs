@@ -346,6 +346,14 @@ Resource |Method |Description
 [/apps/{appID}/topics/{topicID}](/rest/apps-collection/application/topics/topic/#method-topicResourceType-PUT) |Put |Create a new topic. The topicID must be an string following the pattern [A-Za-z0-9_-]* and with maximum length of 64 characters. 
 [/apps/{appID}/topics/{topicID}](/rest/apps-collection/application/topics/topic/#method-topicResourceType-GET) |Get |Check the topic exists. 
 [/apps/{appID}/topics/{topicID}](/rest/apps-collection/application/topics/topic/#method-topicResourceType-DELETE) |Delete |Delete the topic with all the subscriptions it has. 
+[/apps/{appID}/topics/{topicID}/acl](/rest/apps-collection/application/topics/topic/acl/#method-aclResourceType-GET) |Get |Retrieve the complete ACL of the resource.
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}](/rest/apps-collection/application/topics/topic/acl/acl-verb/#method--GET) |Get |Retrieve the ACL entries for the current verb. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/GroupID:{subjectGroupID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/group-id/#method--GET) |Get |Check if this group has granted the verb for the accessed resource. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/GroupID:{subjectGroupID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/group-id/#method--PUT) |Put |Grant to this group the verb on the accessed resource. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/GroupID:{subjectGroupID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/group-id/#method--DELETE) |Delete |Revoke the user the accessed verb on the resource. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/UserID:{subjectUserID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/user-id/#method--GET) |Get |Check if this user has granted the verb for the accessed resource. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/UserID:{subjectUserID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/user-id/#method--PUT) |Put |Grant to this user the verb on the accessed resource. 
+[/apps/{appID}/topics/{topicID}/acl/{ACLVerb}/UserID:{subjectUserID}](/rest/apps-collection/application/topics/topic/acl/acl-verb/user-id/#method--DELETE) |Delete |Revoke the user the accessed verb on the resource. 
 [/apps/{appID}/topics/{topicID}/push/messages](/rest/apps-collection/application/topics/topic/push/push-messages/#method-pushMessageResourceType-POST) |Post |Send a push message to the current topic. 
 [/apps/{appID}/topics/{topicID}/push/subscriptions/users](/rest/apps-collection/application/topics/topic/push/subscriptions/subscribers/#method-subscribedUsersResourceType-POST) |Post |Subscribe the current authenticated user to the topic. 
 [/apps/{appID}/topics/{topicID}/push/subscriptions/users](/rest/apps-collection/application/topics/topic/push/subscriptions/subscribers/#method-subscribedUsersResourceType-POST) |Post |Subscribe the current authenticated user to the topic with a push configuration.
