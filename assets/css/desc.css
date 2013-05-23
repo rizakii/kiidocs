@@ -67,7 +67,9 @@ body#preview section.content .description {
 
 body#preview section.content .summary h2,body#preview section.content h2 {
   font-size:28px; font-weight:normal;
-  line-height:30px;font-family:Georgia;color:#111
+  line-height:30px;
+  font-family: Georgia, 'メイリオ', 'Meiryo', 'ヒラギノ丸ゴ Pro W4', 'Hiragino Maru Gothic Pro', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  color:#111
 }
 body#preview section.content .summary .subtitle,body#preview section.content .subtitle{font-size:21px;line-height:25px}
 body#preview section.content .summary .box,body#preview section.content .box{border:1px solid #ddd;padding:5px}

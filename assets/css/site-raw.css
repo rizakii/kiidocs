@@ -241,7 +241,7 @@ body#preview section.content h1{
 }
 body#preview section.content .summary,body#preview section.content .description{line-height:150%;font-size:15px;}
 body#preview section.content .summary .title,body#preview section.content .description .title{font-size:28px;line-height:30px;
-  font-family:Georgia, sans-serif;
+  font-family: Georgia, 'メイリオ', 'Meiryo', 'ヒラギノ丸ゴ Pro W4', 'Hiragino Maru Gothic Pro', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
   color:#111
 }
 body#preview section.content .summary .subtitle,body#preview section.content .description .subtitle{font-size:21px;line-height:25px}
