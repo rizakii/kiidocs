@@ -57,7 +57,7 @@ void onLoginFinished() {
 
 We see that `onLoginFinished()` is called right after `OnRegisterFinished()` is finished.  In `onLoginFinished()`, two things are done:
 
-1. Invoke invoke `getCurrentUser` method to create an KiiUser instance for the current user.
+1. Invoke `getCurrentUser` method to create an KiiUser instance for the current user.
 2. Invoke `getAccessToken` method to get the user's access token.
 
 The access token is then saved using SharedPreferences (ref. Pref.java). 

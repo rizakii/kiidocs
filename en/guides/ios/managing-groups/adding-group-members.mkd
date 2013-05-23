@@ -38,9 +38,12 @@ KiiUser *user1 = [KiiUser userWithURI:@"_URI_FOR_USER1"];
 KiiUser *user2 = [KiiUser userWithURI:@"_URI_FOR_USER2"];
 NSString *groupName = @"myGroup";
 
-// Remove user1 and user2 from the group
+// Instantiate the existing group
 NSError *error;
 KiiGroup* group = [KiiGroup groupWithName:groupName];
+[group refreshSynchronous:&error];
+
+// Remove user1 and user2 from the group
 [group removeUser:user1];
 [group removeUser:user2];
 [group saveSynchronous:&error];
