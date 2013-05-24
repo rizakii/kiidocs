@@ -82,7 +82,7 @@ In all cases, Kii Cloud will return the requested user data as follows:
 < Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
 <
 {
-  "userID" : "a7784f94-3134-4a78-82af-75df87f23873",
+  "userID" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "loginName" : "Test003",
   "displayName" : "Person Test003"
 }

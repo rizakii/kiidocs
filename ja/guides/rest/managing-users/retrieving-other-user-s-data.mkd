@@ -83,7 +83,7 @@ curl -v -X GET \
 < Content-Type: application/vnd.kii.UserDataRetrievalResponse+json
 <
 {
-  "userID" : "a7784f94-3134-4a78-82af-75df87f23873",
+  "userID" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "loginName" : "Test003",
   "displayName" : "Person Test003"
 }
