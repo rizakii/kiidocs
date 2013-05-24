@@ -14,7 +14,7 @@ KiiUser user = KiiUser.getCurrentUser();
 
 // Get a list of groups in which the current user is a member
 try{
-  List mygroups = user.memberOfGroups();
+  List<KiiGroup> mygroups = user.memberOfGroups();
   for (KiiGroup group : mygroups) {
     // do something with each group
   }  
