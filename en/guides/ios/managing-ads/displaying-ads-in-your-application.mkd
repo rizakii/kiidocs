@@ -14,7 +14,8 @@ Here is how to display ads in your application.
 
 ```objc
 KiiAdnet *adView = [KiiAdnet requestAdWithDelegate:self
-                    withApplicationId:@"<my-application-id>"
-                    andApplicationKey:@"<my-application-key>"];
+                                 withApplicationId:@"<AppID>"
+                                    applicationKey:@"<AppKey>"
+                                           andSite:kiiAdSiteUS];
 [self.view addSubview:adView];
 ```

@@ -16,7 +16,8 @@ old-url: /jp/displaying-ads-in-your-application--3
 ```objc
 KiiAdnet *adView = [KiiAdnet requestAdWithDelegate:self
                                  withApplicationId:@"<AppID>"
-                                 andApplicationKey:@"<AppKey>"];
+                                    applicationKey:@"<AppKey>"
+                                           andSite:kiiAdSiteJP];
 [self.view addSubview:adView];
 ```
 
