@@ -11,9 +11,7 @@ old-url: /jp/--303
 Application Scope トピックへのメッセージ送信は、アプリ開発者のみ行うことができます。実際には、開発者ポータルにて以下の手順を実施してメッセージ送信を行います。
 
 1. 開発者ポータルにログイン。
-1. 対象アプリケーションを選択後、"Notification" アイコンをクリックし、さらに
-   "New Message" ボタンをクリック。  
-   これにより、プッシュメッセージ送信 UI が表示されます。
+1. 対象アプリケーションを選択後、"Notification" アイコンをクリックし、さらに "New Message" ボタンをクリック。 これにより、プッシュメッセージ送信 UI が表示されます。
 
     ![](01.png)
 
@@ -32,23 +30,18 @@ Application Scope トピックへのメッセージ送信は、アプリ開発�
         次に、メッセージの内容を指定します。
 
         ![](03.png)
-        * "Include" セクションにて、メッセージに含める既定フィールドを指定しま
-          す。
+        * "Include" セクションにて、メッセージに含める既定フィールドを指定します。
 
-            それぞれの規定フィールドを有効にした場合にメッセージに追加される値
-            は以下の通りです。
+            それぞれの規定フィールドを有効にした場合にメッセージに追加される値は以下の通りです。
             * App ID: アプリケーションの AppID
             * Sender: Client ID
             * When: プッシュメッセージ送信時のタイムスタンプ
-            * Origin: "Push to Users" メッセージであることを示す"EXPLICIT" とい
-              う値
-            * Object Scope: アプリケーションスコープのトピックに送信されたメッ
-              セージであることを示す "APP" という値
+            * Origin: "Push to Users" メッセージであることを示す"EXPLICIT" という値
+            * Object Scope: アプリケーションスコープのトピックに送信されたメッセージであることを示す "APP" という値
             * Topic ID: 対象トピックのTopic ID
        * メッセージに含める任意フィールド（key-value ペア）を指定します。
             * "+" ボタンを押すと、さらにフィールドを追加できます。
-            * "Droid" と "Apple" アイコンを押すと、それぞれのフィールドの送信先
-              が制御できます（Android 端末のみに送信、iOS 端末のみに送信等）。
+            * "Droid" と "Apple" アイコンを押すと、それぞれのフィールドの送信先が制御できます（Android 端末のみに送信、iOS 端末のみに送信等）。
 
     1. APNS/GCM の詳細設定
 
@@ -63,19 +56,15 @@ Application Scope トピックへのメッセージ送信は、アプリ開発�
               [Apple による解説](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)
               を参照してください。
 
-              なお、バックグラウンドで起動されているアプリにプッシュメッセージ
-              を送信するためには、こちらの Alert 関連情報を設定する必要がありま
-              す。
+              なお、バックグラウンドで起動されているアプリにプッシュメッセージを送信するためには、こちらの Alert 関連情報を設定する必要があります。
 
 
-1. 設定が完了したら "Send..." ボタンを押下しすると、対象トピックにメッセージが
-   送信されます。
+1. 設定が完了したら "Send..." ボタンを押下しすると、対象トピックにメッセージが送信されます。
 
 
 ## シナリオ#2: グループメッセージング
 
-Group scope トピックには、任意のグループメンバーがメッセージを送ることができま
-す。以下に、メッセージ送信を行うコード例をあげます。
+Group scope トピックには、任意のグループメンバーがメッセージを送ることができます。以下に、メッセージ送信を行うコード例をあげます。
 
 ```objc
  // Create APNs message fields
@@ -102,20 +91,16 @@ if (error != nil) {
 
 ここでは、以下の処理を実行しています。
 
-* `createFields` メソッドを実行し、APNS メッセージフィールドインスタンスを作成
-  します。
-* `setAlertBody` メソッドを実行し、APNS メッセージに APNS alert プロパティを設
-  定します。
-* Dictionary を作成後、これにメッセージに入れる key-value ペアを設定します。こ
-  の後、この dictionary を指定の上 `setSpecificData` メソッドを実行します。
+* `createFields` メソッドを実行し、APNS メッセージフィールドインスタンスを作成します。
+* `setAlertBody` メソッドを実行し、APNS メッセージに APNS alert プロパティを設定します。
+* Dictionary を作成後、これにメッセージに入れる key-value ペアを設定します。この後、この dictionary を指定の上 `setSpecificData` メソッドを実行します。
 * `composeMessageWithAPNSFields` メソッドを実行し、push メッセージを作成します。
 * `sendMessage` メソッドを実行し、topic に push メッセージを送信します。
 
 
 ## シナリオ#3: TODO リストを全てのデバイスにプッシュ
 
-User scope トピックには、このトピックの owner のみがメッセージを送信できます。
-以下に、メッセージ送信を行うコード例をあげます。
+User scope トピックには、このトピックの owner のみがメッセージを送信できます。以下に、メッセージ送信を行うコード例をあげます。
 
 ```objc
 NSError *error;
@@ -146,10 +131,8 @@ if (error != nil) {
 
 ここでは以下の処理をしています。
 
-* `createFields` メソッドを実行し、APNS メッセージフィールドのインスタンスを作
-  成。
-* `setAlertBody` メソッドを実行し、APNS メッセージの APNS アラートメッセージを
-  セット。
+* `createFields` メソッドを実行し、APNS メッセージフィールドのインスタンスを作成。
+* `setAlertBody` メソッドを実行し、APNS メッセージの APNS アラートメッセージをセット。
 * `setSpecificData` メソッドを実行し、任意フィールドの値をセット。
 * `composeMessageWithAPNSFields` メソッドを実行し、プッシュメッセージを作成。
 * `sendMessage` メソッドを実行し、メッセージを送信。

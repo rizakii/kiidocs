@@ -24,13 +24,9 @@ Push メッセージを受信するコード例を以下に示します。この
 
 ここでは、以下の処理を実行しています。
 
-1. `messageFromAPNS` メソッドを実行し、受信した push メッセージをパースします。
-   パース結果は KiiPushMessage インスタンスに保存されます。
-1. `getValueOfKiiMessageField` メソッドを実行し、受信した push メッセージよりメ
-   タデータを抽出します。今回の例では、"TOPIC" フィールドを抽出しています。  
-   （push メッセージよりメタデータを抽出する方法の詳細については
-   [appledoc]({% page_url references-ja %})を参照してください）
-1. `showMessageAlertWithTitle` メソッドを実行し、アラートメッセージを表示しま
-   す。
+1. `messageFromAPNS` メソッドを実行し、受信した push メッセージをパースします。パース結果は KiiPushMessage インスタンスに保存されます。
+1. `getValueOfKiiMessageField` メソッドを実行し、受信した push メッセージよりメタデータを抽出します。今回の例では、"TOPIC" フィールドを抽出しています。  
+   （push メッセージよりメタデータを抽出する方法の詳細については [appledoc]({% page_url references-ja %})を参照してください）
+1. `showMessageAlertWithTitle` メソッドを実行し、アラートメッセージを表示します。
 
 

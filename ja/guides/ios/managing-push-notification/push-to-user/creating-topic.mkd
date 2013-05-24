@@ -13,10 +13,8 @@ old-url: /jp/--305
 Application scope トピック作成は 次のように REST API を用いて行います。
 
 
-1. [「RESTスタートガイド - アプリ管理者向け機能」]({% page_url rest-admin_features-ja %})
-   の内容に従い、アプリ管理者トークンを取得します。
-1. 次の例のようにして application scope トピックを作成します（この例では
-   "SendingAlert" という名前のトピックを作成しています）。
+1. [「RESTスタートガイド - アプリ管理者向け機能」]({% page_url rest-admin_features-ja %}) の内容に従い、アプリ管理者トークンを取得します。
+1. 次の例のようにして application scope トピックを作成します（この例では "SendingAlert" という名前のトピックを作成しています）。
 
 ```
  curl -v -X PUT \
