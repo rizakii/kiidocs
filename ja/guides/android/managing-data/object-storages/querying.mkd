@@ -2,8 +2,8 @@
 layout: ja-doc
 title: Object の検索
 summary: Kii Cloud 上の Object のうち、ある条件を満たすものを取得する方法として Kii Cloud SDK は検索機能を提供しています。この機能を用いると、例えば「ある Bucket より "count" フィールドの値が10より大きい Object を、フィールド値降順で最大で10個取得」などといった条件が指定可能です。
-page-id: android-object_storages_querying-ja
 sort-priority: 40
+page-id: android-object_storages_querying-ja
 old-url: /jp/querying-for-objects--5
 ---
 ## KiiClause による Query の条件定義
@@ -60,7 +60,7 @@ try {
 
   List<KiiObject> objLists = result.getResult();
   for (KiiObject obj : objLists) {
-    // Do something with objects in the bucket
+    // Do something with objects in the result
   }
 } catch (IOException e) {
   // handle error
@@ -101,10 +101,11 @@ try {
   // Fetching the next 10 objects (pagination handling)
   if (result.hasNext()) {
     result = result.getNextQueryResult();
-  }
-  objLists = result.getResult();
-  for (KiiObject obj : objLists) {
-    // Do something with the next 10 objects
+     
+    objLists = result.getResult();
+    for (KiiObject obj : objLists) {
+      // Do something with the next 10 objects
+    }
   }
 } catch (IOException e) {
   // handle error

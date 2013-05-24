@@ -10,7 +10,7 @@ Kii SDK.  Currently, the following platforms are supported:
 
 * Android (Java)
 * iOS (Objective-C)
-* Javascript
+* JavaScript
 
 Kii also provides a REST API if you would like to access Kii Cloud from another
 platform or language.
