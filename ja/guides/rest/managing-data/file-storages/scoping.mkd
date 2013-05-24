@@ -80,4 +80,4 @@ old-url: /jp/scoping-files--5
       "https://api-jp.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/WRITE_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
     ```
 
-Authenticated Usersやグループ、ユーザより権限を剥奪する場合も同様に DELETE リクエストを送信します。この場合は、対象をそれぞれ "UserID:ANY\_AUTHENTICATED\_USER"、 "GroupID:{GROUD\_ID}"、"UserID:{USER\_ID}" に変更してください。
+Authenticated Usersやグループ、ユーザより権限を剥奪する場合も同様に DELETE リクエストを送信します。この場合は、対象をそれぞれ "UserID:ANY\_AUTHENTICATED\_USER"、 "GroupID:{GROUP\_ID}"、"UserID:{USER\_ID}" に変更してください。

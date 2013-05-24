@@ -77,4 +77,4 @@ To revoke permission, simply send a DELETE request to the corresponding ACL.
       "https://api.kii.com/api/apps/{APP_ID}/users/{USER_ID}/buckets/sync:{BUCKET_NAME}/objects/{OBJECT_ID}/acl/WRITE_EXISTING_OBJECT/UserID:ANONYMOUS_USER"
     ```
 
-    **Please Note:** You can revoke permission from Authenticated Users, Groups, or Users in a similar manner. Simply change "UserID:ANONYMOUS\_USER" to "UserID:ANY\_AUTHENTICATED\_USER", "GroupID:{GROUD\_ID}" and "UserID:{USER\_ID}", accordingly.
+    **Please Note:** You can revoke permission from Authenticated Users, Groups, or Users in a similar manner. Simply change "UserID:ANONYMOUS\_USER" to "UserID:ANY\_AUTHENTICATED\_USER", "GroupID:{GROUP\_ID}" and "UserID:{USER\_ID}", accordingly.
