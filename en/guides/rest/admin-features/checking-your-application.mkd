@@ -32,9 +32,12 @@ Server: nginx/1.0.15
     "description": "app_description",
     "emailAddress": "you@example.com",
     "emailAddressVerificationRequired": false,
+    "phoneNumberVerificationRequired": false,
     "facebookAppID": {FACEBOOK_APP_ID},
     "phoneNumberVerificationRequired": false,
     "smsFrom": "AppSmsSender",
-    "verificationSmsTemplate": "Your validation code is ${code}, valid for ${valid} hours."
+    "verificationSmsTemplate": "${code}",
+    "exposeFullUserDataToOthers": false,
+    "gcmCollapseKeyDefaultBehavior": {GCM_COLLAPSE_KEY_BEHAVIOR}
 }
 ```
