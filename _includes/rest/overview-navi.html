@@ -37,7 +37,7 @@
 
       <ul class="subpage">
       <li><div><a href="#user_management-user_verification-email_address_verification-resend_the_verification_email">Resend the verification email</a></div></li>
-      <li><div><a href="#user_management-user_verification-email_address_verification-get_the_verificaiton_code">Get the verificaiton code</a></div></li>
+      <li><div><a href="#user_management-user_verification-email_address_verification-get_the_verification_code">Get the verification code</a></div></li>
       <li><div><a href="#user_management-user_verification-email_address_verification-vefity_the_email_address">Vefity the email address</a></div></li>
       </ul>
     </li>
@@ -127,7 +127,526 @@
     </li>
     </ul>
   </li>
+  <li><div><a href="#data_management-file_bucket">File Bucket</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#data_management-file_bucket-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#data_management-file_bucket-user_scope-retrieve_a_file_bucket">Retrieve a file bucket</a></div></li>
+      <li><div><a href="#data_management-file_bucket-user_scope-verify_the_file_bucket_existence">Verify the file bucket existence</a></div></li>
+      <li><div><a href="#data_management-file_bucket-user_scope-delete_the_bucket">Delete the bucket</a></div></li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#data_management-objects">Objects</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#data_management-objects-application_scope">Application Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#data_management-objects-application_scope-create_an_object">Create an object</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-retrieve_an_object">Retrieve an object</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-fully_update_an_object___create_a_new_object_with_an_id">Fully update an object / Create a new object with an ID</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-partially_update_an_object">Partially update an object</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-delete_an_object">Delete an object</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-check_an_object_existence">Check an object existence</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-publish_an_object_body">Publish an object body</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-query_for_objects">Query for objects</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-retrieve_an_object_body">Retrieve an object body</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-add_or_replace_an_object_body">Add or replace an object body</a></div></li>
+      <li><div><a href="#data_management-objects-application_scope-vefity_an_object_body_existence">Vefity an object body existence</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#data_management-objects-group_scope">Group Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#data_management-objects-group_scope-create_an_object">Create an object</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-retrieve_an_object">Retrieve an object</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-fully_update_an_object___create_a_new_object_with_an_id">Fully update an object / Create a new object with an ID</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-partially_update_an_object">Partially update an object</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-delete_an_object">Delete an object</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-check_an_object_existence">Check an object existence</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-query_for_objects">Query for objects</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-retrieve_an_object_body">Retrieve an object body</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-add_or_replace_an_object_body">Add or replace an object body</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-vefity_an_object_body_existence">Vefity an object body existence</a></div></li>
+      <li><div><a href="#data_management-objects-group_scope-publish_an_object_body">Publish an object body</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#data_management-objects-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#data_management-objects-user_scope-create_an_object">Create an object</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-retrieve_an_object">Retrieve an object</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-fully_update_an_object___create_a_new_object_with_an_id">Fully update an object / Create a new object with an ID</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-partially_update_an_object">Partially update an object</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-delete_an_object">Delete an object</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-check_an_object_existence">Check an object existence</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-query_for_objects">Query for objects</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-retrieve_an_object_body">Retrieve an object body</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-add_or_replace_an_object_body">Add or replace an object body</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-vefity_an_object_body_existence">Vefity an object body existence</a></div></li>
+      <li><div><a href="#data_management-objects-user_scope-publish_an_object_body">Publish an object body</a></div></li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#data_management-files">Files</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#data_management-files-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#data_management-files-user_scope-create_a_file">Create a file</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-retrieve_a_file">Retrieve a file</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-fully_update_a_file___create_a_new_file_with_an_id">Fully update a file / Create a new file with an ID</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-partially_update_a_file">Partially update a file</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-delete_a_file">Delete a file</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-check_a_file_existence">Check a file existence</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-query_for_files">Query for files</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-retrieve_a_file_body">Retrieve a file body</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-add_or_replace_a_file_body">Add or replace a file body</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-verify_a_file_body_existence">Verify a file body existence</a></div></li>
+      <li><div><a href="#data_management-files-user_scope-publish_a_file_body">Publish a file body</a></div></li>
+      </ul>
+    </li>
+    </ul>
+  </li>
   </ul>
 </li>
-<li><div><a href="#analytics">Analytics</a></div></li>
+<li><div><a href="#acl_management">ACL Management</a></div>
+
+  <ul class="subpage">
+  <li><div><a href="#acl_management-setting_acl_on_scope">Setting ACL on Scope</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#acl_management-setting_acl_on_scope-application_scope">Application Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_scope-application_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-application_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-application_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-application_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_scope-group_scope">Group Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_scope-group_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-group_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-group_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-group_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_scope-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-retrieve_the_current_acl_entries-retrieve_all_acl_entries">Retrieve all ACL entries</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-retrieve_the_current_acl_entries-retrieve_acl_entires_with_the_specified_acl_verb">Retrieve ACL entires with the specified ACL verb</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-verify_the_permission">Verify the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-verify_the_permission-verify_if_the_specified_user_has_the_permission">Verify if the specified user has the permission</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-verify_the_permission-verify_if_the_specified_group_has_the_permission">Verify if the specified group has the permission</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-grant_the_permission">Grant the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-grant_the_permission-grant_the_permission_to_the_specified_user">Grant the permission to the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-grant_the_permission-grant_the_permission_to_the_specified_group">Grant the permission to the specified group</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-revoke_the_permission">Revoke the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_user">Revoke the permission from the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_scope-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_group">Revoke the permission from the specified group</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#acl_management-setting_acl_on_bucket">Setting ACL on Bucket</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#acl_management-setting_acl_on_bucket-application_scope">Application Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_bucket-application_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-application_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-application_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-application_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_bucket-group_scope">Group Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_bucket-group_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-group_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-group_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-group_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-retrieve_the_current_acl_entries-retrieve_all_acl_entries">Retrieve all ACL entries</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-retrieve_the_current_acl_entries-retrieve_acl_entires_with_the_specified_acl_verb">Retrieve ACL entires with the specified ACL verb</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-verify_the_permission">Verify the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-verify_the_permission-verify_if_the_specified_user_has_the_permission">Verify if the specified user has the permission</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-verify_the_permission-verify_if_the_specified_group_has_the_permission">Verify if the specified group has the permission</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-grant_the_permission">Grant the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-grant_the_permission-grant_the_permission_to_the_specified_user">Grant the permission to the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-grant_the_permission-grant_the_permission_to_the_specified_group">Grant the permission to the specified group</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-revoke_the_permission">Revoke the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_user">Revoke the permission from the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_bucket-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_group">Revoke the permission from the specified group</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#acl_management-setting_acl_on_file_bucket">Setting ACL on File Bucket</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-retrieve_the_current_acl_entries-retrieve_all_acl_entries">Retrieve all ACL entries</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-retrieve_the_current_acl_entries-retrieve_acl_entires_with_the_specified_acl_verb">Retrieve ACL entires with the specified ACL verb</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-verify_the_permission">Verify the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-verify_the_permission-verify_if_the_specified_user_has_the_permission">Verify if the specified user has the permission</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-verify_the_permission-verify_if_the_specified_group_has_the_permission">Verify if the specified group has the permission</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-grant_the_permission">Grant the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-grant_the_permission-grant_the_permission_to_the_specified_user">Grant the permission to the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-grant_the_permission-grant_the_permission_to_the_specified_group">Grant the permission to the specified group</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-revoke_the_permission">Revoke the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_user">Revoke the permission from the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file_bucket-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_group">Revoke the permission from the specified group</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#acl_management-setting_acl_on_object">Setting ACL on Object</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#acl_management-setting_acl_on_object-application_scope">Application Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_object-application_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-application_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-application_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-application_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_object-group_scope">Group Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_object-group_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-group_scope-verify_the_permission">Verify the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-group_scope-grant_the_permission">Grant the permission</a></div></li>
+      <li><div><a href="#acl_management-setting_acl_on_object-group_scope-revoke_the_permission">Revoke the permission</a></div></li>
+      </ul>
+    </li>
+    <li><div><a href="#acl_management-setting_acl_on_object-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_object-user_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-retrieve_the_current_acl_entries-retrieve_all_acl_entries">Retrieve all ACL entries</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-retrieve_the_current_acl_entries-retrieve_acl_entires_with_the_specified_acl_verb">Retrieve ACL entires with the specified ACL verb</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_object-user_scope-verify_the_permission">Verify the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-verify_the_permission-verify_if_the_specified_user_has_the_permission">Verify if the specified user has the permission</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-verify_the_permission-verify_if_the_specified_group_has_the_permission">Verify if the specified group has the permission</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_object-user_scope-grant_the_permission">Grant the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-grant_the_permission-grant_the_permission_to_the_specified_user">Grant the permission to the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-grant_the_permission-grant_the_permission_to_the_specified_group">Grant the permission to the specified group</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_object-user_scope-revoke_the_permission">Revoke the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_user">Revoke the permission from the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_object-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_group">Revoke the permission from the specified group</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#acl_management-setting_acl_on_file">Setting ACL on File</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#acl_management-setting_acl_on_file-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#acl_management-setting_acl_on_file-user_scope-retrieve_the_current_acl_entries">Retrieve the current ACL entries</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-retrieve_the_current_acl_entries-retrieve_all_acl_entries">Retrieve all ACL entries</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-retrieve_the_current_acl_entries-retrieve_acl_entires_with_the_specified_acl_verb">Retrieve ACL entires with the specified ACL verb</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file-user_scope-verify_the_permission">Verify the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-verify_the_permission-verify_if_the_specified_user_has_the_permission">Verify if the specified user has the permission</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-verify_the_permission-verify_if_the_specified_group_has_the_permission">Verify if the specified group has the permission</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file-user_scope-grant_the_permission">Grant the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-grant_the_permission-grant_the_permission_to_the_specified_user">Grant the permission to the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-grant_the_permission-grant_the_permission_to_the_specified_group">Grant the permission to the specified group</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#acl_management-setting_acl_on_file-user_scope-revoke_the_permission">Revoke the permission</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_user">Revoke the permission from the specified user</a></div></li>
+        <li><div><a href="#acl_management-setting_acl_on_file-user_scope-revoke_the_permission-revoke_the_permission_from_the_specified_group">Revoke the permission from the specified group</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  </ul>
+</li>
+<li><div><a href="#analytics_management">Analytics Management</a></div>
+
+  <ul class="subpage">
+  <li><div><a href="#analytics_management-post_event_data">Post event data</a></div></li>
+  <li><div><a href="#analytics_management-retrieve_flex_analytics_results">Retrieve Flex Analytics results</a></div></li>
+  </ul>
+</li>
+<li><div><a href="#push_notification_management">Push Notification Management</a></div>
+
+  <ul class="subpage">
+  <li><div><a href="#push_notification_management-_push_to_app__notification">&quot;Push to App&quot; notification</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification">Bucket notification</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope">Application Scope</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-subscribe_the_current_user_to_the_bucket">Subscribe the current user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-subscribe_the_specifid_user_to_the_bucket">Subscribe the specifid user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-check_if_the_specified_user_is_subscribed_to_the_bucket">Check if the specified user is subscribed to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-unsubscribe_the_specified_user_from_the_bucket">Unsubscribe the specified user from the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-get_the_push_configuration_on_the_subscription_for_the_specified_user">Get the push configuration on the subscription for the specified user</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-application_scope-update_the_push_configuration_on_the_subscription_for_the_specified_user">Update the push configuration on the subscription for the specified user</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope">Group Scope</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-subscribe_the_current_user_to_the_bucket">Subscribe the current user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-subscribe_the_specifid_user_to_the_bucket">Subscribe the specifid user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-check_if_the_specified_user_is_subscribed_to_the_bucket">Check if the specified user is subscribed to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-unsubscribe_the_specified_user_from_the_bucket">Unsubscribe the specified user from the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-get_the_push_configuration_on_the_subscription_for_the_specified_user">Get the push configuration on the subscription for the specified user</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-group_scope-update_the_push_configuration_on_the_subscription_for_the_specified_user">Update the push configuration on the subscription for the specified user</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope">User Scope</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-subscribe_the_current_user_to_the_bucket">Subscribe the current user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-subscribe_the_specifid_user_to_the_bucket">Subscribe the specifid user to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-check_if_the_specified_user_is_subscribed_to_the_bucket">Check if the specified user is subscribed to the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-unsubscribe_the_specified_user_from_the_bucket">Unsubscribe the specified user from the bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-get_the_push_configuration_on_the_subscription_for_the_specified_user">Get the push configuration on the subscription for the specified user</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-bucket_notification-user_scope-update_the_push_configuration_on_the_subscription_for_the_specified_user">Update the push configuration on the subscription for the specified user</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification">File Bucket notification</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope">User Scope</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-subscribe_the_current_user_to_the_file_bucket">Subscribe the current user to the file bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-subscribe_the_specifid_user_to_the_file_bucket">Subscribe the specifid user to the file bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-check_if_the_specified_user_is_subscribed_to_the_file_bucket">Check if the specified user is subscribed to the file bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-unsubscribe_the_specified_user_from_the_file_bucket">Unsubscribe the specified user from the file bucket</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-get_the_push_configuration_on_the_subscription_for_the_specified_user">Get the push configuration on the subscription for the specified user</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_app__notification-file_bucket_notification-user_scope-update_the_push_configuration_on_the_subscription_for_the_specified_user">Update the push configuration on the subscription for the specified user</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  <li><div><a href="#push_notification_management-_push_to_users__notification">&quot;Push to Users&quot; notification</a></div>
+
+    <ul class="subpage">
+    <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope">Application Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-topics">Topics</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-topics-get_a_list_of_available_topics">Get a list of available topics</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-topics-create_a_new_topic">Create a new topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-topics-check_the_topic_existence">Check the topic existence</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-topics-delete_the_topic">Delete the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-subscribe_unsubscribe">Subscribe/unsubscribe</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-subscribe_unsubscribe-subscribe_the_current_user_to_the_topic">Subscribe the current user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-subscribe_unsubscribe-subscribe_the_specified_user_to_the_topic">Subscribe the specified user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-subscribe_unsubscribe-check_if_the_specified_user_is_subscribed_to_the_topic">Check if the specified user is subscribed to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-subscribe_unsubscribe-unsubscribe_the_specified_user_from_the_topic">Unsubscribe the specified user from the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-messages">Messages</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-messages-send_a_push_message_to_the_current_topic">Send a push message to the current topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-configuration">Configuration</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-configuration-get_the_current_push_configuration">Get the current push configuration</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-application_scope-configuration-update_the_push_configuration">Update the push configuration</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope">Group Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-topics">Topics</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-topics-get_a_list_of_available_topics">Get a list of available topics</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-topics-create_a_new_topic">Create a new topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-topics-check_the_topic_existence">Check the topic existence</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-topics-delete_the_topic">Delete the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-subscribe_unsubscribe">Subscribe/unsubscribe</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-subscribe_unsubscribe-subscribe_the_current_user_to_the_topic">Subscribe the current user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-subscribe_unsubscribe-subscribe_the_specified_user_to_the_topic">Subscribe the specified user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-subscribe_unsubscribe-check_if_the_specified_user_is_subscribed_to_the_topic">Check if the specified user is subscribed to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-subscribe_unsubscribe-unsubscribe_the_specified_user_from_the_topic">Unsubscribe the specified user from the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-messages">Messages</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-messages-send_a_push_message_to_the_current_topic">Send a push message to the current topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-configuration">Configuration</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-configuration-get_the_current_push_configuration">Get the current push configuration</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-group_scope-configuration-update_the_push_configuration">Update the push configuration</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope">User Scope</a></div>
+
+      <ul class="subpage">
+      <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-topics">Topics</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-topics-get_a_list_of_available_topics">Get a list of available topics</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-topics-create_a_new_topic">Create a new topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-topics-check_the_topic_existence">Check the topic existence</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-topics-delete_the_topic">Delete the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-subscribe_unsubscribe">Subscribe/unsubscribe</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-subscribe_unsubscribe-subscribe_the_current_user_to_the_topic">Subscribe the current user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-subscribe_unsubscribe-subscribe_the_specified_user_to_the_topic">Subscribe the specified user to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-subscribe_unsubscribe-check_if_the_specified_user_is_subscribed_to_the_topic">Check if the specified user is subscribed to the topic</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-subscribe_unsubscribe-unsubscribe_the_specified_user_from_the_topic">Unsubscribe the specified user from the topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-messages">Messages</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-messages-send_a_push_message_to_the_current_topic">Send a push message to the current topic</a></div></li>
+        </ul>
+      </li>
+      <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-configuration">Configuration</a></div>
+
+        <ul class="subpage">
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-configuration-get_the_current_push_configuration">Get the current push configuration</a></div></li>
+        <li><div><a href="#push_notification_management-_push_to_users__notification-user_scope-configuration-update_the_push_configuration">Update the push configuration</a></div></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  </ul>
+</li>
 </ul>
