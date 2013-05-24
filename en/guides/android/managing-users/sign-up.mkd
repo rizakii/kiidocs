@@ -16,7 +16,7 @@ When setting an email address or phone number to a user, you may let Kii Cloud t
 
 ##User Sign-up
 
-The following snippet shows how to sign up a user with a username "user_123456", an email address "`user_123456@example.com`", a phone number "+819012345678" and a password "123ABC".
+The following snippet shows how to sign up a user with a username `user_123456`, an email address `user_123456@example.com`, a phone number `+819012345678` and a password `123ABC`.
 
 ```java
 builder = KiiUser.builderWithName("user_123456");

@@ -21,9 +21,9 @@ curl -v -X POST \
   "paginationKey":"asd12ijdfasdfjadfjgk", "bestEffortLimit":10}'
 ```
 
-## QueryRequset オブジェクト
+## Query Requset オブジェクト
 
-QueryRequest オブジェクトの一例を以下に示します。
+Query Request オブジェクトの一例を以下に示します。
 
 ```javascript
 {

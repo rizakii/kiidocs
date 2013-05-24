@@ -20,9 +20,9 @@ curl -v -X POST \
   "paginationKey":"asd12ijdfasdfjadfjgk", "bestEffortLimit": 10}'
 ```
 
-## QueryRequset Object
+## Query Requset Object
 
-Here is an example of a QueryRequest object:
+Here is an example of a Query Request object:
 
 ```javascript
 {
