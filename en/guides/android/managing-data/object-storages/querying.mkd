@@ -37,7 +37,7 @@ Optionally, you can use the following methods to fine-tune the query results:
  * **sortByDesc**
  * **setLimit**
 
-If neither sortByAsc nor sorByDesc is specified, the query results will be in arbitrary order.  If setLimit is not specified, the maximum number of the query results may be up to 200.
+If neither sortByAsc nor sortByDesc is specified, the query results will be in arbitrary order.  If setLimit is not specified, the maximum number of the query results may be up to 200.
 
 ## Parsing KiiQueryResult
 
@@ -48,7 +48,7 @@ If the result has multiple pages (e.g., you've specified setLimit to 10, and the
 
 ## Query Examples
 
-Let us start with a simplest example; querying all objects in a bucket.  。
+Let us start with a simplest example; querying all objects in a bucket. 
 
 To get all objects in a bucket, you first create an "all" query using `KiiQuery` method without any KiiClause object as a parameter, then invoke the `query` method of the target bucket with the "all" query.  Alternatively, you can just invoke the `query` method without any parameter.
 
@@ -63,7 +63,7 @@ try {
 
   List<KiiObject> objLists = result.getResult();
   for (KiiObject obj : objLists) {
-    // Do something with objects in the bucket
+    // Do something with objects in the result
   }
 } catch (IOException e) {
   // handle error
@@ -106,10 +106,11 @@ try {
   // Fetching the next 10 objects (pagination handling)
   if (result.hasNext()) {
     result = result.getNextQueryResult();
-  }
-  objLists = result.getResult();
-  for (KiiObject obj : objLists) {
-    // Do something with the next 10 objects
+     
+    objLists = result.getResult();
+    for (KiiObject obj : objLists) {
+      // Do something with the next 10 objects
+    }
   }
 } catch (IOException e) {
   // handle error

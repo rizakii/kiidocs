@@ -12,7 +12,7 @@ old-url: /en/updating-files--3
 
 ## Updating Only Metadata
 
-The below is an example of how you can update only metadata  After editing the metadata, use the `saveMetaData` method to upload the change(s) onto Kii Cloud.
+The below is an example of how you can only update the metadata. After editing the metadata, use the `saveMetaData` method to upload the change(s) onto Kii Cloud.
 
 ```objc
 KiiFile *file = [KiiFile fileWithURI:@"_URI_OF_THE_FILE_"];

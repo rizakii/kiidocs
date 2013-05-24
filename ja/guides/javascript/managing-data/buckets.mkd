@@ -40,7 +40,7 @@ var userBucket = user.bucketWithName("score_card");
 ```
 
 * Application Scopeのbucketを作成するには`Kii` インスタンスの`bucketWithName`を呼びます
-* Group Scopeのbucketを作成するには`KiiGroup`インスタンスの1`bucketWithName`を呼びます
+* Group Scopeのbucketを作成するには`KiiGroup`インスタンスの`bucketWithName`を呼びます
 * User Scopeのbucketを作成するには`KiiUser`インスタンスの`bucketWithName`を呼びます
 
 Bucket は bucket 内にオブジェクトが作成されて初めて作成されることに注意してください。  例えば、上記の userBucket は次のように新しくオブジェクトが作成されたタイミングで作られます。
