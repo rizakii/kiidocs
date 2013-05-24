@@ -51,7 +51,7 @@ APNS サーバより受け取ったデバイストークンを KIi Cloud に送�
 
   // Install a Device to Kii Cloud
   NSError *error = nil;
-  KiiPushInstallation *installation = [KiiPushInstallation installSynchronousWithError:&error;];
+  KiiPushInstallation *installation = [KiiPushInstallation installSynchronous:&error;];
 
   if (error != nil) {
     NSLog(@"Installation failed : %@", error);
