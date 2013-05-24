@@ -52,7 +52,7 @@ we are setting a device token obtained from the APNS server.
 
   // Install a Device to Kii Cloud
   NSError *error = nil;
-  KiiPushInstallation *installation = [KiiPushInstallation installSynchronousWithError:&error;];
+  KiiPushInstallation *installation = [KiiPushInstallation installSynchronous:&error];
 
   if (error != nil) {
     NSLog(@"Installation failed : %@", error);
