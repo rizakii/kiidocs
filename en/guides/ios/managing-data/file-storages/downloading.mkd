@@ -5,7 +5,7 @@ summary: If you know the URI of the file you wish to download, you can directly 
 sort-priority: 20
 old-url: /en/download-files--3
 ---
-The following sample code illustrates how to retrieve an object via its URI:
+The following sample code illustrates how to retrieve a file via its URI:
 
 ```objc
 NSError *error;
