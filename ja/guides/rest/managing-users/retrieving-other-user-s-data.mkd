@@ -12,8 +12,6 @@ Kii Cloud が返すユーザ情報の量は、アプリケーションの設定�
 * LoginName
 * DisplayName
 
-このアプリケーション設定は、開発者ポータル上の操作か、アプリ開発者向け REST API （詳細は[こちら]({% page_url rest-configuring_your_application-ja %})を参照）により設定可能です。
-
 開発者ポータル上で設定を行う方法を以下に示します。
 
 1. "Edit" ボタンをクリックし、アプリケーションコンソールを開きます。

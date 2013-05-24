@@ -11,8 +11,6 @@ The amount of information returned by Kii Cloud depends on the application setti
 * LoginName
 * DisplayName
 
-You can configure this option either via the dev portal or via REST API for app admin (refer [here]({% page_url rest-configuring_your_application-en %}) for the details).
-
 To toggle the option on the dev portal, please execute the following steps:
 
 1. Click "Edit" button at your application console on the dev portal.
