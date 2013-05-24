@@ -13,7 +13,7 @@ Each bucket has a "scope", which determines to whom the bucket belongs.  For exa
 These are three types of bucket scopes supported by Kii Platform:
 
 * **Application Scope** : The bucket belongs to your application
-    * Authenticated users (i.e., all users who have been signed-in) will have full access to the bucket by default
+    * Authenticated users (i.e., all users who have been signed-in) will have full access to the bucket by default. (except for modifying ACL)
     * Anonymous users (i.e., users who have not yet signed-in) can only query and read data in the bucket by default
 * **Group Scope** : The bucket belongs to a user group
     * The group owner will have full access to the bucket by default
