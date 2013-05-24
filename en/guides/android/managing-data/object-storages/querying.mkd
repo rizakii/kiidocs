@@ -56,7 +56,7 @@ KiiQuery all_query = new KiiQuery();
 try {
   KiiQueryResult<KiiObject> result = Kii.bucket("myBucket").query(all_query);
   // Alternatively, you can also do:
-  // KiiQueryResult<KiiObject> result = Kii.bucket("myBuckets").query();
+  // KiiQueryResult<KiiObject> result = Kii.bucket("myBuckets").query(null);
 
   List<KiiObject> objLists = result.getResult();
   for (KiiObject obj : objLists) {
