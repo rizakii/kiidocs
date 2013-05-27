@@ -42,9 +42,9 @@ KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:user1 andAction:KiiACLFileAc
 [acl putACLEntry:entry2];
 
 // Save the ACL
-[acl saveSynchronous:&error;
-          didSucceed:&succeeded;
-             didFail:&failed;];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
 if (error != nil) {
   // Setting file ACL failed
   // Please check error description and succeeded/failed arrays
