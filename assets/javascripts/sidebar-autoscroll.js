@@ -8,8 +8,7 @@ $(function() {
   var sidebar = $('.sidebar');
   var parent = sidebar.parent();
   var begin = sidebar.offset().top;
-
-  var requiredHeight = sidebar.height();
+  var lastSidebarHeight = getSidebarRequiredHeight();
 
   function getEnd() {
     return parent.offset().top + parent.height() - sidebar.height();
@@ -35,6 +34,10 @@ $(function() {
     } else {
       return 0;
     }
+  }
+
+  function getSidebarRequiredHeight() {
+    return sidebar.children().height();
   }
 
   function applyMode(mode) {
@@ -74,15 +77,16 @@ $(function() {
 
   function checkHeight() {
     var isScrollable = sidebar.hasClass(SCROLLABLE) ? true : false;
+    var required = getSidebarRequiredHeight();
     var h = $(window).height();
-    if (h < requiredHeight) {
+    if (h < required) {
       sidebar.height(h);
       if (!isScrollable) {
         sidebar.toggleClass(SCROLLABLE, true);
       }
     } else {
       if (isScrollable) {
-        sidebar.height(requiredHeight);
+        sidebar.height(required);
         sidebar.toggleClass(SCROLLABLE, false);
         // chrome workaround: short width after removing scrollbar.
         chromeAdjustWidth();
@@ -90,8 +94,23 @@ $(function() {
     }
   }
 
+  function isSidebarHeightChanged() {
+    var h = getSidebarRequiredHeight();
+    if (h != lastSidebarHeight) {
+      lastSidebarHeight = h;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   $(window).scroll(function() {
     checkScroll();
+    if (isSidebarHeightChanged()) {
+      setTimeout(function() {
+        checkHeight();
+      }, 10);
+    }
   });
 
   $(window).resize(function() {
