@@ -11,13 +11,13 @@ old-url: /en/scoping-files
 For all files, the following default access control will be applied:
 
 * **User Scope**
-    * The user can read and write the object by default
-    * Other users cannot read and write the object by default
+    * The user can read and write the file by default
+    * Other users cannot read and write the file by default
 
 ## Set a new ACL on a File
 
 New access permission can be applied onto a file by adding a new ACL.  The
-possible access controls that can be granted on an object are as follows:
+possible access controls that can be granted on a file are as follows:
 
 * **KiiACLFileActionRead**: Allowing to read the file.
 * **KiiACLFileActionWrite**: Allowing to modify and delete the file.
@@ -44,9 +44,9 @@ KiiACLEntry *entry2 = [KiiACLEntry entryWithSubject:user1
 [acl putACLEntry:entry2];
 
 // Save the ACL
-[acl saveSynchronous:&error;
-          didSucceed:&succeeded;
-             didFail:&failed;];
+[acl saveSynchronous:&error
+          didSucceed:&succeeded
+             didFail:&failed];
 
 if (error != nil) {
   // Setting file ACL failed
