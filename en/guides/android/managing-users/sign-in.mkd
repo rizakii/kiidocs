@@ -51,7 +51,7 @@ Here is a sample code snippet for authenticating a user with an access token.  T
 
 ```java
  // Get an access token
-KiiUser user = KiiUser.login("username", "password");
+KiiUser user = KiiUser.logIn("username", "password");
 String accessToken = user.getAccessToken();
 
 // Securely store the access token in persistent storage
@@ -64,7 +64,7 @@ String accessToken = getStoredToken();
 
 // Use the access token to sign-in again
 try {
-  KiiUser.loginWithAccessToken(accessToken);
+  KiiUser.loginWithToken(accessToken);
 } catch (IOException e) {
   // Sign-in failed for some reasons
   // Please check IOExecption to see what went wrong...
