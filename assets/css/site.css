@@ -107,5 +107,31 @@ div.gsc-control-cse {
   height: 33px;
 }
 
+/* for left sidebar navi */
+
+div.content-container > div.wrapper {
+  position: relative;
+}
+
 aside.sidebar {
+  width: 252px !important;
+  overflow-y: hidden;
+}
+
+aside.sidebar.fixed {
+  position: fixed;
+  top: 0px;
+}
+
+aside.sidebar.bottom {
+  position: absolute;
+  bottom: 0px;
+}
+
+aside.sidebar.scrollable {
+  overflow-y: scroll;
+}
+
+aside.sidebar > .chrome-fix {
+  width: 252px !important;
 }
