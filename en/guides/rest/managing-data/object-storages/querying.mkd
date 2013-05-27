@@ -190,7 +190,7 @@ A QueryClause object is defined using one or more of the following clauses:
       },
       "_id": "0512ca53-4d86-4ee3-b2d0-53de7559c6cc",
       "_modified": 1366965367393,
-      "_created": 1366965367393,  
+      "_created": 1366965367393,
       "_owner": "SYS_ADMIN",
       "_version": "1",
       "_calculated": {
@@ -199,7 +199,7 @@ A QueryClause object is defined using one or more of the following clauses:
     }
     ...
     ```
-    
+
     Note that the field "distance\_to\_mylocation" is stored inside "_calculated" field.  The number represents a distance from the center point (in meter).  This field is availabe for sorting in the query, but in ascending order only.
 
 ## Pagination
