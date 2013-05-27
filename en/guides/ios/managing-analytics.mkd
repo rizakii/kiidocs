@@ -8,7 +8,7 @@ old-url: /en/managing-analytics--2
 Kii Cloud provides two types of analytics:
 
 * **Basic Analytics**: General application analytics with predefined metrics.
-* **Flex Analytics**: Flexible applicatin analytics with cutomizable metrics.
+* **Flex Analytics**: Flexible application analytics with cutomizable metrics.
 
 Basic Analytics provides "out-of-the-box" analysis on your application. You can
 fetch the predefined analytics results with no configuration. All results will
